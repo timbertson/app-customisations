@@ -1,4 +1,4 @@
-#VERSION 1.1.4
+# based on VERSION 1.1.4
 
 import gedit, gtk, gtk.glade
 import gconf
@@ -6,6 +6,10 @@ import gnomevfs
 import pygtk
 pygtk.require('2.0')
 import os, os.path, gobject
+import thread
+
+# more responsive, but maybe unstable. Do you feel daring?
+THREADING = True
 
 # set this to true for gedit versions before 2.16
 pre216_version = False
@@ -26,6 +30,7 @@ ui_str="""<ui>
 # essential interface
 class SnapOpenPluginInstance:
 	def __init__( self, plugin, window ):
+		gtk.gdk.threads_init()
 		self._window = window
 		self._plugin = plugin
 		if pre216_version:
@@ -34,7 +39,9 @@ class SnapOpenPluginInstance:
 			self._encoding = gedit.encoding_get_current()  
 		self._rootdir = "file://" + os.getcwd()
 		self._show_hidden = False
-		self._liststore = None;
+		self._liststore = None
+		self._finder_thread = None
+		self._last_text = None
 		self._init_glade()
 		self._insert_menu()
 
@@ -43,7 +50,7 @@ class SnapOpenPluginInstance:
 		self._action_group = None
 		self._window = None
 		self._plugin = None
-		self._liststore = None;
+		self._liststore = None
 
 	def update_ui( self ):
 		return
@@ -98,45 +105,74 @@ class SnapOpenPluginInstance:
 	#mouse event on list
 	def on_list_mouse( self, widget, event ):
 		if event.type == gtk.gdk._2BUTTON_PRESS:
-			self.open_selected_item( event )			
+			self.open_selected_item( event )
 
 	#key selects from list (passthrough 3 args)
 	def on_select_from_list(self, widget, event):
 		self.open_selected_item(event)
 
+
 	#keyboard event on entry field
 	def on_pattern_entry( self, widget, event ):
-		oldtitle = self._snapopen_window.get_title().replace(" * too many hits", "")
 		if event.keyval == gtk.keysyms.Return:
 			self.open_selected_item( event )
 			return
+
+		# find files...
 		pattern = self._glade_entry_name.get_text()
+		if pattern == self._last_text:
+			# don't bother redoing a search if the text hasn't changed
+			return
+		else:
+			self._last_text = pattern
+		oldtitle = self._snapopen_window.get_title().replace(" * too many hits", "")
+		if THREADING:
+			self._finder_thread = thread.start_new_thread(self._find_files, (pattern, oldtitle))
+		else:
+			self._find_files(pattern, oldtitle)
+	
+	def _abort_old_thread(self):
+		if THREADING:
+			if self._finder_thread != thread.get_ident():
+				print "thread %s is exiting..." % thread.get_ident()
+				thread.exit()
+	
+
+	def _find_files(self, pattern, oldtitle):
+		thread_enter()
 		pattern = pattern.replace(" ","*")
 		#modify lines below as needed, these defaults work pretty well
 		rawpath = self._rootdir.replace("file://", "")
-		filefilter = " | grep -s -v \"/\.\""
+		filefilter = " | grep -s -v \"/\.\" 2>/dev/null"
 		cmd = ""
 		if self._show_hidden:
 			filefilter = ""
-		if len(pattern) > 0:
-			cmd = "cd " + rawpath + "; find . -maxdepth 10 -depth -type f -iwholename \"*" + pattern + "*\" " + filefilter + " | grep -v \"~$\" | head -n " + repr(max_result + 1) + " | sort"
+		if len(pattern) > 2:
+			cmd = "locate -i --quiet --limit " + repr(max_result + 1) + " --wholename '"+ rawpath + "/*" + "*".join(pattern.split()) + "*'"
+			cmd += filefilter + " | grep -v \"~$\" 2>/dev/null"
 			self._snapopen_window.set_title("Searching ... ")
 		else:
 			self._snapopen_window.set_title("Enter pattern ... ")	
-		#print cmd
+		print cmd
+		thread_leave()
 
 		self._liststore.clear()
 		maxcount = 0
 		hits = os.popen(cmd).readlines()
+		self._abort_old_thread()
 		for file in hits:
+			self._abort_old_thread()
 			file = file.rstrip().replace("./", "") #remove cwd prefix
-			name = os.path.basename(file)			
+			name = os.path.basename(file)
 			self._liststore.append([name, file])
+			self._liststore.sort(shorter_first_then_second_elem) # show shorter matches first
 			if maxcount > max_result:
 				break
 			maxcount = maxcount + 1
 		if maxcount > max_result:
 			oldtitle = oldtitle + " * too many hits"
+
+		thread_enter()
 		self._snapopen_window.set_title(oldtitle)
 				
 		selected = []
@@ -146,6 +182,8 @@ class SnapOpenPluginInstance:
 			iter = self._liststore.get_iter_first()
 			if iter != None:
 				self._hit_list.get_selection().select_iter(iter)
+
+		thread_leave()
 
 	#on menuitem activation (incl. shortcut)
 	def on_snapopen_action( self ):
@@ -190,7 +228,7 @@ class SnapOpenPluginInstance:
 	
 	#opens (or switches to) the given file
 	def _open_file( self, filename ):
- 		uri = self._rootdir + "/" + filename
+ 		uri = ('file://' + filename) if filename.startswith("/") else (self._rootdir + "/" + filename)
 		if pre216_version:
 			tab = self.old_get_tab_from_uri(self._window, uri)
 		else:
@@ -254,3 +292,33 @@ class SnapOpenPlugin( gedit.Plugin ):
 
 	def update_ui( self, window ):
 		self._get_instance( window ).update_ui()
+
+
+def thread_enter():
+	if THREADING:
+		gtk.gdk.threads_enter()
+
+def thread_leave():
+	if THREADING:
+		gtk.gdk.threads_leave()
+
+def shorter(a,b):
+	"""
+	Comparison method to sort by shortest string first.
+	Falls back on default (alpha) sort for equal length objects.
+	"""
+	la = len(a)
+	lb = len(b)
+	return 0 if la == lb else (-1 if la < lb else 1)
+
+def shorter_first_then_second_elem(a, b):
+	try:
+		result = shorter(a[0], b[0])
+		if result == 0:
+			result = shorter(a[1], b[1])
+			if result == 0:
+				result = cmp(a[1],b[1])
+		return result
+	except:
+		return shorter(a,b)
+		
