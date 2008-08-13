@@ -305,13 +305,18 @@ def thread_leave():
 def shorter(a,b):
 	"""
 	Comparison method to sort by shortest string first.
-	Falls back on default (alpha) sort for equal length objects.
 	"""
 	la = len(a)
 	lb = len(b)
 	return 0 if la == lb else (-1 if la < lb else 1)
 
 def shorter_first_then_second_elem(a, b):
+	"""
+	Sort by shortest first element,
+	then shortest element,
+	then default sort of second element.
+	"""
+
 	try:
 		result = shorter(a[0], b[0])
 		if result == 0:
