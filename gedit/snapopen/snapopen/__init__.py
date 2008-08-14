@@ -9,7 +9,7 @@ import os, os.path, gobject
 import thread
 
 # more responsive, but maybe unstable. Do you feel daring?
-THREADING = True
+THREADING = False
 
 # set this to true for gedit versions before 2.16
 pre216_version = False
@@ -51,6 +51,8 @@ class SnapOpenPluginInstance:
 		self._window = None
 		self._plugin = None
 		self._liststore = None
+		self._finder_thread = None
+		self._last_text = None
 
 	def update_ui( self ):
 		return
