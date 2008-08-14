@@ -165,7 +165,7 @@ class SnapOpenPluginInstance:
 			file = file.rstrip().replace("./", "") #remove cwd prefix
 			name = os.path.basename(file)
 			self._liststore.append([name, file])
-			self._liststore.sort(shorter_first_then_second_elem) # show shorter matches first
+			#self._liststore.sort(shorter_first_then_second_elem) # show shorter matches first
 			if maxcount > max_result:
 				break
 			maxcount = maxcount + 1
