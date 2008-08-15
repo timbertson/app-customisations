@@ -1,0 +1,8 @@
+#!/bin/sh
+
+ssh -fNL 16089:localhost:16089 wwwadmin@csrv2946.2273.cust.eqx.conexim.net
+ssh -fNL 16000:localhost:16000 wwwadmin@csrv2946.2273.cust.eqx.conexim.net
+
+echo "------"
+echo "firefox 'http://localhost:16000/admin/collections/'"
+

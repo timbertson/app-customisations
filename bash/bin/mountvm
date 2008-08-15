@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sshfs lab@ylabvm-tjc.sensis.com.au:/var/svn ~/vm-repos
+

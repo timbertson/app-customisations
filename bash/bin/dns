@@ -1,0 +1,8 @@
+#!/bin/sh
+namespace='yellowlab'
+base=`dirname "$0"`
+"$base/postip.rb" "$namespace"
+"$base/postip.rb" # (for compatibility)
+#gksudo "$base/write_hosts.rb" "$namespace"
+gksudo "$base/write_hosts.rb"
+
