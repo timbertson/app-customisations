@@ -11,4 +11,4 @@ export PATH="$PATH:/opt/local/bin:$HOME/.bin"
 export MANPATH="$MANPATH:/opt/local/man"
 
 # "copy working directory" (to the clipboard)
-alias cwd='echo `pwd` | pbcopy; echo "Copied: `pwd`"'
+alias cwd='echo -n `pwd` | pbcopy; echo "Copied: `pwd`"'
