@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# app aliases
+alias tm='open -a /Applications/TextMate.app/Contents/MacOS/TextMate'
+alias ftp='open -a /Applications/Yummy\ FTP.app/Contents/MacOS/Yummy\ FTP'
+
+# Add darwinports and ~/.bin to PATH:
+export PATH="$PATH:/opt/local/bin:$HOME/.bin"
+
+# Add darwinports to MANPATH:
+export MANPATH="$MANPATH:/opt/local/man"
+
+# "copy working directory" (to the clipboard)
+alias cwd='echo `pwd` | pbcopy; echo "Copied: `pwd`"'

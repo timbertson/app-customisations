@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# colorize a unified diff
+# (takes stdin, prints stdout)
 
 $stdin.each do |line|
   puts( if line =~ /^\+(.*)$/

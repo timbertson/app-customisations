@@ -1,14 +1,5 @@
-# .bashrc
-
-
-export EDITOR='vi'
-export PATH="$PATH:/var/lib/gems/1.8/bin"
-export JDK_HOME="/usr/lib/jvm/java-6-sun/"
-
-function svndiff
-{
-  svn diff $@ | color-diff
-}
+#!/bin/sh
+export PATH="$PATH:/sbin:/usr/sbin"
 
 function ssh-setup 
 {
@@ -16,26 +7,3 @@ function ssh-setup
     eval `ssh-agent`
   fi
 }
-#ssh-setup
-
-function ip
-{
-  echo 161.117.117.$1
-}
-
-function ssh-local
-{
-  ssh lab@$1.sensis.com.au
-}
-
-function title
-{
-  export PROMPT_COMMAND='echo -ne "\033]0;'"$@"'\007"'
-  #$PROMPT_COMMAND
-}
-
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
-fi
-

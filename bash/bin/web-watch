@@ -1,0 +1,25 @@
+#!/bin/sh
+# good for knowing when your internet connection returns
+
+site="http://www.google.com"
+time=10
+if [ -n "$1" ]; then
+  site="$1"
+fi
+if [ -n "$2" ]; then
+  time="$2"
+fi
+
+echo "pinging $site every $time seconds..."
+
+while true; do
+  wget "$site" -o/dev/null -O/dev/null
+  if [ $? == 0 ]; then
+    echo "SUCCESS!"
+    growlnotify -m "Web watch" "$site is back up!"
+    break
+  else
+    echo "No response..."
+    sleep $time
+  fi
+done

@@ -1,27 +1,4 @@
-# .bash_profile
-
-# Get the aliases and functions
-if [ -f ~/.bashrc ]; then
-	. ~/.bashrc
-fi
-
-# User specific environment and startup programs
-
-PATH=$PATH:$HOME/bin
-
-export PATH
-unset USERNAME
-
-# user settings:
-export RUBYOPT=rubygems
-export EDITOR=vi
-alias fl='cd ~/yl-repos/dev/trunk/fastloader/'
-alias web='cd ~/yl-repos/dev/trunk/webapp/'
-
-# anything after this line will only run in interactive mode
-#[ -z "$PS1" ] && return
-
-# User specific aliases and functions
+# colours
 BLUE=`tput setf 1`
 GREEN=`tput setf 2`
 CYAN=`tput setf 3`
@@ -32,33 +9,15 @@ WHITE=`tput setf 7`
 GREY=`tput setf 0`
 PS1='\[$GREY\][\T] \[$YELLOW\]\u\[$BLUE\]@\[$RED\]\h \[$BLUE\]\w/\[$GREEN\] \$\[$WHITE\] '
 
-alias lab='ssh-local ylabvm-tjc'
-alias fast-host='csrv2946.2273.cust.eqx.conexim.net'
-alias web-host='csrv2945.2273.cust.eqx.conexim.net'
+function title
+{
+  export PROMPT_COMMAND='echo -ne "\033]0;'"$@"'\007"'
+  #$PROMPT_COMMAND
+}
 
-alias m='sshfs -o allow_other -o uid="$UID" lab@ylabvm-tjc.sensis.com.au:/var/svn ~/vm-repo/'
-alias um='sudo umount ~/vm-repo/'
-export PATH="$PATH:/sbin:/usr/sbin:$HOME/bin"
-alias idea='~/Apps/idea-7757/bin/idea.sh'
-alias df='df -h'
-alias ls='ls --color -h'
-alias vim='vi'
-alias ..='. ~/.profile'
-alias ll='ls -l'
-alias la='ls -la'
-alias l='ll'
-alias vim.='vim ~/.bash_profile;..'
-alias rkae='rake'
-alias rk='rake'
-alias grep='grep --color'
-alias gr='grep'
-alias gerp='grep'
-alias fast='sudo su fast-user -'
-alias emacs='emacs -nw'
-alias cdcap='cd ~/yl-repos/ops/trunk/capistrano'
-alias nocrud="egrep -v '\.svn|\.log'"
-alias grepr="grep -R"
-alias grepi="grep -i"
-alias grepir="grep -Ri"
-alias less='less -R' # support raw characters (colours!)
+if [ `uname` == 'Darwin' ]; then
+	source osx
+fi
 
+source scm
+source alias

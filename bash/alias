@@ -1,0 +1,19 @@
+#!/bin/sh
+
+alias ls='ls -Gh' #enable colours and human-readable sizes
+alias ll='ls -l'
+alias la='ls -la'
+
+alias diffpatch='diff -ur'
+alias grep='grep --color'
+alias less='less -R' # raw character support (ie colours)
+alias vim.='vim ~/.bash_profile; . ~/.bash_profile'
+alias giff='git diff --color'
+
+alias ad='pushd' # "add dir"
+alias sd='popd'  # "subtract dir"
+
+alias ..='. ~/.bash_profile'
+
+alias mnt='sshfs -o allow_other -o uid="$UID"'
+alias umnt='sudo umount'
