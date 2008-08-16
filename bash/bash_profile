@@ -17,6 +17,8 @@ function title
 
 if [ `uname` == 'Darwin' ]; then
 	source osx
+else
+	source linux
 fi
 
 source scm
