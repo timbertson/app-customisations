@@ -29,4 +29,7 @@ else
 
 	source "$base/scm"
 	source "$base/alias"
+	
+	# case insensitive file globbing (primaily for tab completion)
+	shopt -s nocaseglob
 fi
