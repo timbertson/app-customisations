@@ -1,25 +1,32 @@
-# colours
-BLUE=`tput setf 1`
-GREEN=`tput setf 2`
-CYAN=`tput setf 3`
-RED=`tput setf 4`
-MAGENTA=`tput setf 5`
-YELLOW=`tput setf 6`
-WHITE=`tput setf 7`
-GREY=`tput setf 0`
-PS1='\[$GREY\][\T] \[$YELLOW\]\u\[$BLUE\]@\[$RED\]\h \[$BLUE\]\w/\[$GREEN\] \$\[$WHITE\] '
-
-function title
-{
-  export PROMPT_COMMAND='echo -ne "\033]0;'"$@"'\007"'
-  #$PROMPT_COMMAND
-}
-
-if [ `uname` == 'Darwin' ]; then
-	source osx
+#!/bin/bash
+if [ "$#" != '1' ] || [ ! -d "$1" ]; then
+	echo "error: please specify the directory containing this file (bash_profile) as its first argument"
 else
-	source linux
-fi
+	base="$1"
 
-source scm
-source alias
+	# colours
+	RED=`tput setaf 1`
+	GREEN=`tput setaf 2`
+	YELLOW=`tput setaf 3`
+	BLUE=`tput setaf 4`
+	MAGENTA=`tput setaf 5`
+	CYAN=`tput setaf 6`
+	WHITE=`tput setaf 7`
+	GREY=`tput setaf 0`
+	PS1='\[$GREY\][\T] \[$YELLOW\]\u\[$BLUE\]@\[$RED\]\h \[$BLUE\]\w/\[$GREEN\] \$\[$WHITE\] '
+
+	function title
+	{
+	  export PROMPT_COMMAND='echo -ne "\033]0;'"$@"'\007"'
+	  #$PROMPT_COMMAND
+	}
+
+	if [ `uname` == 'Darwin' ]; then
+		source "$base/osx"
+	else
+		source "$base/linux"
+	fi
+
+	source "$base/scm"
+	source "$base/alias"
+fi
