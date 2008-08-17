@@ -30,8 +30,8 @@ ui_str="""<ui>
 # essential interface
 class SnapOpenPluginInstance:
 	def __init__( self, plugin, window ):
-    if THREADING:
-		gtk.gdk.threads_init()
+		if THREADING:
+			gtk.gdk.threads_init()
 		self._window = window
 		self._plugin = plugin
 		if pre216_version:
