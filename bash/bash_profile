@@ -11,8 +11,8 @@ else
 	BLUE=`tput setaf 4`
 	MAGENTA=`tput setaf 5`
 	CYAN=`tput setaf 6`
-	LIGHT=`tput setaf 7`
-	WHITE=`tput setaf 9`
+	WHITE=`tput setaf 7`
+	LIGHT=`tput setaf 9`
 	GREY=`tput setaf 0`
 	PS1='\n\[$GREY\][\T] \[$YELLOW\]\u\[$BLUE\]@\[$RED\]\h \[$BLUE\]\w/\[$GREEN\] \$\[$LIGHT\] '
 
@@ -33,4 +33,10 @@ else
 	
 	# case insensitive file globbing (primaily for tab completion)
 	shopt -s nocaseglob
+	
+	alias tmpdir="date +'%Y-%m-%d.%H-%M-%S'"
+	function cdtmp {
+		t=`tmpdir`
+		mkdir -p "$t" && pushd "$t"
+	}
 fi
