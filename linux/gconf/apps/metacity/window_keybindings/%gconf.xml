@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<gconf>
+        <entry name="raise_or_lower" mtime="1220834587" type="string">
+                <stringvalue>&lt;Alt&gt;grave</stringvalue>
+        </entry>
+        <entry name="toggle_on_all_workspaces" mtime="1217459377" type="string">
+                <stringvalue>&lt;Shift&gt;&lt;Alt&gt;a</stringvalue>
+        </entry>
+        <entry name="toggle_maximized" mtime="1217223445" type="string">
+                <stringvalue>&lt;Shift&gt;&lt;Alt&gt;m</stringvalue>
+        </entry>
+        <entry name="minimize" mtime="1216725826" type="string">
+                <stringvalue>&lt;Alt&gt;m</stringvalue>
+        </entry>
+        <entry name="close" mtime="1216725824" type="string">
+                <stringvalue>&lt;Alt&gt;w</stringvalue>
+        </entry>
+        <entry name="toggle_fullscreen" mtime="1216725816" type="string">
+                <stringvalue>&lt;Shift&gt;&lt;Alt&gt;Return</stringvalue>
+        </entry>
+</gconf>
