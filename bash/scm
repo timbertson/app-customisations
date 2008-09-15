@@ -1,6 +1,6 @@
 #!/bin/sh
 
-alias giff='git diff'
+alias giff='git diff --color'
 
 # alias 'g' to git. If no args supplied, do "git status"
 function g

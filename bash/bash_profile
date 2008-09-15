@@ -36,7 +36,7 @@ else
 	
 	alias tmpdir="date +'%Y-%m-%d.%H-%M-%S'"
 	function cdtmp {
-		t=`tmpdir`
+		t=/tmp/`tmpdir`
 		mkdir -p "$t" && pushd "$t"
 	}
 fi
