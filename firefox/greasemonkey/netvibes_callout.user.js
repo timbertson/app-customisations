@@ -104,23 +104,37 @@ It currently supports the following netvibes modules:
 
 	function scan_twitter() {
 		if(!document.location.href.match(/netvibes/)) return;
-		items = scan_service('twitter', '.moduleContent.twitter', '.item', 'p.description',
+		var service = 'twitter'
+		var icon_urls = Array()
+		items = scan_service(service, '.moduleContent.twitter', '.item', 'p.description',
 			function(item_node, content_nodes) {
-				return content_nodes.text().replace(item_node.find('a.time').text(), '')
+				// save icons for later use
+				var msg = content_nodes.text().replace(new RegExp(' *' + item_node.find('a.time').text() + '$'), '')
+				// e.g: replace / *2 days ago$/ with nothing
+				try{
+					icon_urls[msg.split(' ')[0]] = item_node.find('img').attr('src')
+				} catch(e) {
+					glog(service, "exception getting image: " + e)
+				}
+				return msg
 			}
 		)
 		
-		process_items('twitter', items, 'http://assets0.twitter.com/images/favicon.ico',
+		glog(service, 'icon urls: ' + icon_urls)
+		
+		process_items(service, items, 'http://assets0.twitter.com/images/favicon.ico',
 			function(msg, service, icon){
-				notify(msg.replace(/^([^ ]+)/, ''), service + ': ' + msg.split(' ')[0], icon)
+				var username = msg.split(' ')[0]
+				icon = icon_urls[username] || icon
+				notify(msg.replace(/^([^ ]+)/, ''), service + ': ' + username, icon)
 			}
 		)
 	}
 	
 	function scan_facebook() {
 		if(!document.location.href.match(/facebook/)) return;
-		service = 'facebook'
-		items = scan_service(service, 'body.ready', '.feedStory', null)
+		var service = 'facebook'
+		var items = scan_service(service, 'body.ready', '.feedStory', null)
 		process_items(service, items, 'http://static.ak.fbcdn.net/images/icons/favicon.gif')
 	}
 
