@@ -39,4 +39,9 @@ else
 		t=/tmp/`tmpdir`
 		mkdir -p "$t" && pushd "$t"
 	}
+	
+	function cdbase {
+		d=`dirname "$1"`
+		cd "$d"
+	}
 fi
