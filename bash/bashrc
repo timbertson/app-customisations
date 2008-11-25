@@ -7,3 +7,16 @@ function ssh-setup
     eval `ssh-agent`
   fi
 }
+
+alias tmpdir="date +'%Y-%m-%d.%H-%M-%S'"
+function cdtmp {
+	t=/tmp/`tmpdir`
+	mkdir -p "$t" && pushd "$t"
+}
+
+function timestamp {
+	while read line; do
+		t=`date "+%Y-%m-%d %H:%M:%S"`
+		echo "$t: $line"
+	done
+}

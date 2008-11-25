@@ -34,12 +34,6 @@ else
 	# case insensitive file globbing (primaily for tab completion)
 	shopt -s nocaseglob
 	
-	alias tmpdir="date +'%Y-%m-%d.%H-%M-%S'"
-	function cdtmp {
-		t=/tmp/`tmpdir`
-		mkdir -p "$t" && pushd "$t"
-	}
-	
 	function cdbase {
 		d=`dirname "$1"`
 		cd "$d"
