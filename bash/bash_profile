@@ -3,7 +3,8 @@ if [ "$#" != '1' ] || [ ! -d "$1" ]; then
 	echo "error: please specify the directory containing this file (bash_profile) as its first argument"
 else
 	base="$1"
-
+	export PATH="$PATH:$base/bin"
+	
 	# colours
 	RED=`tput setaf 1`
 	GREEN=`tput setaf 2`
