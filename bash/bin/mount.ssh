@@ -4,7 +4,7 @@ if [ "$#" -lt 2 ]; then
 	exit 2
 fi
 
-cmd="sshfs -o allow_other -o uid='$UID'"
+cmd="sshfs -o allow_other -o uid=`id -u`"
 
 if [ ! -e "$2" ]; then
 	echo "Making directory: $2"
