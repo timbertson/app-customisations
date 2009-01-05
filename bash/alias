@@ -14,5 +14,5 @@ alias sd='popd'  # "subtract dir"
 
 alias ..='. ~/.bash_profile'
 
-alias mount-ssh='sshfs -o allow_other -o uid="$UID"'
+alias mount.ssh='sshfs -o allow_other -o uid="$UID"'
 alias umount='sudo umount'
