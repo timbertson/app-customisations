@@ -1,0 +1,14 @@
+#!/bin/sh
+if [ "$#" -lt 2 ]; then
+	echo "usage: mount.ssh [opts] remote local-dir"
+	exit 2
+fi
+
+cmd="sshfs -o allow_other -o uid='$UID'"
+
+if [ ! -e "$2" ]; then
+	echo "Making directory: $2"
+	mkdir -p "$2"
+fi
+
+sudo $cmd "$@"
