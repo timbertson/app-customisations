@@ -8,8 +8,7 @@ fi
 \ls -1 | while read f; do
 	if [ -d "$f" ]; then
 		echo
-		echo '----------------------'
-		echo "** $f **"
+		echo "------- $f -------"
 		(cd "$f" && "$@")
 	fi
 done
