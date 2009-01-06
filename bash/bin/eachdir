@@ -1,0 +1,16 @@
+#!/bin/sh
+
+if [ "$#" -eq 0 ]; then
+	echo "Usage: $0 action"
+	exit 2
+fi
+
+\ls -1 | while read f; do
+	if [ -d "$f" ]; then
+		echo
+		echo '----------------------'
+		echo "** $f **"
+		(cd "$f" && "$@")
+	fi
+done
+
