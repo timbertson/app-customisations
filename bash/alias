@@ -1,6 +1,5 @@
 #!/bin/sh
 
-alias ls='ls -Gh' #enable colours and human-readable sizes
 alias ll='ls -l'
 alias la='ls -la'
 

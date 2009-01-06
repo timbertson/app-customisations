@@ -1,5 +1,6 @@
 #!/bin/sh
 
+alias ls='ls -h --color=auto' #enable colours and human-readable sizes
 alias open='nautilus'
 export PATH="$PATH:$HOME/bin"
 

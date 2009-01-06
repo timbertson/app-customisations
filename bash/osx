@@ -1,5 +1,7 @@
 #!/bin/sh
 
+alias ls='ls -Gh' #enable colours and human-readable sizes
+
 # app aliases
 alias ftp='open -a /Applications/Yummy\ FTP.app/Contents/MacOS/Yummy\ FTP'
 
