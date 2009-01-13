@@ -3,4 +3,4 @@ build-essential
 git-core
 ipython
 subversion
-
+python-nose
