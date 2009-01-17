@@ -15,7 +15,7 @@ else
 	WHITE=`tput setaf 7`
 	LIGHT=`tput setaf 9`
 	GREY=`tput setaf 0`
-	PS1='\n\[$GREY\][\T] \[$YELLOW\]\u\[$BLUE\]@\[$RED\]\h \[$BLUE\]\w/\[$GREEN\] \$\[$LIGHT\] '
+	PS1='\n\[$GREY\][\T] \[$YELLOW\]\u\[$GREY\]@\[$RED\]\h \[$BLUE\]\w/\[$GREEN\] \$\[$LIGHT\] '
 
 	function title
 	{

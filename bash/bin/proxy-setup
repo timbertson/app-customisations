@@ -1,5 +1,5 @@
 #!/bin/bash
-if [[ "$0" =~ "set_proxy.sh" ]]
+if [[ -f "$0" ]]
 then
   echo "You must run this script via 'source $0' not directly"
   exit -1
