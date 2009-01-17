@@ -11,6 +11,8 @@ alias vim.='vim ~/.bash_profile; . ~/.bash_profile'
 alias ad='pushd' # "add dir"
 alias sd='popd'  # "subtract dir"
 
+alias ipy='ipython --noconfirm_exit'
+
 alias ..='. ~/.bash_profile'
 
 alias umount='sudo umount'
