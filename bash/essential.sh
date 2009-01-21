@@ -1,7 +1,7 @@
 #!/bin/sh
 # essential functionality in a single file; for easy deployment to new boxes
 # usage:
-# curl <location> | while read f; do exec "$f"; done
+# curl <location> > /tmp/bashrc && . /tmp/bashrc
 
 # common and obvious aliases
 alias ll='ls -l'
@@ -38,7 +38,7 @@ xmodmap -e 'add Control = Control_L'
 function color-diff
 {
 	# inline ruby? CLASSY!
-	ruby -e <<EOF
+	ruby -e '
 	$stdin.each do |line|
 	  puts( if line =~ /^\+(.*)$/
 	        "\e[32m#{$&}\e[0m" 
@@ -53,7 +53,7 @@ function color-diff
 	        end
 	      )
 	  end
-EOF
+'
 }
 
 # make subversion diff almost as awesome as git's:
