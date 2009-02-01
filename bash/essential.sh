@@ -30,6 +30,9 @@ xmodmap -e 'remove Lock = Caps_Lock'
 xmodmap -e 'keysym Caps_Lock = Control_L'
 xmodmap -e 'add Control = Control_L'
 
+# map shift+space to underscore
+xmodmap -e 'keycode 65 = space underscore'
+
 
 # ----------------------------
 # functions
