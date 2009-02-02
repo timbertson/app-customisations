@@ -8,5 +8,5 @@
 	"$\UF72B" = "moveToEndOfLineAndModifySelection:";
 	
 	/* shift + space -> underscore */
-	"$ " = ("insertText:", "_");
+	"^ " = ("insertText:", "_");
 }

@@ -26,13 +26,12 @@ alias tm='gedit' # nothing like it, but I habitually use "tm" on linux
 
 
 # i hate capslock with a passion...
-xmodmap -e 'remove Lock = Caps_Lock'
-xmodmap -e 'keysym Caps_Lock = Control_L'
-xmodmap -e 'add Control = Control_L'
-
-# map shift+space to underscore
-xmodmap -e 'keycode 65 = space underscore'
-
+function xmm {
+   xmodmap -e "$@" >/dev/null 2>&1
+}
+xmm 'remove Lock = Caps_Lock'
+xmm 'keysym Caps_Lock = Control_L'
+xmm 'add Control = Control_L'
 
 # ----------------------------
 # functions
@@ -78,17 +77,17 @@ function g
 }
 
 # colours
-RED=`tput setaf 1`
-GREEN=`tput setaf 2`
-YELLOW=`tput setaf 3`
-BLUE=`tput setaf 4`
-MAGENTA=`tput setaf 5`
-CYAN=`tput setaf 6`
-WHITE=`tput setaf 7`
-LIGHT=`tput setaf 9`
-GREY=`tput setaf 0`
+export RED=`tput setaf 1`
+export GREEN=`tput setaf 2`
+export YELLOW=`tput setaf 3`
+export BLUE=`tput setaf 4`
+export MAGENTA=`tput setaf 5`
+export CYAN=`tput setaf 6`
+export WHITE=`tput setaf 7`
+export LIGHT=`tput setaf 9`
+export GREY=`tput setaf 0`
 # ooh! pretty colours :D
-PS1='\n\[$GREY\][\T] \[$YELLOW\]\u\[$GREY\]@\[$RED\]\h \[$BLUE\]\w/\[$GREEN\] \$\[$LIGHT\] '
+export PS1='\n\[$GREY\][\T] \[$YELLOW\]\u\[$GREY\]@\[$RED\]\h \[$BLUE\]\w/\[$GREEN\] \$\[$LIGHT\] '
 
 # cd to the dir containing "file"
 function cdbase {

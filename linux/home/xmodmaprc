@@ -1,1 +1,2 @@
-keycode 65 = space underscore
+! convert shift+space -> underscore, if you're into that:
+!keycode 65 = space underscore
