@@ -1,2 +1,2 @@
-! convert shift+space -> underscore, if you're into that:
-!keycode 65 = space underscore
+! this is supposed to make ctrl+space underscore, but I've yet to see that work:
+keycode 65 = space space underscore
