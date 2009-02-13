@@ -1,0 +1,21 @@
+desc 'install using symlinks to this directory'
+task :'link' do
+	Dir["root/etc/profile.d/*"].each do |fl|
+		destfile = fl.gsub(/^root/,'') 
+		dir = File.dirname destfile
+		
+		cmd "rm -rf '#{destfile}'"
+		cmd "mkdir -p '#{dir}'"
+		cmd "ln -s '#{Dir.pwd}/#{fl}' '#{destfile}'"
+	end
+end
+
+desc 'make a .deb file'
+task :deb do
+	puts "TODO..."
+end
+
+def cmd(str)
+	puts ">> #{str}"
+	system(str) or raise("command failed!")
+end
