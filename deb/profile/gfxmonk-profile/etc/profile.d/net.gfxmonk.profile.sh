@@ -32,6 +32,7 @@ else
 fi
 
 source "$base/scm"
+source "$base/bashrc"
 source "$base/alias"
 
 # case insensitive file globbing (primaily for tab completion)
