@@ -1,0 +1,9 @@
+#!/bin/sh
+key="$1"
+if [ "$key" = '' ]; then
+	echo "please specify a key"
+	exit
+fi
+gpg --keyserver keyserver.ubuntu.com --recv "$key" && \
+gpg --export --armor "$key" | sudo apt-key add -
+
