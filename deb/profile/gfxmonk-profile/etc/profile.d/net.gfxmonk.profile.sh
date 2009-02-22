@@ -8,6 +8,9 @@ fi
 
 export PATH="$PATH:/sbin:/usr/sbin"
 
+# only run for bash
+[ -z "$PS1" -o -z "$BASH" ] && return
+
 # colours
 RED=`tput setaf 1`
 GREEN=`tput setaf 2`
