@@ -8,7 +8,7 @@ fi
 
 export PATH="$PATH:/sbin:/usr/sbin"
 
-[ -z "$PS1" ] && return
+[ -z "$PS1" -o -z "$BASH" ] && return
 # colours
 RED=`tput setaf 1`
 GREEN=`tput setaf 2`
