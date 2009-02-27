@@ -15,7 +15,6 @@ tab-convert: http://www.stambouliote.de/projects/gedit_plugins.html
 text-wrap-toggle: http://live.gnome.org/Gedit/Plugins?action=AttachFile&do=view&target=toggletextwrap-plugin-0.1.0.tar.bz2
 word-completion: http://users.tkk.fi/~otsaloma/gedit
 columns: http://live.gnome.org/Gedit/Plugins/ColumnMode
-full-screen: http://hogbaysoftware.com/projects/writeroom
 ipython-console http://code.google.com/p/gedit-ipythonconsole/
 markdown: http://live.gnome.org/Gedit/MarkdownSupport
 open-terminal-here: http://www.gafouri.net/files/open-terminal-here.tar.gz
