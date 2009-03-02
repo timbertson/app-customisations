@@ -1,0 +1,5 @@
+#!/usr/bin/env python
+
+import urllib, sys
+print urllib.unquote(sys.argv[1])
+

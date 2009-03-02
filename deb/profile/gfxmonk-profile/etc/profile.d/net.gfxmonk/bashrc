@@ -1,7 +1,8 @@
 #!/bin/sh
 export PATH="$PATH:/sbin:/usr/sbin"
 
-function ssh-setup 
+alias 'ssh-setup'='ssh_setup'
+function ssh_setup 
 {
   if [ $(( ${SSH_AGENT_PID} + 1)) == 1 ]; then
     eval `ssh-agent`
