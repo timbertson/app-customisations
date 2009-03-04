@@ -7,6 +7,7 @@ alias diffpatch='diff -ur'
 alias grep='egrep --color'
 alias less='less -R' # raw character support (ie colours)
 alias vim.='vim ~/.bash_profile; . ~/.bash_profile'
+alias ff='firefox'
 
 alias ad='pushd' # "add dir"
 alias sd='popd'  # "subtract dir"
