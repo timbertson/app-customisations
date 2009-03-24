@@ -83,7 +83,9 @@ if __name__ == '__main__':
 		main()
 	except StandardError, e:
 		print "Error: " + str(e)
+		sys.exit(2)
 	except KeyboardInterrupt, e:
 		print
 		line("cancelled.")
+		sys.exit(1)
 		
