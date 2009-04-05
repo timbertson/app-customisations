@@ -5,7 +5,6 @@ alias ls='ls -Gh' #enable colours and human-readable sizes
 # app aliases
 alias ftp='open -a /Applications/Yummy\ FTP.app/Contents/MacOS/Yummy\ FTP'
 alias firefox='open -a /Applications/Firefox.app'
-alias tm='open -a /Applications/TextMate.app'
 alias ff='firefox'
 alias dns-flush='sudo dscacheutil -flushcache'
 
