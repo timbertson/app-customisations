@@ -31,7 +31,7 @@ if not file_base.endswith('_test'):
 		print "Error: %s" % (file_path)
 		exit(2)
 	if not os.path.isfile(file_path):
-		print "Find did not get us a valid file: %s" % (file_path,)
+		print "Could not find *_test.py. Find returned: %s" % (file_path,)
 		exit(2)
 
 
@@ -39,11 +39,7 @@ rel_file_path = str_end(project_dir, file_path)
 if rel_file_path.startswith(os.path.sep):
 	rel_file_path = rel_file_path[1:]
 
-rel_file_path = re.sub('\.py$', '', rel_file_path, re.I)
-rel_file_path = rel_file_path.replace('..','.')
-dotted_file_path = '.'.join(os.path.split(rel_file_path))
-
-cmd = """cd '%s' && nosetests '%s' --xml --xml-formatter=nosexml.TextMateFormatter""" % (escape_singles(project_dir), escape_singles(dotted_file_path))
+cmd = """cd '%s' && nosetests '%s' --xml --xml-formatter=nosexml.TextMateFormatter""" % (escape_singles(project_dir), escape_singles(rel_file_path))
 
 # print cmd
 
