@@ -16,8 +16,7 @@ def main(argv=None):
 	while True:
 		try:
 			subprocess.call(argv)
-			if len(raw_input('\n    >> press return to play again << ')) > 0:
-				break
+			raw_input('\n    >> press return to play again (ctrl+c to quit) << ')
 			print '\n\n\n'
 		except KeyboardInterrupt:
 			break
