@@ -1,2 +1,7 @@
 ! this is supposed to make ctrl+space underscore, but I've yet to see that work:
-keycode 65 = space space underscore
+! keycode 65 = space space underscore
+
+! this turns capslock into another ctrl:
+remove Lock = Caps_Lock
+keysym Caps_Lock = Control_L
+add Control = Control_L
