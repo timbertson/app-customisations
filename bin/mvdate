@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ $# -eq 0 ]; then
+	echo "usage: mvdate file [file2 [...]]"
+	exit 1
+fi
+
+datestr=`date '+%Y-%m-%d'`
+for f in "$@"; do
+	mv "$f" "$datestr $f"
+done
