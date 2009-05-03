@@ -25,13 +25,11 @@ alias open='gnome-open'
 alias tm='gedit' # nothing like it, but I habitually use "tm" on linux
 
 
-# i hate capslock with a passion...
 function xmm {
    xmodmap -e "$@" >/dev/null 2>&1
 }
-xmm 'remove Lock = Caps_Lock'
-xmm 'keysym Caps_Lock = Control_L'
-xmm 'add Control = Control_L'
+# i hate capslock with a passion... uncomment the below line if you agree
+#xmm 'remove Lock = Caps_Lock'; xmm 'keysym Caps_Lock = Control_L'; xmm 'add Control = Control_L'
 
 # ----------------------------
 # functions
