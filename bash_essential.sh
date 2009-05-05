@@ -6,6 +6,7 @@
 # common and obvious aliases
 alias ll='ls -l'
 alias la='ls -la'
+alias lt='ls -lrt'
 
 alias grep='egrep --color'
 alias less='less -R' # raw character support (ie colours)
