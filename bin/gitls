@@ -2,11 +2,43 @@
 
 import os
 import sys
+try:
+	import git
+except ImportError:
+	print >> sys.stderr, "ERROR: You need to install the gitpython python library to use this tool"
+	sys.exit(1)
+import termstyle as col
 
-files = sys.argv[:1]
-if len(files) == 0:
-	files = os.listidr('.')
-	files = [fl for fl in files if os.path.isdir(fl)]
+def main(files=None):
+	if files is None:
+		files = sys.argv[1:]
+	if len(files) == 0:
+		files = os.listdir('.')
+		files = [fl for fl in files if os.path.isdir(fl)]
 
+	for file_ in files:
+		repo = get_repo(file_)
+		print fmt_repo(repo, file_)
+	
+def get_repo(path):
+	try:
+		return git.Repo(path)
+	except git.InvalidGitRepositoryError:
+		return None
 
+def fmt_repo(repo, path):
+	if repo is None:
+		return col.black(path)
+	parts = []
+	path_col = col.red if repo.is_dirty else col.green
+	parts.append(path_col(path))
+	parts.append(col.yellow(repo.active_branch))
+	remotes = repo.git.remote().splitlines()
+	remotes_str = '[%s]' % (col.blue(', '.join(remotes)),)
+	parts.append(remotes_str)
+	#TODO: find out if current branch is ahead/behind any remotes
+	return ' '.join(parts)
+
+if __name__ == '__main__':
+	sys.exit(main())
 
