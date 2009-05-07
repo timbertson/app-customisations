@@ -56,10 +56,11 @@ def format_remote_info(repo, branch):
 	for remote_url, advanced in remote_infos:
 		if remote_url.endswith("/" + branch):
 			remote_url = remote_url.rsplit('/', 1)[0]
-		if advanced > 0:
-			parts.append(", %s:%s" % (col.red("+", advanced), remote_url))
-		else:
+		if advanced == 0:
 			parts.append(col.green(" = ", remote_url))
+		else:
+			sign = "+" if advanced > 0 else ""
+			parts.append(", %s:%s" % (col.red(sign, advanced), remote_url))
 	return ''.join(parts)
 	
 
@@ -74,8 +75,16 @@ def remote_info(repo):
 		return [line.split(remote_str)[1][1:] for line in lines if not line.endswith('HEAD')]
 
 	def commits_ahead_of(repo, remote_url):
-		commits = repo.git.rev_list("%s..HEAD" % (remote_url,)).splitlines()
-		return len(commits)
+		def diff(start, finish):
+			commits = repo.git.rev_list("%s..%s" % (start,finish)).splitlines()
+			return len(commits)
+			
+		commits = diff(remote_url, "HEAD")
+		if commits > 0:
+			return commits
+		back_commits = diff("HEAD", remote_url)
+		return -back_commits
+		
 	
 	return [(url, commits_ahead_of(repo, url)) for url in get_remote_urls(repo)]
 
