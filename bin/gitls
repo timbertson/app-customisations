@@ -2,12 +2,18 @@
 
 import os
 import sys
+
+def _neeed(lib):
+	print >> sys.stderr, "ERROR: You need to install the gitpython python library to use this tool"
+	sys.exit(1)
 try:
 	import git
 except ImportError:
-	print >> sys.stderr, "ERROR: You need to install the gitpython python library to use this tool"
-	sys.exit(1)
-import termstyle as col
+	_need('gitpython')
+try:
+	import termstyle as col
+except ImportError:
+	_need('termstyle')
 
 def main(files=None):
 	if files is None:
@@ -18,6 +24,8 @@ def main(files=None):
 
 	for file_ in files:
 		repo = get_repo(file_)
+		if repo is None:
+			continue
 		print fmt_repo(repo, file_)
 	
 def get_repo(path):
@@ -28,16 +36,48 @@ def get_repo(path):
 
 def fmt_repo(repo, path):
 	if repo is None:
-		return col.black(path)
+		return col.black("[n/a: ",path,"]")
 	parts = []
-	path_col = col.red if repo.is_dirty else col.green
+	path_col = col.red if repo.is_dirty else col.yellow
+
+	active_branch = repo.active_branch
+	branch_str = col.cyan(":", active_branch) if active_branch != 'master' else ''
 	parts.append(path_col(path))
-	parts.append(col.yellow(repo.active_branch))
-	remotes = repo.git.remote().splitlines()
-	remotes_str = '[%s]' % (col.blue(', '.join(remotes)),)
-	parts.append(remotes_str)
-	#TODO: find out if current branch is ahead/behind any remotes
-	return ' '.join(parts)
+	parts.append(branch_str)
+	parts.append(format_remote_info(repo, active_branch))
+
+	return ''.join(parts)
+
+def format_remote_info(repo, branch):
+	remote_infos = remote_info(repo)
+	# sort by "least divergent first"
+	parts = []
+	remote_infos = sorted(remote_infos, key=lambda x: x[1])
+	for remote_url, advanced in remote_infos:
+		if remote_url.endswith("/" + branch):
+			remote_url = remote_url.rsplit('/', 1)[0]
+		if advanced > 0:
+			parts.append(", %s:%s" % (col.red("+", advanced), remote_url))
+		else:
+			parts.append(col.green(" = ", remote_url))
+	return ''.join(parts)
+	
+
+def remote_info(repo):
+	"""return a list of (remote_url, commits_ahead) pairs for each remote in repo"""
+	# basic operation is:
+	# git-for-each-ref refs/remotes -> to get a list of remote refs
+	# git-rev-list <remote_url>..HEAD -> to find all the commits ahead of remote URL
+	def get_remote_urls(repo):
+		remote_str = 'refs/remotes'
+		lines = repo.git.for_each_ref(remote_str).splitlines()
+		return [line.split(remote_str)[1][1:] for line in lines if not line.endswith('HEAD')]
+
+	def commits_ahead_of(repo, remote_url):
+		commits = repo.git.rev_list("%s..HEAD" % (remote_url,)).splitlines()
+		return len(commits)
+	
+	return [(url, commits_ahead_of(repo, url)) for url in get_remote_urls(repo)]
 
 if __name__ == '__main__':
 	sys.exit(main())
