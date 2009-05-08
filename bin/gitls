@@ -4,7 +4,7 @@ import os
 import sys
 
 def _neeed(lib):
-	print >> sys.stderr, "ERROR: You need to install the gitpython python library to use this tool"
+	print >> sys.stderr, "ERROR: You need to install the %s python library to use this tool" % (lib,)
 	sys.exit(1)
 try:
 	import git
@@ -15,19 +15,41 @@ try:
 except ImportError:
 	_need('termstyle')
 
-def main(files=None):
-	if files is None:
-		files = sys.argv[1:]
-	if len(files) == 0:
-		files = os.listdir('.')
-		files = [fl for fl in files if os.path.isdir(fl)]
+def isdir(*parts):
+	return os.path.isdir(os.path.join(*parts))
 
+def main(paths=None):
+	strip_path_bits = 0
+	if paths is None:
+		paths = sys.argv[1:]
+	if len(paths) <= 0:
+		strip_path_bits = 1
+		paths = ['.']
+	
+	if should_list_children(paths):
+		files = get_all_child_dir_paths(paths)
+	else:
+		files = paths
 	for file_ in files:
 		repo = get_repo(file_)
-		if repo is None:
-			continue
+		if strip_path_bits > 0:
+			file_ = os.path.join(*os.path.split(file_)[strip_path_bits:])
 		print fmt_repo(repo, file_)
+
+def should_list_children(paths):
+	return not any([isdir(path, '.git') for path in paths])
 	
+def get_all_child_dir_paths(paths):
+	dir_paths = []
+	for path in paths:
+		if not os.path.isdir(path):
+			continue
+		for item in os.listdir(path):
+			fullpath = os.path.join(path, item)
+			if os.path.isdir(fullpath):
+				dir_paths.append(fullpath)
+	return dir_paths if len(dir_paths) > 0 else paths
+
 def get_repo(path):
 	try:
 		return git.Repo(path)
@@ -35,8 +57,13 @@ def get_repo(path):
 		return None
 
 def fmt_repo(repo, path):
+	if path == '.':
+		if repo is not None:
+			path = os.path.basename(repo.wd)
+		else:
+			path = os.path.basename(os.path.abspath(os.path.curdir))
 	if repo is None:
-		return col.black("[n/a: ",path,"]")
+		return col.black(path)
 	parts = []
 	path_col = col.red if repo.is_dirty else col.yellow
 
@@ -51,8 +78,8 @@ def fmt_repo(repo, path):
 def format_remote_info(repo, branch):
 	remote_infos = remote_info(repo)
 	# sort by "least divergent first"
+	remote_infos = sorted(remote_infos, key=lambda x: abs(x[1]))
 	parts = []
-	remote_infos = sorted(remote_infos, key=lambda x: x[1])
 	for remote_url, advanced in remote_infos:
 		if remote_url.endswith("/" + branch):
 			remote_url = remote_url.rsplit('/', 1)[0]
