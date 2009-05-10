@@ -63,10 +63,13 @@ def fmt_repo(repo, path):
 			path = os.path.basename(repo.wd)
 		else:
 			path = os.path.basename(os.path.abspath(os.path.curdir))
-	try:
-		active_branch = repo.active_branch
-	except git.errors.GitCommandError:
-		repo = None
+			
+	if repo is not None:
+		# make sure it's a valid repo
+		try:
+			active_branch = repo.active_branch
+		except git.errors.GitCommandError:
+			repo = None
 
 	if repo is None:
 		return col.black(path)
