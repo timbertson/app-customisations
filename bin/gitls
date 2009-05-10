@@ -19,10 +19,29 @@ except ImportError:
 def isdir(*parts):
 	return os.path.isdir(os.path.join(*parts))
 
-def main(paths=None):
+def split_args(args):
+	is_opt = lambda x: x.startswith('--')
+	is_not_opt = lambda x: not is_opt(x)
+	
+	args = filter(is_opt, args)
+	paths = filter(is_not_opt, args)
+	
+	args = [arg[2:] for arg in args]
+	return args, paths
+
+def main(args=None):
+	if args is None:
+		args = sys.argv[1:]
+	flags, paths = split_args(args)
+	
+	refresh = False
+	if 'refresh' in flags:
+		refresh = True
+	if 'help' in flags:
+		print >> sys.stderr, "usage: %s [--refresh] [dir ...]" % (os.path.basename(sys.argv[0]))
+		return 1
+
 	strip_path_bits = 0
-	if paths is None:
-		paths = sys.argv[1:]
 	if len(paths) <= 0:
 		strip_path_bits = 1
 		paths = ['.']
@@ -33,6 +52,12 @@ def main(paths=None):
 		files = paths
 	for file_ in files:
 		repo = get_repo(file_)
+		if repo is not None and refresh:
+			for remote in remotes(repo):
+				try:
+					repo.git.fetch(remote)
+				except git.errors.GitCommandError:
+					print >> sys.stderr, "# %s: couldn't fetch remote \"%s\"" % (os.path.basename(repo.wd), remote,)
 		if strip_path_bits > 0:
 			file_ = os.path.join(*os.path.split(file_)[strip_path_bits:])
 		print fmt_repo(repo, file_)
@@ -53,8 +78,10 @@ def get_all_child_dir_paths(paths):
 
 def get_repo(path):
 	try:
-		return git.Repo(path)
-	except git.InvalidGitRepositoryError:
+		repo = git.Repo(path)
+		branch = repo.active_branch # make sure it's initted
+		return repo
+	except (git.InvalidGitRepositoryError, git.errors.GitCommandError):
 		return None
 
 def fmt_repo(repo, path):
@@ -64,18 +91,12 @@ def fmt_repo(repo, path):
 		else:
 			path = os.path.basename(os.path.abspath(os.path.curdir))
 			
-	if repo is not None:
-		# make sure it's a valid repo
-		try:
-			active_branch = repo.active_branch
-		except git.errors.GitCommandError:
-			repo = None
-
 	if repo is None:
 		return col.black(path)
 	parts = []
 	path_col = col.red if repo.is_dirty else col.yellow
 
+	active_branch = repo.active_branch
 	branch_str = col.cyan(":", active_branch) if active_branch != 'master' else ''
 	parts.append(path_col(path))
 	parts.append(branch_str)
@@ -98,18 +119,20 @@ def format_remote_info(repo, branch):
 			parts.append(", %s:%s" % (col.red(sign, advanced), remote_url))
 	return ''.join(parts)
 	
+def get_remote_urls(repo):
+	# git-for-each-ref refs/remotes -> to get a list of remote refs
+	remote_str = 'refs/remotes'
+	lines = repo.git.for_each_ref(remote_str).splitlines()
+	return [line.split(remote_str)[1][1:] for line in lines if not line.endswith('HEAD')]
+
+def remotes(repo):
+	return repo.git.remote().splitlines()
 
 def remote_info(repo):
 	"""return a list of (remote_url, commits_ahead) pairs for each remote in repo"""
-	# basic operation is:
-	# git-for-each-ref refs/remotes -> to get a list of remote refs
-	# git-rev-list <remote_url>..HEAD -> to find all the commits ahead of remote URL
-	def get_remote_urls(repo):
-		remote_str = 'refs/remotes'
-		lines = repo.git.for_each_ref(remote_str).splitlines()
-		return [line.split(remote_str)[1][1:] for line in lines if not line.endswith('HEAD')]
 
 	def commits_ahead_of(repo, remote_url):
+		# uses git-rev-list <remote_url>..HEAD -> to find all the commits ahead of remote URL
 		def diff(start, finish):
 			commits = repo.git.rev_list("%s..%s" % (start,finish)).splitlines()
 			return len(commits)
@@ -145,7 +168,6 @@ def remote_info(repo):
 		return infos
 	
 	return relevant_remote_infos(repo)
-	# return [(url, commits_ahead_of(repo, url)) for url in get_remote_urls(repo)]
 
 if __name__ == '__main__':
 	try:
