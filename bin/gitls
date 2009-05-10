@@ -63,12 +63,16 @@ def fmt_repo(repo, path):
 			path = os.path.basename(repo.wd)
 		else:
 			path = os.path.basename(os.path.abspath(os.path.curdir))
+	try:
+		active_branch = repo.active_branch
+	except git.errors.GitCommandError:
+		repo = None
+
 	if repo is None:
 		return col.black(path)
 	parts = []
 	path_col = col.red if repo.is_dirty else col.yellow
 
-	active_branch = repo.active_branch
 	branch_str = col.cyan(":", active_branch) if active_branch != 'master' else ''
 	parts.append(path_col(path))
 	parts.append(branch_str)
@@ -141,5 +145,8 @@ def remote_info(repo):
 	# return [(url, commits_ahead_of(repo, url)) for url in get_remote_urls(repo)]
 
 if __name__ == '__main__':
-	sys.exit(main())
+	try:
+		sys.exit(main())
+	except KeyboardInterrupt:
+		sys.exit(1)
 
