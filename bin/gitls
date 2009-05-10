@@ -2,6 +2,7 @@
 
 import os
 import sys
+from collections import defaultdict
 
 def _neeed(lib):
 	print >> sys.stderr, "ERROR: You need to install the %s python library to use this tool" % (lib,)
@@ -111,9 +112,33 @@ def remote_info(repo):
 			return commits
 		back_commits = diff("HEAD", remote_url)
 		return -back_commits
-		
+
+	def lowest_differing_branch(repo, remote_urls):
+		best = None
+		for remote_url in remote_urls:
+			diff = commits_ahead_of(repo, remote_url)
+			if best is None or abs(diff) < best[-1]:
+				best = (remote_url, diff)
+				if diff == 0:
+					# ain't gonna get any better...
+					return best
+		return best
 	
-	return [(url, commits_ahead_of(repo, url)) for url in get_remote_urls(repo)]
+	def relevant_remote_infos(repo):
+		all_remotes = get_remote_urls(repo)
+		remote_branches = defaultdict(list)
+		for remote in all_remotes:
+			remote_name = remote.split('/')[0]
+			remote_branches[remote_name].append(remote)
+
+		infos = []
+		for remote_name, remote_urls in remote_branches.items():
+			best_match = lowest_differing_branch(repo, remote_urls)
+			infos.append(best_match)
+		return infos
+	
+	return relevant_remote_infos(repo)
+	# return [(url, commits_ahead_of(repo, url)) for url in get_remote_urls(repo)]
 
 if __name__ == '__main__':
 	sys.exit(main())
