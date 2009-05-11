@@ -1,0 +1,119 @@
+#!/usr/bin/env python
+"""
+For an ssh-based git remote, this script will attempt to
+ssh into the remote host's working directory and run a
+git-pull <name_of_self_according_to_remote> current_branch_name
+
+No guarantees are made as to what will happen if the pull is not
+clean. Probably something bad.
+"""
+
+import git
+import sys
+import re
+import subprocess
+
+def main(args = None):
+	if args is None:
+		args = sys.argv[1:]
+
+	if len(args) == 1:
+		# default to "origin"
+		args.append('origin')
+
+	if len(args) == 2:
+		remote_name, name_of_here_from_remote = args
+	else:
+		raise ValueError("expected 1 or 2 args, got %s" % (len(args),))
+	
+	repo = git.Repo('.')
+	branch = repo.active_branch
+	remotes = Remotes(map(Remote, repo.git.remote('-v').splitlines()))
+	if not remote_name in remotes:
+		remotes_str = "\n".join(["  " + name for name in remotes.names()])
+		raise ValueError("no such remote \"%s\"\nKnown remotes:\n%s" % (remote_name, remotes_str))
+
+	remotes[remote_name].remote_pull(name_of_here_from_remote, branch)
+
+protocol_sep = '://'
+remote_sep = ':'
+
+ssh = 'ssh'
+file_ = 'file'
+
+class Remotes(object):
+	def __init__(self, remotes):
+		self.remotes = {}
+		for remote in remotes:
+			self.remotes[remote.name] = remote
+	
+	def names(self):
+		return self.remotes.keys()
+
+	def __contains__(self, obj):
+		return obj in self.remotes
+	
+	def __getitem__(self, key):
+		return self.remotes[key]
+	
+	def __repr__(self):
+		return repr(self.remotes)
+
+	def __str__(self):
+		return str(self.remotes)
+
+def shell_quote(*s):
+	def _shell_quote_single(s):
+		s = s.replace('\\','\\\\') # escape backslashes
+		s = s.replace('"','\\"')   # escape double quotes
+		return '"%s"' % (s,)
+	return tuple(map(_shell_quote_single, s))
+
+class Remote(object):
+	def __init__(self, remote_str):
+		self.name, remote_str = remote_str.split('\t',1)
+		self.protocol = ssh if remote_sep in remote_str else file_
+		
+		if protocol_sep in remote_str:
+			self.protocol, remote_str = remote_str.split(protocol_sep, 1)
+
+		if self.protocol == ssh:
+			self.host, self.path = remote_str.split(':',1)
+			if re.match('\.git$', self.path, re.I):
+				self.path = self.path[:-4]
+	
+	def __hash__(self):
+		return hash(self.name)
+	
+	def __eq__(self, other):
+		return isintance(other, type(self)) and other.name == self.name
+	
+	def __str__(self):
+		return "<#remote: %s>" % (str(self.name),)
+	def __repr__(self):
+		return str(self)
+	
+	def remote_pull(self, repo, branch):
+		if self.protocol != ssh:
+			raise RuntimeError("can't remote_pull over protocol %s" % (self.protocol))
+		subcommand = "cd %s && git pull %s %s" % shell_quote(self.path, repo, branch)
+		cmd_args = ['ssh', self.host, self.path, '-c', subcommand]
+		print "Running command: %s" % (cmd_args,)
+		subprocess.check_call(cmd_args)
+
+if __name__ == '__main__':
+	usage = "usage: git-pull-remote <remote> <name_of_self_according_to_remote>"
+	if '--help' in sys.argv[1:]:
+		print >> sts.stdout, usage
+		print >> sts.stdout, __doc__
+		sys.exit(0)
+	try:
+		sys.exit(main(sys.argv[1:]))
+	except ValueError, e:
+		print >> sys.stderr, "Error: %s" % (e.message,)
+		print >> sys.stderr, ""
+		print >> sys.stderr, usage
+	except KeyboardInterrupt:
+		sys.exit(1)
+	
+
