@@ -96,8 +96,16 @@ class Remote(object):
 	def remote_pull(self, repo, branch):
 		if self.protocol != ssh:
 			raise RuntimeError("can't remote_pull over protocol %s" % (self.protocol))
+		if self.path.startswith("~"):
+			self.path = self.path[1:]
+			prefix = "$HOME"
+			if not prefix.startswith('/'):
+				# it was a user-dir, eg ~bob. turn it into $HOME/../bob
+				prefix += "/.."
+			self.path = "%s/%s" % (prefix, self.path)
 		subcommand = "cd %s && git pull %s %s" % shell_quote(self.path, repo, branch)
-		cmd_args = ['ssh', self.host, self.path, '-c', subcommand]
+		
+		cmd_args = ['ssh', self.host, subcommand]
 		print "Running command: %s" % (cmd_args,)
 		subprocess.check_call(cmd_args)
 
