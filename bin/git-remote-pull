@@ -111,7 +111,7 @@ class Remote(object):
 			self.path = self.path[1:]
 			prefix = "$HOME"
 			if not prefix.startswith('/'):
-				# it was a user-dir, eg ~bob. turn it into $HOME/../bob
+				# if it was a user-dir, eg ~bob. turn it into $HOME/../bob
 				prefix += "/.."
 			self.path = "%s/%s" % (prefix, self.path)
 		subcommand = "cd %s && git pull %s %s" % shell_quote(self.path, repo, branch)
