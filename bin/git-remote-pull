@@ -17,6 +17,8 @@ def main(args = None):
 	if args is None:
 		args = sys.argv[1:]
 
+	args = [arg for arg in args if not arg.startswith('--')]
+
 	if len(args) == 1:
 		# default to "origin"
 		args.append('origin')
@@ -72,13 +74,22 @@ def shell_quote(*s):
 class Remote(object):
 	def __init__(self, remote_str):
 		self.name, remote_str = remote_str.split('\t',1)
-		self.protocol = ssh if remote_sep in remote_str else file_
+		self.protocol = None
 		
 		if protocol_sep in remote_str:
 			self.protocol, remote_str = remote_str.split(protocol_sep, 1)
+		else:
+			self.protocol = ssh if remote_sep in remote_str else file_
 
 		if self.protocol == ssh:
-			self.host, self.path = remote_str.split(':',1)
+			print remote_str
+			sep = ':'
+			
+			if not sep in remote_str:
+				# try whatever's before the first slash, apparently that's valid?
+				remote_str = remote_str.replace('/',':/',1)
+
+			self.host, self.path = remote_str.split(sep,1)
 			if re.match('\.git$', self.path, re.I):
 				self.path = self.path[:-4]
 	
@@ -111,16 +122,24 @@ class Remote(object):
 
 if __name__ == '__main__':
 	usage = "usage: git-pull-remote <remote> <name_of_self_according_to_remote>"
-	if '--help' in sys.argv[1:]:
+	argv = sys.argv[1:]
+	if '--help' in argv:
 		print >> sts.stdout, usage
 		print >> sts.stdout, __doc__
 		sys.exit(0)
+
+	debug = False
+	if '--debug' in argv:
+		debug = True
+
 	try:
-		sys.exit(main(sys.argv[1:]))
+		sys.exit(main(argv))
 	except ValueError, e:
-		print >> sys.stderr, "Error: %s" % (e.message,)
+		print >> sys.stderr, "Error: %s" % (e,)
 		print >> sys.stderr, ""
 		print >> sys.stderr, usage
+		if debug:
+			raise
 	except KeyboardInterrupt:
 		sys.exit(1)
 	
