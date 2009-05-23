@@ -26,4 +26,6 @@ restructured-text: http://textmethod.com/wiki/ReStructuredTextToolsForGedit
 switcher: http://rockiger.googlecode.com/files/switcher-plugin.tar.bz2
 tabs-extend: http://code.google.com/p/gedit-tabsextend/
 navigation: http://users.tkk.fi/~otsaloma/gedit/
+copy-document-location: http://github.com/gfxmonk/gedit-plugins/tree/master
+gfxmonk-trailsave: http://github.com/gfxmonk/gedit-plugins/tree/master
 
