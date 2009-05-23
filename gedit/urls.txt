@@ -25,4 +25,5 @@ python-outline: http://live.gnome.org/Gedit/PythonOutlinePlugin
 restructured-text: http://textmethod.com/wiki/ReStructuredTextToolsForGedit
 switcher: http://rockiger.googlecode.com/files/switcher-plugin.tar.bz2
 tabs-extend: http://code.google.com/p/gedit-tabsextend/
+navigation: http://users.tkk.fi/~otsaloma/gedit/
 
