@@ -7,6 +7,7 @@ alias ftp='open -a /Applications/Yummy\ FTP.app/Contents/MacOS/Yummy\ FTP'
 alias firefox='open -a /Applications/Firefox.app'
 alias ff='firefox'
 alias dns-flush='sudo dscacheutil -flushcache'
+export EDITOR='mate -w'
 
 # Add darwinports and ~/.bin to PATH:
 export PATH="$PATH:/opt/local/bin:/opt/local/sbin:$HOME/.bin"
