@@ -1,0 +1,7 @@
+#!/bin/sh
+
+where='.'
+[ -n "$1" ] && where="$1"
+
+find "$where" -iname '*.pyc' -exec rm -i '{}' \;
+
