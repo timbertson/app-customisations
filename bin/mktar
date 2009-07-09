@@ -13,7 +13,7 @@ lower_file = files[-1].lower()
 if lower_file.endswith('.tar.gz') or lower_file.endswith('.tgz'):
 	output_file = files.pop()
 else:
-	output_file = files[-1] + '.tar.gz'
+	output_file = files[-1].rstrip('/') + '.tar.gz'
 
 print "compressing [%s] -> %s" % (', '.join(files), output_file)
 subprocess.check_call(['tar', 'zcf', output_file] + files)
