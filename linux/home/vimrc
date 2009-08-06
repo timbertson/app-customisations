@@ -1,0 +1,17 @@
+set tabstop=2
+set ignorecase
+set smartcase
+set incsearch
+set scrolloff=2
+set wildmode=longest,list
+set nocompatible
+set autoindent
+set mouse=a
+
+map <C-j> gt
+map <C-k> gT
+map <C-t> :tabnew
+
+set wmh=0
+
+

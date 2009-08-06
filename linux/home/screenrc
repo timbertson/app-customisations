@@ -1,0 +1,23 @@
+bind = resize =
+bind + resize +1
+bind - resize -1
+bind _ resize max
+bind ^] next
+bind ^[ prev
+
+screen -t "bash" 0 bash
+screen -t "editor" 1 bash
+screen -t "ipython" 2 ipython -p sh
+screen -t "scratch" 3 bash
+screen -t "help" 4 man screen
+select 1
+
+bind ' ' windowlist -b 
+startup_message       off
+defscrollback         3000
+silencewait           15
+activity              "activity in %n (%t) [%w:%s]~"
+bell                  "bell     in %n (%t) [%w:%s]~"
+vbell_msg             " *beep* "
+
+
