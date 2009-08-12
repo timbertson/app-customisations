@@ -1,4 +1,10 @@
+syntax on
+
+set encoding=utf-8
+
 set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set ignorecase
 set smartcase
 set incsearch
@@ -8,10 +14,24 @@ set nocompatible
 set autoindent
 set mouse=a
 
-map <C-j> gt
-map <C-k> gT
+"highlight tabs & trailing spaces
+autocmd BufNewFile,BufRead * set list listchars=tab:›\ ,trail:-
+"highlight any spaces that are followed by a tab (the horror!)
+autocmd BufNewFile,BufRead * match Error / \+\t/
+
+" tab left & right
+map <C-m> gt
+map <C-n> gT
+" home & end
+map <C-l> g$
+map <C-h> g^
+
+" scroll (without moving cursor) on ctrl+j/k
+map <C-k> <C-y>
+map <C-j> <C-e>
 map <C-t> :tabnew
 
+" allow status-bar windows (0-height)
 set wmh=0
 
 
