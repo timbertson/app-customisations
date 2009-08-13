@@ -1,0 +1,3 @@
+[submodule "vim/src/vimtlib"]
+	path = vim/src/vimtlib
+	url = http://github.com/tomtom/vimtlib.git
