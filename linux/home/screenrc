@@ -2,14 +2,13 @@ bind = resize =
 bind + resize +1
 bind - resize -1
 bind _ resize max
-bind ^] next
-bind ^[ prev
+bind ^m next
+bind ^n prev
 
 screen -t "bash" 0 bash
-screen -t "editor" 1 bash
+screen -t "editor" 1 vim
 screen -t "ipython" 2 ipython -p sh
 screen -t "scratch" 3 bash
-screen -t "help" 4 man screen
 select 1
 
 bind ' ' windowlist -b 
