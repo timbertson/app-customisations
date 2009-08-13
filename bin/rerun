@@ -17,7 +17,7 @@ def main(argv=None):
 		try:
 			subprocess.call(argv)
 			raw_input('\n    >> press return to play again (ctrl+c to quit) << ')
-			print '\n\n\n'
+			print '\n' * 20
 		except KeyboardInterrupt:
 			break
 

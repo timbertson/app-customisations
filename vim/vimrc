@@ -1,4 +1,5 @@
 syntax on
+set number
 filetype plugin on
 
 set encoding=utf-8
