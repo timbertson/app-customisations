@@ -4,3 +4,6 @@
 [submodule "vim/src/vim-scmdiff"]
 	path = vim/src/vim-scmdiff
 	url = http://github.com/ghewgill/vim-scmdiff.git
+[submodule "vim/src/autotab"]
+	path = vim/src/autotab
+	url = http://github.com/gfxmonk/vim-autotab.git
