@@ -1,0 +1,1 @@
+../../src/vim-scmdiff/scmdiff.vim

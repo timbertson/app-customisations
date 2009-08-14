@@ -1,3 +1,6 @@
 [submodule "vim/src/vimtlib"]
 	path = vim/src/vimtlib
 	url = http://github.com/tomtom/vimtlib.git
+[submodule "vim/src/vim-scmdiff"]
+	path = vim/src/vim-scmdiff
+	url = http://github.com/ghewgill/vim-scmdiff.git
