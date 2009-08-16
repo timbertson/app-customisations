@@ -1,1 +1,1 @@
-/Users/tim/Documents/Programming/vim/autotab/plugin/autotab.vim
+../../src/autotab/plugin/autotab.vim
