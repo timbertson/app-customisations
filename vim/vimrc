@@ -1,6 +1,7 @@
 syntax on
 set number
 filetype plugin on
+color ir_black
 
 set encoding=utf-8
 
@@ -53,3 +54,6 @@ map <C-/> ]#
 
 " ctrl+f to FuzzyFinder (recursive)
 map <C-f> :call g:FuzzyFinderMode.File.launch_base("**/", 0)<cr>
+
+" copy full path to clipboard
+nmap <C-c> :silent !echo -n "%:p" \| pbcopy<cr>
