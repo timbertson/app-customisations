@@ -51,3 +51,5 @@ vmap / ]#
 " and ctl+slash to line comment toggle
 map <C-/> ]#
 
+" ctrl+f to FuzzyFinder (recursive)
+map <C-f> :call g:FuzzyFinderMode.File.launch_base("**/", 0)<cr>
