@@ -17,7 +17,7 @@ set nocompatible
 set autoindent
 set smartindent
 set mouse=a
-set iskeyword-=_ " allow underscore to delimit words"
+" set iskeyword-=_ \" allow underscore to delimit words"
 
 "draw tabs & trailing spaces
 autocmd BufNewFile,BufRead * set list listchars=tab:›\ ,trail:-
