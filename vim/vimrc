@@ -27,12 +27,15 @@ autocmd BufNewFile,BufRead * set list listchars=tab:›\ ,trail:-
 autocmd BufNewFile,BufRead * match Error /\( \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ ]\)/
 
 " tab left & right
-map <C-m> gt
-map <C-n> gT
+map <A-j> gt
+map <A-k> gT
 
 " home & end
 map <C-l> g$
 map <C-h> g^
+map <space> h
+map <C-Space> g^
+map <S-Space> b
 " foward & back words at a time
 map <S-h> b
 map <S-l> w
