@@ -17,6 +17,8 @@ set nocompatible
 set autoindent
 set smartindent
 set mouse=a
+" allow status-bar windows (0-height)
+set wmh=0
 " set iskeyword-=_ \" allow underscore to delimit words"
 
 "draw tabs & trailing spaces
@@ -44,11 +46,18 @@ map <S-l> w
 map <C-k> <C-y>
 map <C-j> <C-e>
 
+" ctl + up/down to move lines
+nmap <a-up> ddkP
+nmap <a-down> ddp
+
+" copy (to gui clipboard)
+vmap <C-c> "+y
+
+" delete to the "black hole" buffer
+map <S-d> "_d
+
 " new tab with ctl+t
 map <C-t> :tabnew<cr>
-
-" allow status-bar windows (0-height)
-set wmh=0
 
 " map slash (in visual mode) to block comment toggle
 vmap / ]#
