@@ -31,6 +31,12 @@ autocmd BufNewFile,BufRead * match Error /\( \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ ]\)
 " tab left & right
 map <A-j> gt
 map <A-k> gT
+" same for macvim (cmd key, because alt doesn't work
+map <D-j> gt
+map <D-k> gT
+
+" I don't use man much, and i keep accidentally hitting it
+map <S-k> lh
 
 " home & end
 map <C-l> g$
