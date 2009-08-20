@@ -57,8 +57,12 @@ map <C-j> <C-e>
 nmap <a-up> ddkP
 nmap <a-down> ddp
 
-" copy (to gui clipboard)
+" copy / paste (gvim, with the gui clipboard)
 vmap <C-c> "+y
+imap <C-v> <esc>"+gpi
+
+" select all in visual mode
+vmap <C-a> <esc>ggvG$
 
 " delete to the "black hole" buffer
 map <S-d> "_d
@@ -73,6 +77,7 @@ map <C-/> ]#
 
 " ctrl+f to FuzzyFinder (recursive)
 map <C-f> :call g:FuzzyFinderMode.File.launch_base("**/", 0)<cr>
+command! -narg=1 -complete=dir Find call g:FuzzyFinderMode.File.launch_base("<args>" . "/**/", 0)
 
 " copy full path to clipboard
 nmap <C-c> :silent !echo -n "%:p" \| pbcopy<cr>
