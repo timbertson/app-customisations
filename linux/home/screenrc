@@ -2,8 +2,8 @@ bind = resize =
 bind + resize +1
 bind - resize -1
 bind _ resize max
-bind ^m next
-bind ^n prev
+bind ^j next
+bind ^k prev
 
 screen -t "bash" 0 bash
 screen -t "editor" 1 vim
