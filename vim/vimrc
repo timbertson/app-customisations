@@ -56,6 +56,9 @@ map <C-j> <C-e>
 " ctl + up/down to move lines
 nmap <a-up> ddkP
 nmap <a-down> ddp
+" and the same for mac using the option key
+nmap <D-up> ddkP
+nmap <D-down> ddp
 
 " copy / paste (gvim, with the gui clipboard)
 vmap <C-c> "+y
