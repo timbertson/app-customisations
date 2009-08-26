@@ -7,3 +7,6 @@
 [submodule "vim/src/autotab"]
 	path = vim/src/autotab
 	url = http://github.com/gfxmonk/vim-autotab.git
+[submodule "vim/src/ack"]
+	path = vim/src/ack
+	url = http://github.com/mileszs/ack.vim.git
