@@ -39,6 +39,11 @@ map <D-k> gT
 " I don't use man much, and i keep accidentally hitting it
 map <S-k> lh
 
+" ctrl + b to highlight current word
+map <C-b> viw
+" and then keep extending it
+vmap <C-b> o?\<<cr>o2/\><cr>h
+
 " home & end
 map <C-l> g$
 map <C-h> g^
@@ -62,7 +67,7 @@ vmap <C-c> "+y
 imap <C-v> <esc>"+gpi
 
 " select all in visual mode
-vmap <C-a> <esc>ggvG$
+vmap <C-a> <esc>ggVG
 
 " delete to the "black hole" buffer
 map <S-d> "_d
@@ -70,10 +75,9 @@ map <S-d> "_d
 " new tab with ctl+t
 map <C-t> :tabnew<cr>
 
-" map slash (in visual mode) to block comment toggle
-vmap / ]#
-" and ctl+slash to line comment toggle
-map <C-/> ]#
+" map alt+slash to line comment toggle
+map <A-/> ]#k
+map <D-/> ]#k
 
 " ctrl+f to FuzzyFinder (recursive)
 map <C-f> :call g:FuzzyFinderMode.File.launch_base("**/", 0)<cr>
