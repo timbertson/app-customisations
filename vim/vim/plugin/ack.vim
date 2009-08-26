@@ -1,0 +1,1 @@
+../../src/ack/plugin/ack.vim
