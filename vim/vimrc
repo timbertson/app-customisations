@@ -4,7 +4,9 @@ filetype plugin on
 color ir_black
 
 set encoding=utf-8
-set textwidth=0
+set textwidth=77
+set formatoptions=croqaln
+command! Emailmode set formatoptions=croqantw textwidth=70
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
@@ -39,10 +41,19 @@ map <D-k> gT
 " I don't use man much, and i keep accidentally hitting it
 map <S-k> lh
 
+" quote character to highlight inside brackets
+nmap " vib
 " ctrl + b to highlight current word
 map <C-b> viw
 " and then keep extending it
 vmap <C-b> o?\<<cr>o2/\><cr>h
+
+" surround selection with things:
+vmap ( <esc>`<i(<esc>`>la)<esc>
+vmap [ <esc>`<i[<esc>`>la]<esc>
+vmap { <esc>`<i{<esc>`>la}<esc>
+" ) kills the surrounding characters of a selection
+vmap ) <esc>`<hx`>x
 
 " home & end
 map <C-l> g$
@@ -53,6 +64,9 @@ map <S-Space> b
 " foward & back words at a time
 map <S-h> b
 map <S-l> w
+
+" ctrl + backspace for deleting a word
+imap <C-BS> <C-W>
 
 " scroll (without moving cursor) on ctrl+j/k
 map <C-k> <C-y>
