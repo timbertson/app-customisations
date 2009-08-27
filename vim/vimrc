@@ -50,7 +50,7 @@ map <D-k> gT
 map <S-k> lh
 
 " quote character to highlight inside brackets
-nmap " vib
+nmap ; vib
 " ctrl + b to highlight current word
 map <C-b> viw
 " and then keep extending it
@@ -80,7 +80,7 @@ imap <C-BS> <C-W>
 map <C-k> <C-y>
 map <C-j> <C-e>
 
-" ctl + up/down to move lines
+" alt + up/down to move lines
 nmap <a-up> ddkP
 nmap <a-down> ddp
 " and the same for mac using the option key
