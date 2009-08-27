@@ -4,16 +4,24 @@ filetype plugin on
 color ir_black
 
 set encoding=utf-8
-set textwidth=77
+set textwidth=78
+set backupdir=~/.tmp
+set directory=~/.tmp
+set nojoinspaces " just one space after a period (when joining)
+set nofoldenable " I can never remember how to use folding
+set autoread " reload file whenever it changes on disk
+set wrapmargin=5
 set formatoptions=croqaln
 command! Emailmode set formatoptions=croqantw textwidth=70
 set tabstop=2
+set cursorline
 set softtabstop=2
 set shiftwidth=2
 set ignorecase
 set smartcase
 set incsearch
-set scrolloff=2
+set scrolloff=3
+set sidescrolloff=5
 set wildmode=longest,list
 set nocompatible
 set autoindent
@@ -34,7 +42,7 @@ autocmd BufNewFile,BufRead * match Error /\( \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ ]\)
 " tab left & right
 map <A-j> gt
 map <A-k> gT
-" same for macvim (cmd key, because alt doesn't work
+" same for macvim (cmd key, because alt doesn't work)
 map <D-j> gt
 map <D-k> gT
 
