@@ -31,6 +31,10 @@ set mouse=a
 set wmh=0
 " set iskeyword-=_ \" allow underscore to delimit words"
 
+if has("gui_running")
+	set lines=40 columns=160
+endif
+
 "draw tabs & trailing spaces
 autocmd BufNewFile,BufRead * set list listchars=tab:▸\  " add ,trail=- if you like
 
@@ -86,6 +90,7 @@ nmap <a-down> ddp
 " and the same for mac using the option key
 nmap <D-up> ddkP
 nmap <D-down> ddp
+
 
 " copy / paste (gvim, with the gui clipboard)
 vmap <C-c> "+y
