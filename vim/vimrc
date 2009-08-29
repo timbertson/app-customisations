@@ -11,6 +11,7 @@ set nojoinspaces " just one space after a period (when joining)
 set nofoldenable " I can never remember how to use folding
 set autoread " reload file whenever it changes on disk
 set wrapmargin=5
+set nowrap
 set formatoptions=croqaln
 command! Emailmode set formatoptions=croqantw textwidth=70
 set tabstop=2
@@ -68,11 +69,11 @@ vmap { <esc>`<i{<esc>`>la}<esc>
 vmap ) <esc>`<hx`>x
 
 " home & end
-map <C-l> g$
-map <C-h> g^
-map <space> h
-map <C-Space> g^
-map <S-Space> b
+nmap <C-l> $
+nmap <C-h> ^
+nmap <space> h
+nmap <C-Space> ^
+nmap <S-Space> b
 " foward & back words at a time
 map <S-h> b
 map <S-l> w
