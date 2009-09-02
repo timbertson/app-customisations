@@ -12,7 +12,7 @@ set nofoldenable " I can never remember how to use folding
 set autoread " reload file whenever it changes on disk
 set wrapmargin=5
 set nowrap
-set formatoptions=croqaln
+set formatoptions=croqln
 command! Emailmode set formatoptions=croqantw textwidth=70
 set tabstop=2
 set cursorline
@@ -69,11 +69,11 @@ vmap { <esc>`<i{<esc>`>la}<esc>
 vmap ) <esc>`<hx`>x
 
 " home & end
-nmap <C-l> $
-nmap <C-h> ^
-nmap <space> h
-nmap <C-Space> ^
-nmap <S-Space> b
+map <C-l> $
+map <C-h> ^
+map <space> h
+map <C-Space> ^
+map <S-Space> b
 " foward & back words at a time
 map <S-h> b
 map <S-l> w
