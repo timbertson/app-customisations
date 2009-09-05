@@ -1,2 +1,3 @@
 " seriously you guys, I know what formatting I want
-set formatoptions=roqln
+set formatoptions=croqln
+set textwidth=0
