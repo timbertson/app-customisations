@@ -37,12 +37,12 @@ if has("gui_running")
 endif
 
 "draw tabs & trailing spaces
-autocmd BufNewFile,BufRead * set list listchars=tab:▸\  " add ,trail=- if you like
+autocmd BufNewFile,BufRead * set list listchars=tab:▸\ ,trail:●
 
 "highlight any spaces that are followed by a tab (the horror!)
 " and any _single_ space that comes after ^\t+ (this is usually accedental)
 " and also trailing spaces
-autocmd BufNewFile,BufRead * match Error /\( \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ ]\)\|\([^ \t]\zs[ \t]\+$\)/
+autocmd BufNewFile,BufRead * match Error /\( \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ ]\)\|\([^ \t]\zs\s\+$\)/
 
 " tab left & right
 map <A-j> gt
