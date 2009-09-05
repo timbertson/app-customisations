@@ -1,1 +1,1 @@
-global.vim
+set nolist
