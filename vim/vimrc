@@ -57,6 +57,8 @@ map <S-k> lh
 
 " quote character to highlight inside brackets
 nmap ; vib
+" and keep going ...
+vmap ; <esc>llvib
 " ctrl + b to highlight current word
 map <C-b> viw
 " and then keep extending it
