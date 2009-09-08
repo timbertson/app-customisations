@@ -21,7 +21,8 @@ CYAN=`tput setaf 6`
 WHITE=`tput setaf 7`
 LIGHT=`tput setaf 9`
 GREY=`tput setaf 0`
-PS1='\n\[$GREY\][\T] \[$YELLOW\]\u\[$GREY\]@\[$RED\]\h \[$BLUE\]\w/\[$GREEN\] \$\[$LIGHT\] '
+error_notification='`__ext=$?;if [ $__ext != 0 ]; then echo -e "\n$GREY> exit code: $__ext"; fi`'
+PS1="$error_notification"'\n\[$GREY\][\T] \[$YELLOW\]\u\[$GREY\]@\[$RED\]\h \[$BLUE\]\w/\[$GREEN\] \$\[$LIGHT\] '
 
 function title
 {
