@@ -38,7 +38,8 @@ if has("gui_running")
 endif
 
 "draw tabs & trailing spaces
-autocmd BufNewFile,BufRead * set list listchars=tab:▸\ ,trail:●
+autocmd BufNewFile,BufRead * set list listchars=tab:▸\ ,trail:∿
+set list listchars=tab:▸\ ,trail:∿
 
 "highlight any spaces that are followed by a tab (the horror!)
 " and any _single_ space that comes after ^\t+ (this is usually accedental)
@@ -63,13 +64,19 @@ vmap ; <esc>llvib
 map <C-b> viw
 " and then keep extending it
 vmap <C-b> o?\<<cr>o2/\><cr>h
+" \w should maybe do the same thing?
+nmap <leader>w <c-b>
+vmap <leader>w <c-b>
 
 " surround selection with things:
-vmap ( <esc>`<i(<esc>`>la)<esc>
-vmap [ <esc>`<i[<esc>`>la]<esc>
-vmap { <esc>`<i{<esc>`>la}<esc>
+vmap <leader>( <esc>`<i(<esc>`>la)<esc>
+vmap <leader>[ <esc>`<i[<esc>`>la]<esc>
+vmap <leader>< <esc>`<i<<esc>`>la><esc>
+vmap <leader>{ <esc>`<i{<esc>`>la}<esc>
+vmap <leader>' <esc>`<i'<esc>`>la'<esc>
+vmap <leader>" <esc>`<i"<esc>`>la"<esc>
 " ) kills the surrounding characters of a selection
-vmap ) <esc>`<hx`>x
+vmap <leader>) <esc>`<hx`>x
 
 " home & end
 map <C-l> $
@@ -83,6 +90,13 @@ map <S-l> w
 
 " ctrl + backspace for deleting a word
 imap <C-BS> <C-W>
+
+" ctrl + space to insert an underscore
+imap <C-space> _
+
+" ctrl-tab for completion
+imap <C-tab> <c-n>
+imap <C-S-tab> <c-p>
 
 " scroll (without moving cursor) on ctrl+j/k
 map <C-k> <C-y>
@@ -107,11 +121,15 @@ vmap <C-a> <esc>ggVG
 map <S-d> "_d
 
 " new tab with ctl+t
-map <C-t> :tabnew<cr>
+nmap <C-t> :tabnew<cr>
 
 " map alt+slash to line comment toggle
-map <A-/> ]#k
-map <D-/> ]#k
+map <A-/> :silent TComment<cr>
+map <D-/> :silent TComment<cr>
+
+" option (or alt) + r to run the current file
+nmap <D-r> :up<cr>:!`pwd`/%<cr>
+nmap <A-r> :up<cr>:!`pwd`/%<cr>
 
 " ctrl+f to FuzzyFinder (recursive)
 map <C-f> :call g:FuzzyFinderMode.File.launch_base("**/", 0)<cr>
