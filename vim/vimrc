@@ -125,8 +125,8 @@ map <S-d> "_d
 nmap <C-t> :tabnew<cr>
 
 " map alt+slash to line comment toggle
-map <A-/> :silent TComment<cr>
-map <D-/> :silent TComment<cr>
+map <A-/> :TComment<cr>
+map <D-/> :TComment<cr>
 
 " option (or alt) + r to run the current file
 nmap <D-r> :up<cr>:!`pwd`/%<cr>
