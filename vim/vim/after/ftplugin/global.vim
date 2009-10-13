@@ -1,3 +1,3 @@
 " seriously you guys, I know what formatting I want
-set formatoptions=croqln
+set formatoptions=crqln
 set textwidth=0

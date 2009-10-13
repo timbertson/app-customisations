@@ -12,8 +12,7 @@ set nofoldenable " I can never remember how to use folding
 set autoread " reload file whenever it changes on disk
 set wrapmargin=5
 set nowrap
-set formatoptions=croqln
-set formatoptions=croqln
+set formatoptions=crqln
 command! Emailmode set formatoptions=croqantw textwidth=70
 set tabstop=2
 set cursorline
