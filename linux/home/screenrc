@@ -6,10 +6,7 @@ bind ^j next
 bind ^k prev
 
 screen -t "bash" 0 bash
-screen -t "editor" 1 vim
-screen -t "ipython" 2 ipython -p sh
-screen -t "scratch" 3 bash
-select 1
+screen -t "bash2" 1 bash
 
 bind ' ' windowlist -b 
 startup_message       off

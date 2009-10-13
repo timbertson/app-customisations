@@ -1,5 +1,4 @@
 nautilus-open-terminal
-build-essential
 git-core
 ipython
 subversion
@@ -17,4 +16,4 @@ curl
 xbindkeys
 xautomation
 vim
-
+ack
