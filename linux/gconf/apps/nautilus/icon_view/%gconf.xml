@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<gconf>
-        <entry name="labels_beside_icons" mtime="1216724696" type="bool" value="true">
-        </entry>
-        <entry name="default_use_tighter_layout" mtime="1216724698" type="bool" value="false">
-        </entry>
-</gconf>
