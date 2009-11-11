@@ -11,19 +11,6 @@ export PATH="$PATH:/sbin:/usr/sbin"
 # only run for bash
 [ -z "$PS1" -o -z "$BASH" ] && return
 
-# colours
-RED=`tput setaf 1`
-GREEN=`tput setaf 2`
-YELLOW=`tput setaf 3`
-BLUE=`tput setaf 4`
-MAGENTA=`tput setaf 5`
-CYAN=`tput setaf 6`
-WHITE=`tput setaf 7`
-LIGHT=`tput setaf 9`
-GREY=`tput setaf 0`
-error_notification='`__ext=$?;if [ $__ext != 0 ]; then echo -e "\n$GREY> exit code: $__ext"; fi`'
-PS1="$error_notification"'\n\[$GREY\][\T] \[$YELLOW\]\u\[$GREY\]@\[$RED\]\h \[$BLUE\]\w/\[$GREEN\] \$\[$LIGHT\] '
-
 function title
 {
   export PROMPT_COMMAND='echo -ne "\033]0;'"$@"'\007"'
@@ -38,6 +25,7 @@ fi
 source "$base/scm"
 source "$base/bashrc"
 source "$base/alias"
+source "$base/prompt"
 
 # case insensitive file globbing (primaily for tab completion)
 shopt -s nocaseglob
@@ -45,13 +33,6 @@ shopt -s nocaseglob
 function cdbase {
 	d=`dirname "$1"`
 	cd "$d"
-}
-
-function ssh-setup 
-{
-  if [ $(( ${SSH_AGENT_PID} + 1)) == 1 ]; then
-    eval `ssh-agent`
-  fi
 }
 
 alias tmpdir="date +'%Y-%m-%d.%H-%M-%S'"
