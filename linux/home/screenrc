@@ -8,7 +8,7 @@ bind ^k prev
 screen -t "bash" 0 bash
 screen -t "bash2" 1 bash
 
-bind ' ' windowlist -b 
+bind ' ' windowlist -b
 startup_message       off
 defscrollback         3000
 silencewait           15
