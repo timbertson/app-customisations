@@ -43,4 +43,7 @@ def _confirm(old, new):
 
 
 if __name__ =='__main__':
+	if '--help' in sys.argv[1:]:
+		print "Usage: %s search replace path [path ...]" % (os.path.basename(sys.argv[0]),)
+		sys.exit(1)
 	sys.exit(main(*sys.argv[1:]))
