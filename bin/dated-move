@@ -1,0 +1,90 @@
+#!/usr/bin/env python
+
+import os, sys
+import subprocess
+import time
+import pygtk
+import gtk
+
+import logging
+debug = logging.debug
+logging.basicConfig(level=logging.DEBUG)
+
+class UsageError(RuntimeError): pass
+
+def usage():
+	print "Usage: %s source [dest_base [name]]" % (os.path.basename(sys.argv[0]),)
+	raise UsageError()
+
+def _path(*p):
+	return os.path.join(*map(os.path.expanduser, p))
+
+def responseToDialog(entry, dialog, response):
+	dialog.response(response)
+def get_input(message):
+	#base this on a message dialog
+	dialog = gtk.MessageDialog(
+		None,
+		gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
+		gtk.MESSAGE_QUESTION,
+		gtk.BUTTONS_OK,
+		None)
+	dialog.set_markup(message)
+	#create the text input field
+	entry = gtk.Entry()
+	#allow the user to press enter to do ok
+	entry.connect("activate", responseToDialog, dialog, gtk.RESPONSE_OK)
+	#create a horizontal box to pack the entry and a label
+	hbox = gtk.HBox()
+	#hbox.pack_start(gtk.Label("Script input:"), False, 5, 5)
+	hbox.pack_end(entry)
+	#some secondary text
+	#dialog.format_secondary_markup("This will be used for <i>identification</i> purposes")
+	#add it and show it
+	dialog.vbox.pack_end(hbox, True, True, 0)
+	dialog.show_all()
+	#go go go
+	dialog.run()
+	text = entry.get_text()
+	dialog.destroy()
+	return text
+
+def get_folder(description, default="~"):
+	chooser = gtk.FileChooserDialog(title=None,action=gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER, buttons=(gtk.STOCK_CANCEL,gtk.RESPONSE_CANCEL,gtk.STOCK_OPEN,gtk.RESPONSE_OK))
+	chooser.set_current_folder(os.path.expanduser(default))
+	response = chooser.run()
+	if response != gtk.RESPONSE_OK:
+		raise RuntimeError("no folder picked")
+	filename = chooser.get_filename()
+	return filename
+
+
+def parse(args):
+	if len(args) == 3:
+		source, dest_base, name = args
+	if len(args) < 1 or len(args) > 3:
+		usage()
+		raise RuntimeError("invalid number of arguments")
+	source = args[0]
+	if len(args) < 3:
+		name = get_input("Enter folder description")
+	if len(args) < 2:
+		dest_base = get_folder("Destination (base)", default="~/Pictures/Photos")
+	return source, dest_base, name
+
+def move(src, dest):
+	print "moving '%s' to '%s'" % (src, dest)
+	os.rename(src, dest)
+
+def main(args):
+	try:
+		source, dest_base, name = parse(args)
+	except UsageError:
+		return 1
+	time_prefix = time.strftime('%Y-%m', time.localtime())
+	dest_name = "%s %s" % (time_prefix, name)
+	move(_path(source), _path(dest_base, dest_name))
+
+if __name__ == '__main__':
+	sys.exit(main(sys.argv[1:]))
+
