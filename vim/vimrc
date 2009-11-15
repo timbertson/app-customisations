@@ -128,8 +128,11 @@ map <A-/> :TComment<cr>
 map <D-/> :TComment<cr>
 
 " option (or alt) + r to run the current file
-nmap <D-r> :up<cr>:!`pwd`/%<cr>
-nmap <A-r> :up<cr>:!`pwd`/%<cr>
+nmap <D-r> :up<cr>:!%:p<cr>
+nmap <A-r> :up<cr>:!%:p<cr>
+
+" ctrl+s to save things!
+nmap <C-s> :w<cr>
 
 " ctrl+f to FuzzyFinder (recursive)
 map <C-f> :call g:FuzzyFinderMode.File.launch_base("**/", 0)<cr>

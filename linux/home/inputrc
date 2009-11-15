@@ -1,2 +1,4 @@
+$include /etc/inputrc
+
 set completion-ignore-case on
 set match-hidden-files off
