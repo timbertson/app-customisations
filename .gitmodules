@@ -10,3 +10,6 @@
 [submodule "vim/src/ack"]
 	path = vim/src/ack
 	url = http://github.com/mileszs/ack.vim.git
+[submodule "vim/src/git-vim"]
+	path = vim/src/git-vim
+	url = git://github.com/motemen/git-vim.git
