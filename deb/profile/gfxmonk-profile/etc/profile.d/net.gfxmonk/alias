@@ -7,6 +7,7 @@ alias lt='ls -lrt'
 alias diffpatch='diff -ur'
 alias grep='egrep --color'
 alias less='less -RSi' # raw character support; no word wrap; insensitive search, quit-at-eof
+alias l='less'
 alias vim.='vim ~/.bash_profile; . ~/.bash_profile'
 alias ff='firefox'
 

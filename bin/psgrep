@@ -1,0 +1,4 @@
+#!/bin/sh
+
+ps=`ps aux`
+echo "$ps" | grep -Ev "^$USER +($$|$PPID)" | grep "$@"

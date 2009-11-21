@@ -27,14 +27,15 @@ set wildmode=longest,list
 set nocompatible
 set autoindent
 set smartindent
+set timeoutlen=1 " shouldn't be necessary, but somehow I end up with ambiguous mappings sometimes
 set mouse=a
 " allow status-bar windows (0-height)
 set wmh=0
 " set iskeyword-=_ \" allow underscore to delimit words"
 
-if has("gui_running")
-	set lines=40 columns=160
-endif
+" if has("gui_running")
+" 	set lines=40 columns=160
+" endif
 
 "draw tabs & trailing spaces
 autocmd BufNewFile,BufRead * set list listchars=tab:▸\ 
@@ -43,8 +44,8 @@ set list listchars=tab:▸\
 "highlight any spaces that are followed by a tab (the horror!)
 " and any _single_ space that comes after ^\t+ (this is usually accedental)
 " and also trailing spaces
-autocmd BufNewFile,BufRead * match Error /\( \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ ]\)\|\([^ \t]\zs\s\+$\)/
-                             match Error /\( \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ ]\)\|\([^ \t]\zs\s\+$\)/
+autocmd BufNewFile,BufRead * match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ ]\)\|\([^ \t]\zs\s\+$\)/
+                             match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ ]\)\|\([^ \t]\zs\s\+$\)/
 
 " tab left & right
 map <A-j> gt
@@ -69,12 +70,13 @@ nmap <leader>w <c-b>
 vmap <leader>w <c-b>
 
 " surround selection with things:
-vmap <leader>( <esc>`<i(<esc>`>la)<esc>
-vmap <leader>[ <esc>`<i[<esc>`>la]<esc>
-vmap <leader>< <esc>`<i<<esc>`>la><esc>
-vmap <leader>{ <esc>`<i{<esc>`>la}<esc>
-vmap <leader>' <esc>`<i'<esc>`>la'<esc>
-vmap <leader>" <esc>`<i"<esc>`>la"<esc>
+vmap <leader>( <esc>`>a)<esc>`<i(<esc>
+vmap <leader>[ <esc>`>a]<esc>`<i[<esc>
+"vmap <leader>< <esc>`>a><esc>`<i<<esc>
+vmap <leader>{ <esc>`>a}<esc>`<i{<esc>
+vmap <leader>' <esc>`>a'<esc>`<i'<esc>
+vmap <leader>" <esc>`>a"<esc>`<i"<esc>
+
 " ) kills the surrounding characters of a selection
 vmap <leader>) <esc>`<hx`>x
 
@@ -112,7 +114,7 @@ nmap <D-down> ddp
 
 " copy / paste (gvim, with the gui clipboard)
 vmap <C-c> "+y
-imap <C-v> <esc>"+gpi
+imap <C-v> <esc>"+gpa
 
 " select all in visual mode
 vmap <C-a> <esc>ggVG

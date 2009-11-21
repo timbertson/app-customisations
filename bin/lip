@@ -3,12 +3,12 @@
 import os, re, sys, commands
 
 def usage():
-	print >> sys.stderr, "Usage: %s n [eth_type=en]" % sys.argv[0]
+	print >> sys.stderr, "Usage: %s n [eth_type=wlan0]" % sys.argv[0]
 	exit(1)
 
 args = sys.argv[1:]
 
-en_type = 'en'
+en_type = 'wlan0'
 if len(args) == 0 or len(args) > 2:
 	usage()
 try: n = args[0]
@@ -20,11 +20,13 @@ en_match = en_type
 if not re.match('[0-9]$', en_match):
 	en_match += '[0-9]'
 
-local_ips = commands.getoutput("ifconfig | grep --after=2 '^%s:'" % en_match)
+local_ips = commands.getoutput("ifconfig | grep --after=2 '^%s '" % en_match)
 # print local_ips
-lines = [line for line in local_ips.split("\n") if re.match('^\s*inet ', line)]
+print local_ips
+lines = [line for line in local_ips.split("\n") if re.match('^inet addr:', line)]
 # print lines
-ip = lines[0].split(' ')[1]
+print lines
+ip = lines[0].split(':')[1]
 ip_parts = ip.split('.')
 ip_parts[-1] = n
 print '.'.join(ip_parts)
