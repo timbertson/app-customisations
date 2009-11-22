@@ -27,7 +27,6 @@ set wildmode=longest,list
 set nocompatible
 set autoindent
 set smartindent
-set timeoutlen=1 " shouldn't be necessary, but somehow I end up with ambiguous mappings sometimes
 set mouse=a
 " allow status-bar windows (0-height)
 set wmh=0
@@ -47,12 +46,13 @@ set list listchars=tab:▸\
 autocmd BufNewFile,BufRead * match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ ]\)\|\([^ \t]\zs\s\+$\)/
                              match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ ]\)\|\([^ \t]\zs\s\+$\)/
 
-" tab left & right
+"" tab left & right
 map <A-j> gt
 map <A-k> gT
 " same for macvim (cmd key, because alt doesn't work)
-map <D-j> gt
-map <D-k> gT
+""NOTE: only run this on macvim - on gnome, it causes an ambiguous map for "<<" (unindent line)
+"map <D-j> gt
+"map <D-k> gT
 
 " I don't use man much, and i keep accidentally hitting it
 map <S-k> lh
@@ -108,8 +108,8 @@ map <C-j> <C-e>
 nmap <a-up> ddkP
 nmap <a-down> ddp
 " and the same for mac using the option key
-nmap <D-up> ddkP
-nmap <D-down> ddp
+"nmap <D-up> ddkP
+"nmap <D-down> ddp
 
 
 " copy / paste (gvim, with the gui clipboard)
@@ -127,10 +127,10 @@ nmap <C-t> :tabnew<cr>
 
 " map alt+slash to line comment toggle
 map <A-/> :TComment<cr>
-map <D-/> :TComment<cr>
+"map <D-/> :TComment<cr>
 
 " option (or alt) + r to run the current file
-nmap <D-r> :up<cr>:!%:p<cr>
+"nmap <D-r> :up<cr>:!%:p<cr>
 nmap <A-r> :up<cr>:!%:p<cr>
 
 " ctrl+s to save things!
