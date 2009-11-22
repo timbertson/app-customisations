@@ -4,14 +4,17 @@ require 'webrick'
 
 include WEBrick
 def start_webrick(config = {})
-  server = HTTPServer.new(config)
-  yield server if block_given?
-  ['INT', 'TERM'].each {|signal| 
-    trap(signal) {server.shutdown}
-  }
-  server.start
-
+	server = HTTPServer.new(config)
+	yield server if block_given?
+	['INT', 'TERM'].each {|signal|
+		trap(signal) {server.shutdown}
+	}
+	server.start
 end
-  
-start_webrick(:DocumentRoot => '.', :Port => 3000)
+
+mime_types = {}
+mime_types.merge!(WEBrick::HTTPUtils.load_mime_types('/etc/mime.types')) rescue nil
+mime_types.merge!(WEBrick::HTTPUtils.load_mime_types(File.expand_path('~/.mime.types'))) rescue nil
+
+start_webrick(:DocumentRoot => '.', :Port => 3000, :MimeTypes => mime_types)
 
