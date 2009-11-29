@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os, sys
+import shutil
 import subprocess
 import time
 import pygtk
@@ -69,12 +70,12 @@ def parse(args):
 	if len(args) < 3:
 		name = get_input("Enter folder description")
 	if len(args) < 2:
-		dest_base = get_folder("Destination (base)", default="~/Pictures/Photos")
+		dest_base = get_folder("Destination (base)", default="~/Pictures/")
 	return source, dest_base, name
 
 def move(src, dest):
 	print "moving '%s' to '%s'" % (src, dest)
-	os.rename(src, dest)
+	shutil.move(src, dest)
 
 def main(args):
 	try:

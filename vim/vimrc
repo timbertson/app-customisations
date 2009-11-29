@@ -26,7 +26,7 @@ set sidescrolloff=5
 set wildmode=longest,list
 set nocompatible
 set autoindent
-set smartindent
+set cinkeys-=#
 set mouse=a
 " allow status-bar windows (0-height)
 set wmh=0
