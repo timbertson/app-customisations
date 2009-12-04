@@ -3,3 +3,4 @@
 *.swp
 *.deb
 vim/vim/.netrwhist
+/vim/vim/spell/*

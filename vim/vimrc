@@ -13,7 +13,7 @@ set autoread " reload file whenever it changes on disk
 set wrapmargin=5
 set nowrap
 set formatoptions=crqln
-command! Emailmode set formatoptions=croqantw textwidth=70
+command! Emailmode set formatoptions=croqantw textwidth=70 spell mousemodel=popup
 set tabstop=2
 set cursorline
 set softtabstop=2
@@ -141,4 +141,6 @@ map <C-f> :call g:FuzzyFinderMode.File.launch_base("**/", 0)<cr>
 command! -narg=1 -complete=dir Find call g:FuzzyFinderMode.File.launch_base("<args>" . "/**/", 0)
 
 " copy full path to clipboard
-nmap <C-c> :silent !echo -n "%:p" \| pbcopy<cr>
+nmap <C-c> :silent !echo -n "%:p" \| xsel -ib<cr>
+
+nmap <A-o> :up<cr>:silent !gnome-open %:p<cr>
