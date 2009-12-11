@@ -13,7 +13,7 @@ set autoread " reload file whenever it changes on disk
 set wrapmargin=5
 set nowrap
 set formatoptions=crqln
-command! Emailmode set formatoptions=croqantw textwidth=70 spell mousemodel=popup
+command! Emailmode set formatoptions=croqant textwidth=70 spell mousemodel=popup
 set tabstop=2
 set cursorline
 set softtabstop=2
@@ -45,6 +45,8 @@ set list listchars=tab:▸\
 " and also trailing spaces
 autocmd BufNewFile,BufRead * match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ ]\)\|\([^ \t]\zs\s\+$\)/
                              match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ ]\)\|\([^ \t]\zs\s\+$\)/
+
+autocmd FocusLost * :wall
 
 "" tab left & right
 map <A-j> gt
