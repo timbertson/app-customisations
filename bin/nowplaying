@@ -1,0 +1,11 @@
+#!/bin/sh
+
+app="$1"
+[ -z "$app" ] && app="rhythmbox" # default app
+ps aux |\
+	grep "$app" |\
+	grep -v grep |\
+	awk '{print $2}' |\
+	xargs -n 1 lsof -p |\
+	grep -oi "/home/$USER/Music/.*\..*$" |\
+	zenity --list --column=File --width=700 --height=400
