@@ -114,6 +114,14 @@ nmap <a-down> ddp
 "nmap <D-down> ddp
 
 
+" I want { and } tp match whitespace-only lines, rather than just empty ones
+" TODO: need to omit these from the search history
+noremap { :silent ?^\s*$<cr>
+noremap } :silent /^\s*$<cr>
+
+vnoremap { ?^\s*$<cr>
+vnoremap } /^\s*$<cr>
+
 " copy / paste (gvim, with the gui clipboard)
 vmap <C-c> "+y
 imap <C-v> <esc>"+gpa
