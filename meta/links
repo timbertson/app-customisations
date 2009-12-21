@@ -1,0 +1,7 @@
+../deb/profile/gfxmonk-profile/etc/profile.d/net.gfxmonk /etc/profile.d/net.gfxmonk
+../deb/profile/gfxmonk-profile/etc/profile.d/net.gfxmonk.profile.sh /etc/profile.d/net.gfxmonk.profile.sh
+../vim/vimrc /home/tim/.vimrc
+../vim/vim /home/tim/.vim
+../linux/home/inputrc /home/tim/.inputrc
+../linux/home/xbindkeysrc.scm /home/tim/.xbindkeysrc.scm
+../linux/home/xmodmaprc /home/tim/.xmodmaprc
