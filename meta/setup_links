@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+
+import os
+import sys
+import shutil
+
+base = os.path.abspath(os.path.dirname(sys.argv[0]))
+f = open(os.path.join(base, 'links'))
+
+def exists(p):
+	return os.path.exists(p) or os.path.islink(p)
+
+def isdir(p):
+	return os.path.isdir(p) and not os.path.islink(p)
+
+try:
+	for line in f:
+		src, dest = line.rstrip().split(' ', 1)
+		dest = os.path.expanduser(dest)
+		src = os.path.abspath(os.path.join(base, src))
+		print "linking %s to %s" % (src, dest)
+		if exists(dest):
+			if not os.path.islink(dest):
+				cont = raw_input("%s exists - continue?" % (
+					dest,)).strip() == ''
+				if not cont: break
+			if isdir(dest):
+				shutil.rmtree(dest)
+			else:
+				os.remove(dest)
+			print "removed %s" % (dest,)
+		os.symlink(src, dest)
+
+finally:
+	f.close()
+
