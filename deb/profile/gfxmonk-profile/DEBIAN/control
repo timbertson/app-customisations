@@ -1,7 +1,0 @@
-Package: net.gfxmonk.profile
-Name: gfxmonk-profile
-Version: 0.0.1-1
-Architecture: all
-Depends: 
-Description:
- terminal profile modifications
