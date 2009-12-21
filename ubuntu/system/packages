@@ -9,7 +9,6 @@ synergy
 ubuntu-restricted-extras
 ruby-dev
 parcellite
-ubuntu-standard
 wkhtmltopdf
 galternatives
 ffmpeg
@@ -29,12 +28,10 @@ xautomation
 compizconfig-settings-manager
 ack-grep
 docky
-ubuntu-desktop
 rubygems
 rake
 google-chrome-unstable
 mp3gain
 sshfs
 lame
-ubuntu-minimal
 libgdata5
