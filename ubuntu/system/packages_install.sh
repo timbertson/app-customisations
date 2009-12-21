@@ -1,3 +1,3 @@
 #!/bin/sh
 
-cat `dirname "$0"`/packages | xargs sudo apt-get install $@
+cat `dirname "$0"`/packages | xargs sudo apt-get install -y "$@"
