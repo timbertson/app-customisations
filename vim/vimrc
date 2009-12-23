@@ -154,7 +154,7 @@ command! -narg=1 -complete=dir Find call g:FuzzyFinderMode.File.launch_base("<ar
 nmap <C-c> :silent !echo -n "%:p" \| xsel -ib<cr>
 
 nmap <A-o> :up<cr>:silent !gnome-open %:p<cr>
-command! -narg=0 Open :silent :!gnome-open "`dirname "%:p"`"
-command! -narg=0 Term :silent :!gnome-terminal --working-directory="`dirname "%:p"`"
+command! -narg=0 Open :silent :!gnome-open "`dirname "%:p"`" &
+command! -narg=0 Term :silent :!gnome-terminal --working-directory="`dirname "%:p"`" &
 command! -narg=0 CD :lcd %:p:h
 command! -narg=0 Mdview :silent :!mdview % &

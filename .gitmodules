@@ -13,3 +13,6 @@
 [submodule "vim/src/git-vim"]
 	path = vim/src/git-vim
 	url = git://github.com/motemen/git-vim.git
+[submodule "vim/src/vim-markdown"]
+	path = vim/src/vim-markdown
+	url = git://github.com/NoahRic/vim-markdown.git
