@@ -4,3 +4,4 @@
 *.deb
 vim/vim/.netrwhist
 /vim/vim/spell/*
+*.list.save
