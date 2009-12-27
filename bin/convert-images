@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+source="$1"
+suffix="$2"
+shift 2
+
+echo "converting all files in $source to $suffix"
+
+ls -1 "$source" | while read f; do
+	path="$source/$f"
+	if [ -f "$path" ]; then
+		dest="${f%\.*}"."$suffix"
+		if [ -f "$dest" ]; then
+			echo "Error: file exists: $dest"
+		else
+			echo "converting $path to $dest"
+			convert "$path" "$@" "$dest"
+		fi
+	fi
+done
+
