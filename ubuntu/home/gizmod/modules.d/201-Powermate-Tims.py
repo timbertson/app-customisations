@@ -1,35 +1,3 @@
-    #***
-  #*********************************************************************
-#*************************************************************************
-#***
-#*** GizmoDaemon Config Script
-#***  Powermate Compiz config
-#***
-#*****************************************
-  #*****************************************
-    #***
-
-"""
-
-  Copyright (c) 2007, Gizmo Daemon Team
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at 
-
-	http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and 
-  limitations under the License. 
-  
-"""
-
-############################
-# Imports
-##########################
-
 from GizmoDaemon import *
 from GizmoScriptDefault import *
 import time
@@ -42,15 +10,11 @@ INTERESTED_CLASSES = [GizmoEventClass.Powermate]
 PRESS_THRESHOLD = 2
 MULTIPLIER = 2
 
-_out = open('/tmp/powermate-log', 'w')
+#_out = open('/tmp/powermate-log', 'w')
 
-def debug(s):
-	print >> _out, s
-	_out.flush()
-
-############################
-# PowermateCompiz Class definition
-##########################
+def debug(s): pass
+	#print >> _out, s
+	#_out.flush()
 
 class ScrollAction(GizmoScriptDefault):
 	"""
