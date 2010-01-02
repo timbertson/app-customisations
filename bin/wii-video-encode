@@ -1,0 +1,37 @@
+#!/usr/bin/python
+
+import subprocess
+import os, sys
+
+outfile = None
+try:
+	infile, outfile = sys.argv[1:]
+except ValueError:
+	infile, = sys.argv[1:]
+directory, filename = os.path.split(infile)
+base, ext = os.path.splitext(filename)
+
+if not outfile:
+	filename_attempts = (
+		base + '.avi',
+		base + '-xvid.avi',
+		base + '-wii.avi',
+	)
+	filename_attempts = map(lambda x: os.path.join(directory, x), filename_attempts)
+	for outfile in filename_attempts:
+		if not os.path.exists(outfile):
+			break
+
+
+cmd = [
+	'mencoder',
+	'-ovc', 'xvid',
+	'-oac', 'mp3lame',
+	'-xvidencopts', 'bitrate=300',
+	'-lameopts', 'abr:br=110',
+	'-o', outfile,
+	infile]
+print "Running command:\n%s" % (' '.join(cmd),)
+subprocess.check_call(cmd)
+print "Created %r" % (outfile,)
+
