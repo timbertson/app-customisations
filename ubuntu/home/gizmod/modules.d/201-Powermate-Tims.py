@@ -42,13 +42,19 @@ INTERESTED_CLASSES = [GizmoEventClass.Powermate]
 PRESS_THRESHOLD = 2
 MULTIPLIER = 2
 
+_out = open('/tmp/powermate-log', 'w')
+
+def debug(s):
+	print >> _out, s
+	_out.flush()
+
 ############################
 # PowermateCompiz Class definition
 ##########################
 
-class PowermateCompiz(GizmoScriptDefault):
+class ScrollAction(GizmoScriptDefault):
 	"""
-	Compiz Powermate Event Mapping
+	Tim's default scrolley actions
 	"""
 	
 	############################
@@ -60,6 +66,7 @@ class PowermateCompiz(GizmoScriptDefault):
 		Called from Base Class' onEvent method.
 		See GizmodDispatcher.onEvent documention for an explanation of this function
 		"""
+		debug("event!")
 					
 		if Event.Type == GizmoEventType.EV_REL:
 			if not Gizmo.getKeyState(GizmoKey.BTN_0): # normal scrolling
@@ -73,7 +80,7 @@ class PowermateCompiz(GizmoScriptDefault):
 				else:
 					repeat = abs(self.press_buffer) // PRESS_THRESHOLD
 					self.press_buffer = repeat % PRESS_THRESHOLD
-					print "repeat = %s, new buffer = %s" % (repeat, self.press_buffer)
+					debug("repeat = %s, new buffer = %s" % (repeat, self.press_buffer))
 
 				if Event.Value < 0:
 					for repeat in range(repeat):
@@ -87,9 +94,6 @@ class PowermateCompiz(GizmoScriptDefault):
 				# issue a close tab if the button is pressed
 				Gizmod.Keyboards[0].createEvent(GizmoEventType.EV_KEY, GizmoKey.KEY_W, [GizmoKey.KEY_RIGHTCTRL])
 		return True
-
-
-		return False
 		
 	############################
 	# Private Functions
@@ -103,9 +107,7 @@ class PowermateCompiz(GizmoScriptDefault):
 		GizmoScriptDefault.__init__(self, ENABLED, VERSION_NEEDED, INTERESTED_CLASSES)
 		self.press_buffer = 0
 
-############################
-# PowermateCompiz class end
-##########################
 
 # register the user script
-PowermateCompiz()
+debug("loading...")
+ScrollAction()
