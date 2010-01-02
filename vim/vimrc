@@ -46,7 +46,15 @@ set list listchars=tab:▸\
 autocmd BufNewFile,BufRead * match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ ]\)\|\([^ \t]\zs\s\+$\)/
                              match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ ]\)\|\([^ \t]\zs\s\+$\)/
 
-autocmd FocusLost * :silent up
+autocmd!
+fun! Save_if_possible()
+	if len(expand("%")) > 0
+		:up
+	else
+		echo "[no file]"
+	endif
+endfun
+autocmd FocusLost * call Save_if_possible()
 
 augroup mkd
 	autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
