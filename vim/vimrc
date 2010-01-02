@@ -46,7 +46,6 @@ set list listchars=tab:▸\
 autocmd BufNewFile,BufRead * match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ ]\)\|\([^ \t]\zs\s\+$\)/
                              match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ ]\)\|\([^ \t]\zs\s\+$\)/
 
-autocmd!
 fun! Save_if_possible()
 	if len(expand("%")) > 0
 		:up
