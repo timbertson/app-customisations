@@ -13,7 +13,15 @@ set autoread " reload file whenever it changes on disk
 set wrapmargin=5
 set nowrap
 set formatoptions=crqln
-command! Emailmode set formatoptions=croqant textwidth=70 spell mousemodel=popup
+
+fun! FnEmailMode()
+	set spell mousemodel=popup
+	set wrap linebreak nolist wrapmargin=5
+	set expandtab
+	match none
+endfun
+
+command! Emailmode call FnEmailMode()
 set tabstop=2
 set cursorline
 set softtabstop=2
@@ -43,8 +51,8 @@ set list listchars=tab:▸\
 "highlight any spaces that are followed by a tab (the horror!)
 " and any _single_ space that comes after ^\t+ (this is usually accedental)
 " and also trailing spaces
-autocmd BufNewFile,BufRead * match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ ]\)\|\([^ \t]\zs\s\+$\)/
-                             match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ ]\)\|\([^ \t]\zs\s\+$\)/
+autocmd BufNewFile,BufRead * match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ *]\)\|\([^ \t]\zs\s\+$\)/
+                             match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ *]\)\|\([^ \t]\zs\s\+$\)/
 
 fun! Save_if_possible()
 	if len(expand("%")) > 0
@@ -56,7 +64,7 @@ endfun
 autocmd FocusLost * call Save_if_possible()
 
 augroup mkd
-	autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
+	autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt spell mousemodel=popup textwidth=70;
 augroup END
 
 
@@ -157,6 +165,7 @@ nmap <A-r> :up<cr>:!%:p<cr>
 
 " ctrl+s to save things!
 nmap <C-s> :w<cr>
+imap <C-s> <esc>:w<cr>a
 
 " Q to (re) format things
 vmap Q Jgqq
