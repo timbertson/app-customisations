@@ -9,5 +9,6 @@ augroup END
 
 augroup narrativejavascript
     au! BufRead,BufNewFile *.njs   setfiletype javascript
+    au! BufRead,BufNewFile *.jss   setfiletype javascript
 augroup END
 

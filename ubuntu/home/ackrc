@@ -1,0 +1,2 @@
+--type-add=js=.jss,.json,.njs
+--type-add=properties=.properties

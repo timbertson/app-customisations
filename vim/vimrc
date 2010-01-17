@@ -16,7 +16,7 @@ set formatoptions=crqln
 
 fun! FnEmailMode()
 	set spell mousemodel=popup
-	set wrap linebreak nolist wrapmargin=5
+	set wrap linebreak nolist wrapmargin=0
 	set expandtab
 	match none
 endfun
