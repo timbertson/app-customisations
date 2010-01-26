@@ -150,7 +150,7 @@ imap <C-v> <esc>"+gpa
 vmap <C-a> <esc>ggVG
 
 " delete to the "black hole" buffer
-map <S-d> "_d
+map <S-Y> "_d
 
 " new tab with ctl+t
 nmap <C-t> :tabnew<cr>
@@ -186,3 +186,4 @@ command! -narg=0 Open :silent :!gnome-open "`dirname "%:p"`" &
 command! -narg=0 Term :silent :!gnome-terminal --working-directory="`dirname "%:p"`" &
 command! -narg=0 CD :lcd %:p:h
 command! -narg=0 Mdview :silent :!mdview % &
+command! -narg=0 Automake autocmd BufWritePost <buffer> make
