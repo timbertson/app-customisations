@@ -1,2 +1,3 @@
 # Google software repository
 deb http://dl.google.com/linux/deb/ stable non-free main
+deb http://dl.google.com/linux/deb/ testing non-free
