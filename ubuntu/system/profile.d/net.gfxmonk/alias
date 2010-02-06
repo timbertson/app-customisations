@@ -10,8 +10,8 @@ alias egrep='egrep --color'
 alias less='less -RSi' # raw character support; no word wrap; insensitive search
 alias l='less'
 alias vim.='vim ~/.bash_profile; . ~/.bash_profile'
-alias ff='firefox'
-alias firefox-dev='firefox --no-remote -p dev'
+alias ff='run firefox'
+alias firefox-dev='run firefox --no-remote -p dev'
 
 alias aptinstall='sudo apt-get install'
 alias aptremove='sudo apt-get remove'
