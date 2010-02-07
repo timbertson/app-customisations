@@ -5,8 +5,8 @@ color ir_black
 
 set encoding=utf-8
 set textwidth=0
-set backupdir=~/.tmp
-set directory=~/.tmp
+set noswapfile
+set nobackup
 set nojoinspaces " just one space after a period (when joining)
 set nofoldenable " I can never remember how to use folding
 set autoread " reload file whenever it changes on disk

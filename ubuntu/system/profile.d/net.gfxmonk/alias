@@ -26,3 +26,4 @@ alias ipy='ipython --noconfirm_exit'
 alias ..='. ~/.bash_profile'
 
 alias umount='sudo umount'
+alias xephyr='Xephyr -ac -screen 600x800 -br -reset -terminate 2> /dev/null :1 &'
