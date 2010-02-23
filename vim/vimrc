@@ -98,6 +98,14 @@ vmap <leader>[ <esc>`>a]<esc>`<i[<esc>
 vmap <leader>{ <esc>`>a}<esc>`<i{<esc>
 vmap <leader>' <esc>`>a'<esc>`<i'<esc>
 vmap <leader>" <esc>`>a"<esc>`<i"<esc>
+vmap <leader>` <esc>`>a`<esc>`<i`<esc>
+nmap <leader>' vi'
+nmap <leader>" vi"
+nmap <leader>[ vi[
+nmap <leader>` vi`
+
+" + expands a selection in both directions by one character
+vmap + loho
 
 " ) kills the surrounding characters of a selection
 vmap <leader>) <esc>`<hx`>x
