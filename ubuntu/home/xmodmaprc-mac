@@ -1,14 +1,14 @@
 
-! swap ctrl & alt
-remove Mod1 = Alt_L
-add Control = Alt_L
+! this turns capslock into another ctrl:
+remove Lock = Caps_Lock
+add Control = Caps_Lock
 
-remove Control = Control_L
-add Mod4 = Control_L
-
+! swap ctrl & meta4
 remove Mod4 = Super_L
 add Control = Super_L
 
+remove Control = Control_L
+add Mod4 = Control_L
 
 ! fix macally keycode bindings:
 keycode 160 = XF86AudioRaiseVolume
