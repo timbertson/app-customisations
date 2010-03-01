@@ -1,0 +1,11 @@
+
+! swap ctrl & alt
+remove Mod1 = Alt_L
+add Control = Alt_L
+
+remove Control = Control_L
+add Mod4 = Control_L
+
+remove Mod4 = Super_L
+add Mod1 = Super_L
+
