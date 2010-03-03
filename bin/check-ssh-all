@@ -1,0 +1,52 @@
+#!/usr/bin/env python
+import commands
+import os
+import sys
+import optparse
+
+
+def get_lines():
+	status, lines = commands.getstatusoutput("cat ~/.ssh/config | grep -v NOCHECK | grep -E '^\s*(Host |#)'")
+	lines = map(lambda x: x.strip(), lines.splitlines())
+	return lines
+
+def main():
+	p = optparse.OptionParser("usage: %prog user pass1 [pass2...]")
+	p.add_option('-k', '--add-keys', action="store_true")
+	opts, args = p.parse_args()
+	do(opts, args)
+	user = args.pop(0)
+	do(user, args, deploy_keys = opts.add_keys)
+
+def do(user, passwds, deploy_keys=False):
+	lines = get_lines()
+	for line in lines:
+		if line.startswith("#"):
+			print line
+		else:
+			host = line.split()[1]
+			success = False
+			for passwd in passwds:
+				print >> sys.stderr, "%s: trying %s" % (host, passwd,)
+				result, output = commands.getstatusoutput("check-ssh '%s@%s' '%s'" % (user, host, passwd))
+				if result in (0,2):
+					success = True
+					if result == 2:
+						# key-based auth
+						print "OK([key-auth]): %s" % (passwd, host)
+					else:
+						print "OK(%s): %s" % (passwd, host)
+						if(deploy_keys):
+							print >> sys.stderr, "Deploying key to %s" % (host,)
+							result, output = commands.getstatusoutput("ssh-copy-id-auto '%s@%s' '%s'" % (user, host, passwd))
+							if result != 0:
+								print "Warning: couldn't deploy key file: %s" ("|| ".join(output.splitlines()), )
+							else:
+								print "KEY DEPLOYED!"
+					break
+			if not success:
+				print "FAIL: %s" % (host,)
+
+if __name__ == '__main__':
+	main()
+
