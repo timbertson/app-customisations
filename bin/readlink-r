@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+
+import os, sys
+
+def main():
+	path = sys.argv[1]
+	print path,
+	while os.path.islink(path):
+		dirname = os.path.dirname(os.path.abspath(path))
+		path = os.readlink(path)
+		print "-> %s" % (path,)
+		if not path.startswith('/'):
+			path = os.path.abspath(os.path.join(dirname, path))
+		print path
+
+if __name__ == '__main__':
+	main()
