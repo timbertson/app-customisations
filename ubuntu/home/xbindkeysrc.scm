@@ -21,6 +21,21 @@
 (xbindkey '(control alt "b:8") "xte 'key Left'")
 (xbindkey '(control alt "b:9") "xte 'key Right'")
 
+; meta + scroll to resize major window
+(xbindkey '(mod4 "b:4") "xte 'key h'")
+(xbindkey '(mod4 "b:5") "xte 'key l'")
+
+; meta + shift + scroll = resize minor window
+(xbindkey '(shift mod4 "b:4") "xte 'keyup Shift_L' 'key u' 'keydown Shift_L'")
+(xbindkey '(shift mod4 "b:5") "xte 'keyup Shift_L' 'key i' 'keydown Shift_L'")
+
+; alt + super + left/right click = add/decrease members in main area
+(xbindkey '(alt mod4 "b:8") "xte 'keyup Alt_L' 'str ,' 'keydown Alt_L'")
+(xbindkey '(alt mod4 "b:9") "xte 'keyup Alt_L' 'str .' 'keydown Alt_L'")
+
+; kill windows with meta+shift+middle-click
+(xbindkey '(alt mod4 "b:2") "xte 'keyup Alt_L' 'keydown Shift_L' 'key c' 'keyup Shift_L' 'keydown Alt_L'")
+
 ; f13 = play/pause
 ;(xbindkey '("c:191") "songbird --pause")
 ; f14 & f15 for prev/next
