@@ -16,3 +16,6 @@
 [submodule "vim/src/vim-markdown"]
 	path = vim/src/vim-markdown
 	url = git://github.com/NoahRic/vim-markdown.git
+[submodule "vim/src/nerdtree"]
+	path = vim/src/nerdtree
+	url = http://github.com/scrooloose/nerdtree.git

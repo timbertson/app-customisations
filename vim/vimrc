@@ -186,6 +186,9 @@ nmap <leader>p V{jo}ko
 map <C-f> :call g:FuzzyFinderMode.File.launch_base("**/", 0)<cr>
 command! -narg=1 -complete=dir Find call g:FuzzyFinderMode.File.launch_base("<args>" . "/**/", 0)
 
+" leader-t for showing nerd-tree
+map <leader>t :NERDTreeToggle<cr>
+
 " copy full path to clipboard
 nmap <C-c> :silent !echo -n "%:p" \| xsel -ib<cr>
 
