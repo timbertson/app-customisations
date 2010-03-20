@@ -13,6 +13,7 @@ for config in configs:
 
 	try:
 		for line in f:
+			if not line.strip(): continue
 			src, dest = line.rstrip().split(' ', 1)
 			dest = os.path.expanduser(dest)
 			src = os.path.abspath(os.path.join(base, src))
