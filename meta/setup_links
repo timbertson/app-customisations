@@ -23,7 +23,7 @@ for config in configs:
 			try:
 				subprocess.check_call(['../bin/ln_i', src, dest])
 			except subprocess.CalledProcessError:
-				"Failed linking - maybe it's a sudo:"
+				print "Trying sudo..."
 				subprocess.check_call(['sudo', '../bin/ln_i', src, dest])
 				print "Done."
 
