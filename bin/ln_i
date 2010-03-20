@@ -8,8 +8,10 @@ try:
 	if os.path.exists(dest):
 		if raw_input("Do you want to replace the existing %s (y/n): " % (dest,)) != "y":
 			sys.exit(0)
-		else:
+		if os.path.isdir(dest):
 			shutil.rmtree(dest)
+		else:
+			os.remove(dest)
 	os.symlink(src, dest)
 
 except KeyboardInterrupt:

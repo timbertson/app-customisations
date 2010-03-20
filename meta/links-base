@@ -1,8 +1,13 @@
 ../ubuntu/system/profile.d/net.gfxmonk /etc/profile.d/net.gfxmonk
 ../ubuntu/system/profile.d/net.gfxmonk.profile.sh /etc/profile.d/net.gfxmonk.profile.sh
+../ubuntu/system/sessions /etc/X11/sessions
+../ubuntu/system/udev-rules.d/input.rules /etc/udev/rules.d/input.rules
+
 ../vim/vimrc /home/tim/.vimrc
 ../vim/vim ~/.vim
+
 ../bin ~/.bin
+
 ../ubuntu/home/inputrc ~/.inputrc
 ../ubuntu/home/xbindkeysrc.scm ~/.xbindkeysrc.scm
 ../ubuntu/home/ackrc ~/.ackrc
