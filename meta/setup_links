@@ -3,34 +3,29 @@
 import os
 import sys
 import shutil
+import subprocess
 
 base = os.path.abspath(os.path.dirname(sys.argv[0]))
-f = open(os.path.join(base, 'links'))
+configs = ['base'] + sys.argv[1:]
+print "configs: %r" % (configs,)
+for config in configs:
+	f = open(os.path.join(base, 'links-%s' % (config,)))
 
-def exists(p):
-	return os.path.exists(p) or os.path.islink(p)
+	try:
+		for line in f:
+			src, dest = line.rstrip().split(' ', 1)
+			dest = os.path.expanduser(dest)
+			src = os.path.abspath(os.path.join(base, src))
+			if not os.path.exists(src):
+				print "ERROR: non-existant path: %s" % (src,)
+				sys.exit(1)
+			print "linking %s to %s" % (src, dest)
+			try:
+				subprocess.check_call(['../bin/ln_i', src, dest])
+			except subprocess.CalledProcessError:
+				"Failed linking - maybe it's a sudo:"
+				subprocess.check_call(['sudo', '../bin/ln_i', src, dest])
 
-def isdir(p):
-	return os.path.isdir(p) and not os.path.islink(p)
-
-try:
-	for line in f:
-		src, dest = line.rstrip().split(' ', 1)
-		dest = os.path.expanduser(dest)
-		src = os.path.abspath(os.path.join(base, src))
-		print "linking %s to %s" % (src, dest)
-		if exists(dest):
-			if not os.path.islink(dest):
-				cont = raw_input("%s exists - continue?" % (
-					dest,)).strip() == ''
-				if not cont: break
-			if isdir(dest):
-				shutil.rmtree(dest)
-			else:
-				os.remove(dest)
-			print "removed %s" % (dest,)
-		os.symlink(src, dest)
-
-finally:
-	f.close()
+	finally:
+		f.close()
 

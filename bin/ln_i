@@ -1,0 +1,20 @@
+#!/usr/bin/env python
+
+import sys, os, shutil
+src, dest = sys.argv[1:]
+try:
+	if os.path.islink(dest):
+		os.remove(dest)
+	if os.path.exists(dest):
+		if raw_input("Do you want to replace the existing %s (y/n): " % (dest,)) != "y":
+			sys.exit(0)
+		else:
+			shutil.rmtree(dest)
+	os.symlink(src, dest)
+
+except KeyboardInterrupt:
+	sys.exit(1)
+except OSError, e:
+	print >> sys.stderr, e
+	sys.exit(2)
+
