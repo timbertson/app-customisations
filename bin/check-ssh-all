@@ -1,51 +1,255 @@
 #!/usr/bin/env python
 import commands
 import os
+import re
 import sys
 import optparse
+import time
 
+null = open(os.devnull)
+DEBUG = False
+expect_pargs = ['expect', '-']
 
-def get_lines():
-	status, lines = commands.getstatusoutput("cat ~/.ssh/config | grep -v NOCHECK | grep -E '^\s*(Host |#)'")
-	lines = map(lambda x: x.strip(), lines.splitlines())
-	return lines
+def filter(lines):
+	nocheck = "NOCHECK"
+	alias = "#alias"
+	lines = [line.strip() for line in lines]
+	result = []
+	skip_next_host = False
+	for line in lines:
+		if skip_next_host: continue
+		skip_next_host = nocheck in line and alias in line
+		if nocheck in line or alias in line: continue
+		if not re.match("^\s*(Host(Name)? |#)", line): continue
+		line = line.strip()
+		if line.startswith('#'):
+			result.append(line)
+			continue
+		if line.startswith("Host"):
+			line = line.split(' ')[1]
+		if " " in line:
+			line = line.split(' ')[0]
+		if line.endswith(":"):
+			line = line[:-1]
+		result.append(line)
+	return result
+
+def get_lines(filename):
+	def _get_lines(fl):
+		return [line.strip() for line in fl.readlines() if line.strip()]
+
+	if filename == '-':
+		if sys.stdin.isatty():
+			print >> sys.stderr, "WARNING: reading from stdin"
+		return _get_lines(sys.stdin)
+		
+	f = open(filename, 'r')
+	try: return _get_lines(f)
+	finally: f.close()
 
 def main():
+	global null, DEBUG, expect_pargs
 	p = optparse.OptionParser("usage: %prog user pass1 [pass2...]")
 	p.add_option('-k', '--add-keys', action="store_true")
+	p.add_option('-i', '--hosts', default=None, help="input file with one host per line")
+	p.add_option('-c', '--change-pass', default=None)
+	p.add_option('-d', '--debug', action='store_true', default=False)
 	opts, args = p.parse_args()
-	do(opts, args)
+	if opts.debug:
+		null = sys.stdout
+		DEBUG = True
+		expect_pargs = ['expect','-d', '-']
+	if len(args) < 2:
+		p.print_help()
+		sys.exit(1)
 	user = args.pop(0)
-	do(user, args, deploy_keys = opts.add_keys)
+	if opts.hosts:
+		host_lines = get_lines(os.path.expanduser(opts.hosts))
+	else:
+		host_lines = filter(get_lines(os.path.expanduser("~/.ssh/config")))
+	try:
+		main_loop(host_lines, user, args, deploy_keys = opts.add_keys, new_passwd=opts.change_pass)
+	except KeyboardInterrupt:
+		print "\nCancelled."
+		sys.exit(1)
 
-def do(user, passwds, deploy_keys=False):
-	lines = get_lines()
-	for line in lines:
+def main_loop(host_lines, user, passwds, deploy_keys=False, new_passwd=None):
+	for line in host_lines:
 		if line.startswith("#"):
 			print line
-		else:
-			host = line.split()[1]
-			success = False
-			for passwd in passwds:
-				print >> sys.stderr, "%s: trying %s" % (host, passwd,)
-				result, output = commands.getstatusoutput("check-ssh '%s@%s' '%s'" % (user, host, passwd))
-				if result in (0,2):
-					success = True
-					if result == 2:
-						# key-based auth
-						print "OK([key-auth]): %s" % (passwd, host)
-					else:
+			continue
+
+		host = line
+		success = False
+		results = []
+		for passwd in passwds:
+			attempts = 0
+			while attempts < 3:
+				if success: break
+				attempts += 1
+				try:
+					if DEBUG:
+						print >> sys.stderr, "%s: trying %s" % (host, passwd,)
+					result = log_in(host, user, passwd, new_passwd)
+					results.append(result)
+					if result in ('OK', 'PASSWORD_OK'):
+						if new_passwd:
+							passwd = new_passwd
+						success = True
 						print "OK(%s): %s" % (passwd, host)
 						if(deploy_keys):
-							print >> sys.stderr, "Deploying key to %s" % (host,)
-							result, output = commands.getstatusoutput("ssh-copy-id-auto '%s@%s' '%s'" % (user, host, passwd))
-							if result != 0:
-								print "Warning: couldn't deploy key file: %s" ("|| ".join(output.splitlines()), )
-							else:
-								print "KEY DEPLOYED!"
-					break
-			if not success:
-				print "FAIL: %s" % (host,)
+							deploy_keys_to(host, user, passwd)
+						break
+				except IOError:
+					time.sleep(1)
+		if not success:
+			print "FAIL: %s (%s)" % (host, ", ".join(results))
+
+def deploy_keys_to(host, user, passwd):
+	if DEBUG:
+		print >> sys.stderr, "Deploying key to %s" % (host,)
+	if not ssh_copy_id_auto(host, user, passwd):
+		print "Error: couldn't deploy key file"
+
+def ssh_copy_id_auto(host, user, passwd):
+	prog = r"""
+		set host "%s@%s"
+		set password "%s"
+		set timeout 10
+		spawn ssh-copy-id $host
+		match_max 100000
+		# Look for password prompt
+		expect {
+			"*?assword:*" { send -- "$password\r"; send -- "\r"; exp_continue }
+			"\nPassword:*" { send -- "$password\r"; send -- "\r"; exp_continue }
+			eof { exit 1 }
+			"Now try*\r" { exit 0 }
+			timeout { exit 1 }
+		}
+		exit 0
+	""" % (user, host, passwd)
+	return run_process(expect_pargs, prog).returncode == 0
+
+
+def run_process(pargs, input, stdout=None):
+	if DEBUG:
+		print "RUNNING: %s" % (pargs,)
+	if stdout is None:
+		stdout = null
+	p = subprocess.Popen(pargs, stdin=subprocess.PIPE, stdout=stdout)
+	p.communicate(input)
+	return p
+
+import subprocess
+def log_in(host, user, passwd, new_passwd=None):
+	error_codes = {
+		'OK':           0,
+		'PASSWORD_OK':  1,
+		'CANT_CONNECT': 3,
+		'EOF':          4,
+		'UNKNOWN':      5,
+		'TIMEOUT':      6,
+		'CANT_CHANGE':  8,
+		'DENIED':       7,
+	}
+	prefix = """
+		set host "%s@%s"
+		set password "%s"
+		set timeout 10
+		match_max 100000
+		set retcode %s
+	""" % (user, host, passwd, error_codes['OK'])
+
+	common_clauses = r"""
+		expect {
+			-re "(\nP|.*'s (P|p))assword:*" {
+				set retcode %(PASSWORD_OK)s
+				send -- "$password\r"
+				send -- "\r"
+				exp_continue
+			}
+			"Could not resolve hostname*" {
+				exit %(CANT_CONNECT)s
+			}
+			"*you want to continue connecting (yes/no)? " {
+				send -- yes\r
+				exp_continue
+			}
+			"*Too many authentication failures*" {
+				exit %(DENIED)s
+			}
+			"*Permission denied (*" {
+				exit %(DENIED)s
+			}
+			eof { exit %(EOF)s }
+			timeout { exit %(TIMEOUT)s }
+	"""
+
+	suffix = """
+		}
+		exit $retcode
+	"""
+
+	def run_expect(cmd, clauses):
+		cmd = 'spawn ssh $host %s' % (cmd,)
+		clauses = (common_clauses + clauses) % error_codes
+		input = prefix + cmd + clauses + suffix
+		#print input
+		retcode = run_process(expect_pargs, input).returncode
+		status = None
+		for description, code in error_codes.items():
+			if retcode == code:
+				status = description
+				break
+		return status
+
+	connectivity_check = (
+		'"echo ALL_OK"',
+		r"""
+			"ALL_OK\r" { exit $retcode }
+		""")
+	
+	passwd_change = (
+		'',
+		r"""
+			"*existing*password: " {
+				send -- "%s\r"
+				exp_continue
+			}
+			"*(current) *password: " {
+				send -- "%s\r"
+				exp_continue
+			}
+			-re "(n|N)ew .*(P|p)assword: " {
+				send -- "%s\r"
+				exp_continue
+			}
+			"*successfully changed*\r" {
+				exit %s
+			}
+			"*you want to continue connecting (yes/no)? " {
+				send -- yes\r
+				exp_continue
+			}
+			"*passwd: *" {
+				exit %s
+			}
+			"$ " {
+				send -- "passwd\r"
+				exp_continue
+			}
+		""" % (passwd, passwd, new_passwd, error_codes['OK'], error_codes['CANT_CHANGE']))
+
+	while True:
+		try:
+			if new_passwd and new_passwd != passwd:
+				return run_expect(*passwd_change)
+			else:
+				return run_expect(*connectivity_check)
+		except IOError:
+			import time
+			time.sleep(1)
+
 
 if __name__ == '__main__':
 	main()

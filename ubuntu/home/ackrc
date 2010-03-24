@@ -1,3 +1,4 @@
 --type-add=js=.jss,.json,.njs
 --type-set=properties=.properties
 --type-set=jss=.jss
+--type-set=coffee=.coffee
