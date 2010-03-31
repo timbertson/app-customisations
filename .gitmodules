@@ -12,10 +12,10 @@
 	url = http://github.com/mileszs/ack.vim.git
 [submodule "vim/src/git-vim"]
 	path = vim/src/git-vim
-	url = git://github.com/motemen/git-vim.git
+	url = http://github.com/motemen/git-vim.git
 [submodule "vim/src/vim-markdown"]
 	path = vim/src/vim-markdown
-	url = git://github.com/plasticboy/vim-markdown.git
+	url = http://github.com/plasticboy/vim-markdown.git
 [submodule "vim/src/nerdtree"]
 	path = vim/src/nerdtree
 	url = http://github.com/scrooloose/nerdtree.git
