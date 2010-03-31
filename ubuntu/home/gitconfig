@@ -1,0 +1,21 @@
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+	sh = !git-sh
+	sub = submodule
+	up = git pull && git submodule sync && git submodule init && git submodule update && git sub
+	patch = format-patch --stdout
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+	showbranch = auto
+	sh = auto
+[merge]
+	tool = meld
+[user]
+	name = gfxmonk
+	email = tim3d.junk@gmail.com
