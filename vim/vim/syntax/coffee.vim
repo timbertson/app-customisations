@@ -1,1 +1,1 @@
-/home/tim/dev/web/coffee-script/extras/coffee.vim
+../../src/coffee-script/extras/coffee.vim
