@@ -1,6 +1,6 @@
 #!/bin/sh
 
-alias giff='git diff --color'
+alias giff='git diff'
 
 # alias 'g' to git. If no args supplied, do "git status"
 function g
@@ -11,6 +11,7 @@ function g
 		git "$@"
 	fi
 }
+complete -o bashdefault -o default -o nospace -F _git g
 
 # make subversion diff almost as awesome as git's:
 function svndiff

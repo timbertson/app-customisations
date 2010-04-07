@@ -14,7 +14,9 @@ alias ff='run firefox'
 alias firefox-dev='run firefox --no-remote -p dev'
 
 alias aptinstall='sudo apt-get install'
+complete -o filenames -F _complete_dpkg_avail aptinstall
 alias aptremove='sudo apt-get remove'
+complete -o filenames -F _complete_dpkg_installed aptremove
 alias aptsearch='apt-cache search'
 
 alias ad='pushd' # "add dir"
@@ -27,3 +29,4 @@ alias ..='. ~/.bash_profile'
 
 alias umount='sudo umount'
 alias xephyr='Xephyr -ac -screen 600x800 -br -reset -terminate 2> /dev/null :1 &'
+

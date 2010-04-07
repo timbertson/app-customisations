@@ -24,6 +24,7 @@ fi
 
 source "$base/scm"
 source "$base/bashrc"
+source "$base/completion"
 source "$base/alias"
 source "$base/prompt"
 
