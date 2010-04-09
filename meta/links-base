@@ -12,3 +12,4 @@
 ../ubuntu/home/xbindkeysrc.scm ~/.xbindkeysrc.scm
 ../ubuntu/home/ackrc ~/.ackrc
 ../ubuntu/home/gizmod ~/.gizmod
+../ubuntu/home/gitconfig ~/.gitconfig
