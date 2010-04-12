@@ -14,6 +14,13 @@
 	status = auto
 	showbranch = auto
 	sh = auto
+[color "branch"]
+	current = green
+	remote = cyan
+[color "status"]
+	added = green
+	changed = red
+	untracked = cyan
 [merge]
 	tool = meld
 [user]
