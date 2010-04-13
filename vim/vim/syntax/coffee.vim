@@ -1,1 +1,1 @@
-../../src/coffee-script/extras/coffee.vim
+../../src/vim-coffee-script/syntax/coffee.vim

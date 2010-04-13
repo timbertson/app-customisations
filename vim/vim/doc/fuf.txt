@@ -1,1 +1,0 @@
-../../src/vim-fuzzyfinder/doc/fuf.txt
