@@ -9,6 +9,7 @@
 ../bin ~/.bin
 
 ../ubuntu/home/inputrc ~/.inputrc
+../ubuntu/home/xmonad.hs ~/.xmonad/xmonad.hs
 ../ubuntu/home/xbindkeysrc.scm ~/.xbindkeysrc.scm
 ../ubuntu/home/ackrc ~/.ackrc
 ../ubuntu/home/gizmod ~/.gizmod
