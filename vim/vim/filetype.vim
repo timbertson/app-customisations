@@ -16,3 +16,6 @@ augroup narrativejavascript
     au! BufRead,BufNewFile *.jss   setfiletype javascript
 augroup END
 
+augroup scala
+		au! BufRead,BufNewFile *.scala setfiletype scala
+augroup END
