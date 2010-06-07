@@ -12,6 +12,7 @@ alias l='less'
 alias vim.='vim ~/.bash_profile; . ~/.bash_profile'
 alias ff='run firefox'
 alias firefox-dev='run firefox --no-remote -p dev'
+alias gd='run gnome-do'
 
 alias aptinstall='sudo apt-get install'
 complete -o filenames -F _complete_dpkg_avail aptinstall
