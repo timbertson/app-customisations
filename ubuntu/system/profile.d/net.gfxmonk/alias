@@ -20,6 +20,8 @@ alias aptremove='sudo apt-get remove'
 complete -o filenames -F _complete_dpkg_installed aptremove
 alias aptsearch='apt-cache search'
 
+alias private='ecryptfs-mount-private'
+
 alias ad='pushd' # "add dir"
 alias sd='popd'  # "subtract dir"
 alias cdreal='cd `pwd -P`' # go to the canonical path, expanding all symlinks
