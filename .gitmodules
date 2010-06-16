@@ -25,3 +25,6 @@
 [submodule "vim/src/vim-coffee-script"]
 	path = vim/src/vim-coffee-script
 	url = http://github.com/kchmck/vim-coffee-script.git
+[submodule "vim/src/neocomplcache"]
+	path = vim/src/neocomplcache
+	url = http://github.com/Shougo/neocomplcache.git
