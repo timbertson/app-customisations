@@ -4,6 +4,10 @@ import XMonad
 import XMonad.Config.Bluetile
 import XMonad.Util.Replace
 import XMonad.Config.Gnome
+import XMonad.Hooks.SetWMName
+import XMonad.Hooks.ManageHelpers
+import qualified XMonad.StackSet as W
+
 main = replace >> xmonad bluetileConfig
 	{ borderWidth = 2
 	, normalBorderColor  = "#444444" -- "#dddddd"
@@ -11,8 +15,12 @@ main = replace >> xmonad bluetileConfig
 	, manageHook = manageHook gnomeConfig <+> myManageHook
 	, focusFollowsMouse  = True
 	, workspaces = ["1","2","3","4","5"]
+	, startupHook = setWMName "LG3D" -- silly java...
 -- 	-- , keys = customKeys delkeys inskeys
 	}
+
+myDoFullFloat :: ManageHook
+myDoFullFloat = doF W.focusDown <+> doFullFloat
 
 myManageHook = composeAll [
 	resource =? "desktop_window" --> doIgnore
@@ -20,7 +28,7 @@ myManageHook = composeAll [
 	, className =? "Do" --> doIgnore
 	, className =? "Guake.py" --> doFloat
 	, className =? "Zenity" --> doFloat
-	, isFullscreen --> doFullFloat
+	, isFullscreen --> myDoFullFloat
 	, isSplash --> doIgnore
 	]
 	where
