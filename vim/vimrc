@@ -113,6 +113,8 @@ vmap <leader>) <esc>`<hx`>x
 " home & end
 map <C-l> $
 map <C-h> ^
+" nul is ctrl-space for terminal
+map <nul> ^
 map <space> h
 map <C-Space> ^
 map <S-Space> b
