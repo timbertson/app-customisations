@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<?xml-stylesheet type='text/xsl' href='interface.xsl'?>
+<interface uri="http://gfxmonk.net/dist/0install/xmonad.xml" xmlns="http://zero-install.sourceforge.net/2004/injector/interface">
+	<name>xmonad</name>
+	<summary>meta-package</summary>
+	<description>
+	</description>
+
+	<group main="xmonad">
+		<package-implementation main="/usr/bin/xmonad" package="xmonad"/>
+	</group>
+</interface>
+<!-- Base64 Signature
+iEYEABECAAYFAkwbK3UACgkQ/lhgK1iJTtIzAACgm/8bDTvGqaVkbp3szy3JQKWSztcAoKHE1yf2
+zaEA/VgQKFVZ+fx+NMDT
+
+-->

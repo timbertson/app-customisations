@@ -1,0 +1,9 @@
+#!/bin/sh
+
+base="$HOME/.xmonad"
+mkdir -p "$base"
+if [ ! -L "$base/xmonad.hs" ]; then
+	[ -f "$base/xmonad.hs" ] && cp "$base/xmonad.hs" "$base/xmonad.hs.bak"
+	cp `dirname "$0"`/xmonad.hs "$base/xmonad.hs"
+fi
+exec xmonad

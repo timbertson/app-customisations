@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+
+import os
+import sys
+
+try:
+	map_type=sys.argv[1].lower()
+except IndexError:
+	print >> sys.stderr, "mac or pc keyboard?"
+	sys.exit(1)
+
+map_file = os.path.join(os.path.dirname(__file__), "xmodmaprc-%s" % (map_type,))
+print map_file
+
+def current():
+	os.system("xmodmap -pm")
+
+def reverse():
+	os.system("cat '%s' | sed -e 's/^add/ remove/' -e 's/^remove/ add/' | sort -r | xmodmap -" % map_file)
+
+def map():
+	os.system("xmodmap '%s'" % (map_file))
+
+try:
+	current()
+	map()
+	print '-' * 20
+	current()
+	while True:
+		print '-' * 20
+		raw_input()
+except (KeyboardInterrupt, EOFError):
+	reverse()
+	current()
+
+

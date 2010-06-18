@@ -15,4 +15,3 @@ keycode 160 = XF86AudioRaiseVolume
 keycode 181 = XF86AudioLowerVolume
 keycode 191 = XF86AudioPlay
 
-! ctrl+space == backspace

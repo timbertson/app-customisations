@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<?xml-stylesheet type='text/xsl' href='interface.xsl'?>
+<interface uri="http://gfxmonk.net/dist/0install/xmonad-custom.xml" xmlns="http://zero-install.sourceforge.net/2004/injector/interface">
+	<name>xmonad</name>
+	<summary>custom xmonad</summary>
+	<description>
+	</description>
+
+	<group main="copy-and-run">
+		<requires interface="http://gfxmonk.net/dist/0install/xmonad.xml"/>
+		<implementation id="sha1new=186a56c98d8eb6e58f9a85f30fba3fbc9e5f2d71" released="2010-06-18" version="20100617.2252">
+		
+    <manifest-digest sha256="d56d43ac05193cdd13afa2e4fcb2d4d957c1d0b2860a9a52efcb42795f12c952"/>
+    <archive href="http://gfxmonk.net/dist/0install/xmonad-custom/xmonad-custom-20100617.2252.tgz" size="828"/>
+  </implementation>
+	</group>
+</interface>
