@@ -5,3 +5,5 @@
 vim/vim/.netrwhist
 /vim/vim/spell/*
 *.list.save
+*.gpg
+0inst

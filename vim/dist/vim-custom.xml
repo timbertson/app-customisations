@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<?xml-stylesheet type='text/xsl' href='interface.xsl'?>
+<interface uri="http://gfxmonk.net/dist/0install/vim-custom.xml" xmlns="http://zero-install.sourceforge.net/2004/injector/interface">
+	<name>vim</name>
+	<summary>custom VIM</summary>
+	<description>
+	</description>
+
+	<group main="run-vim">
+		<requires interface="http://gfxmonk.net/dist/0install/vim-gnome.xml"/>
+		<implementation id="sha1new=18bf9b86bbbf3fc82a2c9c9856952839f01225e9" released="2010-06-18" version="20100617.2252">
+    <manifest-digest sha256="5d9a351d16523049ed39c8badc7d0986a22f237c8791f31f14e2ba0942e8e0d1"/>
+    <archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom-20100617.2252.tgz" size="120970"/>
+  </implementation>
+	</group>
+</interface>

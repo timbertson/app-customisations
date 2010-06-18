@@ -1,0 +1,4 @@
+#!/bin/sh
+exec vim \
+	--cmd "set runtimepath+=`dirname $0`/vim,$VIMRUNTIME" \
+	-u "`dirname $0`"/vimrc "$@"

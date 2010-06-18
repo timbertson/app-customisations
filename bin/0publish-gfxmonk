@@ -17,16 +17,28 @@ webdest="$HOME/Sites/gfxmonk/dist/0install"
 archive_base="$base/$name"
 build=0inst
 
+if [ "$version" = "date" ]; then
+	version=`date "+%Y%m%d.%H%M"`
+	echo "version: $version"
+	cp "$build/$name.tgz" "$build/$name-$version.tgz"
+fi
+
 set -x
 if [ "$cmd" != "copy" ]; then
 	0publish "$feed" \
 		--set-interface-uri="$base"/"$feed"
-	if fgrep "$version" "$feed" | fgrep 'archive'; then echo "need a new version?"; exit 1; fi
-	0publish "$feed" \
-		--add-version="$version" \
-		--archive-url="$archive_base/$name-$version.tgz" \
-		--archive-file="$build/$name-$version.tgz" \
-		--set-released=today
+	if fgrep "$version" "$feed" | fgrep 'archive'; then
+		echo "need a new version?"; sleep 2;
+		0publish "$feed" \
+			--set-version="$version" \
+			--set-released=today
+	else
+		0publish "$feed" \
+			--add-version="$version" \
+			--archive-url="$archive_base/$name-$version.tgz" \
+			--archive-file="$build/$name-$version.tgz" \
+			--set-released=today
+	fi
 fi
 
 mkdir -p "$webdest/$name"
