@@ -1,9 +1,23 @@
 #!/bin/sh
 
+set -ex
+
 base="$HOME/.xmonad"
+missing=""
+which xmonad || missing="$missing xmonad"
+which cabal || missing="$missing cabal-install"
+[ -z "$missing" ] || gksu apt-get install $missing
+ls -1 "$HOME/.cabal/lib/" | fgrep xmonad-bluetilebranch || (cabal update; cabal install xmonad-bluetilebranch xmonad-contrib-bluetilebranch)
+
+ghc-pkg expose xmonad-bluetilebranch
+ghc-pkg expose xmonad-contrib-bluetilebranch
+ghc-pkg hide xmonad || echo 'please run `sudo ghc-pkg hide xmonad`'
+ghc-pkg hide xmonad-contrib || echo 'please run `sudo ghc-pkg hide xmonad-contrib`'
+
 mkdir -p "$base"
 if [ ! -L "$base/xmonad.hs" ]; then
-	[ -f "$base/xmonad.hs" ] && cp "$base/xmonad.hs" "$base/xmonad.hs.bak"
+	[ -f "$base/xmonad.hs" ] && cp "$base/xmonad.hs" "$base/xmonad.hs.bak" && chmod +w "$base/xmonad.hs"
 	cp `dirname "$0"`/xmonad.hs "$base/xmonad.hs"
+	chmod +w "$base/xmonad.hs"
 fi
 exec xmonad
