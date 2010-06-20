@@ -28,6 +28,7 @@ myManageHook = composeAll [
 	, className =? "Do" --> doIgnore
 	, className =? "Guake.py" --> doFloat
 	, className =? "Zenity" --> doFloat
+	, className =? "Gloobus-preview" --> doFloat
 	, isFullscreen --> myDoFullFloat
 	, isSplash --> doIgnore
 	]
