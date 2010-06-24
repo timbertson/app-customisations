@@ -16,7 +16,8 @@ def current():
 	os.system("xmodmap -pm")
 
 def reverse():
-	os.system("cat '%s' | sed -e 's/^add/ remove/' -e 's/^remove/ add/' | sort -r | xmodmap -" % map_file)
+	base = os.path.dirname(sys.argv[0])
+	os.system("%s/xmodmap-reverse '%s'" % (base, map_file))
 
 def map():
 	os.system("xmodmap '%s'" % (map_file))

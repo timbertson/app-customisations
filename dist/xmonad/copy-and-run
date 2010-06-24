@@ -6,7 +6,7 @@ base="$HOME/.xmonad"
 missing=""
 which xmonad || missing="$missing xmonad"
 which cabal || missing="$missing cabal-install"
-[ -z "$missing" ] || gksu apt-get install $missing
+[ -z "$missing" ] || gksu -- apt-get install -y $missing
 ls -1 "$HOME/.cabal/lib/" | fgrep xmonad-bluetilebranch || (cabal update; cabal install xmonad-bluetilebranch xmonad-contrib-bluetilebranch)
 
 ghc-pkg expose xmonad-bluetilebranch

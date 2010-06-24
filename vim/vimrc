@@ -13,6 +13,7 @@ set autoread " reload file whenever it changes on disk
 set wrapmargin=5
 set nowrap
 set formatoptions=crqln
+set backspace=indent,eol,start
 
 fun! FnEmailMode()
 	setlocal spell mousemodel=popup

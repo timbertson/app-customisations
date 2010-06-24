@@ -1,5 +1,5 @@
-version=20100617.2252
-#version=date
+#version=20100617.2252
+version=date
 
 0inst:
 	mkdir -p 0inst

@@ -13,5 +13,9 @@
     <manifest-digest sha256="4449d8d80d4d0ebad02e074f52ec7e7c364ae9ed784ba59011416826d7fe7de4"/>
     <archive href="http://gfxmonk.net/dist/0install/xmodmap-custom/xmodmap-custom-20100617.2252.tgz" size="747"/>
   </implementation>
+		<implementation id="sha1new=efa9f2ae7fc9b32bd1e34f4f991f09c0867d75db" released="2010-06-23" version="20100623.1908">
+    <manifest-digest sha256="0441273f996a2f9d337d02864de53c77435a9cfc7900be8d9321663046dd1e8e"/>
+    <archive href="http://gfxmonk.net/dist/0install/xmodmap-custom/xmodmap-custom-20100623.1908.tgz" size="825"/>
+  </implementation>
 	</group>
 </interface>
