@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ "$*" = "--versions" ]; then
+  exec 0launch -gd 'http://0install.net/2007/interfaces/0publish-gui.xml' "$@"
+else
+  exec 0launch  'http://0install.net/2007/interfaces/0publish-gui.xml' "$@"
+fi
