@@ -41,6 +41,9 @@ set mouse=a
 set wmh=0
 " set iskeyword-=_ \" allow underscore to delimit words"
 
+set tags+=.tags
+let g:autotagTagsFile=".tags"
+
 " if has("gui_running")
 " 	set lines=40 columns=160
 " endif
@@ -156,6 +159,7 @@ vnoremap } /^\s*$<cr>
 " copy / paste (gvim, with the gui clipboard)
 vmap <C-c> "+y
 imap <C-v> <esc>"+gpa
+cmap <C-v> <C-r>+
 
 " select all in visual mode
 vmap <C-a> <esc>ggVG

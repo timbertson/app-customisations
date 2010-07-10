@@ -1,0 +1,12 @@
+#!/bin/bash
+#oh, this is just lovely...
+file=/tmp/err
+action="$1"
+[ -z "$action" ] && action="compile"
+echo "" > "$file"
+sbt "$action" | while read line; do
+	echo $line
+	echo "$line" | sed -e 's/[^[:print:]]//g' -e's/\[[0-9][0-9]*m//g' >> "$file"
+done
+gvim --remote-send "<esc>:cg ${file}"
+gvim --remote-send "<esc>:cw"
