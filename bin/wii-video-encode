@@ -27,7 +27,7 @@ cmd = [
 	'mencoder',
 	'-ovc', 'xvid',
 	'-oac', 'mp3lame',
-	'-xvidencopts', 'bitrate=300',
+	'-xvidencopts', 'bitrate=500',
 	'-lameopts', 'abr:br=110',
 	'-o', outfile,
 	infile]
