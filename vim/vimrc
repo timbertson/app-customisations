@@ -167,8 +167,8 @@ vmap <C-a> <esc>ggVG
 " delete to the "black hole" buffer
 map <S-Y> "_d
 
-" new tab with ctl+t
-nmap <C-t> :tabnew<cr>
+" new tab with ctl+shift+t
+nmap <C-S-t> :tabnew<cr>
 
 " map alt+slash to line comment toggle
 map <A-/> :TComment<cr>

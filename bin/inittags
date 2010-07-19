@@ -1,5 +1,5 @@
 #!/bin/sh
 
 f="$1"
-[ -z "$f" ] || f=.tags
+[ -n "$f" ] || f=.tags
 ctags -f "$f" -R .
