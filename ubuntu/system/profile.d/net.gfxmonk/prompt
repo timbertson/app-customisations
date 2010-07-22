@@ -21,3 +21,12 @@ HOSTNAME_COLOR="$YELLOW"
 
 # string it all together:
 PS1="$error_notification"'\n\[$GREEN\]\u\[$HOSTNAME_COLOR\]@\h \[$CYAN\]\w\[$GREEN\] \$\[$LIGHT\] '
+
+
+case "$TERM" in
+xterm*|rxvt*)
+  PROMPT_COMMAND='echo -ne "\033]0;$(echo ${PWD} | sed -e "s@${HOME}@~@")\007"'
+  ;;
+*)
+  ;;
+esac
