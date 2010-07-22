@@ -19,9 +19,6 @@
 [submodule "vim/src/nerdtree"]
 	path = vim/src/nerdtree
 	url = http://github.com/scrooloose/nerdtree.git
-[submodule "ext/htmlview"]
-	path = ext/htmlview
-	url = http://github.com/gfxmonk/htmlview.git
 [submodule "vim/src/vim-coffee-script"]
 	path = vim/src/vim-coffee-script
 	url = http://github.com/kchmck/vim-coffee-script.git
