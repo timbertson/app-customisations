@@ -1,0 +1,10 @@
+#!/bin/bash
+find . -maxdepth 4 -name '.git' | while read f; do
+	(
+		b="$(dirname "$f")";
+		cd "$b";
+		printf '%40s : %s' "$b" "$(git ls)"
+		echo ""
+	)
+done
+
