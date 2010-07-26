@@ -4,18 +4,18 @@
 	<name>xmonad</name>
 	<summary>custom xmonad installer</summary>
 	<description>
-</description>
+	</description>
+	<publish mode="ignore" xmlns="http://gfxmonk.net/dist/0install"/>
 
 	<group main="copy-and-run">
 		<implementation id="sha1new=d2400c1466c6aed8b0293a33fccd00d1af14e205" released="2010-06-19" version="20100617.2252">
-    <manifest-digest sha256="6500bed4612d0c94018c9e1074de0faff0c1f19d667d0772595c72a0783c516a"/>
-    <archive href="http://gfxmonk.net/dist/0install/xmonad-custom/xmonad-custom-20100617.2252.tgz" size="1024"/>
-  </implementation>
+		<manifest-digest sha256="6500bed4612d0c94018c9e1074de0faff0c1f19d667d0772595c72a0783c516a"/>
+		<archive href="http://gfxmonk.net/dist/0install/xmonad-custom/xmonad-custom-20100617.2252.tgz" size="1024"/>
+	</implementation>
 		<implementation id="sha1new=addcde270c3e4d8570b15eda1ca025661ff4a60c" released="2010-06-23" version="20100623.1906">
-    <manifest-digest sha256="ab12060d4ac611af5b7887a03ba894f3e0550ad5c6a7c9888d32691ee5f18203"/>
-    <archive href="http://gfxmonk.net/dist/0install/xmonad-custom/xmonad-custom-20100623.1906.tgz" size="1045"/>
-    <archive href="http://gfxmonk.net/dist/0install/xmonad-custom/xmonad-custom-20100623.1907.tgz" size="1045"/>
-  </implementation>
+		<manifest-digest sha256="ab12060d4ac611af5b7887a03ba894f3e0550ad5c6a7c9888d32691ee5f18203"/>
+		<archive href="http://gfxmonk.net/dist/0install/xmonad-custom/xmonad-custom-20100623.1907.tgz" size="1045"/>
+	</implementation>
 		<implementation id="." released="2010-06-23" version="20100623.1907"/>
 	</group>
 </interface>

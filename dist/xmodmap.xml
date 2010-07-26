@@ -3,6 +3,7 @@
 <interface uri="http://gfxmonk.net/dist/0install/xmodmap.xml" xmlns="http://zero-install.sourceforge.net/2004/injector/interface">
 	<name>xmodmap</name>
 	<summary>meta-package</summary>
+	<publish mode="ignore" xmlns="http://gfxmonk.net/dist/0install"/>
 	<description>
 	</description>
 
@@ -10,8 +11,3 @@
 		<package-implementation main="/usr/bin/xmodmap" package="x11-xserver-utils"/>
 	</group>
 </interface>
-<!-- Base64 Signature
-iEYEABECAAYFAkwbOJEACgkQ/lhgK1iJTtJg5wCgmjQ36/FJ2ErfV4sByEJMyoYR3bcAoK6/9ETm
-MAPIRee79eAWrrMduAiV
-
--->

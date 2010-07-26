@@ -5,6 +5,7 @@
 	<summary>custom xmodmap</summary>
 	<description>
 	</description>
+	<publish mode="ignore" xmlns="http://gfxmonk.net/dist/0install"/>
 
 	<group main="apply_temporarily">
 		<requires interface="http://gfxmonk.net/dist/0install/xmodmap.xml"/>

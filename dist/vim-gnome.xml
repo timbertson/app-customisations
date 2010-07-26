@@ -5,13 +5,8 @@
 	<summary>meta-package</summary>
 	<description>
 	</description>
-
+	<publish mode="ignore" xmlns="http://gfxmonk.net/dist/0install"/>
 	<group main="vim">
 		<package-implementation main="/usr/bin/vim" package="vim-gnome"/>
 	</group>
 </interface>
-<!-- Base64 Signature
-iEYEABECAAYFAkwaDcYACgkQ/lhgK1iJTtIWgQCeKJjy402igNNphoXkHncv6wZbQn4AoKtWyzvM
-QG6ZJqniVrPn+E87lrvw
-
--->

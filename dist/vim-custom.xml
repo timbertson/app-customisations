@@ -3,6 +3,7 @@
 <interface uri="http://gfxmonk.net/dist/0install/vim-custom.xml" xmlns="http://zero-install.sourceforge.net/2004/injector/interface">
 	<name>vim</name>
 	<summary>custom VIM</summary>
+	<publish mode="ignore" xmlns="http://gfxmonk.net/dist/0install"/>
 	<description>
 	</description>
 
