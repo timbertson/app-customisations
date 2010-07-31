@@ -1,0 +1,11 @@
+Bugs
+
+* After exiting (:q) a buffer that has diff enabled, subsequent diffs appear to fail.
+* Should restore options like 'wrap' to their original state when turning diff off
+* winsaveview() and winrestview() require Vim 7.x. Autodetect and degrade gracefully.
+
+Features
+
+* Option to show side-by-side diff (ie. don't hide original buffer)
+* Make it easier to customize colors and commands
+* Add a refresh or enable an auto-update feature so diff highlighting changes as changes are made.
