@@ -6,10 +6,10 @@
 "
 " API is documented below.
 
-if exists("g:loaded_pathogen") || &cp
-  finish
-endif
-let g:loaded_pathogen = 1
+" if exists("g:loaded_pathogen") || &cp
+"   finish
+" endif
+" let g:loaded_pathogen = 1
 
 " Split a path into a list.
 function! pathogen#split(path) abort " {{{1
