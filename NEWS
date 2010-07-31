@@ -1,0 +1,24 @@
+2008-09-20
+* Changed the default diff key from C-d to <Leader>d (default would be \d)
+
+2008-09-03
+* Add Enabled/Disabled messages when scmdiff is toggled
+* Fix highlighting on error messages so subsequent messages aren't highlighted
+
+2008-08-25
+* Move Highlight colors out of code so they can be customized by user in .vimrc
+
+2008-08-18
+* Initial support for mercurial auto-detection 
+
+2008-08-17
+* fix bug: Look for SCM directories based on path of file in current buffer, not on getcwd() 
+
+2008-08-15
+* Add auto-detection of svn, git, and cvs SCMs
+
+2008-08-10
+
+* Make C-d a toggle to turn the diff on/off
+* Avoid deleting unrelated buffers when turning diff off
+* Autorefresh now works properly
