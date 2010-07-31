@@ -1,0 +1,28 @@
+VIMTLIB=~/vimfiles
+VIMDIRS=autoload compiler ftplugin indent macros plugin plugin_experimental ruby syntax
+
+tags:
+	cd ${VIMTLIB}; \
+		rm tags || echo "..."; \
+		ctags -R -f - ${VIMDIRS} | grep -v -e '^s:' > tags
+
+loaded:
+	cd ${VIMTLIB}; \
+		rm macros/vimtlib.vim || echo "..." ; \
+		echo "command! -nargs=+ TLibUse exec 'unlet '. join(map([<f-args>], '''loaded_''. v:val'))" > macros/vimtlib.vim ; \
+		grep -oh -w -E "loaded_[a-zA-Z]+" plugin/*.vim | sort -u | sed -e 's/\(.*\)/let \1 = 1/' >> macros/vimtlib.vim
+
+vimtips.xml:
+	mkdir ${VIMTLIB}/tmp; cd ${VIMTLIB}/tmp; \
+		wget http://wikistats.wikia.com/v/vi/vim/pages_current.xml.gz; \
+		gunzip pages_current.xml.gz
+
+vimtips:
+	cd ${VIMTLIB}; \
+		if [ ! -e tmp/pages_current.xml ]; then echo "Run 'make vimtips.xml' first"; fi; \
+		ruby/vimtips2help.rb --xml tmp/pages_current.xml --out doc/vimtips.txt -v -m "*´"
+
+vba:
+	cd ${VIMTLIB}; \
+		ruby/vimball.rb -u -z -b ${VIMTLIB} -d ${VIMTLIB}/vimballs vba vimballs/*.recipe
+
