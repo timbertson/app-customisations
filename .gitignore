@@ -2,8 +2,11 @@
 *~
 *.swp
 *.deb
-vim/vim/.netrwhist
-/vim/vim/spell/*
+vim/.netrwhist
+/vim/spell/*
+/vim/cache/*
 *.list.save
 *.gpg
 0inst
+.netrwhist
+.hg
