@@ -195,11 +195,12 @@ nmap Q gqq
 nmap <leader>p V{jo}ko
 
 " ctrl+f to FuzzyFinder (recursive)
-map <C-f> :call g:FuzzyFinderMode.File.launch_base("**/", 0)<cr>
-command! -narg=1 -complete=dir Find call g:FuzzyFinderMode.File.launch_base("<args>" . "/**/", 0)
+nmap <C-f> :FuzzyFinderBuffer<cr>
+nmap <leader>f :FuzzyFinderFileWithFullCwd<cr>
+nmap <leader>t :FuzzyFinderTag<cr>
 
 " leader-t for showing nerd-tree
-map <leader>t :NERDTreeToggle<cr>
+map <leader>e :NERDTreeToggle<cr>
 
 " copy full path to clipboard
 nmap <C-c> :silent let @+ = expand("%:p")<cr>
