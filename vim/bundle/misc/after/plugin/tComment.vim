@@ -1,1 +1,0 @@
-call TCommentDefineType('coffee', '# %s')
