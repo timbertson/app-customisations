@@ -4,7 +4,7 @@
 ../ubuntu/system/udev-rules.d/input.rules /etc/udev/rules.d/input.rules
 
 ../vim/vimrc /home/tim/.vimrc
-../vim/vim ~/.vim
+../vim ~/.vim
 
 ../bin ~/.bin
 

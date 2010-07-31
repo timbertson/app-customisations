@@ -1,1 +1,0 @@
-../../src/vim-markdown/mkd.vim

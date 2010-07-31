@@ -1,2 +1,0 @@
-fuzzyfinder: http://www.vim.org/scripts/script.php?script_id=1984
-ipython (ftplugin): http://www.vim.org/scripts/script.php?script_id=30
