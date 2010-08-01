@@ -1,3 +1,2 @@
 set rtp=$VIM_BASE
-source $VIM_BASE/autoload/*.vim
 source $VIM_BASE/vimrc

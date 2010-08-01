@@ -1,3 +1,3 @@
 #!/bin/bash
 export VIM_BASE="$(dirname $0)"/vim
-exec vim -u vimrc
+exec vim -u "$VIM_BASE/vimrc" "$@"

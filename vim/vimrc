@@ -1,3 +1,4 @@
+set nocp
 call pathogen#runtime_append_all_bundles()
 " reload filetype detection
 filetype off
