@@ -1,3 +1,4 @@
 #!/bin/bash
-export VIM_BASE="$(dirname $0)"/vim
-exec vim -u "$VIM_BASE/vimrc" "$@"
+BASE="$(dirname "$0")"
+export VIM_BASE="$BASE/vim"
+exec vim -u "$BASE/vimrc" "$@"

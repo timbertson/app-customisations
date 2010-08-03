@@ -1,2 +1,2 @@
-set rtp=$VIM_BASE
+set rtp+=$VIM_BASE
 source $VIM_BASE/vimrc
