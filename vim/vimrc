@@ -1,4 +1,4 @@
-set nocp
+set nocompatible
 call pathogen#runtime_append_all_bundles()
 " reload filetype detection
 filetype off
@@ -6,7 +6,6 @@ filetype plugin indent on
 
 syntax on
 set number
-filetype plugin on
 color ir_black
 
 set encoding=utf-8
@@ -20,6 +19,7 @@ set wrapmargin=5
 set nowrap
 set formatoptions=crqln
 set backspace=indent,eol,start
+set guitablabel=%N\ %t\ %m%r
 
 fun! FnEmailMode()
 	setlocal spell mousemodel=popup
@@ -39,7 +39,6 @@ set incsearch
 set scrolloff=3
 set sidescrolloff=5
 set wildmode=longest,list
-set nocompatible
 set autoindent
 set cinkeys-=#
 set mouse=a
@@ -49,10 +48,6 @@ set wmh=0
 
 set tags+=.tags
 let g:autotagTagsFile=".tags"
-
-" if has("gui_running")
-" 	set lines=40 columns=160
-" endif
 
 "draw tabs & trailing spaces
 autocmd BufNewFile,BufRead * set list listchars=tab:▸\ 
@@ -171,7 +166,7 @@ cmap <C-v> <C-r>+
 vmap <C-a> <esc>ggVG
 
 " delete to the "black hole" buffer
-map <S-Y> "_d
+map <S-k> "_d
 
 " new tab with ctl+shift+t
 nmap <C-S-t> :tabnew<cr>
