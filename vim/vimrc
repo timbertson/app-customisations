@@ -168,8 +168,8 @@ vmap <C-a> <esc>ggVG
 " delete to the "black hole" buffer
 map <S-k> "_d
 
-" new tab with ctl+shift+t
-nmap <C-S-t> :tabnew<cr>
+" new tab with <leader>T
+nmap <leader>T :tabnew<cr>
 
 " map alt+slash to line comment toggle
 map <A-/> :TComment<cr>
@@ -192,6 +192,7 @@ nmap <leader>p V{jo}ko
 
 " ctrl+f to FuzzyFinder (recursive)
 nmap <C-f> :FuzzyFinderBuffer<cr>
+nmap <leader>b :FuzzyFinderBuffer<cr>
 nmap <leader>f :FuzzyFinderFileWithFullCwd<cr>
 nmap <leader>t :FuzzyFinderTag<cr>
 
