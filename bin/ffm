@@ -1,0 +1,19 @@
+#!/usr/bin/python
+
+import sys, os
+
+def usage():
+	print >> sts.stderr, "Usage: ffm [on|off]"
+	sys.exit(1)
+
+
+args = sys.argv[1:]
+if '--help' in args:
+	usage()
+
+if args and args[0] in ('off', 'no', 'n', '0'):
+	val='click'
+else:
+	val='sloppy'
+
+os.execvp('gconftool', ('gconftool', '--set', '/apps/metacity/general/focus_mode', '--type=string', val))
