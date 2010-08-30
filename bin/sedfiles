@@ -36,6 +36,7 @@ def main(search, replace, *paths):
 	print "moved %s files" % (moved,)
 
 def _confirm(old, new):
+	if not sys.stdin.isatty(): return True
 	input = raw_input("moving '%s' -> '%s'\nOK? " % (old, new))
 	if input in ('','y','yes','ok'):
 		return True

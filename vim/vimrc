@@ -194,6 +194,7 @@ nmap <leader>p V{jo}ko
 nmap <C-f> :FuzzyFinderBuffer<cr>
 nmap <leader>b :FuzzyFinderBuffer<cr>
 nmap <leader>f :FuzzyFinderFileWithFullCwd<cr>
+nmap <leader>F :FuzzyFinderTaggedFile<cr>
 nmap <leader>t :FuzzyFinderTag<cr>
 
 " leader-t for showing nerd-tree
