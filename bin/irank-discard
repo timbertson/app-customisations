@@ -1,0 +1,5 @@
+#!/bin/sh
+
+song="$1" || song=`nowplaying`
+[ -z "$song" ] && exit 1
+zenity --question --text="really discard `basename "$song"`?" && mv -iv "$song" ~/Music/discarded/ && echo "done"
