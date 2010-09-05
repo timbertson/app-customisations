@@ -206,7 +206,10 @@ nmap <leader>t :FuzzyFinderTag<cr>
 nmap <leader>e :NERDTreeToggle<cr>
 nmap <leader>E :NERDTreeFind<cr>
 
-" window management: 
+" find usages
+nmap <a-F7> :Ack <c-r><c-w><cr>
+
+" window management:
 nmap <C-tab> <c-w>w
 nmap <S-C-tab> <c-w>W
 nmap <leader><c-l> <c-w>T
