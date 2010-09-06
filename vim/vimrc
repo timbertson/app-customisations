@@ -111,6 +111,9 @@ nmap <leader>` vi`
 vmap + loho
 vmap - holo
 
+" + to increment a number (used to be c-a, but it hardly deserves such a prominent shortcut)
+nnoremap + <c-a>
+
 " ) kills the surrounding characters of a selection
 vmap <leader>) <esc>`<hx`>x
 
