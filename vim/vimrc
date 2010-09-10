@@ -50,9 +50,15 @@ set wmh=0
 set tags+=.tags
 let g:autotagTagsFile=".tags"
 
-"draw tabs & trailing spaces
-autocmd BufNewFile,BufRead * set list listchars=tab:▸\ 
-set list listchars=tab:▸\ 
+" draw tabs
+" (do it poorly in the terminal, because sometimes utf8 is broken)
+if !has('gui_running')
+	autocmd BufNewFile,BufRead * set list listchars=tab:>\ 
+	set list listchars=tab:>\ 
+else
+	autocmd BufNewFile,BufRead * set list listchars=tab:▸\ 
+	set list listchars=tab:▸\ 
+endif
 
 "highlight any spaces that are followed by a tab (the horror!)
 " and any _single_ space that comes after ^\t+ (this is usually accedental)
@@ -61,7 +67,7 @@ autocmd BufNewFile,BufRead * match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ *]
                              match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ *]\)\|\([^ \t]\zs\s\+$\)/
 
 fun! Save_if_possible()
-	if len(expand("%")) > 0
+	if len(expand("%")) > 0 && &buftype == ""
 		:up
 	else
 		echo "[no file]"
@@ -161,7 +167,7 @@ vnoremap } /^\s*$<cr>
 
 " copy / paste (gvim, with the gui clipboard)
 vmap <C-c> "+y
-imap <C-S-v> <esc>"+gpa
+imap <C-S-v> <esc>"+pa
 cmap <C-v> <C-r>+
 
 " shift-insert for pasting from the selection buffer
