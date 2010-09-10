@@ -2,3 +2,4 @@
 --type-set=properties=.properties
 --type-set=jss=.jss
 --type-set=coffee=.coffee
+--type-set=md=.md

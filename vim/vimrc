@@ -24,7 +24,7 @@ set diffopt+=vertical
 
 fun! FnEmailMode()
 	setlocal spell mousemodel=popup
-	setlocal wrap linebreak nolist wrapmargin=0
+	setlocal wrap linebreak wrapmargin=0
 	setlocal expandtab
 	match none
 endfun
@@ -168,6 +168,7 @@ cmap <C-v> <C-r>+
 nmap <S-Ins> "*P
 imap <S-Ins> <esc>"*pa
 omap <S-Ins> <C-r>*
+cmap <S-Ins> <c-r>*
 
 " select all in visual mode
 vmap <C-a> <esc>ggVG
@@ -201,7 +202,7 @@ nmap <leader>p V{jo}ko
 " ctrl+f to FuzzyFinder (recursive)
 nmap <C-f> :FuzzyFinderBuffer<cr>
 nmap <leader>b :FuzzyFinderBuffer<cr>
-nmap <leader>f :FuzzyFinderFileWithFullCwd<cr>
+nmap <leader>f :FuzzyFinderFileWithFullCwd \*\*/$<cr>
 nmap <leader>F :FuzzyFinderTaggedFile<cr>
 nmap <leader>t :FuzzyFinderTag<cr>
 
