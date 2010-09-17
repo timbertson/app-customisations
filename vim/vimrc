@@ -21,6 +21,9 @@ set formatoptions=crqln
 set backspace=indent,eol,start
 set guitablabel=%N\ %t\ %m%r
 set diffopt+=vertical
+set shiftround " round to multiples of shiftwidth for > and <
+set wildignore=*.swp,*.bak,*.pyc,*.class
+set pastetoggle=<F2>
 
 fun! FnEmailMode()
 	setlocal spell mousemodel=popup

@@ -3,7 +3,7 @@
 import sys, os
 
 def usage():
-	print >> sts.stderr, "Usage: ffm [on|off]"
+	print >> sys.stderr, "Usage: ffm [on|off]"
 	sys.exit(1)
 
 

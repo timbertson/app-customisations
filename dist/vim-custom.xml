@@ -12,14 +12,19 @@
     <manifest-digest sha256="1b61fdce060fea9f00315849cb3112e7cc220ff5c9d4f6df06eb635a3651626c"/>
     <archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom.tgz" size="790139"/>
   </implementation>
+</group>
 
 	<group main="run-vim">
 		<requires interface="http://gfxmonk.net/dist/0install/vim-gnome.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/savemytext.xml">
 			<environment insert="" mode="prepend" name="PYTHONPATH"/>
+			<version not-before="0.1.3"/>
 		</requires>
 
-		<implementation id=".">
-		</implementation>
+		<implementation id="sha1new=ef81f969f20f9f499d1f2e2db833a5503e6ab208" released="2010-09-11" version="20100911.0105">
+		
+    <manifest-digest sha256="f5def2456ac11c7455f6ae0724790c06e8cfc25ad6efe3b8c50e6aa9e037ec92"/>
+    <archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom.tgz" size="791362"/>
+  </implementation>
 	</group>
 </interface>
