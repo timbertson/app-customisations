@@ -32,6 +32,11 @@ fun! FnEmailMode()
 	match none
 endfun
 
+" default to email mode when we were spawned by the edit server
+if $FROM_EDIT_SERVER == 'true'
+	call FnEmailMode()
+end
+
 command! Emailmode call FnEmailMode()
 set tabstop=2
 set cursorline
@@ -103,6 +108,7 @@ vmap <C-b> o?\<<cr>o2/\><cr>h
 nmap <leader>w <c-b>
 vmap <leader>w <c-b>
 
+xmap <Leader>s <Plug>Vsurround
 " surround selection with things:
 vmap <leader>( <esc>`>a)<esc>`<i(<esc>
 vmap <leader>[ <esc>`>a]<esc>`<i[<esc>
@@ -172,6 +178,9 @@ vnoremap } /^\s*$<cr>
 vmap <C-c> "+y
 imap <C-S-v> <esc>"+pa
 cmap <C-v> <C-r>+
+" c-v is still sometimes useful for literal <cr> chars, so use <c-l> (mnemonic 'literal')
+cnoremap <C-l> <C-v>
+inoremap <C-l> <C-v>
 
 " shift-insert for pasting from the selection buffer
 nmap <S-Ins> "*P
@@ -222,6 +231,9 @@ nmap <leader>E :NERDTreeFind<cr>
 " find usages
 nmap <a-F7> :Ack <c-r><c-w><cr>
 
+" refresh / redraw
+nmap <F5> :redraw!<cr>
+
 " window management:
 nmap <C-tab> <c-w>w
 nmap <S-C-tab> <c-w>W
@@ -242,3 +254,5 @@ command! -narg=0 Q :q
 command! -narg=0 W :w
 command! -narg=0 Wq :wq
 command! -narg=0 WQ :wq
+
+command! -narg=0 Xmlformat :%!XMLLINT_INDENT='	' xmllint --format -o - -
