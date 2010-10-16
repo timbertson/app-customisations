@@ -1,27 +1,6 @@
 # only run for bash
 [ -z "$PS1" -o -z "$BASH" ] && return
 
-# colours
-RED=`tput setaf 1`
-GREEN=`tput setaf 2`
-YELLOW=`tput setaf 3`
-BLUE=`tput setaf 4`
-MAGENTA=`tput setaf 5`
-CYAN=`tput setaf 6`
-WHITE=`tput setaf 7`
-LIGHT=`tput setaf 9`
-GREY=`tput setaf 0`
-
-# notify on non-zero return code
-error_notification='`__ext=$?;if [ $__ext != 0 ]; then echo -e "\n$GREY> exit code: $__ext"; fi`'
-
-# make remote sessions stand out
-HOSTNAME_COLOR="$YELLOW"
-[ "$SSH_CLIENT" ] && HOSTNAME_COLOR="$RED"
-
-# string it all together:
-PS1="$error_notification"'\n\[$GREEN\]\u\[$HOSTNAME_COLOR\]@\h \[$CYAN\]\w\[$GREEN\] \$\[$WHITE\] '
-
 
 case "$TERM" in
 xterm*|rxvt*)
@@ -32,3 +11,27 @@ xterm*|rxvt*)
 *)
   ;;
 esac
+
+# colours
+RED=`tput setaf 1`
+GREEN=`tput setaf 2`
+YELLOW=`tput setaf 3`
+BLUE=`tput setaf 4`
+MAGENTA=`tput setaf 5`
+CYAN=`tput setaf 6`
+WHITE=`tput setaf 7`
+LIGHT=`tput setaf 9`
+GREY=`tput setaf 0`
+RESET=`tput sgr0`
+
+
+# notify on non-zero return code
+error_notification='`__ext=$?;if [ $__ext != 0 ]; then echo -e "\n$GREY> exit code: $__ext"; fi`'
+
+# make remote sessions stand out
+HOSTNAME_COLOR="$YELLOW"
+[ "$SSH_CLIENT" ] && HOSTNAME_COLOR="$RED"
+
+# string it all together:
+PS1="$error_notification"'\n\[$GREEN\]\u\[$HOSTNAME_COLOR\]@\h \[$CYAN\]\w\[$GREEN\] \$\[$RESET\] '
+
