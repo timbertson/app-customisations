@@ -3,12 +3,17 @@ import sys, os, re
 import readline
 
 class FileExists(IOError): pass
+class NoFileExists(IOError): pass
+FORCE = False
+FORCE_FLAG = '-f'
 
 def substitute(search, replace, filename):
 	return re.sub(search, replace, filename, count=1)
 
 def move(base, old, new):
 	oldloc = os.path.join(base, old)
+	if not os.path.exists(oldloc):
+		raise NoFileExists(oldloc)
 	newloc = os.path.join(base, new)
 	if os.path.exists(newloc):
 		raise FileExists(newloc)
@@ -31,11 +36,15 @@ def main(search, replace, *paths):
 			if not confirmed:
 				print "cancelling..."
 				return 1
-		move(base, filename, new_filename)
-		moved += 1
+		try:
+			move(base, filename, new_filename)
+			moved += 1
+		except IOError, e:
+			print >> sys.stderr, "Skipping. %s: %s" % (type(e).__name__, e)
 	print "moved %s files" % (moved,)
 
 def _confirm(old, new):
+	if FORCE: return True
 	if not sys.stdin.isatty(): return True
 	input = raw_input("moving '%s' -> '%s'\nOK? " % (old, new))
 	if input in ('','y','yes','ok'):
@@ -44,7 +53,11 @@ def _confirm(old, new):
 
 
 if __name__ =='__main__':
-	if '--help' in sys.argv[1:]:
+	args = list(sys.argv[1:])
+	if '--help' in args:
 		print "Usage: %s search replace path [path ...]" % (os.path.basename(sys.argv[0]),)
 		sys.exit(1)
-	sys.exit(main(*sys.argv[1:]))
+	if FORCE_FLAG in args:
+		FORCE = True
+		args.remove('-f')
+	sys.exit(main(*args))
