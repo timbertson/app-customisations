@@ -98,6 +98,13 @@ map <A-k> gT
 "map <D-j> gt
 "map <D-k> gT
 
+" Visually select the text that was last edited/pasted
+nmap gV `[V`]
+
+" Bubble single lines
+nmap <M-Down> ]e
+nmap <M-Up> [e
+
 " quote character to highlight inside brackets
 nmap ; vib
 " and keep going ...
@@ -159,14 +166,6 @@ imap <C-S-tab> <c-p>
 " scroll (without moving cursor) on ctrl+j/k
 map <C-k> <C-y>
 map <C-j> <C-e>
-
-" alt + up/down to move lines
-nmap <a-up> ddkP
-nmap <a-down> ddp
-" and the same for mac using the option key
-"nmap <D-up> ddkP
-"nmap <D-down> ddp
-
 
 " I want { and } to match whitespace-only lines, rather than just empty ones
 " TODO: need to omit these from the search history
