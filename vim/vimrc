@@ -58,15 +58,17 @@ set wmh=0
 set tags+=.tags
 let g:autotagTagsFile=".tags"
 
-" draw tabs
 " (do it poorly in the terminal, because sometimes utf8 is broken)
-if !has('gui_running')
+fun! Lame_tabs()
 	autocmd BufNewFile,BufRead * set list listchars=tab:>\ 
 	set list listchars=tab:>\ 
-else
-	autocmd BufNewFile,BufRead * set list listchars=tab:▸\ 
-	set list listchars=tab:▸\ 
-endif
+endfun
+command! LameTabs call Lame_tabs()
+
+
+" draw tabs
+autocmd BufNewFile,BufRead * set list listchars=tab:▸\ 
+set list listchars=tab:▸\ 
 
 "highlight any spaces that are followed by a tab (the horror!)
 " and any _single_ space that comes after ^\t+ (this is usually accedental)
