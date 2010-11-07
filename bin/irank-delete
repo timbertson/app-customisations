@@ -1,5 +1,5 @@
 #!/bin/sh
 
-song=`nowplaying`
+song="$1"
 [ -z "$song" ] && exit 1
 zenity --question --text="really delete `basename "$song"`?" && `dirname "$0"`/trash "$song" && echo "done"

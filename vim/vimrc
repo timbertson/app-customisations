@@ -104,6 +104,9 @@ nmap gV `[V`]
 " Bubble single lines
 nmap <M-Down> ]e
 nmap <M-Up> [e
+" Bubble selection
+vmap <M-Down> ]e`[V`]
+vmap <M-Up> [e`[V`]
 
 " quote character to highlight inside brackets
 nmap ; vib
