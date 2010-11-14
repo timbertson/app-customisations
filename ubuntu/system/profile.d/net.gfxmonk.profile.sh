@@ -1,4 +1,8 @@
 #!/bin/bash
+# only run for interactive terms
+[ -z "$PS1" ] && return
+[ -n "$BASH" -o -n "$ZSH_VERSION" ] || return
+
 if [ "$#" != '1' ] || [ ! -d "$1" ]; then
 	base=/etc/profile.d/net.gfxmonk
 	# echo "error: please specify the directory containing this file (net.gfxmonk.profile.sh) as its first argument"
@@ -7,9 +11,6 @@ else
 fi
 
 export PATH="$PATH:/sbin:/usr/sbin"
-
-# only run for interactive terms
-[ -z "$PS1" ] && return
 
 function title
 {
