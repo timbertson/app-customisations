@@ -1,15 +1,11 @@
-# only run for bash
-[ -z "$PS1" -o -z "$BASH" ] && return
-
-
 case "$TERM" in
 xterm*|rxvt*)
-  PROMPT_COMMAND='echo -ne "\033]0;$(echo "$(basename "${PWD}") ($(dirname "${PWD}"))" | sed -e "s@${HOME}@~@")\007"'
-  export TERM=xterm-256color
-  stty -ixon # disable ctrl+s, ctrl+q pausing and resuming the terminal
-  ;;
+	PROMPT_COMMAND='echo -ne "\033]0;$(echo "$(basename "${PWD}") ($(dirname "${PWD}"))" | sed -e "s@${HOME}@~@")\007"'
+	export TERM=xterm-256color
+	stty -ixon # disable ctrl+s, ctrl+q pausing and resuming the terminal
+	;;
 *)
-  ;;
+	;;
 esac
 
 # colours

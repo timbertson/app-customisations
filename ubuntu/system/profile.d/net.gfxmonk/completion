@@ -1,17 +1,3 @@
-#!/bin/bash
-function _complete_dpkg_installed {
-	local cur prev special i
-	COMPREPLY=()
-	cur=`_get_cword`
-	prev=${COMP_WORDS[COMP_CWORD-1]}
-	COMREPLY=($(_comp_dpkg_installed_packages $cur))
-}
-
-function _complete_dpkg_avail {
-	local cur prev special i
-	COMPREPLY=()
-	cur=`_get_cword`
-	prev=${COMP_WORDS[COMP_CWORD-1]}
-	COMPREPLY=( $( apt-cache pkgnames $cur 2> /dev/null ) )
-}
-
+use_completion _git g
+use_completion _complete_dpkg_avail aptinstall
+use_completion _complete_dpkg_installed aptremove

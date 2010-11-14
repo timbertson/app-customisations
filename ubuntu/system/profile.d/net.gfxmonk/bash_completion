@@ -1,0 +1,21 @@
+#!/bin/bash
+function _complete_dpkg_installed {
+	local cur prev special i
+	COMPREPLY=()
+	cur=`_get_cword`
+	prev=${COMP_WORDS[COMP_CWORD-1]}
+	COMREPLY=($(_comp_dpkg_installed_packages $cur))
+}
+
+function _complete_dpkg_avail {
+	local cur prev special i
+	COMPREPLY=()
+	cur=`_get_cword`
+	prev=${COMP_WORDS[COMP_CWORD-1]}
+	COMPREPLY=( $( apt-cache pkgnames $cur 2> /dev/null ) )
+}
+
+function use_completion {
+	complete -o bashdefault -F "$1" "$2"
+}
+

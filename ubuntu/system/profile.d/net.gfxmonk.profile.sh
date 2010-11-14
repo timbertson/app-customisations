@@ -1,35 +1,41 @@
 #!/bin/bash
 if [ "$#" != '1' ] || [ ! -d "$1" ]; then
 	base=/etc/profile.d/net.gfxmonk
-	# echo "error: please specify the directory containing this file (bash_profile) as its first argument"
+	# echo "error: please specify the directory containing this file (net.gfxmonk.profile.sh) as its first argument"
 else
 	base="$1"
 fi
 
 export PATH="$PATH:/sbin:/usr/sbin"
 
-# only run for bash
-[ -z "$PS1" -o -z "$BASH" ] && return
+# only run for interactive terms
+[ -z "$PS1" ] && return
 
 function title
 {
   export PROMPT_COMMAND='echo -ne "\033]0;'"$@"'\007"'
 }
 
-if [ `uname` == 'Darwin' ]; then
+if [ $(uname) = 'Darwin' ]; then
 	source "$base/osx"
 else
 	source "$base/linux"
 fi
 
 source "$base/scm"
-source "$base/bashrc"
-source "$base/completion"
+source "$base/path"
+if [ -n "$BASH" ]; then
+	source "$base/bashrc"
+	source "$base/bash_completion"
+	source "$base/bash_prompt"
+fi
+if [ -n "$ZSH_VERSION" ]; then
+	source "$base/zshrc"
+	source "$base/zsh_completion"
+	source "$base/zsh_prompt"
+fi
 source "$base/alias"
-source "$base/prompt"
-
-# case insensitive file globbing (primaily for tab completion)
-shopt -s nocaseglob
+source "$base/completion"
 
 function cdbase {
 	d=`dirname "$1"`

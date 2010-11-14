@@ -11,7 +11,6 @@ function g
 		git "$@"
 	fi
 }
-complete -o bashdefault -o default -o nospace -F _git g
 
 # make subversion diff almost as awesome as git's:
 function svndiff

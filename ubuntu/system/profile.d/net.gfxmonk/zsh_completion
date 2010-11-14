@@ -1,0 +1,3 @@
+function use_completion {
+	compctl -K "$1" "$2"
+}

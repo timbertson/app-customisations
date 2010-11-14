@@ -17,9 +17,7 @@ alias gd='run gnome-do'
 alias g0='mkzero-gfxmonk'
 
 alias aptinstall='sudo apt-get install'
-complete -o filenames -F _complete_dpkg_avail aptinstall
 alias aptremove='sudo apt-get remove'
-complete -o filenames -F _complete_dpkg_installed aptremove
 alias aptsearch='apt-cache search'
 
 alias private='ecryptfs-mount-private'
