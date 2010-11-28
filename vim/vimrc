@@ -15,6 +15,7 @@ set nobackup
 set nojoinspaces " just one space after a period (when joining)
 set nofoldenable " I can never remember how to use folding
 set autoread " reload file whenever it changes on disk
+set autowrite " save file when navigating away from it or using :make (but not on quits, etc)
 set wrapmargin=5
 set nowrap
 set formatoptions=crqln
@@ -24,6 +25,10 @@ set diffopt+=vertical
 set shiftround " round to multiples of shiftwidth for > and <
 set wildignore=*.swp,*.bak,*.pyc,*.class
 set pastetoggle=<F2>
+set sessionoptions="curdir,folds,localoptions,tabpages,winsize"
+autocmd SessionLoadPost * tab ball
+command! -narg=0 SSession :mksession! .vimsession
+command! -narg=0 LSession :source .vimsession
 
 fun! FnEmailMode()
 	setlocal spell mousemodel=popup
@@ -133,6 +138,10 @@ nmap <leader>' vi'
 nmap <leader>" vi"
 nmap <leader>[ vi[
 nmap <leader>` vi`
+
+" ]] to go to next (/prev) quickfix item
+nmap ]] :cn<cr>
+nmap [[ :cp<cr>
 
 " + expands a selection in both directions by one character
 vmap + loho
@@ -260,3 +269,4 @@ command! -narg=0 Wq :wq
 command! -narg=0 WQ :wq
 
 command! -narg=0 Xmlformat :%!XMLLINT_INDENT='	' xmllint --format -o - -
+command! -narg=0 ClearMarkers :sign unplace *
