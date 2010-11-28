@@ -27,3 +27,10 @@ setopt autopushd
 
 # don't export everything, that would be silly...
 unsetopt ALL_EXPORT
+
+# fix for zsh doing something weird...
+# see https://bugs.launchpad.net/ubuntu/+source/zsh/+bug/355883
+bindkey ";5C" forward-word
+bindkey ";3C" forward-word
+bindkey ";5D" backward-word
+bindkey ";3D" backward-word
