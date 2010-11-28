@@ -1,6 +1,6 @@
 if exists("loaded_sbt")
     finish
 endif
-let loaded_codefellow=1
+let loaded_sbt=1
 
 autocmd FileType scala compiler sbt
