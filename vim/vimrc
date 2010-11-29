@@ -231,7 +231,8 @@ nmap Q gqq
 nmap <leader>p V{jo}ko
 
 " ctrl+f to FuzzyFinder (recursive)
-nmap <C-f> :FuzzyFinderBuffer<cr>
+nmap <C-f> :FuzzyFinderTaggedFile<cr>
+nmap <C-b> :FuzzyFinderTaggedBuffer<cr>
 nmap <leader>b :FuzzyFinderBuffer<cr>
 nmap <leader>f :FuzzyFinderFileWithFullCwd \*\*/$<cr>
 nmap <leader>F :FuzzyFinderTaggedFile<cr>
@@ -260,7 +261,10 @@ command! -narg=0 Open :silent :!gnome-open "`dirname "%:p"`" &
 command! -narg=0 Term :silent :!gnome-terminal --working-directory="`dirname "%:p"`" &
 command! -narg=0 CD :lcd %:p:h
 command! -narg=0 Mdview :silent :!mdview % &
-command! -narg=0 Automake autocmd BufWritePost <buffer> make
+augroup automake
+augroup END
+command! -narg=0 Automake autocmd automake BufWritePost <buffer> Make
+command! -narg=0 AutomakeOff autocmd! automake
 
 " silly shift-typos
 command! -narg=0 Q :q

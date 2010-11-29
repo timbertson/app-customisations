@@ -13,7 +13,7 @@ fd, tempfile = tempfile.mkstemp(prefix='vim-make')
 os.close(fd)
 
 def send_vim_cmd(s):
-	return "vim --servername {servername} --remote-send '{cmd}'".format(servername=servername, cmd=s)
+	return "vim --servername {servername} --remote-send '<esc>{cmd}'".format(servername=servername, cmd=s)
 
 cmd = "({makeprg} {args} > {filename} 2>&1 && {on_success} || {on_fail}; sleep 5; rm {filename} ) > /tmp/makelog &".format(
 	filename=tempfile,
