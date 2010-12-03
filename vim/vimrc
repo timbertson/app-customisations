@@ -274,3 +274,7 @@ command! -narg=0 WQ :wq
 
 command! -narg=0 Xmlformat :%!XMLLINT_INDENT='	' xmllint --format -o - -
 command! -narg=0 ClearMarkers :sign unplace *
+
+" pyflakes shouldn't use quickfix; I use that for other stuff!
+let g:pyflakes_use_quickfix = 0
+
