@@ -21,6 +21,7 @@ set nowrap
 set formatoptions=crqln
 set backspace=indent,eol,start
 set guitablabel=%N\ %t\ %m%r
+set guioptions-=T "remove toolbar
 set diffopt+=vertical
 set shiftround " round to multiples of shiftwidth for > and <
 set wildignore=*.swp,*.bak,*.pyc,*.class
@@ -232,7 +233,7 @@ nmap <leader>p V{jo}ko
 
 " ctrl+f to FuzzyFinder (recursive)
 nmap <C-f> :FuzzyFinderTaggedFile<cr>
-nmap <C-b> :FuzzyFinderTaggedBuffer<cr>
+nmap <C-b> :FuzzyFinderBuffer<cr>
 nmap <leader>b :FuzzyFinderBuffer<cr>
 nmap <leader>f :FuzzyFinderFileWithFullCwd \*\*/$<cr>
 nmap <leader>F :FuzzyFinderTaggedFile<cr>
