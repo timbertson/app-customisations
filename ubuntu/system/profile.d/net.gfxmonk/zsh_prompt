@@ -22,4 +22,12 @@ HOSTNAME_COLOR="$PR_YELLOW"
 PS1="$PR_GREY%(?..
 [%?] )
 $PR_GREEN%n$HOSTNAME_COLOR@%m $PR_CYAN%~ $PR_GREEN$ $PR_NO_COLOR"
+
+# set the terminal title when I change working dirs
+chpwd() {
+	[[ -t 1 ]] || return
+	set_terminal_title
+}
+set_terminal_title
+
 unset RPROMPT

@@ -4,4 +4,4 @@ if [ ! "$#" -eq 2 ]; then
 	echo "\nusage: `basename $0` directory cmd\n\n(cmd can include %f for relative path of file)" >&2
 	exit 1
 fi
-inotifywait -rm "$1" -e modify -e move -e create -e delete --format "$2" | bash -x
+inotifywait -rm "$1" -e modify -e move -e create -e delete --format "$2" | quiet 0.2 | bash -x

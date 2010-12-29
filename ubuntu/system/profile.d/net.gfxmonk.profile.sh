@@ -23,6 +23,10 @@ else
 	source "$base/linux"
 fi
 
+function set_terminal_title {
+	echo -ne "\033]0;$(echo "$(basename "${PWD}") ($(dirname "${PWD}"))" | sed -e "s@${HOME}@~@")\007"
+}
+
 source "$base/scm"
 source "$base/path"
 if [ -n "$BASH" ]; then

@@ -3,3 +3,4 @@
 --type-set=jss=.jss
 --type-set=coffee=.coffee
 --type-set=md=.md
+--type-set=rst=.rst
