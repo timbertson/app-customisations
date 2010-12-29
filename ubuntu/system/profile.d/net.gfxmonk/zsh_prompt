@@ -28,6 +28,6 @@ chpwd() {
 	[[ -t 1 ]] || return
 	set_terminal_title
 }
-set_terminal_title
+chpwd
 
 unset RPROMPT
