@@ -34,7 +34,6 @@ command! -narg=0 LSession :source .vimsession
 fun! FnEmailMode()
 	setlocal spell mousemodel=popup
 	setlocal wrap linebreak wrapmargin=0
-	setlocal expandtab
 	match none
 endfun
 
@@ -261,7 +260,8 @@ nmap <A-o> :up<cr>:silent !gnome-open %:p<cr>
 command! -narg=0 Open :silent :!gnome-open "`dirname "%:p"`" &
 command! -narg=0 Term :silent :!gnome-terminal --working-directory="`dirname "%:p"`" &
 command! -narg=0 CD :lcd %:p:h
-command! -narg=0 Mdview :silent :!mdview % &
+command! -narg=0 Mdview :silent :!markdown % | htmlview &
+command! -narg=0 Rstview :silent :!rst2html % | htmlview
 augroup automake
 augroup END
 command! -narg=0 Automake autocmd automake BufWritePost <buffer> Make
@@ -278,4 +278,9 @@ command! -narg=0 ClearMarkers :sign unplace *
 
 " pyflakes shouldn't use quickfix; I use that for other stuff!
 let g:pyflakes_use_quickfix = 0
+
+" 0install tools helpers
+command! Zeroreadme !cd %:p:h && 0readme %:t
+command! Zerocopy !cd %:p:h && gnome-terminal -x /bin/bash -c "echo %:p; mkzero-gfxmonk -c %:t; bash"
+command! Version !version
 
