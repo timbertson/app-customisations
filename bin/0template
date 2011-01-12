@@ -11,7 +11,8 @@ template="""<?xml version="1.0" ?>
 	___
 	</description>
 
-	<group main="%(name)s">
+	<group main="___">
+		<environment name="___" insert="" mode="append" />
 		<implementation id="." version="0.0.1">
 		</implementation>
 	</group>
