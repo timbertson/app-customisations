@@ -1,6 +1,0 @@
-#!/bin/sh
-
-export XMLLINT_INDENT='	'
-for file in "$@"; do
-	xmllint --format -o "$file.pretty" "$file" && mv "$file.pretty" "$file"
-done

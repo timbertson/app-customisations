@@ -1,0 +1,121 @@
+#!/bin/bash
+set -e
+
+irank_base="$HOME/Music/irank"
+music_base="$HOME/Music"
+all_music="$music_base/Library"
+master="master"
+
+function playlists {
+	cat "$HOME/.config/irank/android-playlists"
+}
+
+function required_files {
+	playlists | parallel "ls -1 '$irank_base/'{}" | sort -u
+}
+
+function existing_files {
+	ls -1 "$dest/$master"
+}
+
+function files_no_longer_needed {
+	# just print lines unique to existing_files
+	comm -3 -1 <(required_files) <(existing_files)
+}
+
+function delete_old_music {
+	files_no_longer_needed | parallel "rm -v '$dest/master'/{}"
+}
+
+function rsync_ {
+	rsync -vt --modify-window=2 "$@"
+}
+
+function update_music_files {
+	required_files | rsync_ --files-from=- "$all_music/" "$dest/master/" || err=$?
+	if [ $? -ne 0 ]; then
+		echo "warning: rsync failed! $err"
+		[ $err = 23 ] # this is acceptable; it means some files didn't transfer (they may be in a different dir)
+	fi
+}
+
+function copy_testing_files {
+	rsync_ -a --delete-before "$music_base/TESTING/" "$dest/TESTING/"
+	ls -1 "$dest/TESTING" > "$dest/TESTING.m3u"
+}
+
+function overwrite_android_db {
+	cp "$irank_base/irank.sqlite" "$dest/"
+}
+
+function make_playlists {
+	rm -f "$dest/*.m3u"
+	playlists | parallel "ls -1 '$irank_base/'{}/ | sed -e 's/^/$master\//' > '$dest/'{}.m3u"
+}
+
+function do_sync {
+	mkdir -p "$dest/master"
+	apply_remote_rating_changes
+	delete_old_music
+	update_music_files
+	make_playlists
+	copy_testing_files
+	overwrite_android_db
+
+	irank-testing-artist-playlists "$dest"
+
+	echo '-------- DISK USAGE: -----------'
+	du -h "$dest"
+	size=$(du -hs "$dest" | cut -f1)
+	remaining=$(df -h "$dest" | tail -n1 | awk '{print $4}')
+	notify-send "Android music sync finished" "$size used, $remaining free for $dest"
+}
+
+function apply_remote_rating_changes {
+	if [ -r "$dest/irank.sqlite" ]; then
+		changed_files="$(sqlite3 "$dest"/irank.sqlite 'select count(*) from updates;')"
+		if [ "$changed_files" -ne 0 ]; then
+			if [ $ask = 0 ] || zenity --question --text='Update ratings from changes on device?' --cancel-label='skip'; then
+				_apply_remote_rating_changes
+			fi
+		fi
+	fi
+}
+
+function _apply_remote_rating_changes {
+	echo "updating ratings from device"
+	irank rating-sync --no "$dest/irank.sqlite"
+	if [ $? -ne 0 ]; then
+		zenity --question --text='Rating update failed. Do you want to continue, erasing all failed ratings?' --cancel-label='Stop'
+	fi
+	echo "updating playlists after rating update"
+	irank-playlists-standalone --db-only
+	echo "copying new irank DB to device"
+	overwrite_android_db
+}
+
+
+if [ "$SHLVL" -gt 1 -a -z "$irank_test" ]; then
+	ask=0
+	if [ "$1" = "--ask" ]; then
+		ask=1
+		shift
+	fi
+
+	dest="$1"
+	echo $dest
+
+	if [ -z "$dest" ]; then
+		echo "Error: no destination given"
+		dest=$(grep '^android:' ~/.config/irank/paths | cut -c10-)
+		echo "using: $dest"
+	fi
+	set -x
+	[ -d "$dest" ]
+
+	[ $ask = 0 ] || zenity --question --text='Sync iRank playlists to device?'
+	do_sync
+else
+	echo "# (sourced)"
+	dest='~/.tmp/android'
+fi

@@ -1,0 +1,2 @@
+xhost +
+sudo -u sandbox -i

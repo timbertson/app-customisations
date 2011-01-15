@@ -280,7 +280,8 @@ command! -narg=0 ClearMarkers :sign unplace *
 let g:pyflakes_use_quickfix = 0
 
 " 0install tools helpers
-command! Zeroreadme !cd %:p:h && 0readme %:t
-command! Zerocopy !cd %:p:h && gnome-terminal -x /bin/bash -c "echo %:p; mkzero-gfxmonk -c %:t; bash"
+command! -narg=0 Zeroreadme !cd %:p:h && 0readme %:t
+command! -narg=0 Zerocopy !cd %:p:h && gnome-terminal -x /bin/bash -c "echo %:p; mkzero-gfxmonk -c %:t; bash"
+command! -narg=0 Zerosign !cd %:p:h && gnome-terminal -x `which 0publish` --xmlsign %
 command! Version !version
 
