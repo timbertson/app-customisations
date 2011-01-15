@@ -3,6 +3,7 @@
 import os
 import sys
 from collections import defaultdict
+import optparse
 
 def _need(lib):
 	print >> sys.stderr, "ERROR: You need to install the %s python library to use this tool" % (lib,)
@@ -29,52 +30,72 @@ def split_args(args):
 	args = [arg[2:] for arg in args]
 	return args, paths
 
-def main(args=None):
-	if args is None:
-		args = sys.argv[1:]
-	flags, paths = split_args(args)
+def main():
+	p = optparse.OptionParser("usage: %prog [options] [dir1 [dir2 [...]]]", add_help_option=False)
+	p.add_option('--refresh', action='store_true')
+	p.add_option('--helpme', action='help', help='print this text')
+	p.add_option('--ahead', action='store_true')
+	p.add_option('--dirty', action='store_true')
+	p.add_option('--all', action='store_true', help='list all directories, not just git repos')
+	p.add_option('--depth', type="int", help='search DEPTH directories deep to find git repos', default=1)
+	opts, paths = p.parse_args()
 	
-	refresh = False
-	if 'refresh' in flags:
-		refresh = True
-	if 'help' in flags:
-		print >> sys.stderr, "usage: %s [--refresh] [dir ...]" % (os.path.basename(sys.argv[0]))
-		return 1
-
-	strip_path_bits = 0
 	if len(paths) <= 0:
-		strip_path_bits = 1
 		paths = ['.']
 	
 	if should_list_children(paths):
-		files = get_all_child_dir_paths(paths)
+		dirs_and_repos = get_all_dirs_and_repos(paths, opts.depth)
 	else:
-		files = paths
-	for file_ in files:
-		repo = get_repo(file_)
-		if repo is not None and refresh:
+		dirs_and_repos = zip(paths, map(get_repo, paths))
+	
+	for file_, repo in dirs_and_repos:
+		#repo = get_repo(file_)
+		if repo is None:
+			if opts.all:
+				print fmt_repo(None, file_)
+			continue
+		if opts.refresh:
 			for remote in remotes(repo):
 				try:
 					repo.git.fetch(remote)
 				except git.errors.GitCommandError:
-					print >> sys.stderr, "# %s: couldn't fetch remote \"%s\"" % (os.path.basename(repo.wd), remote,)
-		if strip_path_bits > 0:
-			file_ = os.path.join(*os.path.split(file_)[strip_path_bits:])
-		print fmt_repo(repo, file_)
+					print >> sys.stderr, "# %s: couldn't fetch remote \"%s\"" % (repo.wd, remote,)
+		try:
+			if opts.ahead:
+				divergences = [divergence for url, divergence in remote_info(repo)]
+				if not (divergences and all(map(lambda x: x > 0, divergences))):
+					continue
+			if opts.dirty:
+				if not repo.is_dirty:
+					continue
+			print fmt_repo(repo, file_)
+		except git.errors.GitCommandError:
+			print >> sys.stderr, "Error processing %s" %(file_,)
+			import traceback
+			traceback.print_exc(file=sys.stderr)
 
 def should_list_children(paths):
 	return not any([isdir(path, '.git') for path in paths])
-	
-def get_all_child_dir_paths(paths):
-	dir_paths = []
-	for path in paths:
-		if not os.path.isdir(path):
-			continue
-		for item in os.listdir(path):
-			fullpath = os.path.join(path, item)
-			if os.path.isdir(fullpath):
-				dir_paths.append(fullpath)
-	return dir_paths if len(dir_paths) > 0 else paths
+
+def get_all_dirs_and_repos(bases, depth):
+	def is_repo(repo, fullpath):
+		return repo is not None and os.path.abspath(fullpath) == os.path.abspath(repo.wd)
+
+	def _get_dirs(base, depth):
+		for file in os.listdir(base):
+			fullpath = os.path.join(base, file)
+			if os.path.isdir(fullpath) and not file == '.git':
+				repo = get_repo(fullpath)
+				if is_repo(repo, fullpath):
+					yield (fullpath, repo)
+				if depth > 1:
+					for item in _get_dirs(fullpath, depth-1):
+						yield item
+
+	for base in bases:
+		for item in _get_dirs(base, depth):
+			yield item
+
 
 def get_repo(path):
 	try:
@@ -87,9 +108,12 @@ def get_repo(path):
 def fmt_repo(repo, path):
 	if path == '.':
 		if repo is not None:
-			path = os.path.basename(repo.wd)
+			path = (repo.wd)
 		else:
-			path = os.path.basename(os.path.abspath(os.path.curdir))
+			path = os.path.abspath(os.path.curdir)
+		cwd = os.getcwd()
+		if path.startswith(cwd):
+			path = path[len(cwd):]
 			
 	if repo is None:
 		return col.black(path)
