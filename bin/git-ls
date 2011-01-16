@@ -63,7 +63,7 @@ def main():
 		try:
 			if opts.ahead:
 				divergences = [divergence for url, divergence in remote_info(repo)]
-				if not (divergences and all(map(lambda x: x > 0, divergences))):
+				if not (repo.is_dirty or (divergences and all(map(lambda x: x > 0, divergences)))):
 					continue
 			if opts.dirty:
 				if not repo.is_dirty:
