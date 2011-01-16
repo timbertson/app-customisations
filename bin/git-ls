@@ -112,8 +112,11 @@ def fmt_repo(repo, path):
 		else:
 			path = os.path.abspath(os.path.curdir)
 		cwd = os.getcwd()
-		if path.startswith(cwd):
-			path = path[len(cwd):]
+		if path == cwd:
+			path = os.path.basename(path)
+		else:
+			if path.startswith(cwd):
+				path = path[len(cwd):]
 			
 	if repo is None:
 		return col.black(path)
