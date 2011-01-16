@@ -12,7 +12,7 @@ template="""<?xml version="1.0" ?>
 	</description>
 
 	<group main="___">
-		<environment name="___" insert="" mode="append" />
+		<environment name="___" insert="" mode="prepend" />
 		<implementation id="." version="0.0.1">
 		</implementation>
 	</group>
