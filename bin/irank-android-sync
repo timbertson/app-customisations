@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 irank_base="$HOME/Music/irank"
 music_base="$HOME/Music"
@@ -11,7 +10,7 @@ function playlists {
 }
 
 function required_files {
-	playlists | parallel "ls -1 '$irank_base/'{}" | sort -u
+	playlists | parallel "ls -1 '$irank_base/'{} | sort -R | head -n1000" | sort -u
 }
 
 function existing_files {
@@ -55,7 +54,6 @@ function make_playlists {
 
 function do_sync {
 	mkdir -p "$dest/master"
-	apply_remote_rating_changes
 	delete_old_music
 	update_music_files
 	make_playlists
@@ -95,7 +93,8 @@ function _apply_remote_rating_changes {
 }
 
 
-if [ "$SHLVL" -gt 1 -a -z "$irank_test" ]; then
+if [ -z "$irank_test" ]; then
+	set -e
 	ask=0
 	if [ "$1" = "--ask" ]; then
 		ask=1
@@ -113,9 +112,10 @@ if [ "$SHLVL" -gt 1 -a -z "$irank_test" ]; then
 	set -x
 	[ -d "$dest" ]
 
+	apply_remote_rating_changes
 	[ $ask = 0 ] || zenity --question --text='Sync iRank playlists to device?'
 	do_sync
 else
 	echo "# (sourced)"
-	dest='~/.tmp/android'
+	dest="$HOME/.tmp/android"
 fi
