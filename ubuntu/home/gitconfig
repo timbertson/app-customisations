@@ -18,6 +18,8 @@
 [color "branch"]
 	current = green
 	remote = cyan
+[push]
+	default = current
 [color "status"]
 	added = green
 	changed = red
