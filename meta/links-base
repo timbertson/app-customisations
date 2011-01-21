@@ -1,17 +1,17 @@
-../ubuntu/system/profile.d/net.gfxmonk /etc/profile.d/net.gfxmonk
-../ubuntu/system/profile.d/net.gfxmonk.profile.sh /etc/profile.d/net.gfxmonk.profile.sh
-../ubuntu/system/sessions /etc/X11/sessions
-../ubuntu/system/udev-rules.d/input.rules /etc/udev/rules.d/input.rules
+../root/profile.d/net.gfxmonk /etc/profile.d/net.gfxmonk
+../root/profile.d/net.gfxmonk.profile.sh /etc/profile.d/net.gfxmonk.profile.sh
+../root/sessions /etc/X11/sessions
+../root/udev-rules.d/input.rules /etc/udev/rules.d/input.rules
 
 ../vim/vimrc /home/tim/.vimrc
 ../vim ~/.vim
 
 ../bin ~/.bin
 
-../ubuntu/home/inputrc ~/.inputrc
-../ubuntu/home/ctags ~/.ctags
-../ubuntu/home/xmonad.hs ~/.xmonad/xmonad.hs
-../ubuntu/home/xbindkeysrc.scm ~/.xbindkeysrc.scm
-../ubuntu/home/ackrc ~/.ackrc
-../ubuntu/home/gizmod ~/.gizmod
-../ubuntu/home/gitconfig ~/.gitconfig
+../home/inputrc ~/.inputrc
+../home/ctags ~/.ctags
+../home/xmonad.hs ~/.xmonad/xmonad.hs
+../home/xbindkeysrc.scm ~/.xbindkeysrc.scm
+../home/ackrc ~/.ackrc
+../home/gizmod ~/.gizmod
+../home/gitconfig ~/.gitconfig

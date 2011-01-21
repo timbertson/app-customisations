@@ -1,1 +1,1 @@
-../ubuntu/system/karmic-sources.list.d /etc/apt/sources.list.d
+../root/karmic-sources.list.d /etc/apt/sources.list.d

@@ -1,1 +1,1 @@
-../ubuntu/system/maverick-sources.list.d /etc/apt/sources.list.d
+../root/maverick-sources.list.d /etc/apt/sources.list.d

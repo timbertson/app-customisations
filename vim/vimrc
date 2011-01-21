@@ -231,10 +231,10 @@ nmap Q gqq
 nmap <leader>p V{jo}ko
 
 " ctrl+f to FuzzyFinder (recursive)
-nmap <C-f> :FuzzyFinderTaggedFile<cr>
+"nmap <C-f> :FuzzyFinderTaggedFile<cr>
+nmap <C-f> :CommandT<cr>
 nmap <C-b> :FuzzyFinderBuffer<cr>
 nmap <leader>b :FuzzyFinderBuffer<cr>
-nmap <leader>f :FuzzyFinderFileWithFullCwd \*\*/$<cr>
 nmap <leader>F :FuzzyFinderTaggedFile<cr>
 nmap <leader>t :FuzzyFinderTag<cr>
 
