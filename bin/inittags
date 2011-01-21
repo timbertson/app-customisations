@@ -11,7 +11,6 @@ if [ -d .git -a -e "$hook_script" ]; then
 		fi
 	done
 fi
-pwd
 
 # generate tags *in the background*
 ctags -f ".tags" -R . "$@" >/dev/null 2>&1 &
