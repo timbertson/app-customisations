@@ -64,7 +64,7 @@ function do_sync {
 	copy_testing_files
 	overwrite_android_db
 
-	irank-testing-artist-playlists "$dest"
+	#irank-testing-artist-playlists "$dest"
 
 	echo '-------- DISK USAGE: -----------'
 	du -h "$dest"
