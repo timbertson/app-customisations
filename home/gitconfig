@@ -5,10 +5,10 @@
 	br = branch
 	sh = !git-sh
 	sub = submodule
-	up = git pull && git submodule sync && git submodule init && git submodule update && git sub
+	up = !git pull && git submodule sync && git submodule init && git submodule update && git sub
 	patch = format-patch --stdout
 	show-branches = !git show-branch origin/master $(git branch | cut -c3-)
-	root = git rev-parse --show-toplevel
+	root = rev-parse --show-toplevel
 [color]
 	branch = auto
 	diff = auto

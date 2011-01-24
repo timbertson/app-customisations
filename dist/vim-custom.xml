@@ -2,7 +2,7 @@
 <?xml-stylesheet type='text/xsl' href='interface.xsl'?>
 <interface uri="http://gfxmonk.net/dist/0install/vim-custom.xml" xmlns="http://zero-install.sourceforge.net/2004/injector/interface">
 	<name>vim</name>
-	<summary>custom VIM</summary>
+	<summary>Tim's vim</summary>
 	<publish mode="ignore" xmlns="http://gfxmonk.net/dist/0install"/>
 	<description>
 	</description>
@@ -11,13 +11,9 @@
 		<requires interface="http://gfxmonk.net/dist/0install/savemytext.xml">
 			<version not-before="0.1.3"/>
 		</requires>
-		<implementation id="sha1new=cf5a741b311847009e4e0fcd2651a103fcf7c118" released="2010-10-04" version="20101004.1953">
-			<manifest-digest sha256="375e5d85967d89236e60d6706046f82fb2fb469b5755ec8a52aff2299314a0db"/>
-			<archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom.tgz" size="801520"/>
-		</implementation>
-		<implementation id="sha1new=e93633daeb7c1a54e38a9aaa7295b057b16afa2e" released="2011-01-22" version="20110122.1055">
-    <manifest-digest sha256="f63a6caa8c670657660b5350529cba5543b08c43598ddb6da98ac8a71e4cdc31"/>
-    <archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom.tgz" size="921027"/>
+		<implementation id="sha1new=85d1e406ac40d3f602071af2f7f9c3c1f621fa32" released="2011-01-24" version="20110124.2108">
+    <manifest-digest sha256="40f0af5b2dddd7054d00600f1e80d1e2b3b3a737ffc77d809208f74c0f203879"/>
+    <archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom.tgz" size="951150"/>
   </implementation>
 	</group>
 </interface>
