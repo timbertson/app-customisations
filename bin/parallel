@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ "$*" = "--versions" ]; then
+  exec 0launch -gd 'http://git.savannah.gnu.org/cgit/parallel.git/plain/packager/0install/parallel.xml' "$@"
+else
+  exec 0launch  'http://git.savannah.gnu.org/cgit/parallel.git/plain/packager/0install/parallel.xml' "$@"
+fi

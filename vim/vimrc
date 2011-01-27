@@ -243,7 +243,8 @@ nmap <leader>e :NERDTreeToggle<cr>
 nmap <leader>E :NERDTreeFind<cr>
 
 " find usages
-nmap <a-F7> :Ack -w <c-r><c-w><cr>
+nmap <a-F7> :Ack -wQ <c-r><c-w><cr>
+vmap <M-F7> y:Ack -wQ "<C-R>""<cr>
 
 " refresh / redraw
 nmap <F5> :redraw!<cr>

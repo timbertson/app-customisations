@@ -33,6 +33,8 @@ alias ..='. ~/.bash_profile'
 alias umount='sudo umount'
 alias xephyr='Xephyr -ac -screen 600x800 -br -reset -terminate 2> /dev/null :1 &'
 
-alias man='0alias --manpage --'
+# bootstrap 0launch to get the latest version:
+alias 0launch='\0launch http://0install.net/2007/interfaces/ZeroInstall.xml'
+alias man='0launch --main=0alias http://0install.net/2007/interfaces/ZeroInstall.xml --manpage --'
 alias ind='indicate-task --'
 

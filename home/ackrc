@@ -4,5 +4,6 @@
 --type-set=coffee=.coffee
 --type-set=md=.md
 --type-set=rst=.rst
+--type-set=feature=.feature
 --ignore-dir=build
 --ignore-dir=0inst
