@@ -12,7 +12,7 @@ function playlists {
 _required_files=''
 function required_files {
 	if [ -z "$_required_files" ]; then
-		_required_files="$(playlists | parallel "ls -1 '$irank_base/'{} | sort -R | head -n1300" | sort -u)"
+		_required_files="$(playlists | parallel "ls -1 '$irank_base/'{} | sort -u)"
 	fi
 	echo "$_required_files"
 }

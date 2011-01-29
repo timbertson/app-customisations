@@ -62,6 +62,7 @@ set wmh=0
 
 set tags+=.tags
 let g:autotagTagsFile=".tags"
+let g:ctab_disable_tab_maps=1
 
 " (do it poorly in the terminal, because sometimes utf8 is broken)
 fun! Lame_tabs()
