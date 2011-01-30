@@ -1,0 +1,7 @@
+#!/bin/sh
+# bootstrap 0launch to always use its own feed
+if [ "$*" = "--versions" ]; then
+  exec /usr/bin/0launch -gd 'http://0install.net/2007/interfaces/ZeroInstall.xml' "$@"
+else
+  exec /usr/bin/0launch  'http://0install.net/2007/interfaces/ZeroInstall.xml' "$@"
+fi

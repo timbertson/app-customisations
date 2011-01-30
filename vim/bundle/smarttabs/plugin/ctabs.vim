@@ -210,7 +210,7 @@ if ! exists('g:ctab_disable_checkalign') || g:ctab_disable_checkalign==0
       set sw=50
       if &indentexpr != ''
         let v:lnum=a:line
-        sandbox exe 'let inda='.&indentexpr
+        silent! sandbox exe 'let inda='.&indentexpr
         if inda == -1
           let inda=indent(a:line-1)
         endif
@@ -248,11 +248,16 @@ if ! exists('g:ctab_disable_checkalign') || g:ctab_disable_checkalign==0
     if getline('.') =~ '^\s*$'
       return "\<CR>"
     else
-      return "\<CR>\<c-r>=<SNR>".s:SID().'_CheckAlign(line(''.''))'."\<CR>\<END>"
+      if len(getline('.')) > col('.')
+        let return_to_start_of_text = "\<C-o>^"
+      else
+        let return_to_start_of_text = "\<END>"
+      endif
+      return "\<CR>"."\<c-r>=<SNR>".s:SID().'_CheckAlign(line(''.''))'."\<CR>".return_to_start_of_text
     endif
   endfun
 
-  "exe 'inoremap '.s:buff_map.'<silent> <CR> <CR><c-r>=<SID>CheckAlign(line(''.''))."\<lt>END>"<CR>'
+  " exe 'inoremap '.s:buff_map.'<silent> <CR> call <SID>CheckCR()'
   exe 'inoremap '.s:buff_map.'<silent> <expr> <CR> <SID>CheckCR()'
   exe 'nnoremap '.s:buff_map.'<silent> o o<c-r>=<SID>CheckAlign(line(''.''))."\<lt>END>"<CR>'
   exe 'nnoremap '.s:buff_map.'<silent> O O<c-r>=<SID>CheckAlign(line(''.''))."\<lt>END>"<CR>'

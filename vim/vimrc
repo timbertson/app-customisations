@@ -64,7 +64,8 @@ set tags+=.tags
 let g:autotagTagsFile=".tags"
 " these two fight over the <tab> mapping:
 " let g:ctab_disable_tab_maps=1
-let g:snippetsEmu_key='<leader><tab>'
+let g:snippetsEmu_key='<S-tab>'
+" let g:ctab_disable_checkalign=1
 
 " (do it poorly in the terminal, because sometimes utf8 is broken)
 fun! Lame_tabs()
@@ -72,7 +73,6 @@ fun! Lame_tabs()
 	set list listchars=tab:>\ 
 endfun
 command! LameTabs call Lame_tabs()
-
 
 " draw tabs
 autocmd BufNewFile,BufRead * set list listchars=tab:▸\ 
