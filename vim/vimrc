@@ -37,6 +37,20 @@ fun! FnEmailMode()
 	match none
 endfun
 
+fun! Wrap()
+	setlocal textwidth=76
+	setlocal formatoptions+=at
+	match ErrorMsg '\%>78v.\+'
+endfun
+command! Wrap call Wrap()
+
+fun! NoWrap()
+	setlocal textwidth=0
+	setlocal formatoptions-=at
+	match none
+endfun
+command! NoWrap call NoWrap()
+
 " default to email mode when we were spawned by the edit server
 if $FROM_EDIT_SERVER == 'true'
 	call FnEmailMode()
@@ -62,10 +76,6 @@ set wmh=0
 
 set tags+=.tags
 let g:autotagTagsFile=".tags"
-" these two fight over the <tab> mapping:
-" let g:ctab_disable_tab_maps=1
-let g:snippetsEmu_key='<S-tab>'
-" let g:ctab_disable_checkalign=1
 
 " (do it poorly in the terminal, because sometimes utf8 is broken)
 fun! Lame_tabs()
