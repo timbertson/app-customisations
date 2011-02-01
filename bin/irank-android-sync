@@ -73,23 +73,23 @@ function do_sync {
 	notify-send "Android music sync finished" "$size used, $remaining free for $dest"
 }
 
-function apply_remote_rating_changes {
+function num_remote_rating_changes {
 	if [ -r "$dest/irank.sqlite" ]; then
-		changed_files="$(sqlite3 "$dest"/irank.sqlite 'select count(*) from updates;')"
-		if [ "$changed_files" -ne 0 ]; then
-			if [ $ask = 0 ] || zenity --question --text='Update ratings from changes on device?' --cancel-label='skip'; then
-				_apply_remote_rating_changes
-			fi
-		fi
+		sqlite3 "$dest"/irank.sqlite 'select count(*) from updates;' || echo 0
+	else
+		echo 0
 	fi
 }
 
-function _apply_remote_rating_changes {
+function apply_remote_rating_changes {
 	echo "updating ratings from device"
-	irank rating-sync --no "$dest/irank.sqlite"
-	if [ $? -ne 0 ]; then
-		zenity --question --text='Rating update failed. Do you want to continue, erasing all failed ratings?' --cancel-label='Stop'
+	if [ ! -r "$dest/irank.sqlite" ]; then
+		return 0
 	fi
+	irank rating-sync --no "$dest/irank.sqlite" || ( \
+		zenity --question --text='Rating update FAILED. Do you want to continue, ERASING all failed ratings?' --cancel-label='Cancel' --ok-label='ERASE' && \
+			zenity --question --text='SERIOUSLY?' --cancel-label='No!' --ok-label='Yes, ERASE ratings')
+
 	echo "updating playlists after rating update"
 	irank-playlists-standalone --db-only
 	echo "copying new irank DB to device"
@@ -100,6 +100,8 @@ function _apply_remote_rating_changes {
 if [ -z "$irank_test" ]; then
 	set -e
 	ask=0
+	do_update_ratings=1
+	do_update_playlists=1
 	if [ "$1" = "--ask" ]; then
 		ask=1
 		shift
@@ -116,8 +118,13 @@ if [ -z "$irank_test" ]; then
 	set -x
 	[ -d "$dest" ]
 
-	apply_remote_rating_changes
-	[ $ask = 0 ] || zenity --question --text='Sync iRank playlists to device?'
+	if [ "$ask" = 0 ]; then
+		resp=$(echo -e "ALL\nSync all\nRATINGS\nUpdate ratings only ($(num_remote_rating_changes))" | zenity --list --title="iRank android" --column="action" --column=foo --text="iRank android sync:\nSelect action to perform" --hide-header --hide-column=1)
+		[ "$resp" = 'ALL' ] || do_update_playlists=0
+	fi
+
+	if [ "$do_update_ratings" -eq 1 ]; then apply_remote_rating_changes; fi
+	if [ "$do_update_playlists" -eq 1 ]; then do_sync; fi
 	do_sync
 else
 	echo "# (sourced)"
