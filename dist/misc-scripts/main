@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ -z "$*" ]; then
+	ls -1 "$(dirname "$0")"/bin
+	exit 1
+fi
+
+cmd="$1"
+shift 1
+exec "$(dirname "$0")"/bin/"$cmd" "$@"

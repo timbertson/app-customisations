@@ -59,7 +59,7 @@ end
 command! Emailmode call FnEmailMode()
 set tabstop=2
 set cursorline
-set softtabstop=2
+set softtabstop=0
 set shiftwidth=2
 set ignorecase
 set smartcase

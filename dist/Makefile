@@ -8,6 +8,11 @@ vim: 0inst phony
 	(cd vim; tar phczf ../0inst/vim-custom.tgz *)
 	mkzero-gfxmonk -v ${version} -p 0inst/vim-custom.tgz vim-custom.xml
 
+misc-scripts: 0inst phony
+	rm -f 0inst/misc-scripts.tgz
+	(cd misc-scripts; tar phczf ../0inst/misc-scripts.tgz *)
+	mkzero-gfxmonk -v ${version} -p 0inst/misc-scripts.tgz misc-scripts.xml
+
 xmonad: 0inst phony
 	rm -f 0inst/xmonad-custom.tgz
 	(cd xmonad; tar phczf ../0inst/xmonad-custom.tgz *)

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type='text/xsl' href='interface.xsl'?>
+<interface xmlns="http://zero-install.sourceforge.net/2004/injector/interface" uri="http://gfxmonk.net/dist/0install/misc-scripts.xml">
+	<name>misc-scripts</name>
+	<summary>Tim's miscellaneous useful scripts</summary>
+	<publish xmlns="http://gfxmonk.net/dist/0install" mode="ignore"/>
+	<description>
+	</description>
+	<group main="main">
+		<implementation id="sha1new=6e53dac93fc39f070e6a11682633d3bc0d90e779" released="2011-02-08" version="20110208.2125">
+			<manifest-digest sha256="325a329c01482ac1d9448abf8f695fca292415af9ab7ce052d2aedab2479207b"/>
+			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="18787"/>
+		</implementation>
+	</group>
+</interface>
