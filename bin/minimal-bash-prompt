@@ -1,0 +1,8 @@
+cat <<'EOF'
+function set_terminal_title {
+	echo -ne "\033]0;$(echo "$(basename "${PWD}") ($(dirname "${PWD}"))" | sed -e "s@${HOME}@~@")\007"
+}
+
+PROMPT_COMMAND='set_terminal_title'
+PS1="\n\u`[ "$SSH_CLIENT" ] && tput setaf 1`@\h`tput sgr0` \w $ "
+EOF
