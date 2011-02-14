@@ -9,6 +9,7 @@
 	<group main="run-vim">
 		<requires interface="http://gfxmonk.net/dist/0install/vim-gnome.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/exuberant-ctags.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/pyflakes.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/savemytext.xml">
 			<version not-before="0.1.3"/>
 		</requires>
