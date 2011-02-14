@@ -1,0 +1,5 @@
+#!/bin/sh
+export ZDOTDIR=`dirname "$0"`
+export TBASE=`dirname "$0"`
+# bootstrap my scripts
+exec zsh "$@"

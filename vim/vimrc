@@ -30,6 +30,7 @@ set sessionoptions="curdir,folds,localoptions,tabpages,winsize"
 autocmd SessionLoadPost * tab ball
 command! -narg=0 SSession :mksession! .vimsession
 command! -narg=0 LSession :source .vimsession
+let g:semantic_tabs="auto"
 
 fun! FnEmailMode()
 	setlocal spell mousemodel=popup

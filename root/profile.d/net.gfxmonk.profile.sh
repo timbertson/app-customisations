@@ -4,7 +4,8 @@
 [ -n "$BASH" -o -n "$ZSH_VERSION" ] || return
 
 if [ "$#" != '1' ] || [ ! -d "$1" ]; then
-	base=/etc/profile.d/net.gfxmonk
+	here="$(dirname "$([ -n "${BASH_SOURCE[0]}" ] && echo "${BASH_SOURCE[0]}" || echo "$0")")"
+	base="$here/net.gfxmonk"
 	# echo "error: please specify the directory containing this file (net.gfxmonk.profile.sh) as its first argument"
 else
 	base="$1"
