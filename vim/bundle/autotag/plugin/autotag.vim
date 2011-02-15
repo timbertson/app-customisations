@@ -59,7 +59,7 @@ def diag(verbosity, threshold, msg, args = None):
       echo(msg)
 
 def goodTag(line, excluded):
-   if line[0] == '!':
+   if line and line[0] == '!':
       return True
    else:
       f = string.split(line, '\t')
@@ -134,11 +134,17 @@ class AutoTag:
    def stripTags(self, tagsFile, sources):
       self.__diag("Stripping tags for %s from tags file %s", (",".join(sources), tagsFile))
       backup = ".SAFE"
-      for l in fileinput.input(files=tagsFile, inplace=True, backup=backup):
-         l = l.strip()
-         if goodTag(l, sources):
-            print l
-      os.unlink(tagsFile + backup)
+      inputs = fileinput.FileInput(files=tagsFile, inplace=True, backup=backup)
+      try:
+         for l in inputs:
+            l = l.strip()
+            if goodTag(l, sources):
+               print l
+      finally:
+         inputs.close()
+         try:
+            os.unlink(tagsFile + backup)
+         except StandardError: pass
 
    def updateTagsFile(self, tagsFile, sources):
       tagsDir = os.path.dirname(tagsFile)
