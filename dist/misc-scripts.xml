@@ -7,6 +7,7 @@
 	<description>
 	</description>
 	<group main="main">
+		<environment name="PATH" insert="bin" />
 		<implementation id="sha1new=6e53dac93fc39f070e6a11682633d3bc0d90e779" released="2011-02-08" version="20110208.2125">
 			<manifest-digest sha256="325a329c01482ac1d9448abf8f695fca292415af9ab7ce052d2aedab2479207b"/>
 			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="18787"/>
@@ -22,8 +23,6 @@
 		<implementation id="sha1new=f8298aa77fa13d900e21831dda96d64289cb6108" released="2011-02-12" version="20110212.2235">
 			<manifest-digest sha256="8ea1457cb72385311c28635acfc83f366c00dfee29b66d2138237a7fde529c40"/>
 			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="18867"/>
-			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="18867"/>
 		</implementation>
-		<implementation id="." released="2011-02-14" version="20110214.1833"/>
 	</group>
 </interface>

@@ -13,11 +13,7 @@
 		<requires interface="http://gfxmonk.net/dist/0install/savemytext.xml">
 			<version not-before="0.1.3"/>
 		</requires>
-		<implementation id="sha1new=85d1e406ac40d3f602071af2f7f9c3c1f621fa32" released="2011-01-24" version="20110124.2108">
-			<manifest-digest sha256="40f0af5b2dddd7054d00600f1e80d1e2b3b3a737ffc77d809208f74c0f203879"/>
-			<archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom.tgz" size="951150"/>
-		</implementation>
-		<implementation id="sha1new=d8742d1410dcab1a1d03892204f6887fda936d91" released="2011-02-15" version="20110215.1939">
+		<implementation id="sha1new=d8742d1410dcab1a1d03892204f6887fda936d91" released="2011-02-18" version="20110218.1844">
 			<manifest-digest sha256="bbe22f128ac0b87387edf75e9e036a9e74016aadeace8209fb1f6cdb7b4b8f31"/>
 			<archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom.tgz" size="973213"/>
 		</implementation>

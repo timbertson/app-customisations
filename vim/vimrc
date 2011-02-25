@@ -30,7 +30,7 @@ set sessionoptions="curdir,folds,localoptions,tabpages,winsize"
 autocmd SessionLoadPost * tab ball
 command! -narg=0 SSession :mksession! .vimsession
 command! -narg=0 LSession :source .vimsession
-let g:semantic_tabs="auto"
+" let g:semantic_tabs="auto"
 
 fun! FnEmailMode()
 	setlocal spell mousemodel=popup
@@ -58,10 +58,21 @@ if $FROM_EDIT_SERVER == 'true'
 end
 
 command! Emailmode call FnEmailMode()
-set tabstop=2
+
+fun! Tabsize(sz)
+	let &l:shiftwidth=a:sz
+	let &l:tabstop=a:sz
+	let &l:softtabstop=a:sz
+endfun
+fun! GlobalTabsize(sz)
+	let &shiftwidth=a:sz
+	let &tabstop=a:sz
+	let &softtabstop=a:sz
+endfun
+command! -nargs=1 Tabsize call Tabsize(<args>)
+
+call GlobalTabsize(2)
 set cursorline
-set softtabstop=0
-set shiftwidth=2
 set ignorecase
 set smartcase
 set incsearch

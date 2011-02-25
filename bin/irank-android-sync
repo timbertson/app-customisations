@@ -52,7 +52,7 @@ function overwrite_android_db {
 }
 
 function make_playlists {
-	rm -f "$dest/*.m3u"
+	rm -f "$dest/*.m3u" || echo "can't remove playlists..."
 	playlists | parallel "ls -1 '$irank_base/'{}/ | sed -e 's/^/$master\//' > '$dest/'{}.m3u"
 }
 
@@ -119,7 +119,7 @@ if [ -z "$irank_test" ]; then
 	[ -d "$dest" ]
 
 	if [ "$ask" = 1 ]; then
-		resp=$(echo -e "ALL\nSync all\nRATINGS\nUpdate ratings only ($(num_remote_rating_changes))" | zenity --list --title="iRank android" --column="action" --column=foo --text="iRank android sync:\nSelect action to perform" --hide-header --hide-column=1)
+		resp=$(echo -e "ALL\nSync all\nRATINGS\nUpdate ratings only ($(num_remote_rating_changes))" | zenity --list --title="iRank android" --column="action" --column=foo --text="iRank android sync:\nSelect action to perform" --hide-header --hide-column=1) || exit 0
 		[ "$resp" = 'ALL' ] || do_update_playlists=0
 	fi
 
