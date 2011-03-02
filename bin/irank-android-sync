@@ -53,7 +53,8 @@ function overwrite_android_db {
 
 function make_playlists {
 	rm -f "$dest/*.m3u" || echo "can't remove playlists..."
-	playlists | parallel "ls -1 '$irank_base/'{}/ | sed -e 's/^/$master\//' > '$dest/'{}.m3u"
+	playlists | parallel "ls -1 '$irank_base/'{}/ | sed -e 's/^/$master\//'  '$dest/'{}.m3u"
+	existing_files | sed -e 's/^/master\//' > "$dest/master.m3u"
 }
 
 function do_sync {
@@ -123,8 +124,10 @@ if [ -z "$irank_test" ]; then
 		[ "$resp" = 'ALL' ] || do_update_playlists=0
 	fi
 
-	if [ "$do_update_ratings" -eq 1 ]; then apply_remote_rating_changes; fi
-	if [ "$do_update_playlists" -eq 1 ]; then do_sync; fi
+	make_playlists
+
+	# if [ "$do_update_ratings" -eq 1 ]; then apply_remote_rating_changes; fi
+	# if [ "$do_update_playlists" -eq 1 ]; then do_sync; fi
 else
 	echo "# (sourced)"
 	dest="$HOME/.tmp/android"

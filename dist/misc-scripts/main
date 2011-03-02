@@ -5,6 +5,4 @@ if [ -z "$*" ]; then
 	exit 1
 fi
 
-cmd="$1"
-shift 1
-exec "$(dirname "$0")"/bin/"$cmd" "$@"
+exec "$@"
