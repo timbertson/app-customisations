@@ -1,29 +1,13 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <?xml-stylesheet type='text/xsl' href='interface.xsl'?>
-<interface xmlns="http://zero-install.sourceforge.net/2004/injector/interface" uri="http://gfxmonk.net/dist/0install/misc-scripts.xml">
+<interface uri="http://gfxmonk.net/dist/0install/misc-scripts.xml" xmlns="http://zero-install.sourceforge.net/2004/injector/interface">
 	<name>misc-scripts</name>
 	<summary>Tim's miscellaneous useful scripts</summary>
-	<publish xmlns="http://gfxmonk.net/dist/0install" mode="ignore"/>
+	<publish mode="ignore" xmlns="http://gfxmonk.net/dist/0install"/>
 	<description>
 	</description>
 	<group main="main">
 		<environment insert="bin" name="PATH"/>
-		<implementation id="sha1new=6e53dac93fc39f070e6a11682633d3bc0d90e779" released="2011-02-08" version="20110208.2125">
-			<manifest-digest sha256="325a329c01482ac1d9448abf8f695fca292415af9ab7ce052d2aedab2479207b"/>
-			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="18787"/>
-		</implementation>
-		<implementation id="sha1new=a247e2daf74f678a62aaa47d8e1c5963b882d977" released="2011-02-08" version="20110208.2157">
-			<manifest-digest sha256="ef4b5fdf88185738927f7cf3d3d204067be761c738a477c8eec447cdaf80b29f"/>
-			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="18808"/>
-		</implementation>
-		<implementation id="sha1new=427c15293cab3ac608833f28d29f104cdfc5541f" released="2011-02-08" version="20110208.2201">
-			<manifest-digest sha256="727c617f94bd795cf0cfab84485a8673d88884319fa4e6f15042de58a8bbec17"/>
-			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="18824"/>
-		</implementation>
-		<implementation id="sha1new=f8298aa77fa13d900e21831dda96d64289cb6108" released="2011-02-12" version="20110212.2235">
-			<manifest-digest sha256="8ea1457cb72385311c28635acfc83f366c00dfee29b66d2138237a7fde529c40"/>
-			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="18867"/>
-		</implementation>
 		<implementation id="sha1new=43b1d3a865bb3f61a2bcb8c0f92473a16d7df151" released="2011-03-03" version="20110303.0816">
 			<manifest-digest sha256="d219c0bb98bc729b7940739533715a0d56a8dd5eb5908ab400570c0012a6aee8"/>
 			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="18896"/>
