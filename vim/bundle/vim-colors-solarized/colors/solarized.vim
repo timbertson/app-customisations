@@ -634,7 +634,7 @@ elseif  (g:solarized_visibility=="low")
     exe "hi! SpecialKey"     .s:fmt_bold   .s:fg_base02 .s:bg_none
     exe "hi! NonText"        .s:fmt_bold   .s:fg_base02 .s:bg_none
 else
-    exe "hi! SpecialKey"     .s:fmt_bold   .s:fg_red    .s:bg_none
+    exe "hi! SpecialKey"     .s:fmt_bold   .s:fg_base01 .s:bg_none
     exe "hi! NonText"        .s:fmt_bold   .s:fg_base01 .s:bg_none
 endif
 if (has("gui_running")) || &t_Co > 8

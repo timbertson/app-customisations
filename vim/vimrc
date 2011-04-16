@@ -6,7 +6,14 @@ filetype plugin indent on
 
 syntax on
 set number
-color ir_black
+let g:solarized_contrast="high"
+set background="dark"
+" sorry solarized, but you're rubbish at terminal mode...
+if has("gui_running")
+	color solarized
+else
+	color ir_black
+end
 
 set encoding=utf-8
 set textwidth=0
