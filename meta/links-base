@@ -14,5 +14,6 @@
 ../home/xmonad.hs ~/.xmonad/xmonad.hs
 ../home/xbindkeysrc.scm ~/.xbindkeysrc.scm
 ../home/ackrc ~/.ackrc
+../home/zshrc ~/.zshrc
 ../home/gizmod ~/.gizmod
 ../home/gitconfig ~/.gitconfig
