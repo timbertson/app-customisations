@@ -8,6 +8,7 @@
 
 ../bin ~/.bin
 
+../home/gconf ~/.gconf
 ../home/inputrc ~/.inputrc
 ../home/tmux.conf ~/.tmux.conf
 ../home/ctags ~/.ctags

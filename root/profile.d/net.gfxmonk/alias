@@ -3,6 +3,7 @@
 alias ll='ls -l'
 alias la='ls -la'
 alias lt='ls -lrt'
+alias vi=vim
 
 alias diffpatch='diff -ur'
 alias grep='grep --color'

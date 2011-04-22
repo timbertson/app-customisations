@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="scrollback_lines" mtime="1303453532" type="int" value="5120"/>
+	<entry name="font" mtime="1303453532" type="string">
+		<stringvalue>Monaco 10</stringvalue>
+	</entry>
+	<entry name="use_system_font" mtime="1277378327" type="bool" value="true"/>
+	<entry name="use_theme_background" mtime="1302268144" type="bool" value="false"/>
+	<entry name="bold_color" mtime="1303453532" type="string">
+		<stringvalue>#000000000000</stringvalue>
+	</entry>
+	<entry name="background_darkness" mtime="1303453532" type="float" value="0.88738739490509033"/>
+	<entry name="background_type" mtime="1303453532" type="string">
+		<stringvalue>transparent</stringvalue>
+	</entry>
+	<entry name="use_theme_colors" mtime="1303453532" type="bool" value="false"/>
+	<entry name="visible_name" mtime="1303453532" type="string">
+		<stringvalue>Default</stringvalue>
+	</entry>
+	<entry name="alternate_screen_scroll" mtime="1302268144" type="bool" value="true"/>
+	<entry name="palette" mtime="1303453532" type="string">
+		<stringvalue>#4A524A524A52:#C42044214421:#6E5DB9FC26BB:#D067B02020A8:#34346565A4A4:#757550507B7B:#4D7CAD15AEB4:#D3D3D7D7CFCF:#555557575353:#EFEF29292929:#8A8AE2E23434:#FCFCE9E94F4F:#72729F9FCFCF:#ADAD7F7FA8A8:#3434E2E2E2E2:#EEEEEEEEECEC</stringvalue>
+	</entry>
+	<entry name="background_color" mtime="1303453532" type="string">
+		<stringvalue>#2977188C3782</stringvalue>
+	</entry>
+	<entry name="foreground_color" mtime="1303453532" type="string">
+		<stringvalue>#F18BF18BF18B</stringvalue>
+	</entry>
+</gconf>
