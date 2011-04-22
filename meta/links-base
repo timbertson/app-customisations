@@ -9,9 +9,11 @@
 ../bin ~/.bin
 
 ../home/inputrc ~/.inputrc
+../home/tmux.conf ~/.tmux.conf
 ../home/ctags ~/.ctags
 ../home/xmonad.hs ~/.xmonad/xmonad.hs
 ../home/xbindkeysrc.scm ~/.xbindkeysrc.scm
 ../home/ackrc ~/.ackrc
+../home/zshrc ~/.zshrc
 ../home/gizmod ~/.gizmod
 ../home/gitconfig ~/.gitconfig

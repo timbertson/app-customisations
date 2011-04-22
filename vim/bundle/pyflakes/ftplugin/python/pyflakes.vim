@@ -34,7 +34,8 @@ if !exists('g:pyflakes_use_quickfix')
 endif
 
 
-    python << EOF
+    try
+        python << EOF
 import vim
 import os.path
 import sys
@@ -125,7 +126,9 @@ def check(buffer):
 def vim_quote(s):
     return s.replace("'", "''")
 EOF
-    let b:did_python_init = 1
+        let b:did_python_init = 1
+    catch
+    endtry
 endif
 
 if !b:did_python_init
@@ -232,7 +235,8 @@ if !exists("*s:RunPyflakes")
         let b:qf_list = []
         let b:qf_window_count = -1
         
-        python << EOF
+        try
+            python << EOF
 for w in check(vim.current.buffer):
     vim.command('let s:matchDict = {}')
     vim.command("let s:matchDict['lineNum'] = " + str(w.lineno))
@@ -260,6 +264,9 @@ for w in check(vim.current.buffer):
     vim.command("call add(b:matched, s:matchDict)")
     vim.command("call add(b:qf_list, l:qf_item)")
 EOF
+        catch
+            return
+        endtry
         if g:pyflakes_use_quickfix == 1
             if exists("s:pyflakes_qf")
                 " if pyflakes quickfix window is already created, reuse it
