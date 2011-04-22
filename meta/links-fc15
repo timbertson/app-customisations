@@ -1,1 +1,2 @@
 ../root/yum.repos.d-fc15 /etc/yum.repos.d
+../root/pki-rpm-gpg /etc/pki/rpm-gpg

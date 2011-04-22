@@ -1,0 +1,3 @@
+#!/bin/sh
+
+killall --user="$USER" -SIGHUP gconf-2
