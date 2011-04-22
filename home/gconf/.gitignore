@@ -1,2 +1,3 @@
 apps/
-!apps/gnome-terminal
+!apps/gnome-terminal/
+!apps/metacity/
