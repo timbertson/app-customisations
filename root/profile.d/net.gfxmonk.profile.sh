@@ -4,9 +4,16 @@
 [ -n "$BASH" -o -n "$ZSH_VERSION" ] || return
 
 if [ "$#" != '1' ] || [ ! -d "$1" ]; then
-	here="$(dirname "$([ -n "${BASH_SOURCE[0]}" ] && echo "${BASH_SOURCE[0]}" || echo "$0")")"
+	here="$(readlink -f "$(dirname "$([ -n "${BASH_SOURCE[0]}" ] && echo "${BASH_SOURCE[0]}" || echo "$0")")")"
 	base="$here/net.gfxmonk"
-	# echo "error: please specify the directory containing this file (net.gfxmonk.profile.sh) as its first argument"
+	#echo "SUBSHELL=$ZSH_SUBSHELL"
+	#echo "HERE=$here"
+	#echo "BASH_SRC=${BASH_SOURCE[0]}"
+	#echo "0=$0"
+	if [ ! -d "$base" ]; then
+		#echo "error: please specify the directory containing this file (net.gfxmonk.profile.sh) as its first argument"
+		return
+	fi
 else
 	base="$1"
 fi
