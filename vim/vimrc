@@ -10,6 +10,7 @@ let g:solarized_contrast="high"
 set background="dark"
 " sorry solarized, but you're rubbish at terminal mode...
 if has("gui_running")
+	set guifont=Monospace\ 11
 	color solarized
 else
 	color ir_black
