@@ -9,6 +9,7 @@
 ../bin ~/.bin
 
 ../home/gconf ~/.gconf
+../home/fonts.conf ~/.fonts.conf
 ../home/inputrc ~/.inputrc
 ../home/tmux.conf ~/.tmux.conf
 ../home/ctags ~/.ctags

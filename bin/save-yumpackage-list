@@ -1,0 +1,3 @@
+#!/bin/sh
+package-cleanup --leaves --all > ~/.config/yum-package-list.out && echo "yum package list saved to ~/.config"
+

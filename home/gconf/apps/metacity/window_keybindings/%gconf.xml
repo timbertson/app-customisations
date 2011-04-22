@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
 <gconf>
+	<entry name="minimize" mtime="1303483577" type="string">
+		<stringvalue>&lt;Shift&gt;&lt;Alt&gt;m</stringvalue>
+	</entry>
+	<entry name="raise_or_lower" mtime="1303483186" type="string">
+		<stringvalue>&lt;Shift&gt;&lt;Alt&gt;a</stringvalue>
+	</entry>
 	<entry name="close" mtime="1303482322" type="string">
 		<stringvalue>&lt;Control&gt;&lt;Alt&gt;c</stringvalue>
 	</entry>
