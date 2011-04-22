@@ -19,6 +19,7 @@ else
 fi
 
 export PATH="$PATH:/sbin:/usr/sbin"
+export EDITOR=vim
 
 function title
 {
