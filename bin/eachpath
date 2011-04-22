@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+[ "$#" -gt 2 ]
+str="$1"
+shift 1
+echo -n "$str" | parallel -d: "$@"
