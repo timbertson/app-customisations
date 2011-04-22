@@ -30,4 +30,6 @@ for config in configs:
 
 	finally:
 		f.close()
+	
+	subprocess.check_call(["killall", "--user=" + os.environ['USER'], 'gconfd-2'])
 

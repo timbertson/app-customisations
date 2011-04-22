@@ -196,10 +196,6 @@ imap <C-BS> <C-W>
 " ctrl + space to insert an underscore
 imap <C-space> _
 
-" ctrl-tab for completion
-imap <C-tab> <c-n>
-imap <C-S-tab> <c-p>
-
 " scroll (without moving cursor) on ctrl+j/k
 map <C-k> <C-y>
 map <C-j> <C-e>

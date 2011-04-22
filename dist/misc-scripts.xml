@@ -1,16 +1,16 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <?xml-stylesheet type='text/xsl' href='interface.xsl'?>
-<interface uri="http://gfxmonk.net/dist/0install/misc-scripts.xml" xmlns="http://zero-install.sourceforge.net/2004/injector/interface">
+<interface xmlns="http://zero-install.sourceforge.net/2004/injector/interface" uri="http://gfxmonk.net/dist/0install/misc-scripts.xml">
 	<name>misc-scripts</name>
 	<summary>Tim's miscellaneous useful scripts</summary>
-	<publish mode="ignore" xmlns="http://gfxmonk.net/dist/0install"/>
+	<publish xmlns="http://gfxmonk.net/dist/0install" mode="ignore"/>
 	<description>
 	</description>
 	<group main="main">
 		<environment insert="bin" name="PATH"/>
-		<implementation id="sha1new=43b1d3a865bb3f61a2bcb8c0f92473a16d7df151" released="2011-03-03" version="20110303.0816">
-			<manifest-digest sha256="d219c0bb98bc729b7940739533715a0d56a8dd5eb5908ab400570c0012a6aee8"/>
-			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="18896"/>
+		<implementation id="sha1new=6c7485f071b9d439cf9ee153a10f5a3fd7ea366a" released="2011-04-02" version="20110402.0035">
+			<manifest-digest sha256="fafeda3820982410af2b235f6bf49c1ce906a56477e8e7643d90173c076f71e6"/>
+			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="19161"/>
 		</implementation>
 	</group>
 </interface>
