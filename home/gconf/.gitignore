@@ -1,3 +1,4 @@
 apps/
+desktop/
 !apps/gnome-terminal/
 !apps/metacity/
