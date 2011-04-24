@@ -6,7 +6,8 @@
 	<description>
 	</description>
 	<publish mode="ignore" xmlns="http://gfxmonk.net/dist/0install"/>
-	<group main="vim">
-		<package-implementation main="/usr/bin/vim" package="vim-gnome"/>
+	<group>
+		<package-implementation main="/usr/bin/vim" package="vim-gnome" distributions="Debian"/>
+		<package-implementation main="/usr/bin/vim" package="vim-X11" distributions="RPM"/>
 	</group>
 </interface>

@@ -1,4 +1,4 @@
 #!/bin/bash
 BASE="$(dirname "$0")"
 export VIM_BASE="$BASE/vim"
-exec vim -u "$BASE/vimrc" "$@"
+exec gvim -v -u "$BASE/vimrc" "$@"
