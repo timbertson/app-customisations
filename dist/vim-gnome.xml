@@ -1,13 +1,16 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <?xml-stylesheet type='text/xsl' href='interface.xsl'?>
-<interface uri="http://gfxmonk.net/dist/0install/vim-gnome.xml" xmlns="http://zero-install.sourceforge.net/2004/injector/interface">
+<interface xmlns="http://zero-install.sourceforge.net/2004/injector/interface" uri="http://gfxmonk.net/dist/0install/vim-gnome.xml">
 	<name>vim-gnome</name>
 	<summary>meta-package</summary>
 	<description>
-	</description>
-	<publish mode="ignore" xmlns="http://gfxmonk.net/dist/0install"/>
+</description>
+	<publish xmlns="http://gfxmonk.net/dist/0install" mode="ignore"/>
+	<icon href="http://gfxmonk.net/dist/0install/vim-gnome/icon.svg" type="image/svg"/>
+	<icon href="http://gfxmonk.net/dist/0install/vim-gnome/icon-128.png" type="image/png"/>
+	<needs-terminal/>
 	<group>
-		<package-implementation main="/usr/bin/vim" package="vim-gnome" distributions="Debian"/>
-		<package-implementation main="/usr/bin/vim" package="vim-X11" distributions="RPM"/>
+		<package-implementation distributions="Debian" main="/usr/bin/gvim" package="vim-gnome"/>
+		<package-implementation distributions="RPM" main="/usr/bin/gvim" package="vim-X11"/>
 	</group>
 </interface>

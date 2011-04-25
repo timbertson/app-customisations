@@ -1,3 +1,0 @@
-xbindkeys &
-xkbcomp -I~/ ~/.xkb "${DISPLAY}" &
-gnome-panel &

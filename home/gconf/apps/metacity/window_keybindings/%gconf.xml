@@ -1,5 +1,14 @@
 <?xml version="1.0"?>
 <gconf>
+	<entry name="activate_window_menu" mtime="1303696850" type="string">
+		<stringvalue></stringvalue>
+	</entry>
+	<entry name="begin_resize" mtime="1303696845" type="string">
+		<stringvalue></stringvalue>
+	</entry>
+	<entry name="begin_move" mtime="1303696843" type="string">
+		<stringvalue></stringvalue>
+	</entry>
 	<entry name="minimize" mtime="1303483577" type="string">
 		<stringvalue>&lt;Shift&gt;&lt;Alt&gt;m</stringvalue>
 	</entry>
