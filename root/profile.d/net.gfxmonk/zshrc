@@ -34,3 +34,9 @@ bindkey ";5C" forward-word
 bindkey ";3C" forward-word
 bindkey ";5D" backward-word
 bindkey ";3D" backward-word
+
+# gnome-terminal keybindings:
+bindkey "\eOH" beginning-of-line
+bindkey "\eOF" end-of-line
+bindkey "\e[3~" delete-char
+
