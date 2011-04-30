@@ -11,7 +11,8 @@ template="""<?xml version="1.0" ?>
 	<description>
 	___
 	</description>
-	<package-implementation package="___" distributions="Debian|Rpm"/>
+	<homepage>___</homepage>
+	<package-implementation package="___" distributions="Debian|RPM"/>
 
 	<group main="___">
 		<command name="run" path="___">
