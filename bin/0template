@@ -11,9 +11,15 @@ template="""<?xml version="1.0" ?>
 	<description>
 	___
 	</description>
+	<package-implementation package="___" distributions="Debian|Rpm"/>
 
 	<group main="___">
+		<command name="run" path="___">
+			<runner interface="___"/>
+		</command>
+		<requires interface="___"/>
 		<environment name="___" insert="" mode="prepend" />
+
 		<implementation id="." version="0.0.1">
 		</implementation>
 	</group>
