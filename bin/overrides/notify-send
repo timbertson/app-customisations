@@ -1,0 +1,2 @@
+#!/bin/sh
+/usr/bin/notify-send --hint=int:transient:1 "$@"
