@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+
+v=$(0launch http://gfxmonk.net/dist/0install/version.xml -r)
+(echo "About to COMMIT version $v"; git status) | less
+echo "Ok?"; read confirm
+[ -z "$confirm" ]
+set -x
+git commit -am "$v"
+git tag "version-$v"
+
+feeds=$(ls -1 *.xml | fgrep -v -- '-local.xml')
+local_feeds=$(ls -1 *.xml | fgrep -- '-local.xml')
+if [ "$(echo "$feeds" | wc -l)" -eq 1 -a "$(echo "$local_feeds" | wc -l)" -eq 1 ]; then
+	0launch http://gfxmonk.net/dist/0install/0local.xml "$feeds"
+fi

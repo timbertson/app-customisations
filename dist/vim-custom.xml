@@ -34,5 +34,9 @@
 			<manifest-digest sha256="a89f600bf1a4fd92090bc4f321b93a5de7f9e99adbce945eb1bc10c7dd227474"/>
 			<archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom.tgz" size="973885"/>
 		</implementation>
+		<implementation id="sha1new=66f7859877f030d2788442a2f3dfb2ff96b068a7" released="2011-05-01" version="20110501.0916">
+			<manifest-digest sha256="59839a16b989a6c426ba7ac0cf31ffde3804aea10be7261a54615c3b7172021e"/>
+			<archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom.tgz" size="974299"/>
+		</implementation>
 	</group>
 </interface>
