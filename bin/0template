@@ -7,7 +7,7 @@ template="""<?xml version="1.0" ?>
 <interface uri="http://gfxmonk.net/dist/0install/%(filename)s" xmlns="http://zero-install.sourceforge.net/2004/injector/interface">
 	<name>%(name)s</name>
 	<summary>___</summary>
-	<publish mode="featured|third-party|ignore" xmlns="http://gfxmonk.net/dist/0install"/>
+	<publish mode="featured|third-party|package|ignore" xmlns="http://gfxmonk.net/dist/0install"/>
 	<description>
 	___
 	</description>
@@ -27,8 +27,12 @@ template="""<?xml version="1.0" ?>
 </interface>
 """
 
-args = sys.argv[1:]
-assert len(args) == 1, "Usage: 0template filename.xml"
+from optparse import OptionParser
+p = OptionParser("usage: 0template [OPTIONS] filename.xml")
+p.add_option('-s', '--source', action='store_true', default=False, help="create a src feed (using 0compile)")
+opts, args = p.parse_args()
+
+assert len(args) == 1, p.format_help()
 path = args[0]
 assert not os.path.exists(path), "Error: file already exists!"
 filename = os.path.basename(path)

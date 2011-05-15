@@ -6,6 +6,8 @@
 	<publish xmlns="http://gfxmonk.net/dist/0install" mode="ignore"/>
 	<description>
 	</description>
+	<icon href="http://gfxmonk.net/dist/0install/vim-gnome/icon.svg" type="image/svg"/>
+	<icon href="http://gfxmonk.net/dist/0install/vim-gnome/icon-128.png" type="image/png"/>
 	<group main="run-vim">
 		<requires interface="http://gfxmonk.net/dist/0install/vim-gnome.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/exuberant-ctags.xml"/>
@@ -14,26 +16,6 @@
 			<version not-before="0.1.3"/>
 		</requires>
 		<requires interface="http://gfxmonk.net/dist/0install/ack.xml"/>
-		<implementation id="sha1new=d8742d1410dcab1a1d03892204f6887fda936d91" released="2011-02-18" version="20110218.1844">
-			<manifest-digest sha256="bbe22f128ac0b87387edf75e9e036a9e74016aadeace8209fb1f6cdb7b4b8f31"/>
-			<archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom.tgz" size="973213"/>
-		</implementation>
-		<implementation id="sha1new=568df602fd508945090c9f23d57d943dc9d93a5e" released="2011-03-03" version="20110303.0816">
-			<manifest-digest sha256="c7bb2eb6457e61503b39a7131c823268d517d25ed83109abc0e5511ab49c0f61"/>
-			<archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom.tgz" size="973321"/>
-		</implementation>
-		<implementation id="sha1new=72fa4bc183e30d96d29b526ab488854de2dbda5f" released="2011-03-09" version="20110309.2203">
-			<manifest-digest sha256="43ab1a126a17a7e45c4637b4ee85e87ba14d22bf1a95ce39a2e4a073eee5efe6"/>
-			<archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom.tgz" size="976070"/>
-		</implementation>
-		<implementation id="sha1new=f60e966e67808f16ca9e2b28e4c2e2513d5b8ab0" released="2011-03-21" version="20110321.2032">
-			<manifest-digest sha256="aa080e1f019d6031d375f4f91c01d3f7eb8e6affcfec3cea98bf3044b0077d6c"/>
-			<archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom.tgz" size="975960"/>
-		</implementation>
-		<implementation id="sha1new=4bf37636bdbe4a807b7551e12b337df52badd32a" released="2011-04-24" version="20110424.1858">
-			<manifest-digest sha256="a89f600bf1a4fd92090bc4f321b93a5de7f9e99adbce945eb1bc10c7dd227474"/>
-			<archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom.tgz" size="973885"/>
-		</implementation>
 		<implementation id="sha1new=66f7859877f030d2788442a2f3dfb2ff96b068a7" released="2011-05-01" version="20110501.0916">
 			<manifest-digest sha256="59839a16b989a6c426ba7ac0cf31ffde3804aea10be7261a54615c3b7172021e"/>
 			<archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom.tgz" size="974299"/>

@@ -2,15 +2,27 @@
 //     http://community.livejournal.com/xkbconfig/7996.html
 // load with `xkbcomp -I~/ ~/.xkb "${DISPLAY}"
 xkb_keymap {
-	xkb_keycodes  { include "evdev+aliases(qwerty)"	};
-	xkb_types     { include "complete"	};
-	xkb_compat    { include "complete"	};
-	xkb_symbols   {
-		include "pc+us(mac)+inet(evdev)+altwin(ctrl_win)+ctrl(nocaps)+level3(ralt_switch)"
-		key <LCTL> { [ Super_L, Super_L ] };
-		key <RCTL> { [ Super_R, Super_R ] };
-		modifier_map Mod1 { <LCTL>, <RCTL> };
-	};
-	xkb_geometry  { include "pc(pc104)"	};
+  xkb_keycodes  { include "evdev+aliases(qwerty)" };
+  xkb_types     { include "complete"  };
+  xkb_compat    { include "complete"  };
+  xkb_symbols   {
+    include "pc+us(mac)+inet(evdev)"
+
+    // make ctrl act as windows key (mod4 / super)
+    replace key <LCTL> { [ Super_L, Super_L ] };
+    replace key <RCTL> { [ Super_R, Super_R ] };
+    modifier_map Mod4 { <LCTL>, <RCTL> };
+
+    // make win keys and capslock all act as CTRL
+    replace key <LWIN> {  [   Control_L   ] };
+    replace key <RWIN> {  [   Control_R   ] };
+    replace key <CAPS>  {  [ Control_L, Control_L ] };
+    modifier_map  Control { <CAPS>, <LWIN>, <RWIN> };
+
+    //modifier_map Control { <LWIN>, <RWIN> };
+    //modifier_map Mod4 { <LCTL>, <RCTL> };
+
+  };
+  xkb_geometry  { include "pc(pc104)" };
 };
 
