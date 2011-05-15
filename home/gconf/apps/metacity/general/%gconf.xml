@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <gconf>
-	<entry name="focus_mode" mtime="1303477387" type="string">
+	<entry name="focus_mode" mtime="1303826625" type="string">
 		<stringvalue>sloppy</stringvalue>
 	</entry>
-	<entry name="num_workspaces" mtime="1303475110" type="int" value="2"/>
+	<entry name="num_workspaces" mtime="1305442423" type="int" value="3"/>
 </gconf>

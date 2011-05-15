@@ -1,5 +1,17 @@
 <?xml version="1.0"?>
 <gconf>
+	<entry name="move_to_workspace_down" mtime="1305442041" type="string">
+		<stringvalue>&lt;Shift&gt;&lt;Mod4&gt;Page_Down</stringvalue>
+	</entry>
+	<entry name="move_to_workspace_up" mtime="1305442039" type="string">
+		<stringvalue>&lt;Shift&gt;&lt;Mod4&gt;Page_Up</stringvalue>
+	</entry>
+	<entry name="move_to_workspace_2" mtime="1305442433" type="string">
+		<stringvalue></stringvalue>
+	</entry>
+	<entry name="move_to_workspace_1" mtime="1305442431" type="string">
+		<stringvalue></stringvalue>
+	</entry>
 	<entry name="activate_window_menu" mtime="1303696850" type="string">
 		<stringvalue></stringvalue>
 	</entry>
