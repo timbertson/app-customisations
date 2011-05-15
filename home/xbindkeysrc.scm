@@ -33,8 +33,15 @@
 (xbindkey '(alt mod4 "b:8") "xte 'keyup Alt_L' 'str ,' 'keydown Alt_L'")
 (xbindkey '(alt mod4 "b:9") "xte 'keyup Alt_L' 'str .' 'keydown Alt_L'")
 
+; alt + buttons for workspace switching
+(xbindkey '(alt "b:8") "xte 'keyup Alt_L' 'keydown Super_L' 'key Page_Up'   'keyup Super_L' 'keydown Alt_L'")
+(xbindkey '(alt "b:9") "xte 'keyup Alt_L' 'keydown Super_L' 'key Page_Down' 'keyup Super_L' 'keydown Alt_L'")
+
+; new terminal on ctrl+alt+return
+(xbindkey '(control alt "c:36") "gnome-terminal")
+
 ; kill windows with meta+shift+middle-click
 (xbindkey '(alt mod4 "b:2") "xte 'keyup Alt_L' 'keydown Shift_L' 'key c' 'keyup Shift_L' 'keydown Alt_L'")
 
 ; ctrl+m for enter
-(xbindkey '(control "c:58") "xvkbd -xsendevent -text '\\r'")
+;(xbindkey '(control "c:58") "xvkbd -xsendevent -text '\\r'")

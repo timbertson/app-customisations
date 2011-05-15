@@ -18,10 +18,6 @@ xkb_keymap {
     replace key <RWIN> {  [   Control_R   ] };
     replace key <CAPS>  {  [ Control_L, Control_L ] };
     modifier_map  Control { <CAPS>, <LWIN>, <RWIN> };
-
-    //modifier_map Control { <LWIN>, <RWIN> };
-    //modifier_map Mod4 { <LCTL>, <RCTL> };
-
   };
   xkb_geometry  { include "pc(pc104)" };
 };
