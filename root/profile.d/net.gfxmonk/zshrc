@@ -40,3 +40,7 @@ bindkey "\eOH" beginning-of-line
 bindkey "\eOF" end-of-line
 bindkey "\e[3~" delete-char
 
+# tmux seems to send these ones...
+bindkey "\e[1~" beginning-of-line
+bindkey "\e[4~" end-of-line
+
