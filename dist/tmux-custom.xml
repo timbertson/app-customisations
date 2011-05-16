@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type='text/xsl' href='interface.xsl'?>
+<interface xmlns="http://zero-install.sourceforge.net/2004/injector/interface" uri="http://gfxmonk.net/dist/0install/tmux-custom.xml">
+	<name>tmux-custom</name>
+	<summary>tim's custom tmux</summary>
+	<publish xmlns="http://gfxmonk.net/dist/0install" mode="ignore"/>
+	<description>
+	</description>
+	<group>
+		<command name="run" path="tmux/tmux.conf">
+			<runner interface="http://gfxmonk.net/dist/0install/tmux.xml">
+				<arg>-f</arg>
+			</runner>
+		</command>
+		<implementation id="sha1new=0f485db7f203df476e9a8b1506e87ac6c069c071" released="2011-05-16" version="20110516.1807">
+			<manifest-digest sha256="22b5546b14b229ea6f724165264ee73d63d2f0bcc8347bc2998aef95e6bc216d"/>
+			<archive href="http://gfxmonk.net/dist/0install/tmux-custom/tmux-custom.tgz" size="379"/>
+		</implementation>
+	</group>
+</interface>
