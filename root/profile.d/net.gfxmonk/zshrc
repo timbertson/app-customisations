@@ -30,10 +30,16 @@ unsetopt ALL_EXPORT
 
 # fix for zsh doing something weird...
 # see https://bugs.launchpad.net/ubuntu/+source/zsh/+bug/355883
-bindkey ";5C" forward-word
+#bindkey ";5C" forward-word
 bindkey ";3C" forward-word
-bindkey ";5D" backward-word
+bindkey "[C" forward-word
+#bindkey "\e[1;5C" forward-word
+#bindkey ";3C" forward-word
+#bindkey ";5D" backward-word
 bindkey ";3D" backward-word
+bindkey "[D" backward-word
+#bindkey "\e[1;5D" backward-word
+#bindkey "\e[1" backward-word
 
 # gnome-terminal keybindings:
 bindkey "\eOH" beginning-of-line
@@ -41,6 +47,6 @@ bindkey "\eOF" end-of-line
 bindkey "\e[3~" delete-char
 
 # tmux seems to send these ones...
-bindkey "\e[1~" beginning-of-line
-bindkey "\e[4~" end-of-line
+#bindkey "\e[1~" beginning-of-line
+#bindkey "\e[4~" end-of-line
 

@@ -12,7 +12,7 @@ function playlists {
 _required_files=''
 function required_files {
 	if [ -z "$_required_files" ]; then
-		_required_files="$(playlists | parallel "ls -1 '$irank_base/'{}" | sort -u)"
+		_required_files="$(playlists | parallel "ls -1 '$irank_base/'{} | head -n900" | sort -u)"
 	fi
 	echo "$_required_files"
 }
@@ -103,7 +103,6 @@ if [ -z "$irank_test" ]; then
 	ask=0
 	do_update_ratings=1
 	do_update_playlists=1
-	set -x
 	if [ "$1" = "--ask" ]; then
 		ask=1
 		shift
@@ -126,8 +125,8 @@ if [ -z "$irank_test" ]; then
 
 	make_playlists
 
-	# if [ "$do_update_ratings" -eq 1 ]; then apply_remote_rating_changes; fi
-	# if [ "$do_update_playlists" -eq 1 ]; then do_sync; fi
+	if [ "$do_update_ratings" -eq 1 ]; then apply_remote_rating_changes; fi
+	if [ "$do_update_playlists" -eq 1 ]; then do_sync; fi
 else
 	echo "# (sourced)"
 	dest="$HOME/.tmp/android"

@@ -7,7 +7,7 @@
 	<description>
 	</description>
 	<group>
-		<command name="run" path="tmux/tmux.conf">
+		<command name="run" path="tmux.conf">
 			<runner interface="http://gfxmonk.net/dist/0install/tmux.xml">
 				<arg>-f</arg>
 			</runner>
