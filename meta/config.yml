@@ -1,0 +1,89 @@
+# example configuration
+
+zeroinstall_aliases:
+  vim: http://gfxmonk.net/dist/0install/vim-custom.xml
+
+
+## BASE ##
+
+/etc/profile.d/net.gfxmonk:
+  path: ../root/profile.d/net.gfxmonk
+/etc/profile.d/net.gfxmonk.profile.sh:
+  path: ../root/profile.d/net.gfxmonk.profile.sh
+/etc/X11/sessions:
+  path: ../root/sessions
+/etc/udev/rules.d/input.rules:
+  path: ../root/udev-rules.d/input.rules
+
+~/.vimrc:
+  path: ../vim/vimrc
+~/.vim:
+  path: ../vim
+~/.bin:
+  path: ../bin
+~/.gconf:
+  path: ../home/gconf
+~/.icons:
+  path: ../home/icons
+~/.fonts.conf:
+  path: ../home/fonts.conf
+~/.inputrc:
+  path: ../home/inputrc
+~/.tmux.conf:
+  path: ../home/tmux.conf
+~/.ctags:
+  path: ../home/ctags
+~/.xmonad/xmonad.hs:
+  path: ../home/xmonad.hs
+~/.xbindkeysrc.scm:
+  path: ../home/xbindkeysrc.scm
+~/.ackrc:
+  path: ../home/ackrc
+~/.zshrc:
+  path: ../home/zshrc
+~/.gizmod:
+  path: ../home/gizmod
+~/.gitconfig:
+  path: ../home/gitconfig
+
+
+
+## KEYBOARD TYPES
+~/.xkb:
+  path: ../home/xkb-mac
+  tags: mac-xkb
+
+~/.xmodmaprc:
+  - path: ../home/xmodmaprc-mac
+    tags: mac-xmodmap
+  - path: ../home/xmodmaprc-pc
+    tags: pc
+
+
+## FEDORA
+/etc/yum.repos.d:
+  path: ../root/yum.repos.d-fc15
+  tags: fc15
+
+/etc/pki/rpm-gpg:
+  path: ../root/pki-rpm-gpg
+  tags: fc15
+
+/etc/yum/pluginconf.d:
+  path: ../root/yum.pluginconf.d
+  tags: fc15
+
+/etc/modules-load.d:
+  path: ../root/modules-load.d
+  tags: fc15
+
+
+## UBUNTU
+/etc/apt/sources.list.d:
+  - path: ../root/lucid-sources.list.d
+    tags: ubuntu-lucid
+  - path: ../root/maverick-sources.list.d
+    tags: ubuntu-maverick
+  - path: ../root/natty-sources.list.d
+    tags: ubuntu-natty
+
