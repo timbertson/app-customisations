@@ -118,12 +118,11 @@ if [ -z "$irank_test" ]; then
 	fi
 	[ -d "$dest" ]
 
+	set -x
 	if [ "$ask" = 1 ]; then
 		resp=$(echo -e "ALL\nSync all\nRATINGS\nUpdate ratings only ($(num_remote_rating_changes))" | zenity --list --title="iRank android" --column="action" --column=foo --text="iRank android sync:\nSelect action to perform" --hide-header --hide-column=1) || exit 0
 		[ "$resp" = 'ALL' ] || do_update_playlists=0
 	fi
-
-	make_playlists
 
 	if [ "$do_update_ratings" -eq 1 ]; then apply_remote_rating_changes; fi
 	if [ "$do_update_playlists" -eq 1 ]; then do_sync; fi
