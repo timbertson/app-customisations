@@ -1,10 +1,28 @@
-# example configuration
+# vim: set et:
 
-zeroinstall_aliases:
-  vim: http://gfxmonk.net/dist/0install/vim-custom.xml
+meta:
+  zeroinstall_aliases:
+    vim: http://gfxmonk.net/dist/0install/vim-custom.xml
+  basedir: ~/dev/app-customisations/meta
+  default_tags:
+    meep:
+      - mac
+      - xkb
+      - fc15
+    tjcee:
+      - pc
+      - ubuntu-maverick
 
+# SELF-INSTALL:
 
-## BASE ##
+~/.config/daglink/links.yml:
+  path: links.yml
+
+~/.config/autostart/daglink-update.desktop:
+  uri: http://gfxmonk.net/dist/0install/daglink.xml
+  extract: daglink-update.desktop
+
+## BASE:
 
 /etc/profile.d/net.gfxmonk:
   path: ../root/profile.d/net.gfxmonk
@@ -17,35 +35,48 @@ zeroinstall_aliases:
 
 ~/.vimrc:
   path: ../vim/vimrc
+
 ~/.vim:
   path: ../vim
+
 ~/.bin:
   path: ../bin
+
 ~/.gconf:
   path: ../home/gconf
+
 ~/.icons:
   path: ../home/icons
+
 ~/.fonts.conf:
   path: ../home/fonts.conf
+
 ~/.inputrc:
   path: ../home/inputrc
+
 ~/.tmux.conf:
   path: ../home/tmux.conf
+
 ~/.ctags:
   path: ../home/ctags
+
 ~/.xmonad/xmonad.hs:
   path: ../home/xmonad.hs
+
 ~/.xbindkeysrc.scm:
   path: ../home/xbindkeysrc.scm
+
 ~/.ackrc:
   path: ../home/ackrc
+
 ~/.zshrc:
   path: ../home/zshrc
+
 ~/.gizmod:
   path: ../home/gizmod
+
 ~/.gitconfig:
   path: ../home/gitconfig
-
 
 
 ## KEYBOARD TYPES
