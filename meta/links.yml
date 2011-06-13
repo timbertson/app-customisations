@@ -7,10 +7,10 @@ meta:
   default_tags:
     meep:
       - mac
-      - xkb
       - fc15
     tjcee:
       - pc
+      - xmodmap
       - ubuntu-maverick
 
 # SELF-INSTALL:
@@ -82,11 +82,13 @@ meta:
 ## KEYBOARD TYPES
 ~/.xkb:
   path: ../home/xkb-mac
-  tags: mac-xkb
+  tags: mac fc15
+
+#TODO: make a pc xkb config
 
 ~/.xmodmaprc:
   - path: ../home/xmodmaprc-mac
-    tags: mac-xmodmap
+    tags: mac xmodmap
   - path: ../home/xmodmaprc-pc
     tags: pc
 
