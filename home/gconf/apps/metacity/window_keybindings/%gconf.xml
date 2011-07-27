@@ -1,9 +1,12 @@
 <?xml version="1.0"?>
 <gconf>
-	<entry name="move_to_workspace_down" mtime="1305442041" type="string">
+	<entry name="unmaximize" mtime="1309571482" type="string">
+		<stringvalue></stringvalue>
+	</entry>
+	<entry name="move_to_workspace_down" mtime="1308315703" type="string">
 		<stringvalue>&lt;Shift&gt;&lt;Mod4&gt;Page_Down</stringvalue>
 	</entry>
-	<entry name="move_to_workspace_up" mtime="1305442039" type="string">
+	<entry name="move_to_workspace_up" mtime="1308315706" type="string">
 		<stringvalue>&lt;Shift&gt;&lt;Mod4&gt;Page_Up</stringvalue>
 	</entry>
 	<entry name="move_to_workspace_2" mtime="1305442433" type="string">
@@ -21,13 +24,13 @@
 	<entry name="begin_move" mtime="1303696843" type="string">
 		<stringvalue></stringvalue>
 	</entry>
-	<entry name="minimize" mtime="1303483577" type="string">
-		<stringvalue>&lt;Shift&gt;&lt;Alt&gt;m</stringvalue>
+	<entry name="minimize" mtime="1310783227" type="string">
+		<stringvalue>&lt;Mod4&gt;m</stringvalue>
 	</entry>
-	<entry name="raise_or_lower" mtime="1303483186" type="string">
-		<stringvalue>&lt;Shift&gt;&lt;Alt&gt;a</stringvalue>
+	<entry name="raise_or_lower" mtime="1308315667" type="string">
+		<stringvalue>&lt;Mod4&gt;a</stringvalue>
 	</entry>
-	<entry name="close" mtime="1303482322" type="string">
-		<stringvalue>&lt;Control&gt;&lt;Alt&gt;c</stringvalue>
+	<entry name="close" mtime="1308408602" type="string">
+		<stringvalue>&lt;Shift&gt;&lt;Mod4&gt;c</stringvalue>
 	</entry>
 </gconf>

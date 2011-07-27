@@ -61,16 +61,17 @@ def get_folder(description, default="~"):
 
 
 def parse(args):
-	if len(args) == 3:
-		source, dest_base, name = args
 	if len(args) < 1 or len(args) > 3:
 		usage()
 		raise RuntimeError("invalid number of arguments")
-	source = args[0]
-	if len(args) < 3:
-		name = get_input("Enter folder description")
-	if len(args) < 2:
+	args = args + ([None]*3)
+	source =    args[0]
+	dest_base = args[1]
+	name =      args[2]
+	if dest_base is None:
 		dest_base = get_folder("Destination (base)", default="~/Pictures/")
+	if name is None:
+		name = get_input("Enter folder description")
 	return source, dest_base, name
 
 def move(src, dest):

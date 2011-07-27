@@ -3,7 +3,7 @@
 	<entry name="prev_tab" mtime="1283059659" type="string">
 		<stringvalue>&lt;Control&gt;Page_Up</stringvalue>
 	</entry>
-	<entry name="next_tab" mtime="1283059657" type="string">
+	<entry name="next_tab" mtime="1309570090" type="string">
 		<stringvalue>&lt;Control&gt;Page_Down</stringvalue>
 	</entry>
 	<entry name="toggle_menubar" mtime="1270034424" type="string">

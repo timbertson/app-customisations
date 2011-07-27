@@ -210,8 +210,8 @@ map <C-j> <C-e>
 
 " I want { and } to match whitespace-only lines, rather than just empty ones
 " TODO: need to omit these from the search history
-noremap { :silent ?^\s*$<cr>
-noremap } :silent /^\s*$<cr>
+noremap { :silent ?^\s*$<cr>:silent nohl<cr>
+noremap } :silent /^\s*$<cr>:silent nohl<cr>
 
 vnoremap { ?^\s*$<cr>
 vnoremap } /^\s*$<cr>
