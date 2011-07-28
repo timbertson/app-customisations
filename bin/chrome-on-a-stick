@@ -1,0 +1,87 @@
+#!/usr/bin/env python
+
+from optparse import OptionParser
+import os, sys
+import shutil
+import tempfile
+import urllib2
+import subprocess
+import re
+import stat
+
+default_path = os.path.expanduser("~/.config/chromium")
+
+def main():
+	p = OptionParser("Usage: %prog <action>")
+	p.add_option('-c', '--create', action='store_const', const='create', dest='action', default='run')
+	p.add_option('-r', '--run',    action='store_const', const='run',    dest='action')
+	p.add_option('--profile', default=None, dest='path')
+	p.add_option('-x', '--exec', default='google-chrome', help='browser executable')
+	p.add_option('--dump', action='store_true', help='dump payload')
+	p.add_option('--bootstrap', action='store_const', dest='action', const='bootstrap')
+	opts, args = p.parse_args()
+	assert len(args) == 0
+	opts.path = opts.path or default_path
+	import getpass
+	passwd = getpass.getpass("password:")
+	if __file__.endswith('.in'):
+		opts.action = 'bootstrap'
+	else:
+		self_decrypt(opts, passwd)
+	globals()[opts.action](opts, passwd)
+
+PAYLOAD="""-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+jA0EAwMCBgJPugih0/xgyerQTAUnyw0QA7nx9u37hvvFF/IiuskTENRRkbbNJ2i3
+2yhpl0RUC813o53WBlmCr6qbS/SnZuJGeuLNceqnKZjFp+PLQJ700TGCVLoYAqT5
+0JC633fcZH6o6tJhxiDpKqTapvuJeT9IfIunDuGZETzG9X1BC22nkHVp0JrU93Bs
+ImKrE5AuiZZv6lxgubPDVEkYjG4My6zwiUYRx3lmM4YKGJjqf5TpLGyekbVGJXgH
+Qtz8tKnno5ZRZN6NR0MSWzjYQ7KcAAuba2gKbhzO+P2Z8YoxwKgnXa/3x/cIMVcw
++r1lVf3H7ikFAdHWczVjgjIO3LuzzS+bVBVkmK0gBkWRO0Dgx3somLWBit5Pp3E9
+Jg0ULME1BKSR+cPaLAPqCz8TZmoJ+t/1+/s/2cJfEOGECj3EsmIONp7RgY3juPyI
+fWpYvIyc3tkKraJcSh/GE7+iBDy9XNhlTVg2ZUK/Di4qwDWL+CNt7tl5zWbWoQDw
+w3gee6YAUB1Ewfze3A8LwoQyYqV7xGSbl/Bscb3F7cgSrCHtJz4yhXrja4Os+jti
+Q1avrzICxoUBGB3+P0uNwK7CxaseAI1Keyy1tCFNPivMSnXz+5YTi7a5HlXRutaU
+11k94bxsShTx9Al76CN48Wc2cXY4Mpen0jNPQKFoYjZ/9C24OiuZAfhKiFD0du9h
++9WWdPl7yyndP1iX/3c3tkoqqizlM8HzfeETr5l5QALIBvaJWt/h8XeW78ytgait
+jX0KUcYJTa37qTrRQjJV/ZxafrCVkgVpnqkuDBTBSOOHkp6uikXKQbvvtfelPcaW
+y/u/Ol3uHpXB+7JmfvgyYuvviUiNBFkEDQzemxVWOTW9RyYy+83xMZmYyB9eAKyb
+UG+sR3E4s7MiFSf5gJqMVqiAsaDXCPU4SFaPHnCyJZJQgpk/ssfJZ28O55nIsHBS
+tN8Z7QEo2R3DVZbOXualoB6QwneTyqyR5sqXztOQAzIieEPNOBudVHPQKPzjqDea
+E3wI98x4w6ijGI0byLPnZyN5JwfajGY+XKjeFEMYxoXe2ji9Y9sbEc8V6kr/IOXp
+sMDWwijqtabgLMXhPGbK1Wka93T88jFL0yr6N+F6/SR4dumICtS3IRwrkpZlPQHS
+rP40fKI+l3SIoVkJc1/1879CaADpLk1AkbTPzGJSefYpeOdjCPrxUjXs0Ehz5922
+Pipg/5AQZ4Ra4hbgpGrATvMNLROO6wcirXwWn2MXXiRTuN2RnGvMFSpQI2tGY1Kz
+A98OriafrZ6ICQhu8FG4HmnnEirVh/J0ggmG3MXzl7w97M1oV4mIMJrEXpjlSVon
+kzLqq++tVCPYpJv1uHTDCrUnN4tKsMlqSmxOF51ZGkwYOj4sVFOahYkJgCwCj7Dl
+Eec9I2bAD8LfqEfZ19YMWzVsokaQi13rmJsL61/MbtKC09X8SPhCL+Fqbqc=
+=AGzG
+-----END PGP MESSAGE-----
+
+"""
+
+def gpg(args, passwd, contents):
+	tmp = tempfile.NamedTemporaryFile(delete=False)
+	with tmp.file as f:
+		f.write(contents)
+	try:
+		gpg = subprocess.Popen(['gpg', '--no-use-agent', '--output=-', '--passphrase-fd=0'] + args + [tmp.name], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr = subprocess.PIPE)
+		out, err = gpg.communicate(passwd)
+	finally:
+		os.remove(tmp.name)
+	assert gpg.returncode == 0, err
+	return out
+
+
+def self_decrypt(opts, passwd):
+	out = gpg(['--no-use-agent', '--decrypt'], passwd, PAYLOAD)
+	if opts.dump:
+		print out
+		sys.exit(0)
+	else:
+		out = re.sub('^#.*$', '', out)
+		exec(out)
+
+if __name__ == '__main__':
+	main()

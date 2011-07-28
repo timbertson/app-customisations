@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -ex
+[ "$#" -eq 1 ]
+[ "$1" -eq 0 -o "$1" -eq 1 ]
+echo "$1" > /selinux/enforce
+
