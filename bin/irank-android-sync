@@ -1,69 +1,13 @@
 #!/bin/bash
 
 irank_base="$HOME/Music/irank"
-# music_base="$HOME/Music"
-# all_music="$music_base/Library"
-# master="master"
-
-# function playlists {
-# 	cat "$HOME/.config/irank/android-playlists"
-# }
-# 
-# _required_files=''
-# function required_files {
-# 	if [ -z "$_required_files" ]; then
-# 		_required_files="$(playlists | parallel "ls -1 '$irank_base/'{} | head -n900" | sort -u)"
-# 	fi
-# 	echo "$_required_files"
-# }
-# 
-# function existing_files {
-# 	ls -1 "$dest/$master"
-# }
-# 
-# function files_no_longer_needed {
-# 	# just print lines unique to existing_files
-# 	comm -3 -1 <(required_files) <(existing_files)
-# }
-# 
-# function delete_old_music {
-# 	files_no_longer_needed | parallel "rm -v '$dest/master'/{}"
-# }
-# 
-# function rsync_ {
-# 	rsync -vt --modify-window=2 "$@"
-# }
-# 
-# function update_music_files {
-# 	required_files | rsync_ --files-from=- "$all_music/" "$dest/master/" || err=$?
-# 	if [ $? -ne 0 ]; then
-# 		echo "warning: rsync failed! $err"
-# 		[ $err = 23 ] # this is acceptable; it means some files didn't transfer (they may be in a different dir)
-# 	fi
-# }
-
-# function copy_testing_files {
-# 	rsync_ -a --delete-before "$music_base/TESTING/" "$dest/TESTING/"
-# 	ls -1 "$dest/TESTING" > "$dest/TESTING.m3u"
-# }
 
 function overwrite_android_db {
 	cp "$irank_base/irank.sqlite" "$dest/"
 }
 
-# function make_playlists {
-# 	rm -f "$dest/*.m3u" || echo "can't remove playlists..."
-# 	playlists | parallel "ls -1 '$irank_base/'{}/ | sed -e 's/^/$master\//'  '$dest/'{}.m3u"
-# 	existing_files | sed -e 's/^/master\//' > "$dest/master.m3u"
-# }
-
 function do_sync {
 	irank export -d "$dest" `cat ~/.config/irank/android-playlists`
-	# mkdir -p "$dest/master"
-	# delete_old_music
-	# update_music_files
-	# make_playlists
-	# copy_testing_files
 	overwrite_android_db
 
 	echo '-------- DISK USAGE: -----------'
@@ -75,7 +19,7 @@ function do_sync {
 
 function num_remote_rating_changes {
 	if [ -r "$dest/irank.sqlite" ]; then
-		sqlite3 "$dest"/irank.sqlite 'select count(*) from updates;' || echo 0
+		irank rating-sync --count
 	else
 		echo 0
 	fi
@@ -86,7 +30,7 @@ function apply_remote_rating_changes {
 	if [ ! -r "$dest/irank.sqlite" ]; then
 		return 0
 	fi
-	num_updates="$(irank rating-sync --count)"
+	num_updates="$(num_remote_rating_changes)"
 	if [ "$num_updates" -eq 0 ]; then
 		return 0
 	fi

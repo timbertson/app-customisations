@@ -7,7 +7,7 @@ template="""<?xml version="1.0" ?>
 <interface uri="http://gfxmonk.net/dist/0install/%(filename)s" xmlns="http://zero-install.sourceforge.net/2004/injector/interface">
 	<name>%(name)s</name>
 	<summary>___</summary>
-	<publish mode="featured|third-party|package|ignore" xmlns="http://gfxmonk.net/dist/0install"/>
+	<publish mode="featured|third-party|package|0tools|ignore" xmlns="http://gfxmonk.net/dist/0install"/>
 	<description>
 	___
 	</description>

@@ -30,3 +30,5 @@
 [user]
 	name = gfxmonk
 	email = tim@gfxmonk.net
+[core]
+	excludesfile = /home/tim/.gitignore
