@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+[ "$#" -eq 1 ] || (echo "usage: catenv PID"; exit 1)
+cat /proc/$1/environ | xargs -0 -n 1 echo

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+xml=$(0launch http://gfxmonk.net/dist/0install/gnu-parallel.xml "echo {} | grep '.xml'" ::: "$@" | head -n 1)
+set -x
+[ -n "$xml" ] && 0launch http://gfxmonk.net/dist/0install/0readme.xml "$xml" --rich
+
+set -e
+
+0launch http://gfxmonk.net/dist/0install/mkzero.xml \
+	--namespace='http://gfxmonk.net/dist/0install' \
+	--dest="$HOME/Sites/gfxmonk/dist/0install" \
+	--build="0inst" \
+	"$@"
+
+[ -n "$xml" ] && 0launch http://gfxmonk.net/dist/0install/xmlformat.xml "$xml"
+
+if [ -n "$xml" -a -r setup.py ] && grep -q 'zero2pypi' setup.py; then
+	0launch http://gfxmonk.net/dist/0install/zero2pypi.xml "$xml"
+fi
+

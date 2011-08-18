@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+
+import cgi
+import sys
+def escape(s, escape_quotes=True):
+	return cgi.escape(s, quote=escape_quotes)
+
+def main():
+	if len(sys.argv) > 1:
+		print escape(' '.join(sys.argv[1:]))
+	else:
+		for line in sys.stdin:
+			print escape(line),
+
+if __name__ == '__main__':
+	main()
