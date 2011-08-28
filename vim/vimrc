@@ -147,14 +147,16 @@ nmap <M-Up> [e
 vmap <M-Down> ]e`[V`]
 vmap <M-Up> [e`[V`]
 
-" quote character to highlight inside brackets
-nmap ; vib
+" use , for ;
+nnoremap , ;
+" leader-semi to highlight inside brackets
+nnoremap ; vib
 " and keep going ...
 vmap ; <esc>llvib
 " ctrl + b to highlight current word
-map <C-b> viw
+map <Leader>b viw
 " and then keep extending it
-vmap <C-b> o?\<<cr>o2/\><cr>h
+vmap <Leader>b o?\<<cr>o2/\><cr>h
 " \w should maybe do the same thing?
 nmap <leader>w <c-b>
 vmap <leader>w <c-b>
@@ -264,7 +266,7 @@ nmap <leader>p V{jo}ko
 "nmap <C-f> :FuzzyFinderTaggedFile<cr>
 nmap <C-f> :CommandT<cr>
 nmap <C-b> :FuzzyFinderBuffer<cr>
-nmap <leader>b :FuzzyFinderBuffer<cr>
+" nmap <leader>b :FuzzyFinderBuffer<cr>
 nmap <leader>F :FuzzyFinderTaggedFile<cr>
 nmap <leader>t :FuzzyFinderTag<cr>
 
