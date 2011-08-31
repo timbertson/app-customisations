@@ -5,7 +5,12 @@
 " The local configuration file is expected to have commands affecting
 " only the current buffer.
 
-function SetLocalOptions(fname)
+if exists("g:localrc_loaded")
+  finish
+endif
+let g:localrc_loaded = 1
+
+function! SetLocalOptions(fname)
 	let dirname = fnamemodify(a:fname, ":p:h")
 	while "/" != dirname
 		let lvimrc  = dirname . "/.lvimrc"
