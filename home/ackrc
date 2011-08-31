@@ -1,6 +1,8 @@
---type-add=js=.jss,.json,.njs
+--type-add=js=.jss,.json,.njs,.sjs
 --type-set=properties=.properties
 --type-set=jss=.jss
+--type-set=in=.in
+--type-set=sjs=.sjs
 --type-set=coffee=.coffee
 --type-set=md=.md
 --type-set=rst=.rst

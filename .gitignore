@@ -11,3 +11,4 @@ vim/.netrwhist
 .netrwhist
 .hg
 .tags
+*-local.xml

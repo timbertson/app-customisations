@@ -9,6 +9,12 @@
 	<icon href="http://gfxmonk.net/dist/0install/vim-gnome/icon.svg" type="image/svg"/>
 	<icon href="http://gfxmonk.net/dist/0install/vim-gnome/icon-128.png" type="image/png"/>
 	<group main="run-vim">
+		<command name="run" path="vim/vimrc">
+			<runner interface="http://gfxmonk.net/dist/0install/vim-gnome.xml">
+				<arg>-v</arg>
+				<arg>-u</arg>
+			</runner>
+		</command>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-gnome.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/exuberant-ctags.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/pyflakes.xml"/>
@@ -16,9 +22,15 @@
 			<version not-before="0.1.3"/>
 		</requires>
 		<requires interface="http://gfxmonk.net/dist/0install/ack.xml"/>
-		<implementation id="sha1new=66f7859877f030d2788442a2f3dfb2ff96b068a7" released="2011-05-01" version="20110501.0916">
-			<manifest-digest sha256="59839a16b989a6c426ba7ac0cf31ffde3804aea10be7261a54615c3b7172021e"/>
-			<archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom.tgz" size="974299"/>
-		</implementation>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-pathogen.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-command-t.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-fugitive.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-tagbar.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-nerdtree.xml"/>
+		<environment insert="vim" name="VIMPATH"/>
 	</group>
+	<implementation id="sha1new=3e31b36ca7febae90f26d9fa7782fadf57936736" released="2011-08-31" version="20110831.2043">
+		<manifest-digest sha256="3ccf153719399c646adb20910a1fab1d91c649d62a06cbbf6bda48b238a817a7"/>
+		<archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom.tgz" size="1307105"/>
+	</implementation>
 </interface>

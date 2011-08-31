@@ -1,4 +1,0 @@
-Makefile
-*.log
-!ext.c
-!ext.h

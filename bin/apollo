@@ -1,0 +1,2 @@
+#!/bin/sh
+exec 0launch '/home/tim/dev/web/apollo/apollo.xml' "$@"

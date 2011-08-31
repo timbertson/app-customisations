@@ -1,6 +1,9 @@
 set nocompatible
+" pathogen bootstrap, then use it to make $VIMPATH useful
+let &runtimepath = $PATHOGEN_ROOT . "," . &runtimepath
 let &runtimepath = pathogen#join(split($VIMPATH,':'),&runtimepath)
 call pathogen#runtime_append_all_bundles()
+
 " reload filetype detection
 filetype off
 filetype plugin indent on
@@ -68,6 +71,7 @@ end
 
 command! Emailmode call FnEmailMode()
 
+command! -nargs=0 Spaces set et noet< | retab
 fun! Tabsize(sz)
 	let &l:shiftwidth=a:sz
 	let &l:tabstop=a:sz
