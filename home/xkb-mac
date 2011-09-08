@@ -1,8 +1,14 @@
 // see http://www.emacswiki.org/emacs/MovingTheCtrlKey#toc4 and
 //     http://community.livejournal.com/xkbconfig/7996.html
-// load with `xkbcomp -I~/ ~/.xkb "${DISPLAY}"
+// load with `xkbcomp -I~/ ~/.xkb "${DISPLAY}"`
 xkb_keymap {
-  xkb_keycodes  { include "evdev+aliases(qwerty)" };
+  xkb_keycodes  {
+    include "evdev+aliases(qwerty)"
+    // Macalley icekey is really dumb and inserts
+    // a +/- character when you lean on the shift key.
+    // make it look like shift:
+    <LFS> = 94;
+  };
   xkb_types     { include "complete"  };
   xkb_compat    { include "complete"  };
   xkb_symbols   {
