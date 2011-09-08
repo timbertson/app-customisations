@@ -27,6 +27,7 @@
 		<requires interface="http://gfxmonk.net/dist/0install/vim-fugitive.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-tagbar.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-nerdtree.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-clipbrd.xml"/>
 		<environment insert="vim" name="VIMPATH"/>
 	</group>
 	<implementation id="sha1new=3e31b36ca7febae90f26d9fa7782fadf57936736" released="2011-08-31" version="20110831.2043">
