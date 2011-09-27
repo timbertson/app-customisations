@@ -146,17 +146,33 @@ nmap gV `[V`]
 
 " Bubble single lines
 nmap <M-Down> ]e
+nmap <M-S-J> ]e
 nmap <M-Up> [e
+nmap <M-S-K> [e
 " Bubble selection
 vmap <M-Down> ]e`[V`]
+vmap <M-S-J> ]e`[V`]
 vmap <M-Up> [e`[V`]
+vmap <M-S-K> [e`[V`]
 
 " use , for ;
 nnoremap , ;
-" leader-semi to highlight inside brackets
-nnoremap ; vib
+vnoremap , ;
+nnoremap ; :
+" visual mappings to highlight inside brackets ((like this) and this)
+vmap ] i]
+vmap [ i[
+vmap ) i)
+vmap ( i(
+vmap ; ib
+nmap c] ci]
+nmap c[ ci[
+nmap c) ci)
+nmap c( ci(
+nmap c{ ci{
+nmap c} ci}
+nmap c; cib
 " and keep going ...
-vmap ; <esc>llvib
 " ctrl + b to highlight current word
 map <Leader>b viw
 " and then keep extending it
@@ -225,8 +241,8 @@ vnoremap } /^\s*$<cr>
 
 " copy / paste (gvim, with the gui clipboard)
 vmap <C-c> "+y
-imap <C-S-v> <esc>"+pa
-cmap <C-v> <C-r>+
+inoremap <C-v> <C-r>+
+cnoremap <C-v> <C-r>+
 " c-v is still sometimes useful for literal <cr> chars, so use <c-l> (mnemonic 'literal')
 cnoremap <C-l> <C-v>
 inoremap <C-l> <C-v>

@@ -43,5 +43,9 @@
 ; kill windows with meta+shift+middle-click
 (xbindkey '(alt mod4 "b:2") "xte 'keyup Alt_L' 'keydown Shift_L' 'key c' 'keyup Shift_L' 'keydown Alt_L'")
 
+;(xbindkey '(shift "c:94") "zenity --info")
+;(xbindkey '(shift "c:94") "echo 1")
+;(xbindkey '(shift "c:94") (lambda ())
+
 ; ctrl+m for enter
 ;(xbindkey '(control "c:58") "xvkbd -xsendevent -text '\\r'")

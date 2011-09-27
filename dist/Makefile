@@ -8,6 +8,9 @@ vim: 0inst phony
 	(cd vim; tar phczf ../0inst/vim-custom.tgz *)
 	mkzero-gfxmonk -v ${version} -p 0inst/vim-custom.tgz vim-custom.xml
 
+vim-custom-local.xml: vim-custom.xml
+	0local -p ./vim vim-custom.xml
+
 zsh-custom: 0inst phony
 	rm -f 0inst/zsh-custom.tgz
 	(cd zsh; tar phczf ../0inst/zsh-custom.tgz * .zshrc)

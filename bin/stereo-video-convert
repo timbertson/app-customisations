@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+if [ "$#" -lt 2 ]; then
+	echo -e "Usage: $(basename "$0") input output [options]\ne.g -bitrate=500"
+	exit 1
+fi
+input="$1"
+out="$2"
+shift 2
+set -x
+
+exec ffmpeg -vf 'movie='<(cat "$input")' [inr], movie='<(cat "$input")' [inl], [inl] crop=in_w/2:in_h:0:0 [left], [left] scale=iw:ih/2 [lefts],
+[inr] crop=in_w/2:in_h:in_w/2:0 [right], [right] scale=iw:ih/2 [rights],
+[in][lefts] overlay=w:0 [half], [half][rights] overlay=0:0 [combined], [combined] crop=in_w:in_h/2:0:0 [out]' "$@" "$out" -i "$input"
