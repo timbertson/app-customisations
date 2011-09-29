@@ -9,6 +9,7 @@ filetype off
 filetype plugin indent on
 
 syntax on
+syntax sync minlines=200 " don't lose track of syntax highlighting when in large syntax blocks
 set number
 let g:solarized_contrast="high"
 set background="dark"
@@ -299,7 +300,7 @@ nmap <a-F7> :Ack -wQ <c-r><c-w><cr>
 vmap <M-F7> y:Ack -wQ "<C-R>""<cr>
 
 " refresh / redraw
-nmap <F5> :redraw!<cr>
+nmap <F5> :syntax sync fromstart<cr>:redraw!<cr>
 
 " window management:
 nmap <C-tab> <c-w>w
