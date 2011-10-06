@@ -8,33 +8,13 @@
 	</description>
 	<group main="main">
 		<environment insert="bin" name="PATH"/>
-		<implementation id="sha1new=6c7485f071b9d439cf9ee153a10f5a3fd7ea366a" released="2011-04-02" version="20110402.0035">
-			<manifest-digest sha256="fafeda3820982410af2b235f6bf49c1ce906a56477e8e7643d90173c076f71e6"/>
-			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="19161"/>
+		<implementation id="sha1new=94a491b61063a056c8a1ea5e11dfad4cbed0b932" released="2011-10-06" version="20111006.2138">
+			<manifest-digest sha256="4b450aef2fd3fd766a8839ecc53396cc714ceddfa6734fc11eb2b8abef17255c"/>
+			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="27964"/>
 		</implementation>
-		<implementation id="sha1new=d8561296822fff19d037ecc06968963073b38343" released="2011-05-16" version="20110516.1813">
-			<manifest-digest sha256="5e3ed479a88fcbde0ff861694e0221a3a6cba1baf913fba0eb68828ceedffd9d"/>
-			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="20508"/>
-		</implementation>
-		<implementation id="sha1new=0bc386c6b243dd657f7b36968f847b2ec95642f8" released="2011-07-27" version="20110727.2235">
-			<manifest-digest sha256="778935a5ab7f1a80b54e8a3da8e1bd54bc508da8948ca355f4be6a2003d6d7a5"/>
-			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="22608"/>
-		</implementation>
-		<implementation id="sha1new=6afe69476483bbb50f3acf4feb6ccc4d6443df13" released="2011-07-27" version="20110727.2305">
-			<manifest-digest sha256="6f908d8ba12750e551d1d7b8e8a6687a7f2186d89663f5fd13b50f9724a660ea"/>
-			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="22622"/>
-		</implementation>
-		<implementation id="sha1new=148dfb8cbe00204ae604509955a705d03a62582e" released="2011-07-28" version="20110728.2139">
-			<manifest-digest sha256="f552c8d146cfc7b619b4a24ba1f923a0471752408e5d2dbae05525cefaf15de1"/>
-			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="21912"/>
-		</implementation>
-		<implementation id="sha1new=e49ae51af2c8e0d0e3ce7f9b607361676b604a3a" released="2011-08-18" version="20110818.2132">
-			<manifest-digest sha256="8cdefbff1b95bc9b2b9b055edda37e67a77ec0bce08e59cdb6136e150fde7248"/>
-			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="26252"/>
-		</implementation>
-		<implementation id="sha1new=09484bfaf55ce23eed3bc9eaf9507ad269711895" released="2011-08-18" version="20110818.2148">
-			<manifest-digest sha256="402a07e76fdcca79ba0037ede0e74171e5ce7036b6a41e3b6825425937775a91"/>
-			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="26309"/>
+		<implementation id="sha1new=82bf444d0b8228358d865ecc51737a969d0537a9" released="2011-10-06" version="20111006.2143">
+			<manifest-digest sha256="2694842e30aeb3d608a44bb7735e1793244c1e11ae3e7c15a0a5b0693838fdc0"/>
+			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="27088"/>
 		</implementation>
 	</group>
 </interface>

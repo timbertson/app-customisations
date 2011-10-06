@@ -16,7 +16,7 @@ def main():
 	p.add_option('-c', '--create', action='store_const', const='create', dest='action', default='run')
 	p.add_option('-r', '--run',    action='store_const', const='run',    dest='action')
 	p.add_option('--profile', default=None, dest='path')
-	p.add_option('-x', '--exec', default='google-chrome', help='browser executable')
+	p.add_option('-x', '--exec', default=None, help='browser executable')
 	p.add_option('--dump', action='store_true', help='dump payload')
 	p.add_option('--bootstrap', action='store_const', dest='action', const='bootstrap')
 	opts, args = p.parse_args()
@@ -33,30 +33,32 @@ def main():
 PAYLOAD="""-----BEGIN PGP MESSAGE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-jA0EAwMCBgJPugih0/xgyerQTAUnyw0QA7nx9u37hvvFF/IiuskTENRRkbbNJ2i3
-2yhpl0RUC813o53WBlmCr6qbS/SnZuJGeuLNceqnKZjFp+PLQJ700TGCVLoYAqT5
-0JC633fcZH6o6tJhxiDpKqTapvuJeT9IfIunDuGZETzG9X1BC22nkHVp0JrU93Bs
-ImKrE5AuiZZv6lxgubPDVEkYjG4My6zwiUYRx3lmM4YKGJjqf5TpLGyekbVGJXgH
-Qtz8tKnno5ZRZN6NR0MSWzjYQ7KcAAuba2gKbhzO+P2Z8YoxwKgnXa/3x/cIMVcw
-+r1lVf3H7ikFAdHWczVjgjIO3LuzzS+bVBVkmK0gBkWRO0Dgx3somLWBit5Pp3E9
-Jg0ULME1BKSR+cPaLAPqCz8TZmoJ+t/1+/s/2cJfEOGECj3EsmIONp7RgY3juPyI
-fWpYvIyc3tkKraJcSh/GE7+iBDy9XNhlTVg2ZUK/Di4qwDWL+CNt7tl5zWbWoQDw
-w3gee6YAUB1Ewfze3A8LwoQyYqV7xGSbl/Bscb3F7cgSrCHtJz4yhXrja4Os+jti
-Q1avrzICxoUBGB3+P0uNwK7CxaseAI1Keyy1tCFNPivMSnXz+5YTi7a5HlXRutaU
-11k94bxsShTx9Al76CN48Wc2cXY4Mpen0jNPQKFoYjZ/9C24OiuZAfhKiFD0du9h
-+9WWdPl7yyndP1iX/3c3tkoqqizlM8HzfeETr5l5QALIBvaJWt/h8XeW78ytgait
-jX0KUcYJTa37qTrRQjJV/ZxafrCVkgVpnqkuDBTBSOOHkp6uikXKQbvvtfelPcaW
-y/u/Ol3uHpXB+7JmfvgyYuvviUiNBFkEDQzemxVWOTW9RyYy+83xMZmYyB9eAKyb
-UG+sR3E4s7MiFSf5gJqMVqiAsaDXCPU4SFaPHnCyJZJQgpk/ssfJZ28O55nIsHBS
-tN8Z7QEo2R3DVZbOXualoB6QwneTyqyR5sqXztOQAzIieEPNOBudVHPQKPzjqDea
-E3wI98x4w6ijGI0byLPnZyN5JwfajGY+XKjeFEMYxoXe2ji9Y9sbEc8V6kr/IOXp
-sMDWwijqtabgLMXhPGbK1Wka93T88jFL0yr6N+F6/SR4dumICtS3IRwrkpZlPQHS
-rP40fKI+l3SIoVkJc1/1879CaADpLk1AkbTPzGJSefYpeOdjCPrxUjXs0Ehz5922
-Pipg/5AQZ4Ra4hbgpGrATvMNLROO6wcirXwWn2MXXiRTuN2RnGvMFSpQI2tGY1Kz
-A98OriafrZ6ICQhu8FG4HmnnEirVh/J0ggmG3MXzl7w97M1oV4mIMJrEXpjlSVon
-kzLqq++tVCPYpJv1uHTDCrUnN4tKsMlqSmxOF51ZGkwYOj4sVFOahYkJgCwCj7Dl
-Eec9I2bAD8LfqEfZ19YMWzVsokaQi13rmJsL61/MbtKC09X8SPhCL+Fqbqc=
-=AGzG
+jA0EAwMCoL6a0Bn+a+NgyeqjhPnVZe8UoERF6dHrJ7cPKKGjhr2Mw5xEfgHIAxlw
+Gve3mwnNuoAZq2njiFh+4i2IrljALChGcEZaHVCdxwWO6xYCtPpTrltCkT/6OVV9
+xy9bCFyUjjV8kI93N+3fV+TfLrlvUS0wFJ0sQQU9dsttinP2CddWK7DAtVK67MqX
+FW+TTtOSxNMpOi2VIVR7CMAmZBcI4xiFdycoIBXx+HkU9D6Fm7oaFJtXQKHhO17F
+CXNnhhPnqrSccixdCAL/UCFe9dyd0humYNbw8VujtaXPDB/76gMVWVl3aczb+4EY
+XPJSiuDKvMKTL6vuTgkooKGrPI8TDYcDYstl0j/5024GkiGdPcFLz8BMuu5vs9xs
+FsJtQ/8kC7AAlT7GJ7pJGTYPqtDDK4EG9SxWd55uXdSkRBlbyaQEsPO60kuzhnqm
+iBNofdyCvu/rPeRhAAgPmvSjR2hTP3jPhvOM9YhRzz8VskIs8NnjIFj2INICP1s/
+BRMbPoe1cJ5BXaT1bT56gdLmTAk0WxwNt6nyVYQaA4fEHGq3JdUKz3D1XdC2k5Ro
+t+E/ANUL/bvV2zZAJwXvVlD8DIouQkTUgdQk/cFz5U9EwYG7B7UL1qAySdtdwlTv
+0lc2l7ictkBf4byc9NxAE7nd4NFuZAmW7F53RKn+QXUt8ark1/YQE8OVcjNFP/vD
+q+aXhWS6/yVNq3Pp3V1LdVHBXBjI8Uk8Ul6lSY7h0VsKWrc8SZyRu8fasbMniQcU
+H/9NETt2+i8w5jD3bWT1tBSt6xcLvnX45xmdwiItkqwl2+1iPx/9Atbdmb8tj87/
+3CzrTh891rm3uEnt2gTgou4O0u2KPtFL9wgAz7/Yh5DooOaXDPDR3wIH+sK3Qo+q
+MoaFGP9eoGPnp4USoEnl2i5EV0RHtU+4qtYiunoO3Qtgdbcn0v8NiMYcEJcjAQT8
+nNxhJbrjpkWsPg5Qz84wIkjNN4foUYMvr4MERRlUQnnjqFsgnMZdWjXVMtpy4B8G
+fYYMeMOEIqCrM8vqF5uaCYt6OAP+XxycK0D1gSzTfVCtZext0D9tUAH/zyTcGC/R
+kSnCeS9A5BPmvEtutftMw8WjjwGTJKqRdQbqhfpQMwdEgF2s1MK1xOAMs4F4SF8b
+M3TeAxPHwftiDq0JELjyT7tfoAa4fYH9xrXXzhWlM16BlMnwbLmJJikwDdWH9s4x
+j3i7rVZWCGcZ+eLM3GU173gR/2EW2IwiWSjHxiSpF6iJ1gJNJAPxJdLeIcVE3GbE
+WTdk4MyEz7fDLdbr5APXP1hVFVvjwVaz7607tqByE/UnqBUx5F8o7jTgoAf8Mwjf
+uQ1K7du7pml0qDeXK+G/E1NUStxZTGj5r+N6CA7ySUlddvLPImbf41VzwMHOZEFf
+kKWm/tROWLzt2l/pWBdDKEMHImWMc8MvlhzkvZsWxN03jKx+Jtjgwq5LkVvdndfn
+hI05Q1HjDS21FjwizckVAr4us71IavGL8r7XGE8eIJ8rM/x+r95nFwwoBUKXvkAX
+8PKbnMEoGyw=
+=Hc02
 -----END PGP MESSAGE-----
 
 """
