@@ -8,13 +8,9 @@
 	</description>
 	<group main="main">
 		<environment insert="bin" name="PATH"/>
-		<implementation id="sha1new=94a491b61063a056c8a1ea5e11dfad4cbed0b932" released="2011-10-06" version="20111006.2138">
-			<manifest-digest sha256="4b450aef2fd3fd766a8839ecc53396cc714ceddfa6734fc11eb2b8abef17255c"/>
-			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="27964"/>
-		</implementation>
-		<implementation id="sha1new=82bf444d0b8228358d865ecc51737a969d0537a9" released="2011-10-06" version="20111006.2143">
-			<manifest-digest sha256="2694842e30aeb3d608a44bb7735e1793244c1e11ae3e7c15a0a5b0693838fdc0"/>
-			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="27088"/>
+		<implementation id="sha1new=2b7108faa30643a27822558d5b7e3bdf35daec31" released="2011-10-07" version="20111007.1954">
+			<manifest-digest sha256="42133e57f7d76b27cf18cf9b22eba9e18dcfea338598042ead3017b54c70464e"/>
+			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="27062"/>
 		</implementation>
 	</group>
 </interface>
