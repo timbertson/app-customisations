@@ -6,5 +6,5 @@ maybesource ~/.aliasrc
 
 maybesource /etc/profile.d/net.gfxmonk.profile.sh
 
-. $(0launch -c http://gfxmonk.net/dist/0install/bashcomplete.xml __init | tail -n 1)
-function 0path { eval `0launch http://gfxmonk.net/dist/0install/0path.xml $@` }
+. $(0launch -c http://gfxmonk.net/dist/0install/bashcomplete.xml __init)
+function 0path { eval `0launch http://gfxmonk.net/dist/0install/0path.xml -c $@` }

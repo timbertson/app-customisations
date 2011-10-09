@@ -7,6 +7,7 @@
 	<description>
 	</description>
 	<group main="run">
+		<requires interface="http://gfxmonk.net/dist/0install/zsh.xml"/>
 		<implementation id="sha1new=bc01a512838898640d1319fd822b99b9b7b74cfb" released="2011-02-12" version="20110212.2217">
 			<manifest-digest sha256="97af8ab72714b80744cada61a11b71a36a46bd48b8306c8dae639741e3781879"/>
 			<archive href="http://gfxmonk.net/dist/0install/zsh-custom/zsh-custom.tgz" size="4050"/>
@@ -14,6 +15,10 @@
 		<implementation id="sha1new=e2106048475001ba4d093bfe4308d22fcc77eab3" released="2011-02-14" version="20110214.1832">
 			<manifest-digest sha256="96148d8778e613f598a4372394c2e158f01326997507d97886875c09c147479b"/>
 			<archive href="http://gfxmonk.net/dist/0install/zsh-custom/zsh-custom.tgz" size="4048"/>
+		</implementation>
+		<implementation id="sha1new=afef0cc385760d8b3dc3014058e0a7095ddcffd7" released="2011-10-09" version="20111009.1558">
+			<manifest-digest sha256="2dbd8c3312eb5e4c7e5d2be4aa24f626fa179a8db5833000a9c38c3a802fddc4"/>
+			<archive href="http://gfxmonk.net/dist/0install/zsh-custom/zsh-custom.tgz" size="4269"/>
 		</implementation>
 	</group>
 </interface>
