@@ -4,36 +4,24 @@ version=date
 	mkdir -p 0inst
 
 vim: 0inst phony
-	rm -f 0inst/vim-custom.tgz
-	(cd vim; tar phczf ../0inst/vim-custom.tgz *)
-	mkzero-gfxmonk -v ${version} -p 0inst/vim-custom.tgz vim-custom.xml
+	mkzero-gfxmonk -p vim -x vim -v ${version} --resolve-links vim-custom.xml
 
 vim-custom-local.xml: vim-custom.xml
 	0local -p ./vim vim-custom.xml
 
 zsh-custom: 0inst phony
-	rm -f 0inst/zsh-custom.tgz
-	(cd zsh; tar phczf ../0inst/zsh-custom.tgz * .zshrc)
-	mkzero-gfxmonk -v ${version} -p 0inst/zsh-custom.tgz zsh-custom.xml
+	mkzero-gfxmonk -p zsh -x zsh -v ${version} --resolve-links zsh-custom.xml
 
 tmux-custom: 0inst phony
-	rm -f 0inst/tmux-custom.tgz
-	(cd tmux; tar phczf ../0inst/tmux-custom.tgz *)
-	mkzero-gfxmonk -v ${version} -p 0inst/tmux-custom.tgz tmux-custom.xml
+	mkzero-gfxmonk -p tmux -x tmux -v ${version} --resolve-links tmux-custom.xml
 
 misc-scripts: 0inst phony
-	rm -f 0inst/misc-scripts.tgz
-	(cd misc-scripts; tar phczf ../0inst/misc-scripts.tgz *)
-	mkzero-gfxmonk -v ${version} -p 0inst/misc-scripts.tgz misc-scripts.xml
+	mkzero-gfxmonk -p misc-scripts -x misc-scripts -v ${version} --resolve-links misc-scripts.xml
 
 xmonad: 0inst phony
-	rm -f 0inst/xmonad-custom.tgz
-	(cd xmonad; tar phczf ../0inst/xmonad-custom.tgz *)
-	mkzero-gfxmonk -v ${version} -p 0inst/vim-custom.tgz xmonad-custom.xml
+	mkzero-gfxmonk -p xmonad -x xmonad -v ${version} --resolve-links xmonad-custom.xml
 
 xmodmap: 0inst phony
-	rm -f 0inst/xmodmap-custom.tgz
-	(cd xmodmap; tar phczf ../0inst/xmodmap-custom.tgz *)
-	mkzero-gfxmonk -v ${version} -p 0inst/vim-custom.tgz xmodmap-custom.xml
+	mkzero-gfxmonk -p xmodmap -x xmodmap -v ${version} --resolve-links xmodmap-custom.xml
 
 .PHONY: phony
