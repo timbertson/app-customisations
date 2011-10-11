@@ -16,5 +16,9 @@
 			<manifest-digest sha256="6176780c1b203d4cf4662e8e1b7346964896235122ca799c8aeb3e8547dca5ec"/>
 			<archive extract="misc-scripts" href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts-20111010.2053.tgz" size="27165"/>
 		</implementation>
+		<implementation id="sha1new=44983216d3b2d778b1b881517c0294a3c92759c3" released="2011-10-11" version="20111011.1938">
+			<manifest-digest sha256="b59af0069fab0169d64153d84e4ca4ae0751c9939749b276b25aab59a1635fc3"/>
+			<archive extract="misc-scripts" href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts-20111011.1938.tgz" size="27207"/>
+		</implementation>
 	</group>
 </interface>
