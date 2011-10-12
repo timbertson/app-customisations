@@ -4,6 +4,5 @@ if [ -z "$*" ]; then
 	ls -1 "$(dirname "$0")"/bin
 	exit 1
 fi
-echo "executing: $@" >&2
 
 exec "$@"

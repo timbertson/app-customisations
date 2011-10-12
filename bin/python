@@ -1,2 +1,0 @@
-#!/bin/sh
-exec 0launch 'http://repo.roscidus.com/python/python' "$@"

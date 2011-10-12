@@ -18,6 +18,9 @@ tmux-custom: 0inst phony
 misc-scripts: 0inst phony
 	mkzero-gfxmonk -p misc-scripts -x misc-scripts -v ${version} --resolve-links misc-scripts.xml
 
+misc-scripts-local.xml: misc-scripts.xml
+	0local -p ./misc-scripts misc-scripts.xml
+
 xmonad: 0inst phony
 	mkzero-gfxmonk -p xmonad -x xmonad -v ${version} --resolve-links xmonad-custom.xml
 

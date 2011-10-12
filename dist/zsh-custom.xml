@@ -20,5 +20,9 @@
 			<manifest-digest sha256="2dbd8c3312eb5e4c7e5d2be4aa24f626fa179a8db5833000a9c38c3a802fddc4"/>
 			<archive href="http://gfxmonk.net/dist/0install/zsh-custom/zsh-custom.tgz" size="4269"/>
 		</implementation>
+		<implementation id="sha1new=fb14a37f5e6cff0a216a218a9c84ac266525734a" released="2011-10-12" version="20111012.2126">
+			<manifest-digest sha256="fe88205bd063683a475c096e98b855c2b9f97d3caf4dced8ca380e67d802d00a"/>
+			<archive extract="zsh" href="http://gfxmonk.net/dist/0install/zsh-custom/zsh-custom-20111012.2126.tgz" size="4283"/>
+		</implementation>
 	</group>
 </interface>
