@@ -1,0 +1,2 @@
+#!/bin/sh
+exec 0launch -l | parallel '0launch -rcd --command="" {}'

@@ -12,7 +12,7 @@ import stat
 default_path = os.path.expanduser("~/.config/chromium")
 
 def main():
-	p = OptionParser("Usage: %prog <action>")
+	p = OptionParser("Usage: %prog [OPTIONS]")
 	p.add_option('-c', '--create', action='store_const', const='create', dest='action', default='run')
 	p.add_option('-r', '--run',    action='store_const', const='run',    dest='action')
 	p.add_option('--profile', default=None, dest='path')
@@ -22,8 +22,12 @@ def main():
 	opts, args = p.parse_args()
 	assert len(args) == 0
 	opts.path = opts.path or default_path
-	import getpass
-	passwd = getpass.getpass("password:")
+	if sys.stdin.isatty():
+		import getpass
+		passwd = getpass.getpass("password:")
+	else:
+		passwd = raw_input()
+
 	if __file__.endswith('.in'):
 		opts.action = 'bootstrap'
 	else:
@@ -33,32 +37,32 @@ def main():
 PAYLOAD="""-----BEGIN PGP MESSAGE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-jA0EAwMCQ7QJNwuU4WZgyeqTvA7QXAXn+ao9G6IdEVYdfIClBaRWHTgnQ6oR3KKN
-iggZ8Yv56CWfB/vpmb9Z1ydAi8MBK6OIAuUSsq9qZzomoj6S0LkZ9Z5fL6eI6xyA
-UqiFpQhKUZgEsh49JvS+4vIVRkaIqUjFhe8u7tJ6pLhbClMFxfFtlUaK9GtODZ0+
-zB6afEXd4dIXNq9sjKuPGa8kp+O3AXNogeVkh292hgfMHR/tWKDS/edUZ80rTexx
-izR5HJ/ipAxFL+mtiLNZwkpwcfaMRGlE5zIvbZz0XFcKzkfnAWdUoWu3q89ZhS2Y
-sPh3rrAjTYQZjML+rUwDoVpbAjnWp/djquA6i0osUvXvp02VKbWimXFx9hDp5Qzk
-Ycv0m7kvlcfGiJmgtrEIrPN6RUL0Iw+BAXlwVBHkA+31egNndsT6VSt0+C9Qs73M
-L81zrlKNxGioUTUdFYQ5M9Y+1zaRBt7kcEnvFASEbSuxo1ADcoYn7WQ9e3Q6R0Qd
-cw+aLd/GHg3Qtb7lTKR5L/SyerVf3fucRIpBhx+R8aAbQ/UQiz2EGctTU6AMjrAU
-1ISztz94cNp1hy2pYcxTG3hQSro3tp1rrGw83Jl/eB/GONaiCmugCTaXUyYEEW4F
-U8AGyn7ZFjHXgiS81KBLtzz/vzKWsKUGXPgCyOimjDRP09kU7Ujy3YzZF1801zI8
-wFCSr/l+ILQuwvJOHhlF3bCalDhhClnUib8PyelYvDFCTmnUigyblwfFFQUWfNb9
-EFn0r2OU7DFKLAfxGsHgT+/QgJgP9433xUH8p7AecKFW/X7j43LAH5uoJLPp34qH
-kqkoUduTLQvYN40EHO4Q9iXovu1KC4G59UMBE2zj65v+4cqAxkf6roY++E4G8mBM
-X8mdhLz9VFAHnxqvBijmCUdfA7LKLsdM7CfLM95j+CdC8+SX/pcATSIn5wqxS9VL
-S5MxiEnyJ0iGcB8vtUlsbrAXosDPw+g5iEzUBJy7bBP3wVjZcalkWUVrj2vkQd41
-yPr+mXuuxnq1gttA6mtrxyTR0EWwWlsrCh6ILVOHFZyAkECOnGeFguusLOBIVJMY
-1ddocWVlrPUiMMbWJFaFgCYVqaoYqIA+DfjybuYfjsbwG3LWshf1USFTT+Y1i9ge
-S1dQiW2+stT1AgEiphYaO67wmg01Ryfj6ZSViy/b1hp9VLiPxR+ajjRgLyt0ocXb
-bLQPVdvaJNxh8u9ImpNTLrHVl/4NzJj+CrOdRcBXMhW4VhNBr3GAwMoteYi20Tcz
-/yq75UjO6nviSfuZhHvngn+cUlhYK8sdAlFkxrFEcqcmuIDupg7X1lY1rybT43K1
-ZjoQwPbtyltP3gmNwZnBjFKobEQg14MF7SpNmD9zHPwel+Gq1v+r6ZfX0wcJ9UYc
-Uxed+SDfzx6lRQJH5FXnlsXBCG7DvqUNa2Aa+3EDXQ7ktBGsJjXjA5T+hImoB7qL
-6Vj3dVDjSnEjLJLznFw7aOmlnqSzj3bz+1RicH9j3eipLbmTuvQm69N52Ufwp5US
-au/q5OA+gq5JNT8hd9Z1NJAXJDaEGAQxaRZ3cJ70Z3RZZi1wfToRMR8=
-=LSAG
+jA0EAwMC+Naf+djnNVlgyeqm9G3a6Ee0jPUwtjenHf0yKKA2XqMXO9J75jqVOgjy
+hB18k00bnWlDcQm9XA4rKhHBFczAQMRpHin297nmUphLTbIs4QoHHimnUSN3KcxW
+wk0OSttgAdC3+UgWLfA0XLL3SsLUQ9kyn0T6iv/VM1p9qLrDZGlQm90QQzCkgI3h
+iU/6wluAGzXvJRkYiz7urTZpW+MK2C5FCfL3PaYiziAG5gsRw5i0ZRJ1OosaIkzf
+i1ZDNtII1Ax0VX3HL9ILyZ1B7ecHH8qgzFshjYJzq1mU1fN1qu2qzst1XFsLgU1w
+UA9fqvCOkyd2+FxggWEad4mS9Jp95Az1rNJT+d3sPcdmQzp1CGmlMIc5KYfAxU8J
+IkpPFyD3KXNq8l2mqMIIYfo8ZQXckOmIiImkHyFZzT0+Dg1ERFY5mSNKAEW6d/8H
+4j21VMalURms1dlhoylyAYtgmjMwMHoUR4ixEc6+0RP6ymuznaxhSqYatPEbBdpR
+0+huB92hFi4Lg4jLZ2gW9lIBDR3HxPFJkdm2ROktIY3S/i5EZ2+rWevaPmToU0an
+Mx03s1KR8E064KGTewqWeJaH62PdYMhVzrk0A7Tk3Kj9FbFmHtNyaSz4bfNPpAvy
+hdFu3lwxur9pLvg0is6jAdfF6DcQx+1jmvT5pXAVymCCVPoo0z9bLtAZzWmAIMoZ
+wAmz/oIoxiPnQGMpzvUy//AsjCaQNy2OznIsatnMsDPEmdOMWPdCQVoFGUq/R+jp
+JZVIMlRMvdXOGt+zyv5ux577DmUEMNcyJaZg+ojxYh/LSBqKwxGpqfsyVFHBNsU2
+ngM6763b+ZMv/229IxL9aXqLW/Hg/yrIlqbgs46Dt6MxfMWwsauhSbUmd+xYnPC7
+n8K4PVc5X7KbHrQyx77ynXTsOCrXbLzdhQ4O+gQlwqxpSbf+MDDMD2F/EPA6FIk5
+5tc39Urud4UMmZmx/LAl6KQgIcHYcZUQ3PRohSOlrmluHkPTkPMBofAp91MF7Dsr
+EnrlIpdWeLk68JW+Tj1F3wQCA+57nQy1EpAF7MvsADPUnaZunlQabTLk1y//4QSc
+x+tATQPo5JIwrXrRTJ98XryF1GCCVHQvf/tZL0mYNeYIj3/MkPx6E1P79AqYd3fS
+ngGSp42JEbUagHh4D8aCIYgjDofVi/CnUmXMudh3oHz+gq3zEm4xfZQjaG2T23CW
+rZ8m8jsMMp/Ow3W4MDJcC2wbjOD0AHBYhyINvaMJoEG1mA2n6I/iIn3t/OUVvbA/
+uafxfwjqMFej79LGW6Pb0BnCG7DljSJ1Z5nejRaka0EKbFaalHeqkZkv6YwxrSQH
+jYZXaLvSVPKzcLjV8X0/OE3clACHE7OBw95DcMTjmI45l1h0vVDs/ONTyeCfFi+i
+Q9tAf30pCubHfW9lTokxnD4fHehGayDEgfYyqfioViaPjvsF6Io8wxUzyhIklXHu
+QvYWGmlDGACxUZnDnofCQrehNepxWZhNDlvzP9jiiNP4wnFM24NUdqOn7jER3mhX
+UR0YvRL9q6FPl9XqaT8d+xxAmLRJAEq9OGViJSeRjqjSU4F5eOr5TQQ=
+=BUiQ
 -----END PGP MESSAGE-----
 
 """
