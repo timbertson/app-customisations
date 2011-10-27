@@ -31,9 +31,9 @@
 		<requires interface="http://gfxmonk.net/dist/0install/vim-tabular.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-stratifiedjs.xml"/>
 		<environment insert="vim" name="VIMPATH"/>
+		<implementation id="sha1new=3e31b36ca7febae90f26d9fa7782fadf57936736" released="2011-08-31" version="20110831.2043">
+			<manifest-digest sha256="3ccf153719399c646adb20910a1fab1d91c649d62a06cbbf6bda48b238a817a7"/>
+			<archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom.tgz" size="1307105"/>
+		</implementation>
 	</group>
-	<implementation id="sha1new=3e31b36ca7febae90f26d9fa7782fadf57936736" released="2011-08-31" version="20110831.2043">
-		<manifest-digest sha256="3ccf153719399c646adb20910a1fab1d91c649d62a06cbbf6bda48b238a817a7"/>
-		<archive href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom.tgz" size="1307105"/>
-	</implementation>
 </interface>
