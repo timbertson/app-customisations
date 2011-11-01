@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <gconf>
-	<entry name="button_layout" mtime="1310281586" type="string">
-		<stringvalue>:minimize,maximize,close</stringvalue>
+	<entry name="theme" mtime="1319935329" type="string">
+		<stringvalue>Ambiance</stringvalue>
+	</entry>
+	<entry name="button_layout" mtime="1318330647" type="string">
+		<stringvalue>:minimize,close</stringvalue>
 	</entry>
 </gconf>
