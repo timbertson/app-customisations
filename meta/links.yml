@@ -7,10 +7,15 @@ meta:
   default_tags:
     meep:
       - mac
-      - fc15
+      - ubuntu
+      - oneiric
+      #- fedora
+      #- fc16
+      #- fc15
     tjcee:
       - pc
       - xmodmap
+      - ubuntu
       - ubuntu-maverick
 
 # SELF-INSTALL:
@@ -85,7 +90,7 @@ meta:
 ## KEYBOARD TYPES
 ~/.xkb:
   path: ../home/xkb-mac
-  tags: mac fc15
+  tags: mac fedora
 
 #TODO: make a pc xkb config
 
@@ -95,6 +100,16 @@ meta:
   - path: ../home/xmodmaprc-pc
     tags: pc
 
+## apps:
+~/.config/autostart/banshee.desktop:
+  - path: /usr/share/applications/banshee.desktop
+    tags: ubuntu
+  - path: /usr/share/applications/gnome-banshee.desktop
+    tags: fedora
+
+~/.local/share/gnome-shell.desktop:
+  uri: http://gfxmonk.net/dist/0install/shellshape.xml
+  extract: gnome-shell.desktop
 
 ## FEDORA
 /etc/yum.repos.d:
@@ -103,16 +118,15 @@ meta:
 
 /etc/pki/rpm-gpg:
   path: ../root/pki-rpm-gpg
-  tags: fc15
+  tags: fedora
 
 /etc/yum/pluginconf.d:
   path: ../root/yum.pluginconf.d
-  tags: fc15
+  tags: fedora
 
 /etc/modules-load.d:
   path: ../root/modules-load.d
-  tags: fc15
-
+  tags: fedora
 
 ## UBUNTU
 /etc/apt/sources.list.d:
@@ -122,4 +136,9 @@ meta:
     tags: ubuntu-maverick
   - path: ../root/natty-sources.list.d
     tags: ubuntu-natty
+  - path: ../root/oneiric-sources.list.d
+    tags: ubuntu oneiric
 
+/etc/X11/Xsession.d/80overlayscrollbars:
+  - path: ../root/xsession.d/80overlayscrollbars
+    tags: ubuntu

@@ -102,6 +102,13 @@ set wmh=0
 
 set tags+=.tags
 let g:autotagTagsFile=".tags"
+let g:EasyMotion_leader_key = '<Leader>m'
+let g:EasyMotion_mapping_f = '<leader>f'
+let g:EasyMotion_mapping_F = '<leader>F'
+let g:EasyMotion_mapping_w = '<leader>w'
+let g:EasyMotion_mapping_W = '<leader>W'
+let g:EasyMotion_mapping_j = '<leader>j'
+let g:EasyMotion_mapping_k = '<leader>k'
 
 " (do it poorly in the terminal, because sometimes utf8 is broken)
 fun! Lame_tabs()
