@@ -1,0 +1,2 @@
+#!/bin/sh
+exec 0launch --command 'minimal' 'http://gfxmonk.net/dist/0install/vim-custom.xml' "$@"

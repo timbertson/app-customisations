@@ -10,27 +10,37 @@
 	<icon href="http://gfxmonk.net/dist/0install/vim-gnome/icon-128.png" type="image/png"/>
 	<group main="run-vim">
 		<command name="run" path="vim/vimrc">
+			<!-- package and source implementations are kept out of the "minimal"
+					 command, because they may require root privs / additional setup -->
+			<requires interface="http://gfxmonk.net/dist/0install/exuberant-ctags.xml"/>
+			<requires interface="http://gfxmonk.net/dist/0install/vim-command-t.xml"/>
+			<requires interface="http://gfxmonk.net/dist/0install/savemytext.xml">
+				<version not-before="0.1.3"/>
+			</requires>
+			<runner interface="http://gfxmonk.net/dist/0install/vim-gnome.xml">
+				<arg>-v</arg>
+				<arg>-u</arg>
+			</runner>
+		</command>
+		<command name="minimal" path="vim/vimrc">
 			<runner interface="http://gfxmonk.net/dist/0install/vim-gnome.xml">
 				<arg>-v</arg>
 				<arg>-u</arg>
 			</runner>
 		</command>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-gnome.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/exuberant-ctags.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/pyflakes.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/savemytext.xml">
-			<version not-before="0.1.3"/>
-		</requires>
 		<requires interface="http://gfxmonk.net/dist/0install/ack.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-pathogen.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-command-t.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-fugitive.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-tagbar.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-nerdtree.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-clipbrd.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-tabular.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-easymotion.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-camelcase-motion.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-indent-object.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-argtextobj.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-stratifiedjs.xml"/>
 		<environment insert="vim" name="VIMPATH"/>
 		<implementation id="sha1new=3e31b36ca7febae90f26d9fa7782fadf57936736" released="2011-08-31" version="20110831.2043">
