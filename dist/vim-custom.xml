@@ -12,6 +12,7 @@
 		<command name="run" path="vim/vimrc">
 			<!-- package and source implementations are kept out of the "minimal"
 					 command, because they may require root privs / additional setup -->
+			<requires interface="http://gfxmonk.net/dist/0install/vim-tagbar.xml"/>
 			<requires interface="http://gfxmonk.net/dist/0install/exuberant-ctags.xml"/>
 			<requires interface="http://gfxmonk.net/dist/0install/vim-command-t.xml"/>
 			<requires interface="http://gfxmonk.net/dist/0install/savemytext.xml">
@@ -33,7 +34,6 @@
 		<requires interface="http://gfxmonk.net/dist/0install/ack.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-pathogen.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-fugitive.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-tagbar.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-nerdtree.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-clipbrd.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-tabular.xml"/>

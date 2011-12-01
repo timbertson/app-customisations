@@ -1,0 +1,2 @@
+#!/bin/sh
+exec 0launch '/home/tim/.local/share/desura/desura.xml' "$@"

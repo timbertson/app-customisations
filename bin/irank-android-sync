@@ -36,8 +36,8 @@ function apply_remote_rating_changes {
 	fi
 	echo "applying $num_updates updates..."
 	irank rating-sync --no "$dest/irank.sqlite" || ( \
-		zenity --question --text='Rating update FAILED. Do you want to continue, ERASING all failed ratings?' --cancel-label='Cancel' --ok-label='ERASE' && \
-			zenity --question --text='SERIOUSLY?' --cancel-label='No!' --ok-label='Yes, ERASE ratings')
+		zenity --question --no-markup --text='Rating update FAILED. Do you want to continue, ERASING all failed ratings?' --cancel-label='Cancel' --ok-label='ERASE' && \
+			zenity --question --no-markup --text='SERIOUSLY?' --cancel-label='No!' --ok-label='Yes, ERASE ratings')
 
 	echo "updating playlists after rating update"
 	irank db

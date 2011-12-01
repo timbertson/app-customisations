@@ -6,6 +6,6 @@ set -e
 echo -n "Really delete `basename "$song"`?"
 read f
 [ "$f" = '' -o "$f" = 'y' ]
-# zenity --question --text="really delete `basename "$song"`?"
+# zenity --question --no-markup --text="really delete `basename "$song"`?"
 `dirname "$0"`/trash "$song"
 echo "done"
