@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import sys, os
+import sys, os, re
 import subprocess
 
 def col(code):
@@ -10,6 +10,18 @@ def col(code):
 
 red = col(31)
 reset = col(0)
+
+def surround(line, prefix=red, suffix=reset):
+	"""
+	surrounds a line with markers, placing them _inside_ whitespace
+	
+	>>> surround("line", '[',']')
+	"[line]"
+	>>> surround(" line \n", '[',']')
+	" [line] \n"
+	"""
+	return re.sub("^(\s*)(.*?)(\s*)$", r"\1%s\2%s\3" % (prefix, suffix), line)
+
 
 def main(argv=None):
 	if argv is None:
@@ -21,12 +33,17 @@ def main(argv=None):
 
 	try:
 		proc = subprocess.Popen(argv, stderr=subprocess.PIPE)
-		cmd = 'while read ln; do echo "%s$ln%s"; done;' % (red, reset)
-		stderrproc = subprocess.Popen([cmd], shell=True, stdin=proc.stderr, stdout=sys.stderr)
+		while True:
+			line = proc.stderr.readline()
+			if not line:
+				break
+			print surround(line),
 		proc.wait()
-		stderrproc.wait()
 	except KeyboardInterrupt:
-		pass
+		try:
+			proc.kill()
+		finally:
+			sys.exit(1)
 
 if __name__ == '__main__':
 	main()

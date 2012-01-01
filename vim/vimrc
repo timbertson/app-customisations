@@ -41,6 +41,7 @@ set wildignore=*.swp,*.bak,*.pyc,*.class
 set pastetoggle=<F2>
 set sessionoptions="curdir,folds,localoptions,tabpages,winsize"
 autocmd SessionLoadPost * tab ball
+set sessionoptions=blank,buffers,curdir,folds,resize,tabpages,winsize
 command! -narg=0 SSession :mksession! .vimsession
 command! -narg=0 LSession :source .vimsession
 " let g:semantic_tabs="auto"

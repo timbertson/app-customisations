@@ -1,4 +1,5 @@
 #!/bin/sh
-# typical stereoscoper invocation to
-# squash, flip and colour-match images
-exec stereoscoper --match --swap --squash "$@"
+set -xeu
+[ -d orig ]
+stereoscoper --match --swap --squash --dest cross-eyed orig/*
+stereoscoper --match        --squash --dest straight orig/*
