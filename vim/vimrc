@@ -328,8 +328,8 @@ nmap <A-o> :up<cr>:silent !gnome-open %:p<cr>
 command! -narg=0 Open :silent :!gnome-open "`dirname "%:p"`" &
 command! -narg=0 Term :silent :!gnome-terminal --working-directory="`dirname "%:p"`" &
 command! -narg=0 CD :lcd %:p:h
-command! -narg=0 Mdview :silent :!markdown % | htmlview &
-command! -narg=0 Rstview :silent :!rst2html % | htmlview
+command! -narg=0 Mdview :silent :!markdown "%" | htmlview &
+command! -narg=0 Rstview :silent :!rst2html "%" | htmlview
 augroup automake
 augroup END
 command! -narg=0 Automake autocmd automake BufWritePost <buffer> Make

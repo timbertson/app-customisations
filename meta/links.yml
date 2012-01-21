@@ -9,14 +9,14 @@ meta:
       - mac
       - ubuntu
       - oneiric
+      - desktop
       #- fedora
       #- fc16
       #- fc15
     tjcee:
-      - pc
-      - xmodmap
       - ubuntu
-      - ubuntu-maverick
+      - ubuntu-natty
+      - tv
 
 # SELF-INSTALL:
 
@@ -71,6 +71,10 @@ meta:
 ~/.xbindkeysrc.scm:
   path: ../home/xbindkeysrc.scm
 
+~/.xbindkeysrc.scm:
+  path: ../home/xbindkeysrc-tv.scm
+  tags: tv
+
 ~/.ackrc:
   path: ../home/ackrc
 
@@ -101,14 +105,14 @@ meta:
   - path: ../home/xmodmaprc-mac
     tags: mac xmodmap
   - path: ../home/xmodmaprc-pc
-    tags: pc
+    tags: pc xmodmap
 
 ## apps:
 ~/.config/autostart/banshee.desktop:
   - path: /usr/share/applications/banshee.desktop
-    tags: ubuntu
+    tags: ubuntu desktop
   - path: /usr/share/applications/gnome-banshee.desktop
-    tags: fedora
+    tags: fedora desktop
 
 ~/.local/share/applications/gnome-shell.desktop:
   uri: http://gfxmonk.net/dist/0install/shellshape.xml
