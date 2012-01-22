@@ -1,2 +1,2 @@
-#deb http://ppa.launchpad.net/ricotz/testing/ubuntu oneiric main
-#deb-src http://ppa.launchpad.net/ricotz/testing/ubuntu oneiric main
+# deb http://ppa.launchpad.net/ricotz/testing/ubuntu oneiric main
+# deb-src http://ppa.launchpad.net/ricotz/testing/ubuntu oneiric main

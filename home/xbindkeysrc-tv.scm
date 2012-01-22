@@ -1,2 +1,2 @@
-(xbindkey '("ESC") "sudo shutdown -h now")
+(xbindkey '("Escape") "shutdown-as-user")
 

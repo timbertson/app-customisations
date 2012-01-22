@@ -114,6 +114,10 @@ meta:
   - path: /usr/share/applications/gnome-banshee.desktop
     tags: fedora desktop
 
+~/.config/autostart/xbindkeys.desktop:
+  - path: ../home/applications/xbindkeys.desktop
+    tags: tv
+
 ~/.local/share/applications/gnome-shell.desktop:
   uri: http://gfxmonk.net/dist/0install/shellshape.xml
   extract: gnome-shell.desktop
