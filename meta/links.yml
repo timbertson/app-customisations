@@ -117,6 +117,7 @@ meta:
 ~/.local/share/applications/gnome-shell.desktop:
   uri: http://gfxmonk.net/dist/0install/shellshape.xml
   extract: gnome-shell.desktop
+  tags: desktop
 
 ## FEDORA
 /etc/yum.repos.d:
