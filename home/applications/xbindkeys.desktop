@@ -3,4 +3,5 @@ Type=Application
 Name=XBindkeys
 Comment=Keyboard shortcut utility
 Exec=xbindkeys -v
+Terminal=false
 Categories=GNOME;
