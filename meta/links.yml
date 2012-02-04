@@ -33,6 +33,12 @@ meta:
   path: ../root/profile.d/net.gfxmonk
 /etc/profile.d/net.gfxmonk.profile.sh:
   path: ../root/profile.d/net.gfxmonk.profile.sh
+/etc/profile.d/net.gfxmonk.0path.sh:
+  uri: http://gfxmonk.net/dist/0install/0path.xml
+  extract: init.sh
+/etc/profile.d/net.gfxmonk.bashcomplete.sh:
+  uri: http://gfxmonk.net/dist/0install/bashcomplete.xml
+  extract: bashcomplete/init
 /etc/X11/sessions:
   path: ../root/sessions
 /etc/udev/rules.d/input.rules:
