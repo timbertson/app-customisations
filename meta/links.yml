@@ -29,10 +29,10 @@ meta:
 
 ## BASE:
 
+/etc/profile.d/init:
+  path: ../root/profile.d/init
 /etc/profile.d/net.gfxmonk:
   path: ../root/profile.d/net.gfxmonk
-/etc/profile.d/net.gfxmonk.profile.sh:
-  path: ../root/profile.d/net.gfxmonk.profile.sh
 /etc/profile.d/net.gfxmonk.0path.sh:
   uri: http://gfxmonk.net/dist/0install/0path.xml
   extract: init.sh
@@ -86,6 +86,8 @@ meta:
 
 ~/.zshrc:
   path: ../home/zshrc
+~/.zshrc:
+  path: ../home/bashrc
 
 ~/.gizmod:
   path: ../home/gizmod
