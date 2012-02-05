@@ -86,7 +86,7 @@ meta:
 
 ~/.zshrc:
   path: ../home/zshrc
-~/.zshrc:
+~/.bashrc:
   path: ../home/bashrc
 
 ~/.gizmod:
