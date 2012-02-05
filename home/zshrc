@@ -1,7 +1,1 @@
-function maybesource {
-	[ -f "$1" ] && . "$1"
-}
-maybesource ~/.pathrc
-maybesource ~/.aliasrc
-
-maybesource /etc/profile.d/net.gfxmonk.profile.sh
+. /etc/profile.d/init

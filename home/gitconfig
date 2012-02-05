@@ -9,6 +9,7 @@
 	patch = format-patch --stdout
 	show-branches = !git show-branch origin/master $(git branch | cut -c3-)
 	root = rev-parse --show-toplevel
+	pushall = !git push && git push --tags
 [color]
 	branch = auto
 	diff = auto
