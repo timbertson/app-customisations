@@ -1,0 +1,2 @@
+#!/bin/sh
+exec 0launch --main=0alias "http://0install.net/2007/interfaces/ZeroInstall.xml" --dir="$HOME/.bin/" "$@"

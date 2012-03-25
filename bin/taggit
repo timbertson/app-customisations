@@ -8,6 +8,7 @@ echo "Ok?"; read confirm
 set -x
 git commit -am "$v"
 git tag "version-$v"
+set +x
 
 feeds=$(ls -1 *.xml | fgrep -v -- '-local.xml')
 local_feeds=$(ls -1 *.xml | fgrep -- '-local.xml')

@@ -1,2 +1,2 @@
 #!/bin/sh
-exec 0launch '/home/tim/dev/web/apollo/apollo.xml' "$@"
+exec 0launch 'http://gfxmonk.net/dist/0install/apollo.xml' "$@"

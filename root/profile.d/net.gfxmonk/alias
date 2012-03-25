@@ -27,8 +27,6 @@ alias ad='pushd' # "add dir"
 alias sd='popd'  # "subtract dir"
 alias cdreal='cd `pwd -P`' # go to the canonical path, expanding all symlinks
 
-alias ipy='ipython --noconfirm_exit'
-
 alias umount='sudo umount'
 alias xephyr='Xephyr -ac -screen 600x800 -br -reset -terminate 2> /dev/null :1 &'
 
