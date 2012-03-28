@@ -1,0 +1,2 @@
+#!/bin/sh
+exec 0launch --command 'run-py2' 'http://gfxmonk.net/dist/0install/nosetests-runner.xml' "$@"

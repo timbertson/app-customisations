@@ -1,0 +1,2 @@
+#!/bin/sh
+exec 0launch --command 'build' 'http://gfxmonk.net/dist/0install/sphinx.xml' "$@"

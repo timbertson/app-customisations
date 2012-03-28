@@ -211,8 +211,8 @@ nmap <leader>[ vi[
 nmap <leader>` vi`
 
 " ]] to go to next (/prev) quickfix item
-nmap ]] :cn<cr>
-nmap [[ :cp<cr>
+nmap <A-]> :cn<cr>
+nmap <A-[> :cp<cr>
 
 " + expands a selection in both directions by one character
 vmap + loho

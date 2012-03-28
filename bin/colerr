@@ -38,7 +38,7 @@ def main(argv=None):
 			if not line:
 				break
 			print surround(line),
-		proc.wait()
+		sys.exit(proc.wait())
 	except KeyboardInterrupt:
 		try:
 			proc.kill()

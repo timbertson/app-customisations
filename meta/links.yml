@@ -53,6 +53,9 @@ meta:
 ~/.bin:
   path: ../bin
 
+~/.zero2pypi:
+  path: ../home/zero2pypi
+
 ~/.gconf:
   path: ../home/gconf
 
