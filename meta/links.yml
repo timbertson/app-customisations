@@ -104,6 +104,10 @@ meta:
 ~/.config/rygel.conf:
   path: ../home/rygel.conf
 
+## desktop-specific
+/etc/profile.d/autojump:
+  uri: http://gfxmonk.net/dist/0install/autojump.xml
+  tags: desktop
 
 ## KEYBOARD TYPES
 ~/.xkb:

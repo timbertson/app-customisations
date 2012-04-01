@@ -37,14 +37,21 @@ if [ -n "$BASH" ]; then
 	source "$base/bashrc"
 	source "$base/bash_completion"
 	source "$base/bash_prompt"
+	PROFILE_PATH="$PROFILE_PATH:$BASH_PROFILE_PATH"
 fi
 if [ -n "$ZSH_VERSION" ]; then
 	source "$base/zshrc"
 	source "$base/zsh_completion"
 	source "$base/zsh_prompt"
+	PROFILE_PATH="$PROFILE_PATH:$ZSH_PROFILE_PATH"
 fi
 source "$base/alias"
 source "$base/completion"
+echo "$PROFILE_PATH" | tr ':' '\n' | while read f; do
+	if [ -f "$f" ]; then
+		source "$f"
+	fi
+done
 
 function cdbase {
 	d=`dirname "$1"`
