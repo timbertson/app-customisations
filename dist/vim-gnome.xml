@@ -12,5 +12,7 @@
 	<group>
 		<package-implementation distributions="Debian" main="/usr/bin/gvim" package="vim-gnome"/>
 		<package-implementation distributions="RPM" main="/usr/bin/gvim" package="vim-X11"/>
+		<package-implementation distributions="Cygwin" main="/usr/bin/gvim.exe" package="gvim"/>
+		<package-implementation main="/usr/bin/gvim" package="gvim"/>
 	</group>
 </interface>

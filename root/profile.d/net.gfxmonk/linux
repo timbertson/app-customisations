@@ -1,7 +1,7 @@
 #!/bin/bash
 alias ls='ls -h --color=auto' #enable colours and human-readable sizes
 alias open='gnome-open'
-alias cwd='echo -n `pwd` | xsel -ib' # copy working dir to clipboard
+alias cwd='echo -n `pwd` | 0launch http://gfxmonk.net/dist/0install/xsel.xml -ib' # copy working dir to clipboard
 alias pbcopy='xsel -ib' # that's what it's called on a mac ;)
 alias pbpaste='xsel -ob'
 export PATH="$PATH:$HOME/bin"

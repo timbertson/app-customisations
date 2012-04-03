@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <gconf>
+	<entry name="use_mnemonics" mtime="1322826434" type="bool" value="true"/>
 	<entry name="default_profile" mtime="1295866663" type="string">
 		<stringvalue>Profile0</stringvalue>
 	</entry>

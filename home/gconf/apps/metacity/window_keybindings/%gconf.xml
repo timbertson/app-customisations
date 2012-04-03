@@ -27,17 +27,17 @@
 	<entry name="move_to_workspace_2" mtime="1305442433" type="string">
 		<stringvalue></stringvalue>
 	</entry>
-	<entry name="move_to_workspace_1" mtime="1319929730" type="string">
+	<entry name="move_to_workspace_1" mtime="1324299990" type="string">
 		<stringvalue></stringvalue>
 	</entry>
 	<entry name="activate_window_menu" mtime="1319877492" type="string">
 		<stringvalue>&lt;Alt&gt;space</stringvalue>
 	</entry>
-	<entry name="begin_resize" mtime="1319877492" type="string">
-		<stringvalue>&lt;Alt&gt;F8</stringvalue>
+	<entry name="begin_resize" mtime="1322992701" type="string">
+		<stringvalue></stringvalue>
 	</entry>
-	<entry name="begin_move" mtime="1319877492" type="string">
-		<stringvalue>&lt;Alt&gt;F7</stringvalue>
+	<entry name="begin_move" mtime="1322992698" type="string">
+		<stringvalue></stringvalue>
 	</entry>
 	<entry name="minimize" mtime="1319929832" type="string">
 		<stringvalue>&lt;Mod4&gt;m</stringvalue>
