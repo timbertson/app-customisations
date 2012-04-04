@@ -12,10 +12,10 @@
 		<command name="run" path="vim/vimrc">
 			<!-- package and source implementations are kept out of the "minimal"
 					 command, because they may require root privs / additional setup -->
-			<requires interface="http://gfxmonk.net/dist/0install/vim-tagbar.xml"/>
-			<requires interface="http://gfxmonk.net/dist/0install/exuberant-ctags.xml"/>
-			<requires interface="http://gfxmonk.net/dist/0install/vim-command-t.xml"/>
-			<requires interface="http://gfxmonk.net/dist/0install/savemytext.xml">
+			<requires importance="recommended" interface="http://gfxmonk.net/dist/0install/vim-tagbar.xml"/>
+			<requires importance="recommended" interface="http://gfxmonk.net/dist/0install/exuberant-ctags.xml"/>
+			<requires importance="recommended" interface="http://gfxmonk.net/dist/0install/vim-command-t.xml"/>
+			<requires importance="recommended" interface="http://gfxmonk.net/dist/0install/savemytext.xml">
 				<version not-before="0.1.3"/>
 			</requires>
 			<runner interface="http://gfxmonk.net/dist/0install/vim-gnome.xml">
@@ -50,6 +50,10 @@
 		<implementation id="sha1new=10dac1a0ef114abff6a07cbd54287b4ff7561500" released="2011-12-18" version="20111218.2109">
 			<manifest-digest sha256="0ab3e554c809550c8fb250f6903bd11323922ab7a8375f3dce50641d23bee19c"/>
 			<archive extract="vim" href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom-20111218.2109.tgz" size="912850"/>
+		</implementation>
+		<implementation id="sha1new=69011bf032ce85b1f664538c6a2ba34139fc5454" released="2012-04-04" version="20120404.2008">
+			<manifest-digest sha256="4902537cd6fec2927f5d3d1e84e95be8f9f14cf548fd3c2049f229bd0e94400c"/>
+			<archive extract="vim" href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom-20120404.2008.tgz" size="913568"/>
 		</implementation>
 	</group>
 </interface>
