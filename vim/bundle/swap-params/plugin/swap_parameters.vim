@@ -82,7 +82,6 @@
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if !has('python')
-    s:ErrMsg( "Error: Required Vim compiled with +python" )
     finish
 endif
 
