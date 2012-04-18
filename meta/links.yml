@@ -6,6 +6,8 @@ meta:
   basedir: ~/dev/app-customisations/meta
   default_tags:
     meep:
+      - root
+      - linux
       - mac
       - ubuntu
       - oneiric
@@ -14,9 +16,13 @@ meta:
       #- fc16
       #- fc15
     tjcee:
+      - root
+      - linux
       - ubuntu
       - ubuntu-natty
       - tv
+    "400L-77212":
+      - windows
 
 # SELF-INSTALL:
 
@@ -26,23 +32,30 @@ meta:
 ~/.config/autostart/daglink-update.desktop:
   uri: http://gfxmonk.net/dist/0install/daglink.xml
   extract: daglink-update.desktop
+  tags: linux
 
 ## BASE:
 
 /etc/profile.d/init:
   path: ../root/profile.d/init
+  tags: root
 /etc/profile.d/net.gfxmonk:
   path: ../root/profile.d/net.gfxmonk
+  tags: root
 /etc/profile.d/net.gfxmonk.0path.sh:
   uri: http://gfxmonk.net/dist/0install/0path.xml
   extract: init.sh
+  tags: root
 /etc/profile.d/net.gfxmonk.bashcomplete.sh:
   uri: http://gfxmonk.net/dist/0install/bashcomplete.xml
   extract: bashcomplete/init
+  tags: root
 /etc/X11/sessions:
   path: ../root/sessions
+  tags: root
 /etc/udev/rules.d/input.rules:
   path: ../root/udev-rules.d/input.rules
+  tags: root
 
 ~/.vimrc:
   path: ../vim/vimrc
@@ -67,6 +80,7 @@ meta:
 
 ~/.inputrc:
   path: ../home/inputrc
+  tags: linux
 
 ~/.tmux.conf:
   path: ../home/tmux.conf
@@ -78,7 +92,8 @@ meta:
   path: ../home/xmonad.hs
 
 ~/.xbindkeysrc.scm:
-  path: ../home/xbindkeysrc.scm
+  xath: ../home/xbindkeysrc.scm
+  tags: linux
 
 ~/.xbindkeysrc.scm:
   path: ../home/xbindkeysrc-tv.scm
@@ -89,11 +104,14 @@ meta:
 
 ~/.zshrc:
   path: ../home/zshrc
+  tags: linux
 ~/.bashrc:
   path: ../home/bashrc
+  tags: linux
 
 ~/.gizmod:
   path: ../home/gizmod
+  tags: linux
 
 ~/.gitconfig:
   path: ../home/gitconfig
@@ -103,11 +121,12 @@ meta:
 
 ~/.config/rygel.conf:
   path: ../home/rygel.conf
+  tags: linux
 
 ## desktop-specific
 /etc/profile.d/autojump:
   uri: http://gfxmonk.net/dist/0install/autojump.xml
-  tags: desktop
+  tags: desktop root
 
 ## KEYBOARD TYPES
 ~/.xkb:
