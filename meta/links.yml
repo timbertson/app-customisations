@@ -109,6 +109,9 @@ meta:
   path: ../home/bashrc
   tags: linux
 
+~/.rainbow:
+  path: ../home/rainbow
+
 ~/.gizmod:
   path: ../home/gizmod
   tags: linux
