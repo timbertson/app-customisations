@@ -1,4 +1,4 @@
-BoldAsFont=no
+BoldAsFont=yes
 Term=xterm-256color
 ForegroundColour=221,221,204
 BackgroundColour=30,20,40
