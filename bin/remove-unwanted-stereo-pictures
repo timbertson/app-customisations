@@ -1,0 +1,8 @@
+#!/bin/bash
+set -eux
+for dir in orig straight; do
+	(cd $dir && \
+			piep -i <(ls -1) -e 'outname = lambda x: "-out".join(path.splitext(x)).replace("-out-out","-out")' \
+				'file = p | outname(p) | path.join("..","cross-eyed", p) | not path.exists(p) | sh("trash", file) | "removed", file')
+done
+

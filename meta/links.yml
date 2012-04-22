@@ -112,6 +112,9 @@ meta:
 ~/.rainbow:
   path: ../home/rainbow
 
+~/.config/ipython/profile_default/ipython_config.py:
+  path: ../home/ipython_config.py
+
 ~/.gizmod:
   path: ../home/gizmod
   tags: linux
