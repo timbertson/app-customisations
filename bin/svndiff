@@ -1,0 +1,2 @@
+#!/bin/bash
+rainbow --conf diff -- svn diff "$@" | less -SR
