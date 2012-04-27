@@ -12,8 +12,3 @@ function g
 	fi
 }
 
-# make subversion diff almost as awesome as git's:
-function svndiff
-{
-	svn diff $@ | color-diff
-}
