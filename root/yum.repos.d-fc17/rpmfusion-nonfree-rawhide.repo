@@ -1,0 +1,24 @@
+[rpmfusion-nonfree-rawhide]
+name=RPM Fusion for Fedora Rawhide - Nonfree
+#baseurl=http://download1.rpmfusion.org/nonfree/fedora/development/rawhide/$basearch/os/
+mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-rawhide&arch=$basearch
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-latest-$basearch file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-rawhide-$basearch
+
+[rpmfusion-nonfree-rawhide-debuginfo]
+name=RPM Fusion for Fedora Rawhide - Nonfree - Debug
+#baseurl=http://download1.rpmfusion.org/nonfree/fedora/fedora/development/rawhide/$basearch/os/debug/
+mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-rawhide-debug&arch=$basearch
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-latest-$basearch file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-rawhide-$basearch
+
+[rpmfusion-nonfree-rawhide-source]
+name=RPM Fusion for Fedora Rawhide - Nonfree - Source
+#baseurl=http://download1.rpmfusion.org/nonfree/fedora/fedora/development/rawhide/source/SRPMS/
+mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-rawhide-source&arch=$basearch
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-latest-$basearch file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-rawhide-$basearch
+

@@ -2,7 +2,7 @@
 
 xml=$(0launch http://gfxmonk.net/dist/0install/gnu-parallel.xml "echo {} | grep '.xml'" ::: "$@" | head -n 1)
 set -x
-[ -n "$xml" ] && 0launch http://gfxmonk.net/dist/0install/0readme.xml "$xml" --rich
+[ -n "$xml" ] && 0launch --not-before=0.1.3 http://gfxmonk.net/dist/0install/0readme.xml "$xml" --rich
 
 set -e
 
