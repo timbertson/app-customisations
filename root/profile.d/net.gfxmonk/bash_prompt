@@ -29,5 +29,5 @@ HOSTNAME_COLOR="$YELLOW"
 [ "$SSH_CLIENT" ] && HOSTNAME_COLOR="$RED"
 
 # string it all together:
-PS1="$error_notification"'\n\[$GREEN\]\u\[$HOSTNAME_COLOR\]@\h \[$CYAN\]\w\[$GREEN\] \$\[$RESET\] '
+PS1="$error_notification\n\[$GREEN\]\u\[$HOSTNAME_COLOR\]@\h \[$CYAN\]\w\[$GREEN\] \$\[$RESET\] "
 
