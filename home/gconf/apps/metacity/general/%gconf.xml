@@ -14,5 +14,5 @@
 	<entry name="focus_mode" mtime="1325677862" type="string">
 		<stringvalue>sloppy</stringvalue>
 	</entry>
-	<entry name="num_workspaces" mtime="1333533462" type="int" value="4"/>
+	<entry name="num_workspaces" mtime="1335489045" type="int" value="3"/>
 </gconf>

@@ -30,7 +30,7 @@
 			</runner>
 		</command>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-gnome.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/pyflakes.xml"/>
+		<!-- <requires interface="http://gfxmonk.net/dist/0install/pyflakes.xml"/> -->
 		<requires interface="http://gfxmonk.net/dist/0install/ack.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-pathogen.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-fugitive.xml"/>

@@ -9,12 +9,12 @@ meta:
       - root
       - linux
       - mac
-      - ubuntu
-      - oneiric
+      #- ubuntu
+      #- oneiric
       - desktop
-      #- fedora
-      #- fc16
-      #- fc15
+      - fedora
+      - fc17
+      - shellshape
     tjcee:
       - root
       - linux
@@ -42,11 +42,10 @@ meta:
 /etc/profile.d/net.gfxmonk:
   path: ../root/profile.d/net.gfxmonk
   tags: root
-/etc/profile.d/net.gfxmonk.0path.sh:
+/etc/profile.d/net.gfxmonk.0path:
   uri: http://gfxmonk.net/dist/0install/0path.xml
-  extract: init.sh
   tags: root
-/etc/profile.d/net.gfxmonk.bashcomplete.sh:
+/etc/profile.d/net.gfxmonk.bashcomplete/init.sh:
   uri: http://gfxmonk.net/dist/0install/bashcomplete.xml
   extract: bashcomplete/init
   tags: root
@@ -158,15 +157,21 @@ meta:
   - path: ../home/applications/xbindkeys.desktop
     tags: tv
 
+~/.config/autostart/guake.desktop:
+  - path: ../home/applications/guake.desktop
+    tags: desktop
+
 ~/.local/share/applications/gnome-shell.desktop:
   uri: http://gfxmonk.net/dist/0install/shellshape.xml
   extract: gnome-shell.desktop
-  tags: desktop
+  tags: desktop shellshape
 
 ## FEDORA
 /etc/yum.repos.d:
   path: ../root/yum.repos.d-fc15
   tags: fc15
+  path: ../root/yum.repos.d-fc17
+  tags: fc17
 
 /etc/pki/rpm-gpg:
   path: ../root/pki-rpm-gpg

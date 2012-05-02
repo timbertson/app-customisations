@@ -1,0 +1,2 @@
+#!/bin/sh
+exec 0launch --command=notebook2 'http://gfxmonk.net/dist/0install/ipython.xml' "$@"
