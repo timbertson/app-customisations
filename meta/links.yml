@@ -161,6 +161,18 @@ meta:
   - path: ../home/applications/guake.desktop
     tags: desktop
 
+~/.config/autostart/tim-session.desktop:
+  path: ../session/session.desktop
+  tags: desktop
+
+~/.local/share/tims-startup-actions.desktop:
+  path: ../session/session.desktop
+  tags: desktop
+
+~/.local/share/tim-session:
+  path: ../session
+  tags: desktop
+
 ~/.local/share/applications/gnome-shell.desktop:
   uri: http://gfxmonk.net/dist/0install/shellshape.xml
   extract: gnome-shell.desktop

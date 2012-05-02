@@ -37,8 +37,9 @@
 (xbindkey '(alt "b:8") "xte 'keyup Alt_L' 'keydown Super_L' 'key Page_Up'   'keyup Super_L' 'keydown Alt_L'")
 (xbindkey '(alt "b:9") "xte 'keyup Alt_L' 'keydown Super_L' 'key Page_Down' 'keyup Super_L' 'keydown Alt_L'")
 
-; new terminal on ctrl+alt+return
+; new terminal on super+return
 (xbindkey '(control alt "c:36") "gnome-terminal")
+(xbindkey '(mod4 "c:36") "gnome-terminal")
 
 ; kill windows with meta+shift+middle-click
 (xbindkey '(alt mod4 "b:2") "xte 'keyup Alt_L' 'keydown Shift_L' 'key c' 'keyup Shift_L' 'keydown Alt_L'")
