@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Categories=Application;Development
+Comment=tim's startup items
+Exec=/home/tim/.local/share/tim-session/run
+Hidden=false
+Name=Tim's Startup Actions
+Type=Application
+Version=1.0

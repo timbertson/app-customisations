@@ -1,0 +1,4 @@
+#!/bin/sh
+
+logpath="/tmp/startup-actions-$USER.log"
+"`dirname $0`/_impl" 2>&1 | tee "$logpath" || notify-send 'Startup actions failed' "see $logpath"

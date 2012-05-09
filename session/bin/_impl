@@ -1,0 +1,27 @@
+#!/bin/bash
+export PATH="$PATH:$HOME/bin"
+function runbg {
+	("$@" 2>&1 || echo "STARTUP item error: $@ failed with exit code $?") &
+}
+
+runbg xkbcomp -I~/ ~/.xkb "${DISPLAY}"
+psgrep -q xbindkeys || runbg xbindkeys
+psgrep -q rygel || runbg rygel >/dev/null
+
+# nautilus needs to be started explicitly for desktop in gnome-shell?
+#runbg nautilus -n
+
+# fails with a dbus error if it gets run too early?
+psgrep -q guake || runbg guake
+
+#psgrep -q mountmon || runbg mountmon
+psgrep -q parcellite || runbg parcellite
+#psgrep -q synapse || run synapse -s
+runbg clear-recently-used
+
+runbg save-yumpackage-list
+#runbg save-debpackage-list
+
+psgrep 'systemd --user' || runbg 0launch -c http://gfxmonk.net/dist/0install/systemd-user.xml
+#systemd doesn't exist on ubuntu - do it the crappy way:
+# edit-server-ctl start
