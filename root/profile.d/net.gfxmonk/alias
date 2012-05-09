@@ -20,6 +20,7 @@ alias g0='mkzero-gfxmonk'
 alias aptinstall='sudo apt-get install'
 alias aptremove='sudo apt-get remove'
 alias aptsearch='apt-cache search'
+alias cwd='echo -n `pwd` | 0launch http://gfxmonk.net/dist/0install/pyperclip.xml -i' # copy working dir to clipboard
 
 alias private='ecryptfs-mount-private'
 
@@ -31,6 +32,5 @@ alias umount='sudo umount'
 alias xephyr='Xephyr -ac -screen 600x800 -br -reset -terminate 2> /dev/null :1 &'
 
 alias man='0launch --main=0alias http://0install.net/2007/interfaces/ZeroInstall.xml --manpage --'
-alias 0launch='command 0launch http://0install.net/2007/interfaces/ZeroInstall.xml'
 alias ind='indicate-task --'
 

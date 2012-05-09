@@ -13,6 +13,3 @@ export PATH="$PATH:/opt/local/bin:/opt/local/sbin:$HOME/.bin"
 
 # Add darwinports to MANPATH:
 export MANPATH="$MANPATH:/opt/local/man"
-
-# "copy working directory" (to the clipboard)
-alias cwd='echo -n `pwd` | pbcopy; echo "Copied: `pwd`"'
