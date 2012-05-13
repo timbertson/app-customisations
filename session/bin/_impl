@@ -4,6 +4,8 @@ function runbg {
 	("$@" 2>&1 || echo "STARTUP item error: $@ failed with exit code $?") &
 }
 
+echo "Session started: $(date)"
+
 runbg xkbcomp -I~/ ~/.xkb "${DISPLAY}"
 psgrep -q xbindkeys || runbg xbindkeys
 psgrep -q rygel || runbg rygel >/dev/null
@@ -25,3 +27,4 @@ runbg save-yumpackage-list
 psgrep 'systemd --user' || runbg 0launch -c http://gfxmonk.net/dist/0install/systemd-user.xml
 #systemd doesn't exist on ubuntu - do it the crappy way:
 # edit-server-ctl start
+echo "Session initialization finished: $(date)"
