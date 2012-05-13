@@ -119,10 +119,13 @@ meta:
   tags: linux
 
 ~/.gitconfig:
-  path: ../home/gitconfig
+  path: ../home/git/config
 
 ~/.gitignore:
-  path: ../home/gitignore
+  path: ../home/git/ignore
+
+~/.git/hooks:
+  path: ../home/git/hooks
 
 ~/.config/rygel.conf:
   path: ../home/rygel.conf

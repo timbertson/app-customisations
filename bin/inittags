@@ -1,16 +1,4 @@
 #!/bin/bash
 
-hook_script="$(readlink -f "$0")"
-
-if [ -d .git -a -e "$hook_script" ]; then
-	for hook in post-merge post-commit post-checkout; do
-		p=".git/hooks/$hook"
-		if [ ! -e "$p" ]; then
-			echo "installing git hook: $hook"
-			ln -s "$hook_script" "$p"
-		fi
-	done
-fi
-
 # generate tags *in the background*
 ctags -f ".tags" -R . "$@" >/dev/null 2>&1 &
