@@ -2,7 +2,7 @@
 [Desktop Entry]
 Categories=Application;Development
 Comment=tim's startup items
-Exec=/home/tim/.local/share/tim-session/run
+Exec=/home/tim/.local/share/tim-session/run slow
 Hidden=false
 Name=Tim's Startup Actions
 Type=Application

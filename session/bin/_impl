@@ -6,25 +6,32 @@ function runbg {
 
 echo "Session started: $(date)"
 
+[ "$1" == "slow" ] || sleep 2
+
+# these are important to have early
 runbg xkbcomp -I~/ ~/.xkb "${DISPLAY}"
 psgrep -q xbindkeys || runbg xbindkeys
+
+env >&2
+
+[ "$1" == "slow" ] || sleep 2
+
+psgrep -q guake || runbg guake
+
+[ "$1" == "slow" ] || sleep 5
 psgrep -q rygel || runbg rygel >/dev/null
 
 # nautilus needs to be started explicitly for desktop in gnome-shell?
 #runbg nautilus -n
 
-# fails with a dbus error if it gets run too early?
-psgrep -q guake || runbg guake
-
-#psgrep -q mountmon || runbg mountmon
-psgrep -q parcellite || runbg parcellite
-#psgrep -q synapse || run synapse -s
-runbg clear-recently-used
-
-runbg save-yumpackage-list
-#runbg save-debpackage-list
-
 psgrep 'systemd --user' || runbg 0launch -c http://gfxmonk.net/dist/0install/systemd-user.xml
 #systemd doesn't exist on ubuntu - do it the crappy way:
 # edit-server-ctl start
-echo "Session initialization finished: $(date)"
+
+echo "Session initialization finished (mostly): $(date)"
+
+sleep 5; runbg clear-recently-used
+psgrep daglink || runbg daglink -f
+sleep 20; runbg save-yumpackage-list
+#runbg save-debpackage-list
+echo "Session initialization ended: $(date)"

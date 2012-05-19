@@ -1,4 +1,5 @@
 #!/bin/bash
 
 here="$(readlink -f "$(dirname "$0")")"
-exec 0launch "$here/tim-session.xml"
+[ "$1" == "slow" ] && sleep 5;
+exec 0launch "$here/tim-session.xml" "$@"
