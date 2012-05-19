@@ -11,7 +11,7 @@
 	</entry>
 	<entry name="auto_raise_delay" mtime="1319887978" type="int" value="100"/>
 	<entry name="auto_raise" mtime="1319887971" type="bool" value="false"/>
-	<entry name="focus_mode" mtime="1325677862" type="string">
+	<entry name="focus_mode" mtime="1337159865" type="string">
 		<stringvalue>sloppy</stringvalue>
 	</entry>
 	<entry name="num_workspaces" mtime="1335489045" type="int" value="3"/>

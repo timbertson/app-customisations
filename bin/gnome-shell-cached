@@ -15,6 +15,8 @@ if [ "$1" == "update" ]; then
 	exit
 fi
 
+export SHELLSHAPE_DEBUG=1
+
 # AUTO GENERATED - do not modify below this line
 export GJS_PATH=$'/home/tim/dev/gnome-shell/shellshape@gfxmonk.net/lib:/home/tim/dev/gnome-shell/shellshape@gfxmonk.net/lib'
 export XDG_DATA_DIRS=$'/home/tim/.cache/0install.net/implementations/sha256=fa88a066eb0c196b3b7612288b66123ae14ab9508969baa5b961d2df85bf1236/xdg/data:/home/tim/.cache/0install.net/implementations/sha256=851f0c2a3a7a624451ecfa072da568ea052f4e7ceedce42b7a228ff2dbd7cf75/xdg/data:/home/tim/dev/gnome-shell/shellshape@gfxmonk.net/xdg/data:/home/tim/.cache/0install.net/implementations/sha256=fa88a066eb0c196b3b7612288b66123ae14ab9508969baa5b961d2df85bf1236/xdg/data:/home/tim/dev/gnome-shell/shellshape@gfxmonk.net/xdg/data:/home/tim/.cache/0install.net/implementations/sha256=851f0c2a3a7a624451ecfa072da568ea052f4e7ceedce42b7a228ff2dbd7cf75/xdg/data:/usr/local/share:/usr/share'
