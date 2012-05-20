@@ -43,6 +43,9 @@
 		<requires interface="http://gfxmonk.net/dist/0install/vim-argtextobj.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-stratifiedjs.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-solarized.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-yankring.xml"/>
+		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-vitality.xml"/> -->
+		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-ctrlp.xml"/> -->
 		<environment insert="vim" name="VIMPATH"/>
 		<implementation id="sha1new=3e31b36ca7febae90f26d9fa7782fadf57936736" released="2011-08-31" version="20110831.2043">
 			<manifest-digest sha256="3ccf153719399c646adb20910a1fab1d91c649d62a06cbbf6bda48b238a817a7"/>

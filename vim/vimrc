@@ -134,6 +134,7 @@ set list listchars=tab:▸\
 autocmd BufNewFile,BufRead * match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ *]\)\|\([^ \t]\zs\s\+$\)/
                              match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ *]\)\|\([^ \t]\zs\s\+$\)/
 
+
 fun! Save_if_possible()
 	if len(expand("%")) > 0 && &buftype == ""
 		:up
@@ -353,6 +354,7 @@ command! -narg=0 Zerocopy !cd %:p:h && gnome-terminal -x /bin/bash -c "echo %:p;
 command! -narg=0 Zerosign !cd %:p:h && gnome-terminal -x `which 0publish` --xmlsign %:p
 command! Version !version
 
+command! -narg=1 Boom put =system(\"boom echo <args>\")
 
 if has("win32unix")
 	" make `gf` work on windows paths
