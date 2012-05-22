@@ -118,6 +118,9 @@ meta:
   path: ../home/gizmod
   tags: linux
 
+~/.boom:
+  path: ../home/boom
+
 ~/.gitconfig:
   path: ../home/git/config
 
