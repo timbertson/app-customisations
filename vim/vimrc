@@ -298,13 +298,24 @@ nmap Q gqq
 
 nmap <leader>p V{jo}ko
 
-" ctrl+f to FuzzyFinder (recursive)
-"nmap <C-f> :FuzzyFinderTaggedFile<cr>
-nmap <C-f> :CommandT<cr>
-nmap <C-b> :FuzzyFinderBuffer<cr>
+let g:ctrlp_map=''
+let g:ctrlp_working_path_mode=2 " current directory
+let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files']
+let g:ctrlp_by_filename = 1
+let g:ctrlp_switch_buffer = 2
+
+" CommandT requires compilation, so we use CtrlP as a more portable fallback
+if exists(":CommandT")
+	nmap <C-f> :CommandT<cr>
+else
+	nmap <C-f> :CtrlP<cr>
+endif
+" but always have ctrlp available as well
+nmap <leader><C-f> :CtrlP<cr>
+nmap <C-b> :CtrlPBuffer<cr>
 " nmap <leader>b :FuzzyFinderBuffer<cr>
 " nmap <leader>F :FuzzyFinderTaggedFile<cr>
-nmap <leader>t :FuzzyFinderTag<cr>
+nmap <leader>t :CtrlPTag<cr>
 
 " leader-t for showing nerd-tree
 nmap <leader>e :NERDTreeToggle<cr>

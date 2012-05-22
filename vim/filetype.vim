@@ -7,4 +7,5 @@ augroup filetypedetect
 		au! BufRead,BufNewFile *.njs     setfiletype javascript
 		au! BufRead,BufNewFile *.jss     setfiletype javascript
 		au! BufRead,BufNewFile *.scala   setfiletype scala
+		au! BufRead,BufNewFile *.as      setfiletype actionscript
 augroup END
