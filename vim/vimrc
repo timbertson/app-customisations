@@ -11,7 +11,8 @@ filetype plugin indent on
 syntax on
 syntax sync minlines=200 " don't lose track of syntax highlighting when in large syntax blocks
 set number
-let g:solarized_contrast="high"
+let g:solarized_contrast="normal"
+let g:solarized_italic=0
 set background="dark"
 " sorry solarized, but you're rubbish at terminal mode...
 if has("gui_running")
