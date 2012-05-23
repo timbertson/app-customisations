@@ -306,7 +306,7 @@ let g:ctrlp_by_filename = 1
 let g:ctrlp_switch_buffer = 2
 
 " CommandT requires compilation, so we use CtrlP as a more portable fallback
-if exists(":CommandT")
+if exists(":CommandT") == 2
 	nmap <C-f> :CommandT<cr>
 else
 	nmap <C-f> :CtrlP<cr>
