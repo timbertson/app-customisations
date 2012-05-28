@@ -70,6 +70,7 @@ meta:
 
 ~/.gconf:
   path: ../home/gconf
+  tags: desktop
 
 ~/.icons:
   path: ../home/icons
