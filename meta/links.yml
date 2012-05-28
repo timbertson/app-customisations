@@ -121,6 +121,9 @@ meta:
 ~/.boom:
   path: ../home/boom
 
+~/.snip:
+  path: ../home/snip
+
 ~/.gitconfig:
   path: ../home/git/config
 
