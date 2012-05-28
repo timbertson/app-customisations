@@ -280,6 +280,9 @@ map <S-k> "_d
 " new tab with <leader>T
 nmap <leader>T :tabnew<cr>
 
+nmap <leader>q :q<cr>
+nmap <leader>Q :tabclose<cr>
+
 " map alt+slash to line comment toggle
 map <A-/> :TComment<cr>
 "map <D-/> :TComment<cr>
@@ -301,7 +304,7 @@ nmap <leader>p V{jo}ko
 
 let g:ctrlp_map=''
 let g:ctrlp_working_path_mode=2 " current directory
-let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files']
+let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --cached --other'] " include untracked files
 let g:ctrlp_by_filename = 1
 let g:ctrlp_switch_buffer = 2
 
