@@ -37,6 +37,8 @@
 		<requires interface="http://gfxmonk.net/dist/0install/vim-nerdtree.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-clipbrd.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-tabular.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-detectindent.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-a.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-easymotion.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-camelcase-motion.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-indent-object.xml"/>
