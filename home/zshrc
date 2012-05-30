@@ -1,5 +1,6 @@
-. /etc/profile.d/init
-
+if [ -r /etc/profile.d/init ]; then
+	. /etc/profile.d/init
+fi
 
 # tell ZSH to use the terminfo database
 # create a zkbd compatible hash;
