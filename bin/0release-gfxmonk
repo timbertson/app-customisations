@@ -6,6 +6,7 @@ set -eu
 
 local="$1"
 shift 1
+[ -f "$local" ] ||  (echo "you must provide a feed as the first argument"; exit 1)
 name="$(basename "$local" .xml)"
 feed="$(basename "$local")"
 
