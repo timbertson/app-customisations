@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -eu
+
+[ "$#" -gt 0 ] || (echo "provide at least the feed!"; exit 1)
+
+local="$1"
+shift 1
+[ -f "$local" ] ||  (echo "you must provide a feed as the first argument"; exit 1)
+name="$(basename "$local" .xml)"
+feed="$(basename "$local")"
+
+set -x
+cd 0inst
+local="$(realpath "../$local")"
+[ -f "$feed" ]
+[ -f "$local" ]
+
+exec 0release --release "$local" --master-feed-file="$feed" --archive-dir-public-url="http://gfxmonk.net/dist/0install/$name" "$@"

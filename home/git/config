@@ -29,7 +29,7 @@
 [merge]
 	tool = meld
 [user]
-	name = gfxmonk
+	name = Tim Cuthbertson
 	email = tim@gfxmonk.net
 [core]
 	excludesfile = /home/tim/.gitignore
