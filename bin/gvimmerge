@@ -1,0 +1,3 @@
+#!/bin/sh
+set -x
+exec gvim -f -d -c "wincmd J" "$MERGED" "$LOCAL" "$BASE" "$REMOTE"

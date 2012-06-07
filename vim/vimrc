@@ -226,6 +226,10 @@ nnoremap + <c-a>
 " ) kills the surrounding characters of a selection
 vmap <leader>) <esc>`<hx`>x
 
+" jump to alternate file
+nmap <Leader>a :A<cr>
+nmap <Leader>A :AS<cr>
+
 " home & end
 map <C-l> $
 map <C-h> ^

@@ -33,3 +33,7 @@
 	email = tim@gfxmonk.net
 [core]
 	excludesfile = /home/tim/.gitignore
+[guitool "gvim remote tab"]
+	cmd = gvim --remote-tab \"$FILENAME\"
+	noconsole = yes
+	needsfile = yes
