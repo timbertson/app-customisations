@@ -28,6 +28,8 @@
 	untracked = cyan
 [merge]
 	tool = meld
+[mergetool]
+	keepBackup = false
 [user]
 	name = Tim Cuthbertson
 	email = tim@gfxmonk.net
