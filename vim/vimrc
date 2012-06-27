@@ -24,6 +24,9 @@ end
 
 set encoding=utf-8
 set textwidth=0
+set copyindent
+" insert a tab at the start of the line, without messing up existing (mixed) indents
+nmap <leader><tab> m'0i<tab><esc>`'l
 set noswapfile
 set nobackup
 set nojoinspaces " just one space after a period (when joining)
@@ -45,7 +48,6 @@ autocmd SessionLoadPost * tab ball
 set sessionoptions=blank,buffers,curdir,folds,resize,tabpages,winsize
 command! -narg=0 SSession :mksession! .vimsession
 command! -narg=0 LSession :source .vimsession
-" let g:semantic_tabs="auto"
 
 fun! FnEmailMode()
 	setlocal spell mousemodel=popup
@@ -88,6 +90,10 @@ endfun
 command! -nargs=1 Tabsize call Tabsize(<args>)
 
 call GlobalTabsize(2)
+" defaults for indent-finder when no other preference is clear from the file
+let g:indent_finder_default_style="tab"
+let g:indent_finder_default_width="2"
+
 set cursorline
 set ignorecase
 set smartcase
@@ -100,7 +106,28 @@ set cinkeys-=#
 set mouse=a
 " allow status-bar windows (0-height)
 set wmh=0
+
+" statusbar config:
+set statusline=%< " truncation point
+set statusline+=\  " leading space
+set statusline+=%q " quickfix list
+set statusline+=%-.80f\  " filename, left aligned @ 30chars
+set statusline+=%#statuslinenc#
+set statusline+=\ %m " modified flag
+set statusline+=\ %#special#
+set statusline+=%r " readonly flag
+set statusline+=%#statuslinenc#
+set statusline+=%=
+set statusline+=▸%{&et?'space':'tab'}\ %{&sw} "indentation
+set statusline+=\ \  " separator
+set statusline+=%{&ff} "file format
+set statusline+=• " separator
+set statusline+=%{strlen(&fenc)?&fenc:'none'} "file encoding
+set statusline+=\  "end with a space
+set laststatus=2 " always show the status bar
+
 " set iskeyword-=_ \" allow underscore to delimit words"
+
 
 set tags+=.tags
 let g:autotagTagsFile=".tags"

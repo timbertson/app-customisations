@@ -32,12 +32,15 @@
 		<requires interface="http://gfxmonk.net/dist/0install/vim-gnome.xml"/>
 		<!-- <requires interface="http://gfxmonk.net/dist/0install/pyflakes.xml"/> -->
 		<requires interface="http://gfxmonk.net/dist/0install/ack.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/indent-finder.xml">
+			<environment insert="" mode="prepend" name="VIMPATH"/>
+		</requires>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-pathogen.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-fugitive.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-nerdtree.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-clipbrd.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-tabular.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-detectindent.xml"/>
+		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-detectindent.xml"/> -->
 		<requires interface="http://gfxmonk.net/dist/0install/vim-a.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-easymotion.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-camelcase-motion.xml"/>
@@ -68,6 +71,14 @@
 		<implementation id="sha1new=3055e15ccbbefed2f8487d078111a415c0976f97" released="2012-05-22" version="20120522.2256">
 			<manifest-digest sha256="1f48c7e5907e4986de54bec4e2ef4ec5100c2fdb7fd767d9388810cb87431db4"/>
 			<archive extract="vim" href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom-20120522.2256.tgz" size="547018"/>
+		</implementation>
+		<implementation id="sha1new=141399950f718264c5b3d2e7861f844877e451c1" released="2012-06-09" version="20120609.2348">
+			<manifest-digest sha256="cdcede2e81183fd218cf5ae4c11065a1bf57cf25162ed5569934bd64b0e54324"/>
+			<archive extract="vim" href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom-20120609.2348.tgz" size="547191"/>
+		</implementation>
+		<implementation id="sha1new=1f1547cae691e39e67bac6bce103b9baa612a142" released="2012-06-10" version="20120610.1242">
+			<manifest-digest sha256="00251cd799fef5691150579cfa28f54dfecd628833dcd0ebf180bde5c2928cdc"/>
+			<archive extract="vim" href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom-20120610.1242.tgz" size="547196"/>
 		</implementation>
 	</group>
 </interface>

@@ -10,6 +10,7 @@
 	show-branches = !git show-branch origin/master $(git branch | cut -c3-)
 	root = rev-parse --show-toplevel
 	pushall = !git push && git push --tags
+	l = log --color --graph --pretty=format:'%C(yellow)%h%Creset -%C(bold blue)%d%Creset %s %Cgreen(%cr) %C(bold)<%an>%Creset' --abbrev-commit --date=relative --date-order
 [color]
 	branch = auto
 	diff = auto
@@ -17,6 +18,7 @@
 	status = auto
 	showbranch = auto
 	sh = auto
+	ui = auto
 [color "branch"]
 	current = green
 	remote = cyan
