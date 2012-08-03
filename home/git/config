@@ -29,7 +29,7 @@
 	changed = red
 	untracked = cyan
 [merge]
-	tool = meld
+	tool = gvimdiff
 [mergetool]
 	keepBackup = false
 [user]
