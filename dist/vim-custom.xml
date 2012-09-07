@@ -48,6 +48,7 @@
 		<requires interface="http://gfxmonk.net/dist/0install/vim-argtextobj.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-stratifiedjs.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-solarized.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-tcomment.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-vaxe.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-yankring.xml"/>
 		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-vitality.xml"/> -->
