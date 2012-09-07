@@ -1,6 +1,0 @@
-autoload/tassert.vim
-autoload/tlog.vim
-doc/tassert.txt
-macros/tassert.vim
-plugin/05tlog.vim
-plugin/07tassert.vim
