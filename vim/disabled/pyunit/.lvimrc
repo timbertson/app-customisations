@@ -1,2 +1,0 @@
-" Only consider source files under src
-let PyUnitSourceRoot = "src"
