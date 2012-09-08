@@ -15,9 +15,9 @@
 			<requires importance="recommended" interface="http://gfxmonk.net/dist/0install/vim-tagbar.xml"/>
 			<requires importance="recommended" interface="http://gfxmonk.net/dist/0install/exuberant-ctags.xml"/>
 			<requires importance="recommended" interface="http://gfxmonk.net/dist/0install/vim-command-t.xml"/>
-			<requires importance="recommended" interface="http://gfxmonk.net/dist/0install/savemytext.xml">
+			<!-- <requires importance="recommended" interface="http://gfxmonk.net/dist/0install/savemytext.xml">
 				<version not-before="0.1.3"/>
-			</requires>
+			</requires> -->
 			<runner interface="http://gfxmonk.net/dist/0install/vim-gnome.xml">
 				<arg>-v</arg>
 				<arg>-u</arg>
@@ -46,11 +46,14 @@
 		<requires interface="http://gfxmonk.net/dist/0install/vim-camelcase-motion.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-indent-object.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-argtextobj.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-snipmate.xml">
+			<environment insert="after" mode="prepend" name="VIMPATH"/>
+		</requires>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-stratifiedjs.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-solarized.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-tcomment.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-vaxe.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-yankring.xml"/>
+		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-yankring.xml"/> -->
 		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-vitality.xml"/> -->
 		<requires interface="http://gfxmonk.net/dist/0install/vim-ctrlp.xml"/>
 		<environment insert="vim" name="VIMPATH"/>
@@ -85,6 +88,10 @@
 		<implementation id="sha1new=b95ad0edda9d2d6ffe05090a432808e2ebfab56f" released="2012-08-08" version="20120808.2100">
 			<manifest-digest sha256="b98ce095862f4d460db2cbaa063b2760cf8e165cfdcb48e6b4ebbcfdbdfe6f24"/>
 			<archive extract="vim" href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom-20120808.2100.tgz" size="547273"/>
+		</implementation>
+		<implementation id="sha1new=ad2b04610d632f5d2cf911a59f2c275467455281" released="2012-09-07" version="20120907.2111">
+			<manifest-digest sha256="7eb04e12e07026d2d1a985daa2f476e6d7875b5a249e9caa006749d1ef504960"/>
+			<archive extract="vim" href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom-20120907.2111.tgz" size="74716"/>
 		</implementation>
 	</group>
 </interface>
