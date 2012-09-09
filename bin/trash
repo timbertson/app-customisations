@@ -1,3 +1,2 @@
 #!/bin/sh
-
-mv -f "$@" ~/.local/share/Trash/files/
+exec 0launch 'http://gfxmonk.net/dist/0install/trash.xml' "$@"

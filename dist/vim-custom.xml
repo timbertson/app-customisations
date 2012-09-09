@@ -47,7 +47,7 @@
 		<requires interface="http://gfxmonk.net/dist/0install/vim-indent-object.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-argtextobj.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-snipmate.xml">
-			<environment insert="after" mode="prepend" name="VIMPATH"/>
+			<environment insert="after" mode="append" name="VIMPATH"/>
 		</requires>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-stratifiedjs.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-solarized.xml"/>
@@ -92,6 +92,14 @@
 		<implementation id="sha1new=ad2b04610d632f5d2cf911a59f2c275467455281" released="2012-09-07" version="20120907.2111">
 			<manifest-digest sha256="7eb04e12e07026d2d1a985daa2f476e6d7875b5a249e9caa006749d1ef504960"/>
 			<archive extract="vim" href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom-20120907.2111.tgz" size="74716"/>
+		</implementation>
+		<implementation id="sha1new=7908a45c8cdcdb752a19c44143c6f5a90e59bfcb" released="2012-09-08" version="20120908.2151">
+			<manifest-digest sha256="d43d2905f28d283740e19cccea28de7218f88ce2d4b4ee4ce444415359bb5bcd"/>
+			<archive extract="vim" href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom-20120908.2151.tgz" size="73413"/>
+		</implementation>
+		<implementation id="sha1new=01b90d62f90ebf63f1070db27bfa643eb45f7101" released="2012-09-09" version="20120909.1843">
+			<manifest-digest sha256="4e1a552f401de4aeaa1fbb7ce9bb42e190b2236cab21bc548e7fb75e27940d12"/>
+			<archive extract="vim" href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom-20120909.1843.tgz" size="73855"/>
 		</implementation>
 	</group>
 </interface>

@@ -407,3 +407,9 @@ if has("win32unix")
 	set includeexpr=substitute(system('cygpath\ '.shellescape(v:fname)),'\\n$','','')
 end
 
+fun! Snip(name)
+	" get a snippet from the `snip` command line tool.
+	let l:str = system("snip ". shellescape(a:name))
+	return substitute(l:str, '\n\+$', '', 'g')
+endfun
+
