@@ -1,10 +1,14 @@
 set nocompatible
-" pathogen bootstrap, then use it to make $VIMPATH useful
 let g:pathsep = ':'
 if has("win32")
 	let g:pathsep = ';'
+	if exists("$PWD")
+		" at least start in the right directory when launched from mingw / cygwin
+		cd $PWD
+	endif
 endif
 
+" pathogen bootstrap, then use it to make $VIMPATH useful
 let &runtimepath = $PATHOGEN_ROOT . "," . &runtimepath
 let &runtimepath = pathogen#join(split($VIMPATH,g:pathsep),&runtimepath)
 call pathogen#runtime_append_all_bundles()
