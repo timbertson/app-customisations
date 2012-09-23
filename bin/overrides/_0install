@@ -1,0 +1,4 @@
+#!/bin/bash
+#SYS_0LAUNCH="$(which -a 0launch | grep -E '^/(usr|bin)' | head -n 1)"
+SYS_0LAUNCH="/usr/bin/0launch"
+exec "$SYS_0LAUNCH" --main='0install' -c http://0install.net/2007/interfaces/ZeroInstall.xml "$@"

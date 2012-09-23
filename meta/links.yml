@@ -99,6 +99,10 @@ meta:
   path: ../home/xbindkeysrc-tv.scm
   tags: tv
 
+~/.hai:
+  path: ../home/hai
+  tags: linux
+
 ~/.ackrc:
   path: ../home/ackrc
 
