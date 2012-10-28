@@ -20,7 +20,7 @@ psgrep -q guake || runbg guake
 
 [ "$1" == "slow" ] || sleep 5
 psgrep -q rygel || runbg rygel >/dev/null
-runbg ~/crashplan/bin/CrashPlanEngine start
+#runbg ~/crashplan/bin/CrashPlanEngine start
 
 # nautilus needs to be started explicitly for desktop in gnome-shell?
 #runbg nautilus -n

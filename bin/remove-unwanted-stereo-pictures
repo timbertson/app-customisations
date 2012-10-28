@@ -1,8 +1,21 @@
 #!/bin/bash
-set -eux
+set -e
+if [ "$1" = '-f' -o "$1" = '--force' ]; then
+	trash_cmd='sh("trash", file)'
+else
+	trash_cmd='True'
+	echo "(printing; use -f or --force to really delete)" >&2
+fi
+
+set -u
+
 for dir in orig straight; do
-	(cd $dir && \
-			piep -i <(ls -1) -e 'outname = lambda x: "-out".join(path.splitext(x)).replace("-out-out","-out")' \
-				'file = p | outname(p) | path.join("..","cross-eyed", p) | not path.exists(p) | sh("trash", file) | "removed", file')
+	if [ -d "$dir" ]; then
+		(cd $dir && \
+				piep -i <(ls -1) \
+					'file = p | path.join("..","cross-eyed", p) | not path.exists(p) | '"$trash_cmd"' | "removed", file')
+				#piep -i <(ls -1) -e 'outname = lambda x: "-out".join(path.splitext(x)).replace("-out-out","-out")' \
+					#'file = p | outname(p) | path.join("..","cross-eyed", p) | not path.exists(p) | sh("trash", file) | "removed", file')
+	fi
 done
 
