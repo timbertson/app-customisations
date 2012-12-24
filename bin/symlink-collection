@@ -1,13 +1,21 @@
 #!/usr/bin/env python
 from __future__ import print_function
 import os, sys, optparse
+import shutil
 
 def main():
 	p = optparse.OptionParser("Usage: %prog [OPTIONS] dest")
-	p.add_option
+	p.add_option('-f','--force', action='store_true', help='Overwrite existing directory (checks that it only contains symlinks first)')
 	opts, args = p.parse_args()
 	assert len(args) == 1, p.format_usage()
 	destdir = args[0]
+
+	if opts.force and os.path.exists(destdir):
+		for f in os.listdir(destdir):
+			to_check = os.path.join(destdir, f)
+			assert os.path.islink(to_check), "%s is not a symlink - not overwriting" % (to_check,)
+		shutil.rmtree(destdir)
+
 	assert not os.path.exists(destdir), "Destination %s already exists" % (destdir,)
 	os.makedirs(destdir)
 	print("Created %s" % (destdir,))
