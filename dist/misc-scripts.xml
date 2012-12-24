@@ -7,7 +7,7 @@
 	<description>
 	</description>
 	<group main="main">
-		<environment insert="bin" name="PATH"/>
+		<environment insert="bin" mode="append" name="PATH"/>
 		<implementation id="sha1new=2b7108faa30643a27822558d5b7e3bdf35daec31" released="2011-10-07" version="20111007.1954">
 			<manifest-digest sha256="42133e57f7d76b27cf18cf9b22eba9e18dcfea338598042ead3017b54c70464e"/>
 			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="27062"/>

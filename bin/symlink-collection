@@ -1,0 +1,43 @@
+#!/usr/bin/env python
+from __future__ import print_function
+import os, sys, optparse
+
+def main():
+	p = optparse.OptionParser("Usage: %prog [OPTIONS] dest")
+	p.add_option
+	opts, args = p.parse_args()
+	assert len(args) == 1, p.format_usage()
+	destdir = args[0]
+	assert not os.path.exists(destdir), "Destination %s already exists" % (destdir,)
+	os.makedirs(destdir)
+	print("Created %s" % (destdir,))
+	count = 0
+	for line in sys.stdin:
+		count += 1
+		path = line.strip()
+		relpath = os.path.relpath(path, destdir)
+		retries = 0
+		if not os.path.exists(path):
+			print("WARN: creating link to nonexistant file: %s" % (path,), file=sys.stderr)
+		while True:
+			assert retries < 100, "Couldn't find unique name"
+			suffix = "-%s" % (retries,) if retries > 0 else ''
+			base, ext = os.path.splitext(os.path.basename(path))
+			filename = "".join((base, suffix, ext))
+			linkdest = os.path.join(destdir, filename)
+			if os.path.exists(linkdest):
+				retries += 1
+				continue
+			else:
+				os.symlink(relpath, linkdest)
+				# print "%s ( -> %s)" % (linkdest, relpath)
+				break
+	print("Linked %s files" % (count,))
+
+if __name__ == '__main__':
+	try:
+		main()
+	except AssertionError as e:
+		print("%s: %s" % (type(e).__name__, e), file=sys.stdout)
+		# sys.stderr.flush()
+		sys.exit(1)

@@ -7,7 +7,7 @@ function overwrite_android_db {
 }
 
 function do_sync {
-	irank export -d "$dest" `cat ~/.config/irank/android-playlists`
+	irank export --interactive -d "$dest" `cat ~/.config/irank/android-playlists`
 	overwrite_android_db
 
 	echo '-------- DISK USAGE: -----------'
