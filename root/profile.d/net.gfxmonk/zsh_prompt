@@ -18,10 +18,14 @@ PR_NO_COLOR="%{$terminfo[sgr0]%}"
 HOSTNAME_COLOR="$PR_YELLOW"
 [ "$SSH_CLIENT" ] && HOSTNAME_COLOR="$PR_RED"
 
+setopt PROMPT_SUBST
+
+ZEROENV_PROMPT='$([ -n "$ZEROENV_NAME" ] && print "[${ZEROENV_NAME}] ")'
+
 # string it all together:
 PS1="$PR_GREY%(?..
 [%?] )
-$PR_GREEN%n$HOSTNAME_COLOR@%m $PR_CYAN%~ $PR_GREEN$ $PR_NO_COLOR"
+$PR_WHITE$ZEROENV_PROMPT$PR_GREEN%n$HOSTNAME_COLOR@%m $PR_CYAN%~ $PR_GREEN$ $PR_NO_COLOR"
 
 # set the terminal title when I change working dirs
 chpwd() {

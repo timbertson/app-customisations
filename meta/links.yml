@@ -42,9 +42,6 @@ meta:
 /etc/profile.d/net.gfxmonk:
   path: ../root/profile.d/net.gfxmonk
   tags: root
-/etc/profile.d/net.gfxmonk.0path:
-  uri: http://gfxmonk.net/dist/0install/0path.xml
-  tags: root
 /etc/profile.d/net.gfxmonk.bashcomplete/init.sh:
   uri: http://gfxmonk.net/dist/0install/bashcomplete.xml
   extract: bashcomplete/init
