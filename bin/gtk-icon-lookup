@@ -1,0 +1,18 @@
+#!/usr/bin/python
+from __future__ import print_function
+from gi.repository import Gtk
+import sys
+
+name, = sys.argv[1:]
+
+theme = Gtk.IconTheme()
+icon = theme.lookup_icon(sys.argv[1],
+ Gtk.IconSize.MENU,
+ Gtk.IconLookupFlags.USE_BUILTIN)
+
+if icon is None:
+	print("no icon found: %s" % (name,))
+	sys.exit(1)
+else:
+	print(icon.get_filename())
+
