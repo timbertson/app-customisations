@@ -13,7 +13,8 @@ meta:
       #- oneiric
       - desktop
       - fedora
-      - fc17
+      # fc17
+      - fc18
       - shellshape
     tjcee:
       - root
@@ -46,9 +47,11 @@ meta:
   uri: http://gfxmonk.net/dist/0install/bashcomplete.xml
   extract: bashcomplete/init
   tags: root
+
 /etc/X11/sessions:
   path: ../root/sessions
   tags: root
+
 /etc/udev/rules.d/input.rules:
   path: ../root/udev-rules.d/input.rules
   tags: root
@@ -96,10 +99,6 @@ meta:
   path: ../home/xbindkeysrc-tv.scm
   tags: tv
 
-~/.hai:
-  path: ../home/hai
-  tags: linux
-
 ~/.ackrc:
   path: ../home/ackrc
 
@@ -119,9 +118,6 @@ meta:
 ~/.gizmod:
   path: ../home/gizmod
   tags: linux
-
-~/.boom:
-  path: ../home/boom
 
 ~/.snip:
   path: ../home/snip
@@ -158,10 +154,14 @@ meta:
     tags: pc xmodmap
 
 ## apps:
-~/.config/autostart/banshee.desktop:
-  - path: /usr/share/applications/banshee.desktop
-    tags: ubuntu desktop
-  - path: /usr/share/applications/gnome-banshee.desktop
+# ~/.config/autostart/banshee.desktop:
+#   - path: /usr/share/applications/banshee.desktop
+#     tags: ubuntu desktop
+#   - path: /usr/share/applications/gnome-banshee.desktop
+#     tags: fedora desktop
+
+~/.config/autostart/rhythmbox.desktop:
+  - path: /usr/share/applications/rhythmbox.desktop
     tags: fedora desktop
 
 ~/.config/autostart/xbindkeys.desktop:
@@ -180,10 +180,6 @@ meta:
   path: ../session/session.desktop
   tags: desktop
 
-# ~/Desktop/startup-actions.desktop:
-#   path: ../session/session.desktop
-#   tags: desktop
-
 ~/.local/share/tim-session:
   path: ../session
   tags: desktop
@@ -194,34 +190,10 @@ meta:
   tags: desktop shellshape
 
 ## FEDORA
-/etc/yum.repos.d:
-  path: ../root/yum.repos.d-fc15
-  tags: fc15
-  path: ../root/yum.repos.d-fc17
-  tags: fc17
 
-/etc/pki/rpm-gpg:
-  path: ../root/pki-rpm-gpg
+/etc/modules-load.d/ecryptfs.conf:
+  path: ../root/modules-load.d/ecryptfs.conf
   tags: fedora
-
-/etc/yum/pluginconf.d:
-  path: ../root/yum.pluginconf.d
-  tags: fedora
-
-/etc/modules-load.d:
-  path: ../root/modules-load.d
-  tags: fedora
-
-## UBUNTU
-/etc/apt/sources.list.d:
-  - path: ../root/lucid-sources.list.d
-    tags: ubuntu-lucid
-  - path: ../root/maverick-sources.list.d
-    tags: ubuntu-maverick
-  - path: ../root/natty-sources.list.d
-    tags: ubuntu-natty
-  - path: ../root/oneiric-sources.list.d
-    tags: ubuntu oneiric
 
 /etc/X11/Xsession.d/80overlayscrollbars:
   - path: ../root/xsession.d/80overlayscrollbars

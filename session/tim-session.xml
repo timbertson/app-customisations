@@ -8,8 +8,8 @@
 	Tim's startup actions
 	</description>
 
+	<!--
 	<group main="bin/session">
-		<!-- ubuntu -->
 		<command name="run" path="bin/session"/>
 		<requires interface="http://gfxmonk.net/dist/0install/dropbox.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/edit-server.xml"/>
@@ -27,12 +27,14 @@
 		<requires interface="http://gfxmonk.net/dist/0install/misc-scripts.xml">
 			<environment insert="bin" name="PATH" mode="append"/>
 		</requires>
-		<!-- ubuntu-specific -->
+
+		- ubuntu-specific -
 		<requires interface="http://gfxmonk.net/dist/0install/deborphan.xml" />
 		<requires interface="http://gfxmonk.net/dist/0install/parcellite.xml" />
 
 		<implementation id="." version="0.1"/>
 	</group>
+	-->
 
 	<group main="bin/session">
 		<!-- fedora -->
