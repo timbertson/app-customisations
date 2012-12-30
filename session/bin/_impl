@@ -33,6 +33,7 @@ echo "Session initialization finished (mostly): $(date)"
 
 sleep 5; runbg clear-recently-used
 psgrep daglink || runbg daglink -f
+psgrep dconf-user-overrides || runbg dconf-user-overrides
 sleep 20; runbg save-yumpackage-list
 #runbg save-debpackage-list
 echo "Session initialization ended: $(date)"

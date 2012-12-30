@@ -31,6 +31,6 @@ alias cdreal='cd `pwd -P`' # go to the canonical path, expanding all symlinks
 alias umount='sudo umount'
 alias xephyr='Xephyr -ac -screen 600x800 -br -reset -terminate 2> /dev/null :1 &'
 
-alias man='0launch --main=0alias http://0install.net/2007/interfaces/ZeroInstall.xml --manpage --'
+alias man='0install man --'
 alias ind='indicate-task --'
 

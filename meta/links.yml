@@ -68,15 +68,38 @@ meta:
 ~/.zero2pypi:
   path: ../home/zero2pypi
 
-~/.gconf:
-  path: ../home/gconf
+# ~/.gconf:
+#   path: ../home/gconf
+#   tags: desktop
+
+~/.gconf/apps/gnome-terminal:
+  path: ../home/gconf/apps/gnome-terminal
+  tags: desktop
+
+~/.gconf/apps/metacity/general/%gconf.xml:
+  path: ../home/gconf/apps/metacity/general/%gconf.xml
+  tags: desktop
+
+~/.gconf/apps/metacity/window_keybindings/%gconf.xml:
+  path: ../home/gconf/apps/metacity/window_keybindings/%gconf.xml
+  tags: desktop
+
+~/.gconf/desktop/gnome/shell/windows/%gconf.xml:
+  path: ../home/gconf/desktop/gnome/shell/windows/%gconf.xml
   tags: desktop
 
 ~/.icons:
   path: ../home/icons
 
-~/.fonts.conf:
+# ~/.fonts.conf:
+#   path: ../home/fonts.conf
+
+~/.config/fontconfig/fonts.conf:
   path: ../home/fonts.conf
+
+~/.Xresources:
+  path: ../home/Xresources
+  tags: desktop
 
 ~/.inputrc:
   path: ../home/inputrc
@@ -145,6 +168,14 @@ meta:
   path: ../home/xkb-mac
   tags: mac fedora
 
+/bin/xkb-reset:
+  path: ../bin/xkb-reset
+  tags: mac fedora
+
+~/.config/dconf.user.d/disable-gnome-xkb:
+  path: ../home/dconf/disable-gnome-xkb
+  tags: mac fedora
+
 #TODO: make a pc xkb config
 
 ~/.xmodmaprc:
@@ -176,12 +207,8 @@ meta:
   path: ../session/session.desktop
   tags: desktop
 
-~/.local/share/tims-startup-actions.desktop:
+~/Desktop/tims-startup-actions.desktop:
   path: ../session/session.desktop
-  tags: desktop
-
-~/.local/share/tim-session:
-  path: ../session
   tags: desktop
 
 ~/.local/share/applications/gnome-shell.desktop:
