@@ -65,6 +65,9 @@ meta:
 ~/.bin:
   path: ../bin
 
+~/.config/0install.net/apps:
+  path: ../home/zeroinstall_apps
+
 ~/.zero2pypi:
   path: ../home/zero2pypi
 
