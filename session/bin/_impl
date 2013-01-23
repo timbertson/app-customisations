@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH="$PATH:$HOME/bin"
 function runbg {
-	("$@" 2>&1 || echo "STARTUP item error: $@ failed with exit code $?") &
+	(echo "Running: $@"; "$@" 2>&1 || echo "STARTUP item error: $@ failed with exit code $?") &
 }
 
 echo "Session started: $(date)"
@@ -17,17 +17,20 @@ env >&2
 [ "$1" == "slow" ] || sleep 2
 
 psgrep -q guake || runbg guake
+psgrep -q xflux || runbg xflux -l 37.7833 -g 144.9667 -k 4600
 
 [ "$1" == "slow" ] || sleep 5
 psgrep -q rygel || runbg rygel >/dev/null
-runbg ~/crashplan/bin/CrashPlanEngine start
+psgrep -q CrashPlan || runbg ~/crashplan/bin/CrashPlanEngine start
+
 
 # nautilus needs to be started explicitly for desktop in gnome-shell?
 #runbg nautilus -n
 
-psgrep 'systemd --user' || runbg 0launch -c http://gfxmonk.net/dist/0install/systemd-user.xml
+psgrep 'systemd --user' || runbg systemd --user
 #systemd doesn't exist on ubuntu - do it the crappy way:
 # edit-server-ctl start
+dig +short MX gfxmonk.net | grep -qi google || zenity --error --text="gfxmonk.net email is borked"
 
 echo "Session initialization finished (mostly): $(date)"
 
@@ -36,4 +39,5 @@ psgrep daglink || runbg daglink -f
 psgrep dconf-user-overrides || runbg dconf-user-overrides
 sleep 20; runbg save-yumpackage-list
 #runbg save-debpackage-list
+
 echo "Session initialization ended: $(date)"

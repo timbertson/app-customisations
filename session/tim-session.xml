@@ -44,13 +44,17 @@
 		<requires interface="http://gfxmonk.net/dist/0install/vim-custom.xml">
 			<command-in-path name="gvim"/>
 		</requires>
+		<requires interface="http://gfxmonk.net/dist/0install/ecryptfs-utils.xml" />
 		<requires interface="http://gfxmonk.net/dist/0install/guake.xml" />
 		<requires interface="http://gfxmonk.net/dist/0install/libnotify-bin.xml" />
 		<requires interface="http://gfxmonk.net/dist/0install/parcellite.xml" />
 		<requires interface="http://gfxmonk.net/dist/0install/rygel.xml" />
+		<requires interface="http://gfxmonk.net/dist/0install/systemd-user.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/xbindkeys.xml" />
 		<requires interface="http://gfxmonk.net/dist/0install/xkbcomp.xml" />
+		<requires interface="http://gfxmonk.net/dist/0install/xflux.xml" />
 		<requires interface="http://gfxmonk.net/dist/0install/xte.xml" />
+		<requires interface="http://gfxmonk.net/dist/0install/zenity.xml" />
 		<requires interface="http://gfxmonk.net/dist/0install/misc-scripts.xml">
 			<environment insert="bin" name="PATH" mode="append"/>
 		</requires>
