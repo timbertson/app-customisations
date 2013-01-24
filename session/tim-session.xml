@@ -40,6 +40,7 @@
 		<!-- fedora -->
 		<command name="run" path="bin/session"/>
 		<requires interface="http://gfxmonk.net/dist/0install/dropbox.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/dconf-user-overrides.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/edit-server.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-custom.xml">
 			<command-in-path name="gvim"/>
