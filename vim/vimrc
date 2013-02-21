@@ -42,7 +42,7 @@ nmap <leader><tab> m'0i<tab><esc>`'l
 set noswapfile
 set nobackup
 set nojoinspaces " just one space after a period (when joining)
-set nofoldenable " I can never remember how to use folding
+" set nofoldenable " I can never remember how to use folding
 set autoread " reload file whenever it changes on disk
 set autowrite " save file when navigating away from it or using :make (but not on quits, etc)
 set wrapmargin=5
@@ -51,6 +51,7 @@ set formatoptions=crqln
 set backspace=indent,eol,start
 set guitablabel=%N\ %t\ %m%r
 set guioptions-=T "remove toolbar
+set guioptions-=m "remove menu bar
 set diffopt+=vertical
 set shiftround " round to multiples of shiftwidth for > and <
 set wildignore=*.swp,*.bak,*.pyc,*.class

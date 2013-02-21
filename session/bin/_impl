@@ -4,7 +4,7 @@ function runbg {
 	(echo "Running: $@"; "$@" 2>&1 || echo "STARTUP item error: $@ failed with exit code $?") &
 }
 
-echo "Session started: $(date)"
+echo "Session started: $(date). pid $$ running script $0"
 
 [ "$1" == "slow" ] || sleep 2
 

@@ -1,2 +1,2 @@
 #!/bin/sh
-exec 0launch --command 'npm' 'http://gfxmonk.net/dist/0install/node.js.xml' "$@"
+exec 0install run npm "$@"

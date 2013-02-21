@@ -6,7 +6,11 @@ v=$(0launch http://gfxmonk.net/dist/0install/version.xml -r)
 echo "Ok?"; read confirm
 [ -z "$confirm" ]
 set -x
-git commit -am "$v"
+if g diff-index --quiet HEAD; then
+	echo "(no changes to commit...)"
+else
+	git commit -am "$v"
+fi
 git tag "version-$v"
 set +x
 

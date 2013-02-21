@@ -4,26 +4,26 @@ meta:
   zeroinstall_aliases:
     vim: http://gfxmonk.net/dist/0install/vim-custom.xml
   basedir: ~/dev/app-customisations/meta
-  default_tags:
+  hosts:
     meep:
-      - root
-      - linux
-      - mac
-      #- ubuntu
-      #- oneiric
-      - desktop
-      - fedora
-      # fc17
-      - fc18
-      - shellshape
+      tags:
+        - root
+        - linux
+        - mac
+        - desktop
+        - fedora
+        - fc18
+        - shellshape
     tjcee:
-      - root
-      - linux
-      - ubuntu
-      - ubuntu-natty
-      - tv
+      tags:
+        - root
+        - linux
+        - ubuntu
+        - ubuntu-natty
+        - tv
     "400L-77212":
-      - windows
+      tags:
+        - windows
 
 # SELF-INSTALL:
 
@@ -64,6 +64,10 @@ meta:
 
 /etc/udev/rules.d/input.rules:
   path: ../root/udev-rules.d/input.rules
+  tags: root
+
+/etc/udev/rules.d/99-nexus4.rules:
+  path: ../root/udev-rules.d/99-nexus4.rules
   tags: root
 
 ~/.vimrc:
