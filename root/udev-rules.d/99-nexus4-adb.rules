@@ -1,0 +1,1 @@
+SUBSYSTEM=="usb", ATTRS{idVendor}=="18d1", SYMLINK+="android_adb", MODE="0666"

@@ -4,11 +4,12 @@ if [ "$#" -lt 2 ]; then
 	exit 2
 fi
 
-cmd="sshfs -o allow_other -o uid=`id -u`"
+sshfs="0install run http://gfxmonk.net/dist/0install/sshfs.xml"
+cmd="$sshfs"
 
 if [ ! -e "$2" ]; then
 	echo "Making directory: $2"
 	mkdir -p "$2"
 fi
 
-sudo $cmd "$@"
+$cmd "$@"
