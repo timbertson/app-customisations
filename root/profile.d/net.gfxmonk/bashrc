@@ -1,5 +1,6 @@
 # case insensitive file globbing (primaily for tab completion)
 shopt -s nocaseglob
+HISTCONTROL=ignoreboth
 
 alias 'ssh-setup'='ssh_setup'
 function ssh_setup

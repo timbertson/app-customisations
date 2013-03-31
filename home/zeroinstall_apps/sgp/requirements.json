@@ -1,1 +1,1 @@
-{"interface_uri": "http://gfxmonk.net/dist/0install/supergenpass-platform.xml", "cpu": null, "source": false, "command": "run", "message": null, "os": null, "not_before": null, "before": null}
+{"interface_uri": "http://gfxmonk.net/dist/0install/supergenpass-platform.xml", "source": false, "command": "run", "message": null, "os": null, "cpu": null, "extra_restrictions": {}}

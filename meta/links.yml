@@ -48,15 +48,15 @@ meta:
   extract: bashcomplete/init
   tags: root
 
-/usr/share/bash-completion/completions/0install:
-  uri: http://0install.net/2007/interfaces/ZeroInstall.xml
-  extract: share/bash-completion/completions/0install
-  tags: root
-
-/usr/share/zsh/site-functions/_0install:
-  uri: http://0install.net/2007/interfaces/ZeroInstall.xml
-  extract: share/zsh/site-functions/_0install
-  tags: root
+# /usr/share/bash-completion/completions/0install:
+#   uri: http://0install.net/2007/interfaces/ZeroInstall.xml
+#   extract: share/bash-completion/completions/0install
+#   tags: root
+# 
+# /usr/share/zsh/site-functions/_0install:
+#   uri: http://0install.net/2007/interfaces/ZeroInstall.xml
+#   extract: share/zsh/site-functions/_0install
+#   tags: root
 
 /etc/X11/sessions:
   path: ../root/sessions

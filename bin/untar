@@ -1,10 +1,4 @@
 #!/bin/bash
 
-if echo "$1" | grep -iE '\.tar.bz'; then
-	DECOMPRESS=j
-else
-	DECOMPRESS=z
-fi
-
-tar ${DECOMPRESS}xf "$@"
+tar axf "$@"
 
