@@ -31,7 +31,7 @@
 		</command>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-gnome.xml"/>
 		<!-- <requires interface="http://gfxmonk.net/dist/0install/pyflakes.xml"/> -->
-		<requires interface="http://gfxmonk.net/dist/0install/ack.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim.ack.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/indent-finder.xml">
 			<environment insert="" mode="prepend" name="VIMPATH"/>
 		</requires>
