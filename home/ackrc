@@ -9,3 +9,4 @@
 --type-set=feature=.feature
 --ignore-dir=build
 --ignore-dir=0inst
+--ignore-dir=node_modules
