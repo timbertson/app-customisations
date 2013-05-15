@@ -54,7 +54,7 @@ set guioptions-=T "remove toolbar
 set guioptions-=m "remove menu bar
 set diffopt+=vertical
 set shiftround " round to multiples of shiftwidth for > and <
-set wildignore=*.swp,*.bak,*.pyc,*.class
+set wildignore=*.swp,*.bak,*.pyc,*.class,**/node_modules/**
 set pastetoggle=<F2>
 set sessionoptions="curdir,folds,localoptions,tabpages,winsize"
 autocmd SessionLoadPost * tab ball

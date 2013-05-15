@@ -29,38 +29,46 @@
 				<arg>-u</arg>
 			</runner>
 		</command>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-gnome.xml"/>
-		<!-- <requires interface="http://gfxmonk.net/dist/0install/pyflakes.xml"/> -->
-		<requires interface="http://gfxmonk.net/dist/0install/vim.ack.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/indent-finder.xml">
-			<environment insert="" mode="prepend" name="VIMPATH"/>
-		</requires>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-pathogen.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-fugitive.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-nerdtree.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-clipbrd.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-tabular.xml"/>
-		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-detectindent.xml"/> -->
-		<requires interface="http://gfxmonk.net/dist/0install/vim-a.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-easymotion.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-camelcase-motion.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-indent-object.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/ack.vim.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-abolish.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-argtextobj.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-snipmate.xml">
-			<environment insert="after" mode="append" name="VIMPATH"/>
-		</requires>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-stratifiedjs.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-autotag.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-a.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-background-make.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-camelcase-motion.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-clipbrd.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-ctrlp.xml"/>
+		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-easymotion.xml"/> -->
+		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-errormarker.xml"/> -->
+		<requires interface="http://gfxmonk.net/dist/0install/vim-fugitive.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-gnome.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-indent-object.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-ir-black.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-nerdtree.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-pathogen.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-repeat.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-solarized.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-stratifiedjs.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-surround.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-tabular.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-tcomment.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-vaxe.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-visual-star-search.xml"/>
-		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-yankring.xml"/> -->
-		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-vitality.xml"/> -->
-		<requires interface="http://gfxmonk.net/dist/0install/vim-ctrlp.xml"/>
+		<!-- these ones need custom env vars set: -->
+		<requires interface="http://gfxmonk.net/dist/0install/indent-finder.xml">
+			<environment insert="" mode="prepend" name="VIMPATH"/>
+		</requires>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-snipmate.xml">
+			<environment insert="after" mode="append" name="VIMPATH"/>
+		</requires>
 		<environment insert="vim" name="VIMPATH"/>
-		<implementation id="sha1new=6fb1c24de2a671cb99ea54f2ab14054da88f25c4" released="2012-09-10" version="20120910.2101">
-			<manifest-digest sha256="1b100958fe731991b24b57aa50cc75d452c958b0f196807ec6da61eddc1f7a3a"/>
-			<archive extract="vim" href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom-20120910.2101.tgz" size="73547"/>
+		<implementation id="sha1new=57e078e3d2de494ec3ee24c7ed7ed643949e0405" released="2013-04-07" version="20130407.1517">
+			<manifest-digest sha256new="CFI5D7NCOCJXFX3F25K3CWCRN5CFGSCGOVDBG4H2UNN7SFK4QHEQ"/>
+			<archive extract="vim" href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom-20130407.1625.tgz" size="28141"/>
+		</implementation>
+		<implementation id="sha1new=7c4404d0b28fabf302586cde2233b6e48c8f95c6" released="2013-05-15" version="20130515.2140">
+			<manifest-digest sha256new="4RVS67RHOU6Y3TAMZ6YBPCO764OBPI3QKPMAYSX7HNG5UN76HUPQ"/>
+			<archive extract="vim" href="http://gfxmonk.net/dist/0install/vim-custom/vim-custom-20130515.2140.tgz" size="6963"/>
 		</implementation>
 	</group>
 </interface>
