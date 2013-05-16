@@ -86,17 +86,17 @@ if [ -z "$irank_test" ]; then
 	has_db="$(ssh $host -- sh -c "'if [ -f "$host_path"/irank.sqlite ]; then echo OK; else echo NO; fi'")"
 	if [ "$has_db" = "NO" ]; then
 		do_update_ratings=0
-		num_remote_rating_changes="0"
+		num_updates="0"
 	else
 		[ "$has_db" = "OK" ]
 		scp "$dest/irank.sqlite" "$sqlite_db"
 		do_update_ratings=1
-		num_remote_rating_changes="$(num_remote_rating_changes /tmp/irank.sqlite)"
+		num_updates="$(num_remote_rating_changes "$sqlite_db")"
 	fi
 
 	do_update_playlists=1
 	if [ "$ask" = 1 ]; then
-		resp=$(echo -e "ALL\nSync all\nRATINGS\nUpdate ratings only ($(num_remote_rating_changes))" | zenity --list --title="iRank android" --column="action" --column=foo --text="iRank android sync:\nSelect action to perform" --hide-header --hide-column=1) || exit 0
+		resp=$(echo -e "ALL\nSync all\nRATINGS\nUpdate ratings only ($num_updates)" | zenity --list --title="iRank android" --column="action" --column=foo --text="iRank android sync:\nSelect action to perform" --hide-header --hide-column=1) || exit 0
 		[ "$resp" = 'ALL' ] || do_update_playlists=0
 	fi
 
