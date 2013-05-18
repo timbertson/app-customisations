@@ -31,11 +31,9 @@ function set_terminal_title {
 	echo -ne "\033]0;$(echo "$(basename "${PWD}") ($(dirname "${PWD}"))" | sed -e "s@${HOME}@~@")\007"
 }
 
-source "$base/scm"
 source "$base/path"
 if [ -n "$BASH" ]; then
 	source "$base/bashrc"
-	source "$base/bash_completion"
 	source "$base/bash_prompt"
 	PROFILE_PATH="$PROFILE_PATH:$BASH_PROFILE_PATH"
 fi
@@ -45,8 +43,6 @@ if [ -n "$ZSH_VERSION" ]; then
 	source "$base/zsh_prompt"
 	PROFILE_PATH="$PROFILE_PATH:$ZSH_PROFILE_PATH"
 fi
-source "$base/alias"
-source "$base/completion"
 echo "$PROFILE_PATH" | tr ':' '\n' | while read f; do
 	if [ -f "$f" ]; then
 		source "$f"
@@ -56,19 +52,6 @@ done
 function cdbase {
 	d=`dirname "$1"`
 	cd "$d"
-}
-
-alias tmpdir="date +'%Y-%m-%d.%H-%M-%S'"
-function cdtmp {
-	t=/tmp/`tmpdir`
-	mkdir -p "$t" && pushd "$t"
-}
-
-function timestamp {
-	while read line; do
-		t=`date "+%Y-%m-%d %H:%M:%S"`
-		echo "$t: $line"
-	done
 }
 
 function maybesource {

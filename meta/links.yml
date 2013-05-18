@@ -118,6 +118,10 @@ meta:
 ~/.config/fontconfig/fonts.conf:
   path: ../home/fonts.conf
 
+~/.config/fish/functions:
+  path: ../home/fish/functions
+  tags: linux
+
 ~/.Xresources:
   path: ../home/Xresources
   tags: desktop

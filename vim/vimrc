@@ -8,6 +8,11 @@ if has("win32")
 	endif
 endif
 
+if stridx(&shell, "fish") != -1
+	" vim and fish: worst of friends
+	set shell=sh
+endif
+
 " pathogen bootstrap, then use it to make $VIMPATH useful
 let &runtimepath = $PATHOGEN_ROOT . "," . &runtimepath
 let &runtimepath = pathogen#join(split($VIMPATH,g:pathsep),&runtimepath)
