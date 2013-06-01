@@ -122,6 +122,10 @@ meta:
   path: ../home/fish/functions
   tags: linux
 
+~/.config/fish/config.fish:
+  path: ../home/fish/config.fish
+  tags: linux
+
 ~/.Xresources:
   path: ../home/Xresources
   tags: desktop

@@ -11,7 +11,7 @@ function fish_prompt --description 'Write out the prompt'
 	printf (set_color (set -q SSH_CLIENT; and echo 'red'; or echo 'yellow'))
 	printf @(hostname|cut -d . -f 1)
 	printf ' '
-	printf (set_color cyan)(pwd)' '
+	printf (set_color cyan)$PWD' '
 	printf (set_color green)'$ '
 	printf (set_color normal)
 end
