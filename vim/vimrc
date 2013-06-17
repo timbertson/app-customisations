@@ -30,10 +30,13 @@ let g:solarized_italic=0
 set background="dark"
 " sorry solarized, but you're rubbish at terminal mode...
 if has("gui_running")
-	set guifont=Monospace\ 11
 	color solarized
 	if has("win32")
 		set guifont=Consolas:h12:cANSI
+	elseif has("mac")
+		set guifont=Menlo\ Regular:h15
+	else
+		set guifont=Monospace\ 11
 	endif
 else
 	color ir_black

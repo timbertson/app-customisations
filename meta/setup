@@ -1,6 +1,6 @@
 #!/bin/bash
-set -e
+set -ex
 here="$(dirname "$0")"
 daglink="http://gfxmonk.net/dist/0install/daglink.xml"
 0launch -c "$daglink" --base "$here" --config "$here/links.yml" --force "$@"
-which daglink >/dev/null || 0alias daglink "$daglink"
+which daglink >/dev/null || 0install add daglink "$daglink"

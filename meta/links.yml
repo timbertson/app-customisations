@@ -14,6 +14,7 @@ meta:
         - fedora
         - fc18
         - shellshape
+        - fish
     tjcee:
       tags:
         - root
@@ -24,6 +25,11 @@ meta:
     "400L-77212":
       tags:
         - windows
+    mba.local:
+      tags:
+       - osx
+       - osx_root
+       - fish
 
 # SELF-INSTALL:
 
@@ -111,20 +117,22 @@ meta:
 
 ~/.icons:
   path: ../home/icons
+  tags: linux
 
 # ~/.fonts.conf:
 #   path: ../home/fonts.conf
 
 ~/.config/fontconfig/fonts.conf:
   path: ../home/fonts.conf
+  tags: linux
 
 ~/.config/fish/functions:
   path: ../home/fish/functions
-  tags: linux
+  tags: fish
 
 ~/.config/fish/config.fish:
   path: ../home/fish/config.fish
-  tags: linux
+  tags: fish
 
 ~/.Xresources:
   path: ../home/Xresources
@@ -139,9 +147,6 @@ meta:
 
 ~/.ctags:
   path: ../home/ctags
-
-~/.xmonad/xmonad.hs:
-  path: ../home/xmonad.hs
 
 ~/.xbindkeysrc.scm:
   xath: ../home/xbindkeysrc.scm
@@ -254,3 +259,10 @@ meta:
 /etc/X11/Xsession.d/80overlayscrollbars:
   - path: ../root/xsession.d/80overlayscrollbars
     tags: ubuntu
+
+
+## OSX
+
+/usr/share/0install.net/native_feeds:
+  path: ../zi-feeds/osx
+  tags: osx_root

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type='text/xsl' href='interface.xsl'?>
+<interface xmlns="http://zero-install.sourceforge.net/2004/injector/interface" uri="http://gfxmonk.net/dist/0install/vim-gnome.xml">
+	<name>MacVim</name>
+	<summary>MacVim</summary>
+	<description>MacVim (package implementation)</description>
+	<implementation id="/Users/tim/Applications/MacVim.app/Contents/MacOS" version="7.3">
+		<command name="run">
+			<environment insert="MacVim" mode="replace" name="MACVIM"/>
+			<environment insert="Vim" mode="replace" name="VIM"/>
+			<runner interface="http://repo.roscidus.com/python/python"/>
+			<arg>-c</arg>
+			<arg>
+import sys,os
+GUI = '-g' in sys.argv[1:]
+cmd = [os.environ['MACVIM' if GUI else 'VIM']]
+cmd.extend(sys.argv[1:])
+print repr(cmd)
+if GUI:
+	# MACVIM HAX
+	for flag in ['-v','-g']:
+		try:
+			cmd.remove(flag)
+		except ValueError: pass
+os.execvp(cmd[0], cmd)
+			</arg>
+		</command>
+	</implementation>
+</interface>
