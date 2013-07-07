@@ -1,5 +1,5 @@
 #!/bin/sh
 set -xeu
 [ -d orig ]
-stereoscoper --match --swap --squash --dest cross-eyed orig
-stereoscoper --match        --squash --dest straight orig
+stereoscoper --swap --squash --dest cross-eyed orig
+stereoscoper        --squash --dest straight orig

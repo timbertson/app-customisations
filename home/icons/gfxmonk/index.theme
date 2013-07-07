@@ -1,6 +1,6 @@
 [Icon Theme]
 Name=gfxmonk
-inherits=default
+inherits=Elementary
 Directories=128,48,22,16,scalable
 
 [128]

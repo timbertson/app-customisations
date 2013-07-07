@@ -1,0 +1,8 @@
+#!/bin/bash
+set -eu
+cmd="redo-ifchange all $*"
+zeroenv="0install run http://gfxmonk.net/dist/0install/0env.xml"
+redo="http://gfxmonk.net/dist/0install/redo.xml"
+$zeroenv $redo -- $cmd
+echo "(initial build complete - watching for changes)"
+$zeroenv $redo -- watchdog shell-command -c "$cmd" --wait --recursive .

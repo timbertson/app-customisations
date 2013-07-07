@@ -2,18 +2,18 @@
 ;    apt-get install xbindkeys xautomation
 
 ; bind shift + vertical scroll to horizontal scroll events
-(xbindkey '(shift "b:4") "xte 'mouseclick 6'")
-(xbindkey '(shift "b:5") "xte 'mouseclick 7'")
+;(xbindkey '(shift "b:4") "xte 'mouseclick 6'")
+;(xbindkey '(shift "b:5") "xte 'mouseclick 7'")
 
 ; left & right mouse buttons for changing tabs in most apps:
 (xbindkey '("b:8") "xte 'keydown Control_R' 'key Page_Up' 'keyup Control_R'")
 (xbindkey '("b:9") "xte 'keydown Control_R' 'key Page_Down' 'keyup Control_R'")
 
-; shift + buttons = move focus
+; win + buttons = move focus
 (xbindkey '(mod4 "b:8") "xte 'key k'")
 (xbindkey '(mod4 "b:9") "xte 'key j'")
 
-; control + shift + buttons = move window
+; win + shift + buttons = move window
 (xbindkey '(shift mod4 "b:8") "xte 'key k'")
 (xbindkey '(shift mod4 "b:9") "xte 'key j'")
 

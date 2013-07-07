@@ -1,0 +1,5 @@
+#!/bin/bash
+eval "$(opam config env)"
+export ZEROENV_NAME='opam'
+$SHELL
+
