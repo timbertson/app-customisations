@@ -47,6 +47,7 @@
 		<requires importance="recommended" interface="http://gfxmonk.net/dist/0install/freetype-freeworld.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/guake.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/libnotify-bin.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/nautilus-open-terminal.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/parcellite.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/rygel.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/systemd-user.xml"/>

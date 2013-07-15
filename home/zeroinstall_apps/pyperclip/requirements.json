@@ -1,1 +1,1 @@
-{"interface_uri": "http://gfxmonk.net/dist/0install/pyperclip.xml", "cpu": null, "source": false, "command": "run", "message": null, "os": null, "not_before": null, "before": null}
+{"interface_uri": "http://gfxmonk.net/dist/0install/pyperclip.xml", "extra_restrictions": {}, "message": null, "source": false, "command": "run", "cpu": null, "os": null}

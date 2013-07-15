@@ -1,0 +1,2 @@
+#!/bin/sh
+exec 0install run --wrapper='sudo env RUBYLIB="$RUBYLIB"' http://gfxmonk.net/dist/0install/ghost.xml "$@"
