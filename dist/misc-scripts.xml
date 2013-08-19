@@ -8,42 +8,6 @@
 	</description>
 	<group main="main">
 		<environment insert="bin" mode="append" name="PATH"/>
-		<implementation id="sha1new=2b7108faa30643a27822558d5b7e3bdf35daec31" released="2011-10-07" version="20111007.1954">
-			<manifest-digest sha256="42133e57f7d76b27cf18cf9b22eba9e18dcfea338598042ead3017b54c70464e"/>
-			<archive href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts.tgz" size="27062"/>
-		</implementation>
-		<implementation id="sha1new=3bc655d6403760ffff0f4450777e595744cc6218" released="2011-10-10" version="20111010.2053">
-			<manifest-digest sha256="6176780c1b203d4cf4662e8e1b7346964896235122ca799c8aeb3e8547dca5ec"/>
-			<archive extract="misc-scripts" href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts-20111010.2053.tgz" size="27165"/>
-		</implementation>
-		<implementation id="sha1new=44983216d3b2d778b1b881517c0294a3c92759c3" released="2011-10-11" version="20111011.1938">
-			<manifest-digest sha256="b59af0069fab0169d64153d84e4ca4ae0751c9939749b276b25aab59a1635fc3"/>
-			<archive extract="misc-scripts" href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts-20111011.1938.tgz" size="27207"/>
-		</implementation>
-		<implementation id="sha1new=bc2f9e16f6e36f0a66027f6eebc60baacb0d37d0" released="2011-10-12" version="20111012.2126">
-			<manifest-digest sha256="35471833e0d96d731d34e8b2c3efce9c0bdb261089b1deb560a7b6419c805f93"/>
-			<archive extract="misc-scripts" href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts-20111012.2126.tgz" size="27141"/>
-		</implementation>
-		<implementation id="sha1new=d626edd64cf9b66f3c7db3ec131213fb915e1d87" released="2011-10-18" version="20111018.2051">
-			<manifest-digest sha256="966238dbdefbdf02be49469947808459f9e4b339d2c378e645d0594d4f7a0733"/>
-			<archive extract="misc-scripts" href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts-20111018.2051.tgz" size="27264"/>
-		</implementation>
-		<implementation id="sha1new=ac416a43b5a03cd0e42e4dd0866c01b26b5b48b4" released="2011-12-16" version="20111216.0806">
-			<manifest-digest sha256="311527f764eba8cef66015b44da3f2cb3cead8064917a99aa07a5df55f520ffa"/>
-			<archive extract="misc-scripts" href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts-20111216.0806.tgz" size="28403"/>
-		</implementation>
-		<implementation id="sha1new=aaf24d1ce08d2e15f6c2765d15e86e736f6942a9" released="2012-01-25" version="20120125.1708">
-			<manifest-digest sha256="2c69e4078122a49dcef2af4c82138fbf07682c14bc52b54a66a04130e27be47f"/>
-			<archive extract="misc-scripts" href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts-20120125.1708.tgz" size="29784"/>
-		</implementation>
-		<implementation id="sha1new=62b6d8ac3118eaa7f0605f99b46466e4c4568755" released="2012-03-25" version="20120325.1504">
-			<manifest-digest sha256="60d3a52a6a075e9313e1fcb67c0b24222fb257d03330dd1f1efa7498e12e2816"/>
-			<archive extract="misc-scripts" href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts-20120325.1504.tgz" size="30151"/>
-		</implementation>
-		<implementation id="sha1new=5ec06a4939100c346fe367c1915eb76d0b75c7ac" released="2012-08-08" version="20120808.2100">
-			<manifest-digest sha256="6c9df749dfcdd4c0c796406abe9c60fa76fcbcb535ddb585b784a488c16b30e9"/>
-			<archive extract="misc-scripts" href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts-20120808.2100.tgz" size="2775593"/>
-		</implementation>
 		<implementation id="sha1new=5450b3caee39bda21aa840e6b3fd7b2afce04dab" released="2012-10-28" version="20121028.2130">
 			<manifest-digest sha256="4e58bda4145891f05ab34d10730fbebcded238aec3cbf4156a5e13b198d65b28"/>
 			<archive extract="misc-scripts" href="http://gfxmonk.net/dist/0install/misc-scripts/misc-scripts-20121028.2130.tgz" size="34962"/>

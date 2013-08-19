@@ -1,2 +1,2 @@
 #!/bin/bash
-exec Xephyr -ac -screen 600x800 -br -reset -terminate "$@" 2> /dev/null :1 &
+exec Xephyr -ac -screen 600x800 -br -reset -terminate "$@" :1

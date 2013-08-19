@@ -1,2 +1,0 @@
-#!/bin/sh
-exec 0launch 'https://raw.github.com/ryppl/feeds/gh-pages/cmake.xml' "$@"

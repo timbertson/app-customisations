@@ -1,0 +1,4 @@
+<implementation version="{version}" released="{date}">
+	<manifest-digest/>
+	<archive href="{archive}"/>
+</implementation>

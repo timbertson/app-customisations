@@ -5,8 +5,6 @@ end
 
 set additional_paths \
 	/sbin/ \
-	/opt/ocaml/opam/bin \
-	~/.opam/system/bin \
 	~/.cabal/bin \
 	$NODE_ROOT/bin \
 	~/bin \
@@ -28,9 +26,16 @@ set -x force_s3tc_enable true # games often need this
 
 # --------------
 # OPAM:
-set -x CAML_LD_LIBRARY_PATH /home/tim/.opam/system/lib/stublibs /usr/lib64/ocaml/stublibs
-set -x OCAML_TOPLEVEL_PATH /home/tim/.opam/system/lib/toplevel
+# set -x CAML_LD_LIBRARY_PATH /home/tim/.opam/system/lib/stublibs /usr/lib64/ocaml/stublibs
+# set -x OCAML_TOPLEVEL_PATH /home/tim/.opam/system/lib/toplevel
+##IN PATH:
+##/opt/ocaml/opam/bin \
+##~/.opam/system/bin \
 # --------------
+
+if [ -f ~/dev/0install/zi-stable/share/fish/install-local.fish ]
+	. ~/dev/0install/zi-stable/share/fish/install-local.fish
+end
 
 # --------------
 # Workaround for fish $CWD bug on latest vte
@@ -43,22 +48,6 @@ if begin set -q VTE_VERSION; and test $VTE_VERSION -ge 3405; end
 end
 # --------------
 
-# --------------
-# turbo ZI aliases
-#set zi_apps ~/.config/0install.net/apps/
-#set zi_ocaml ~/dev/0install/zeroinstall/ocaml/_build/main.native
-#if [ -f $zi_ocaml ]
-#	for name in ack 0install
-#		if not functions -q $name
-#			if [ -f $zi_apps/$name/selections.xml ]
-#				eval "function $name --description=\"$name ZeroInstall alias\"; $zi_ocaml run $name \$argv; end"
-#			end
-#		end
-#	end
-#end
-# --------------
-
 if [ -r ~/.aliasrc ]
 	. ~/.aliasrc
 end
-alias ghost="sudo (which --skip-alias ghost)"

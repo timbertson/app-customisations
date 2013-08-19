@@ -5,3 +5,4 @@
 /usr/bin/bash
 /usr/sbin/nologin
 /usr/bin/fish
+/usr/bin/tmux

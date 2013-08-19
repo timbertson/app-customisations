@@ -1,4 +1,6 @@
 #!/bin/bash
+echo "DEPRECATED"
+exit 1
 
 xml=$(0launch http://gfxmonk.net/dist/0install/gnu-parallel.xml "echo {} | grep '.xml'" ::: "$@" | head -n 1)
 set -x

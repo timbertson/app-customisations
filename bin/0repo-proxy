@@ -1,0 +1,4 @@
+#!/bin/bash
+set -eu
+cd "$(0repo-base)"
+0repo proxy

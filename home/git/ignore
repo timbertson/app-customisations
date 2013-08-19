@@ -2,3 +2,4 @@
 *.pyc
 0inst/
 __pycache__
+.redo
