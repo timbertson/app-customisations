@@ -1,0 +1,2 @@
+#!/bin/bash
+exec env ZEROENV_NAME=opam opam config exec "$SHELL"
