@@ -7,6 +7,4 @@
 	"\UF72B"  = "moveToEndOfLine:";
 	"$\UF72B" = "moveToEndOfLineAndModifySelection:";
 	
-	/* shift + space -> underscore */
-	"^ " = ("insertText:", "_");
 }

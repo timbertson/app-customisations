@@ -289,3 +289,7 @@ meta:
 /usr/share/0install.net/native_feeds:
   path: ../zi-feeds/osx
   tags: osx_root
+
+~/Library/KeyBindings/DefaultKeyBinding.dict:
+  path: ../osx/DefaultKeyBinding.dict
+
