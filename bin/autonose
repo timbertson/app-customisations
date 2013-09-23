@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ "$*" = "--versions" ]; then
-  exec 0launch -gd 'http://gfxmonk.net/dist/0install/autonose.xml' "$@"
+  exec 0install run -gd 'http://gfxmonk.net/dist/0install/autonose.xml' "$@"
 else
-  exec 0launch  'http://gfxmonk.net/dist/0install/autonose.xml' "$@"
+  exec 0install run  'http://gfxmonk.net/dist/0install/autonose.xml' "$@"
 fi

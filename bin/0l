@@ -10,8 +10,8 @@ cmd="$1"
 if fgrep -q 'command name="'"$cmd"'"' "$local"; then
 	shift 1
 	set -x
-	0launch --command="$cmd" "$local" "$@"
+	0install run --command="$cmd" "$local" "$@"
 else
 	set -x
-	0launch "$local" "$@"
+	0install run "$local" "$@"
 fi

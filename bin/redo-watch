@@ -1,8 +1,16 @@
 #!/bin/bash
-set -eu
-cmd="redo-ifchange all $*"
+set -e
+if [ -z "$WATCHDOG_ARGS" ]; then
+	WATCHDOG_ARGS=""
+fi
+set -u
+if [ "$#" -eq 0 ]; then
+	cmd="redo-ifchange all"
+else
+	cmd="redo-ifchange $*"
+fi
 zeroenv="0install run http://gfxmonk.net/dist/0install/0env.xml"
 redo="http://gfxmonk.net/dist/0install/redo.xml"
 $zeroenv $redo -- $cmd
 echo "(initial build complete - watching for changes)"
-$zeroenv $redo -- watchdog shell-command -c "$cmd" --wait --recursive .
+$zeroenv $redo -- watchdog shell-command -c "$cmd" --wait --recursive $WATCHDOG_ARGS .

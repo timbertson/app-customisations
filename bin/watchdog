@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ "$*" = "--versions" ]; then
-  exec 0launch -gd 'http://gfxmonk.net/dist/0install/watchdog.xml' "$@"
+  exec 0install run -gd 'http://gfxmonk.net/dist/0install/watchdog.xml' "$@"
 else
-  exec 0launch  'http://gfxmonk.net/dist/0install/watchdog.xml' "$@"
+  exec 0install run  'http://gfxmonk.net/dist/0install/watchdog.xml' "$@"
 fi

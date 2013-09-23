@@ -6,7 +6,7 @@ if [ "$1" == "update" ]; then
 	zeroinstall-plugin-manager http://gfxmonk.net/dist/0install/gnome-shell.xml --plugin-opt -rcd --plugin-opt --command=''
 	sed -i.bak -e '/^# AUTO/,$d' "$here"
 	echo '# AUTO GENERATED - do not modify below this line' >> "$here"
-	0launch \
+	0install run \
 		'http://gfxmonk.net/dist/0install/0path.xml' \
 		"$HOME/.config/zeroinstall-plugin-manager/http%3A%2F%2Fgfxmonk.net%2Fdist%2F0install%2Fgnome-shell.xml/user-feed.xml" | \
 		fgrep -v '_0path_' \
