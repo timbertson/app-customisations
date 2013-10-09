@@ -44,7 +44,8 @@ if [ -e $ZI_0COMPILE ]
 
 	set compl $ZI_0COMPILE/files/share/completions
 	if not contains $compl $fish_complete_path
-		#echo "adding fish_complete_path"
+		# echo "adding fish_complete_path"
+		# echo "$fish_complete_path"
 		set -x fish_complete_path $fish_complete_path $compl
 	end
 end
