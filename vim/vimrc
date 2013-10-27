@@ -62,7 +62,12 @@ set guioptions-=T "remove toolbar
 set guioptions-=m "remove menu bar
 set diffopt+=vertical
 set shiftround " round to multiples of shiftwidth for > and <
-set wildignore=*.swp,*.bak,*.pyc,*.class,**/node_modules/**
+set wildignore+=*.swp,*.bak,*.pyc,*.class
+let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*"
+let g:ctrlp_custom_ignore = {
+	\ 'dir': 'node_modules',
+	\ }
+
 set pastetoggle=<F2>
 set sessionoptions="curdir,folds,localoptions,tabpages,winsize"
 autocmd SessionLoadPost * tab ball
@@ -356,7 +361,7 @@ nmap <leader>p V{jo}ko
 
 let g:ctrlp_map=''
 let g:ctrlp_working_path_mode=2 " current directory
-let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --cached --other'] " include untracked files
+"let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --cached --other'] " include untracked files
 let g:ctrlp_by_filename = 1
 let g:ctrlp_switch_buffer = 2
 

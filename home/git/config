@@ -36,6 +36,8 @@
 	tool = gvimdiff
 [mergetool]
 	keepBackup = false
+[diff]
+	noprefix = true
 [user]
 	name = Tim Cuthbertson
 	email = tim@gfxmonk.net
