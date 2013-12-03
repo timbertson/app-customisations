@@ -1,0 +1,2 @@
+#!/bin/bash
+exec tr '\n' '\0' | xargs -0 "$@"

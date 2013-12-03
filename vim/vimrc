@@ -63,9 +63,9 @@ set guioptions-=m "remove menu bar
 set diffopt+=vertical
 set shiftround " round to multiples of shiftwidth for > and <
 set wildignore+=*.swp,*.bak,*.pyc,*.class
-let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*"
+let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/tmp/*"
 let g:ctrlp_custom_ignore = {
-	\ 'dir': 'node_modules',
+	\ 'dir': 'node_modules,tmp',
 	\ }
 
 set pastetoggle=<F2>

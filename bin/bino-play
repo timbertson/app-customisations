@@ -20,7 +20,7 @@ pause
 set-stereo-layout left-right-half
 play
 wait stop
-""" % (file,)
+""" % (fname,)
 
 with tempfile.NamedTemporaryFile(delete=False) as f:
 	if opts.cross_eyed:

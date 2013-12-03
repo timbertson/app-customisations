@@ -25,6 +25,11 @@ set -x EDITOR vim
 set -x force_s3tc_enable true # games often need this
 set fish_complete_list 0
 
+set -x NOSE_PROGRESSIVE_EDITOR_SHORTCUT_TEMPLATE \
+	'  {term.black}{editor} {term.cyan}+{term.bold}{line_number:<{line_number_max_width}} {term.blue}{path}{normal}{function_format}{term.yellow}{hash_if_function}{function}{normal}'
+set -x NOSE_PROGRESSIVE_EDITOR 'gvimr'
+set -x NOSE_PROGRESSIVE_ADVISORIES 1
+
 # --------------
 # OPAM:
 # set -x CAML_LD_LIBRARY_PATH /home/tim/.opam/system/lib/stublibs /usr/lib64/ocaml/stublibs

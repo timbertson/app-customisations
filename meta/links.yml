@@ -118,6 +118,10 @@ meta:
   path: ../home/icons
   tags: linux
 
+~/.cwiid:
+  path: ../home/cwiid
+  tags: linux
+
 # ~/.fonts.conf:
 #   path: ../home/fonts.conf
 
@@ -228,8 +232,12 @@ meta:
 #   - path: /usr/share/applications/gnome-banshee.desktop
 #     tags: fedora desktop
 
-~/.config/autostart/rhythmbox.desktop:
-  - path: /usr/share/applications/rhythmbox.desktop
+# ~/.config/autostart/rhythmbox.desktop:
+#   - path: /usr/share/applications/rhythmbox.desktop
+#     tags: fedora desktop
+
+~/.config/autostart/exaile.desktop:
+  - path: /usr/share/applications/exaile.desktop
     tags: fedora desktop
 
 ~/.config/autostart/xbindkeys.desktop:
@@ -292,4 +300,5 @@ meta:
 
 ~/Library/KeyBindings/DefaultKeyBinding.dict:
   path: ../osx/DefaultKeyBinding.dict
+  tags: osx
 
