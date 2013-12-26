@@ -62,8 +62,8 @@ set guioptions-=T "remove toolbar
 set guioptions-=m "remove menu bar
 set diffopt+=vertical
 set shiftround " round to multiples of shiftwidth for > and <
-set wildignore+=*.swp,*.bak,*.pyc,*.class
-let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/tmp/*"
+set wildignore+=*.swp,*.bak,*.pyc,*.class,_build
+let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/tmp/*,**/_build/**"
 let g:ctrlp_custom_ignore = {
 	\ 'dir': 'node_modules,tmp',
 	\ }
@@ -143,6 +143,7 @@ set statusline+=\ %m " modified flag
 set statusline+=\ %#special#
 set statusline+=%r " readonly flag
 set statusline+=%#statuslinenc#
+set statusline+=\ %l:%c
 set statusline+=%=
 set statusline+=▸%{&et?'space':'tab'}\ %{&sw} "indentation
 set statusline+=\ \  " separator
@@ -439,3 +440,5 @@ fun! Snip(name)
 	return substitute(l:str, '\n\+$', '', 'g')
 endfun
 
+command! -narg=* Pos call cursor(<f-args>)
+command! -narg=1 Column call cursor(line("."), <args>)

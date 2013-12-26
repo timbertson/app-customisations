@@ -39,8 +39,8 @@
 		<command name="run" path="bin/session"/>
 		<!-- <requires interface="http://gfxmonk.net/dist/0install/dropbox.xml"/> -->
 		<requires interface="http://gfxmonk.net/dist/0install/dconf-user-overrides.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/edit-server.xml"/>
-		<requires interface="/home/tim/dev/web/remote/web-ctl-local.xml"/>
+		<!-- <requires interface="http://gfxmonk.net/dist/0install/edit-server.xml"/> -->
+		<!-- <requires interface="/home/tim/dev/web/remote/web-ctl-local.xml"/> -->
 		<requires interface="http://gfxmonk.net/dist/0install/vim-custom.xml">
 			<command-in-path name="gvim"/>
 		</requires>
@@ -51,6 +51,7 @@
 		<requires interface="http://gfxmonk.net/dist/0install/nautilus-open-terminal.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/parcellite.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/rygel.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/exaile.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/systemd-user.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/xbindkeys.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/xkbcomp.xml"/>

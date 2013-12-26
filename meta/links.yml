@@ -291,6 +291,9 @@ meta:
   path: ../root/yum.repos.d/steam.repo
   tags: fedora root
 
+/etc/systemd/system/user@.service:
+  path: ../root/systemd/user@.service
+  tags: fedora root
 
 ## OSX
 
