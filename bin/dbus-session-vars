@@ -1,0 +1,86 @@
+#!/usr/bin/env python
+import os
+import optparse
+import re
+import logging
+import subprocess
+
+logging.basicConfig(level=logging.INFO)
+
+XDG_RUNTIME_DIR = 'XDG_RUNTIME_DIR'
+DISPLAY = 'DISPLAY'
+
+p = optparse.OptionParser()
+p.add_option('--display')
+p.add_option('--no-env', action='store_true', default = False)
+p.add_option('--process', default = 'gnome-session')
+opts, args = p.parse_args()
+assert len(args) == 0, "too many args"
+
+if opts.no_env:
+	# remove all env sources of defaults
+	del os.environ[XDG_RUNTIME_DIR]
+	del os.environ[DISPLAY]
+
+def get_display():
+	display = opts.display
+	if display is not None: return display
+
+	display = os.environ.get(DISPLAY, None)
+	if display is not None: return display.lstrip(':')
+
+	try:
+		uid = str(os.getuid())
+		runtime_dir = os.environ.get(XDG_RUNTIME_DIR, "/run/user/%s" % uid)
+		display_file = os.path.join(runtime_dir, 'X11-display')
+		if os.path.exists(display_file):
+			dest = os.readlink(display_file)
+			match = re.search('\d+$', dest)
+			if match is not None:
+				return match.group(0)
+		else:
+			logging.warn("no such file: %s" % (display_file,))
+	except Exception as e:
+		logging.error("error:", exc_info=True)
+	return '0'
+
+def file_method():
+	# doesn't work - file is not actually updated with newest dbus vars
+	machine_id = subprocess.check_output(['dbus-uuidgen', '--get']).strip()
+	display = get_display()
+	vars_file = os.path.expanduser('~/.dbus/session-bus/%s-%s' % (machine_id, display))
+
+	with open(vars_file) as f:
+		from shlex import shlex
+		script = shlex(f, vars_file, posix=True)
+		script.whitespace_split = True
+		while True:
+			token = script.get_token()
+			if token is None: break
+			if not '=' in token:
+				logging.warn("unknown token: %s" % (token,))
+				continue
+			if '\n' in token:
+				logging.warn("token contains newline: %s" % (token,))
+				continue
+			print token
+
+def pgrep_method():
+	import getpass
+	pid_output = subprocess.check_output(['pgrep', '-u', getpass.getuser(), opts.process])
+	pids = list(map(int, pid_output.strip().split('\n')))
+	assert pids, "no %s process found" % (opts.process,)
+	if len(pids) > 1:
+		# TODO: get correct one based on its $DISPLAY var
+		logging.warn("multiple pids found")
+	pid = pids[0]
+	with open('/proc/%d/environ' % pid) as env_file:
+		vars = env_file.read().split('\0')
+		for var in vars:
+			if '\n' in vars:
+				logging.warn("token contains newline: %s" % (var,))
+				continue
+			if var.startswith('DBUS_SESSION_BUS'):
+				print var
+
+pgrep_method()
