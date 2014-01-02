@@ -1,0 +1,5 @@
+#!bash -eu
+src="$(basename "$2" .pp).mod"
+gup -u "$src" selinux-version
+semodule_package -o "$1" -m "$src"
+gup --contents "$1"

@@ -1,0 +1,4 @@
+#!bash -eu
+input="allow-systemd-units-in-home.pp"
+gup -u "$input"
+sudo semodule -i "$input"

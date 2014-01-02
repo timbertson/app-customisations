@@ -1,0 +1,6 @@
+#!bash -eu
+src="$(basename "$2" .mod).te"
+gup -u "$src" selinux-version
+checkmodule -M -m -o "$1" "$src"
+gup --contents "$1"
+

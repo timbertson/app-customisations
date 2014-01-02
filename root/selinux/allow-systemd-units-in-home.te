@@ -1,0 +1,15 @@
+
+module allow-systemd-units-in-home 1.0;
+
+require {
+	type systemd_logind_t;
+	type file_t;
+	type user_home_t;
+	type mozilla_plugin_t;
+	class file { getattr unlink };
+	class service start;
+}
+
+#============= systemd_logind_t ==============
+
+allow systemd_logind_t user_home_t:service start;
