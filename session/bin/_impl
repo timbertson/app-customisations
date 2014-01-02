@@ -27,7 +27,7 @@ psgrep -q CrashPlan || runbg ~/crashplan/bin/CrashPlanEngine start
 # nautilus needs to be started explicitly for desktop in gnome-shell?
 #runbg nautilus -n
 
-psgrep 'systemd --user' || runbg systemd --user
+# psgrep 'systemd --user' || runbg systemd --user
 #systemd doesn't exist on ubuntu - do it the crappy way:
 # edit-server-ctl start
 dig gfxmonk.net MX +noall +answer | grep -qi google || zenity --error --text="gfxmonk.net email is borked"

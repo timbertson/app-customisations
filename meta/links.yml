@@ -258,7 +258,7 @@ meta:
 
 ~/.local/share/applications/gnome-shell.desktop:
   uri: http://gfxmonk.net/dist/0install/shellshape.xml
-  extract: gnome-shell.desktop
+  extract: gnome-shell-debug.desktop
   tags: desktop shellshape
 
 ## FEDORA
