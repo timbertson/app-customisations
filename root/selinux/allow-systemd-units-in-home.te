@@ -12,4 +12,4 @@ require {
 
 #============= systemd_logind_t ==============
 
-allow systemd_logind_t user_home_t:service start;
+allow systemd_logind_t user_home_t:service *;
