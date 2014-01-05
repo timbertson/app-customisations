@@ -1,0 +1,1 @@
+{"interface_uri": "http://gfxmonk.net/dist/0install/ansible.xml", "source": false, "command": "ansible-playbook", "message": null, "os": null, "cpu": null, "extra_restrictions": {}}

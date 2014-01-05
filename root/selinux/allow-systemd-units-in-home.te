@@ -5,9 +5,7 @@ require {
 	type systemd_logind_t;
 	type file_t;
 	type user_home_t;
-	type mozilla_plugin_t;
-	class file { getattr unlink };
-	class service start;
+	class service {start status stop};
 }
 
 #============= systemd_logind_t ==============

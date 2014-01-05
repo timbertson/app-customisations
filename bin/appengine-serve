@@ -1,0 +1,3 @@
+#!/bin/bash
+unset PYTHONPATH
+exec 0install run --command="serve" http://gfxmonk.net/dist/0install/google-app-engine.xml . "$@"
