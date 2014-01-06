@@ -1,0 +1,4 @@
+#!/bin/bash
+reset-display
+reset-xkb
+reset-cursor

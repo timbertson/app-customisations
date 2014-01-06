@@ -1,0 +1,4 @@
+#!/bin/bash
+set -eu
+gsettings set org.gnome.settings-daemon.plugins.cursor active false
+gsettings set org.gnome.settings-daemon.plugins.cursor active true

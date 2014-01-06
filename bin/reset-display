@@ -1,0 +1,8 @@
+#!/bin/bash
+set -eu
+set -o pipefail
+
+export DISPLAY="${DISPLAY:-:0}"
+output="$(xrandr -q | grep -E -o '^[^ ]+ connected primary' | awk '{print $1}')"
+xrandr --output "$output" --rotate inverted
+xrandr --output "$output" --rotate normal
