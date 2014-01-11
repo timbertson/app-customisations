@@ -23,7 +23,7 @@ binary_template="""
 	<group>
 		<command name="run" path="%(name)s">
 		</command>
-		<implementation version="{version}" released="{date}">
+		<implementation version="{version}">
 			<manifest-digest/>
 			<archive href="{archive}"/>
 		</implementation>

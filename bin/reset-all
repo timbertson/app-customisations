@@ -1,4 +1,5 @@
 #!/bin/bash
 reset-display
 reset-xkb
+sleep 3
 reset-cursor

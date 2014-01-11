@@ -1,1 +1,2 @@
-/home/tim/dev/oss/direnv/direnv
+#!/bin/sh
+exec 0install run direnv "$@"
