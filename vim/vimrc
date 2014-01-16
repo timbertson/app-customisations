@@ -34,7 +34,7 @@ if has("gui_running")
 	if has("win32")
 		set guifont=Consolas:h12:cANSI
 	elseif has("mac")
-		set guifont=Menlo\ Regular:h15
+		set guifont=Menlo\ Regular:h16
 	else
 		set guifont=Monospace\ 11
 	endif
@@ -205,12 +205,14 @@ augroup END
 
 
 "" tab left & right
-map <A-j> gt
-map <A-k> gT
-" same for macvim (cmd key, because alt doesn't work)
-""NOTE: only run this on macvim - on gnome, it causes an ambiguous map for "<<" (unindent line)
-"map <D-j> gt
-"map <D-k> gT
+if has("mac")
+	""NOTE: only run this on macvim - on gnome, it causes an ambiguous map for "<<" (unindent line)
+	map <D-j> gt
+	map <D-k> gT
+else
+	map <A-j> gt
+	map <A-k> gT
+end
 
 " Visually select the text that was last edited/pasted
 nmap gV `[V`]
@@ -342,8 +344,11 @@ nmap <leader>q :q<cr>
 nmap <leader>Q :tabclose<cr>
 
 " map alt+slash to line comment toggle
-map <A-/> :TComment<cr>
-"map <D-/> :TComment<cr>
+if has("mac")
+	map <D-/> :TComment<cr>
+else
+	map <A-/> :TComment<cr>
+end
 
 " option (or alt) + r to run the current file
 "nmap <D-r> :up<cr>:!%:p<cr>
