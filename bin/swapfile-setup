@@ -1,0 +1,14 @@
+#!/bin/bash
+set -eux
+
+if [ ! -e /swapfile ]; then
+	dd if=/dev/zero of=/swapfile bs=1024 count=16777216
+	mkswap /swapfile
+	chmod 0600 /swapfile
+	if fgrep -q '/swapfile' /etc/fstab; then
+		true # noop
+	else
+		echo '/swapfile swap swap defaults 0 0' >> /etc/fstab
+	fi
+	swapon /swapfile
+fi

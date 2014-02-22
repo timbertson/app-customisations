@@ -1,1 +1,1 @@
-{"interface_uri": "http://gfxmonk.net/dist/0install/node.js.xml", "source": false, "command": "node-gyp", "message": null, "os": null, "cpu": null, "extra_restrictions": {}}
+{"interface_uri": "http://gfxmonk.net/dist/0install/npm.xml", "source": false, "command": "node-gyp", "message": null, "os": null, "cpu": null, "extra_restrictions": {}}

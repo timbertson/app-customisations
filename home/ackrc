@@ -11,3 +11,5 @@
 --ignore-dir=build
 --ignore-dir=0inst
 --ignore-dir=node_modules
+--ignore-dir=tmp
+--ignore-dir=_build

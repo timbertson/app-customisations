@@ -31,9 +31,10 @@ set -x NOSE_PROGRESSIVE_EDITOR 'gvimr'
 set -x NOSE_PROGRESSIVE_ADVISORIES 1
 
 # direnv
-#if which direnv >/dev/null 2>&1
-#	eval (direnv hook fish)
-#end
+if which direnv >/dev/null 2>&1
+	set -x DIRENV_LOG_FORMAT (set_color 777)" direnv: %s"(set_color reset)
+	eval (direnv hook fish)
+end
 
 set ZI_0COMPILE ~/dev/0install/zi-ocaml/zeroinstall-ocaml.0compile/zeroinstall-ocaml-linux-x86_64
 if [ -e $ZI_0COMPILE ]

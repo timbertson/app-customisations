@@ -12,6 +12,9 @@ echo "Session started: $(date). pid $$ running script $0"
 runbg xkbcomp -I~/ ~/.xkb "${DISPLAY}"
 psgrep -q xbindkeys || runbg xbindkeys
 
+# swap buttons 8 ("back") & 2 ("middle click") on slimblade trackball, if connected
+set-pointer-buttons --name 'Kensington Slimblade Trackball' 2:8 8:2 || true # ignore failure, it's probably just not plugged in
+
 env >&2
 
 [ "$1" == "slow" ] || sleep 2

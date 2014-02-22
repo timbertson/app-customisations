@@ -209,8 +209,8 @@ meta:
   path: ../home/xkb-mac
   tags: mac fedora
 
-/bin/xkb-reset:
-  path: ../bin/xkb-reset
+/bin/reset-xkb:
+  path: ../bin/reset-xkb
   tags: mac fedora
 
 ~/.config/dconf.user.d/disable-gnome-xkb:

@@ -3,7 +3,7 @@
 [fedora-chromium-stable]
 name=Builds of the "stable" tag of the Chromium Web Browser
 baseurl=http://repos.fedorapeople.org/repos/spot/chromium-stable/fedora-$releasever/$basearch/
-enabled=1
+enabled=0
 skip_if_unavailable=1
 gpgcheck=0
 
