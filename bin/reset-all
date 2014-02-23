@@ -1,5 +1,5 @@
 #!/bin/bash
 reset-display
-reset-xkb
+reset-input
 sleep 3
 reset-cursor

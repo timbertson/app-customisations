@@ -1,0 +1,3 @@
+#!/bin/bash
+# swap buttons 8 ("back") & 2 ("middle click") on slimblade trackball, if connected
+set-pointer-buttons --name 'Kensington Slimblade Trackball' 2:8 8:2 || true # ignore failure, it's probably just not plugged in
