@@ -156,12 +156,10 @@ meta:
   path: ../home/ctags
 
 ~/.xbindkeysrc.scm:
-  xath: ../home/xbindkeysrc.scm
-  tags: linux
-
-~/.xbindkeysrc.scm:
-  path: ../home/xbindkeysrc-tv.scm
-  tags: tv
+  - path: ../home/xbindkeysrc.scm
+    tags: linux
+  - path: ../home/xbindkeysrc-tv.scm
+    tags: tv
 
 ~/.ackrc:
   path: ../home/ackrc
