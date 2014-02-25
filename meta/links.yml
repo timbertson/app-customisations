@@ -215,6 +215,14 @@ meta:
   path: ../home/dconf/disable-gnome-xkb
   tags: mac fedora
 
+~/.config/dconf.user.d/focus-follows-mouse:
+  path: ../home/dconf/focus-follows-mouse
+  tags: linux
+
+~/.config/dconf.user.d/immediate-focus:
+  path: ../home/dconf/immediate-focus
+  tags: linux
+
 #TODO: make a pc xkb config
 
 ~/.xmodmaprc:
