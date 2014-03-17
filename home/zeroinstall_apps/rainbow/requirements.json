@@ -1,1 +1,1 @@
-{"interface_uri": "http://gfxmonk.net/dist/0install/rainbow.xml", "cpu": null, "source": false, "command": "run", "message": null, "os": null, "not_before": null, "before": null}
+{"interface_uri":"http://gfxmonk.net/dist/0install/rainbow.xml","source":false,"extra_restrictions":{},"command":"run"}

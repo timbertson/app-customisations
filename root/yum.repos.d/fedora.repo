@@ -6,7 +6,7 @@ baseurl=http://mirror.internode.on.net/pub/fedora/linux/releases/$releasever/Eve
 enabled=1
 metadata_expire=7d
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$basearch
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 
 [fedora-debuginfo]
 name=Fedora $releasever - $basearch - Debug
@@ -16,7 +16,7 @@ mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=fedora-debug-$release
 enabled=0
 metadata_expire=7d
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$basearch
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 
 [fedora-source]
 name=Fedora $releasever - Source
@@ -26,4 +26,4 @@ mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=fedora-source-$releas
 enabled=0
 metadata_expire=7d
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$basearch
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch

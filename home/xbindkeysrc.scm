@@ -20,6 +20,11 @@
 
 (xbindkey '(release "b:8") "xte 'mouseclick 1' 'mouseclick 1'")
 
+; I never use mod4+grave, unless my xkb bindings have been lost.
+; So if I'm mashing this, it means I need to reset my keybindings
+; (and maybe pther stuff too)
+(xbindkey '(mod4 grave) "reset-all")
+
 
 ; ; left & right mouse buttons for changing tabs in most apps:
 ; (xbindkey '("b:8") "xte 'keydown Control_R' 'key Page_Up' 'keyup Control_R'")
