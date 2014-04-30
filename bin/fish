@@ -1,2 +1,6 @@
 #!/bin/sh
-exec 0install run fish "$@"
+exec 0install run \
+	http://gfxmonk.net/dist/0install/zeroinstall-plugin-manager.xml \
+	http://gfxmonk.net/dist/0install/fish-shell.xml \
+	--plugin-command=run \
+	"$@"

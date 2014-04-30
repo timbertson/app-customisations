@@ -197,7 +197,7 @@ fun! Save_if_possible()
 		echo "[no file]"
 	endif
 endfun
-autocmd FocusLost * call Save_if_possible()
+autocmd FocusLost * nested call Save_if_possible()
 
 augroup mkd
 	autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt spell mousemodel=popup textwidth=70;

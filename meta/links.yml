@@ -267,15 +267,15 @@ meta:
   extract: gnome-shell-debug.desktop
   tags: desktop shellshape
 
-## FEDORA
+## LINUX
 
 /etc/modules-load.d/ecryptfs.conf:
   path: ../root/modules-load.d/ecryptfs.conf
-  tags: fedora
+  tags: fedora root
 
 /etc/X11/Xsession.d/80overlayscrollbars:
   path: ../root/xsession.d/80overlayscrollbars
-  tags: ubuntu
+  tags: ubuntu root
 
 /etc/yum.repos.d/fedora-chromium-stable.repo:
   path: ../root/yum.repos.d/fedora-chromium-stable.repo
@@ -304,8 +304,10 @@ meta:
 ## OSX
 
 /usr/share/0install.net/native_feeds:
-  path: ../zi-feeds/osx
-  tags: osx_root
+  - path: ../zi-feeds/osx
+    tags: osx_root
+  - path: ../zi-feeds/linux
+    tags: linux root
 
 ~/Library/KeyBindings/DefaultKeyBinding.dict:
   path: ../osx/DefaultKeyBinding.dict

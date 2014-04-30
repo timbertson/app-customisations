@@ -1,0 +1,4 @@
+#!bash -eu
+src="allow-systemctl-user-units allow-sandbox-whatever"
+gup -u $src
+sudo cp $src /etc/sudoers.d/

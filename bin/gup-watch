@@ -1,16 +1,15 @@
 #!/bin/bash
-set -e
-if [ -z "$WATCHDOG_ARGS" ]; then
-	WATCHDOG_ARGS=""
-fi
-set -u
+set -eu
 if [ "$#" -eq 0 ]; then
 	cmd="gup -u all"
 else
 	cmd="gup -u $*"
 fi
+
 zeroenv="0install run http://gfxmonk.net/dist/0install/0env.xml"
 gup="http://gfxmonk.net/dist/0install/gup.xml"
 $zeroenv $gup -- $cmd
+
+cmd="gup --buildable '\${watch_src_path}'; if [ \$? -eq 1 ]; then $cmd; fi"
 echo "(initial build complete - watching for changes)"
-$zeroenv $gup -- watchdog shell-command -c "$cmd" -i '*/.gup/*;*~' -D --wait --recursive $WATCHDOG_ARGS .
+$zeroenv $gup -- watchdog shell-command -c "$cmd" -i '*/.gup/*;*~' -D --wait --recursive ${WATCHDOG_ARGS:-} "${WATCHDOG_DIR:-.}"

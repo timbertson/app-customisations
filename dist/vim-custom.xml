@@ -55,6 +55,7 @@
 		<requires interface="http://gfxmonk.net/dist/0install/vim-tcomment.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-vaxe.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-visual-star-search.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-watch.xml"/>
 		<!-- these ones need custom env vars set: -->
 		<requires interface="http://gfxmonk.net/dist/0install/indent-finder.xml">
 			<environment insert="" mode="prepend" name="VIMPATH"/>

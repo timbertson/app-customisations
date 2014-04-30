@@ -1,5 +1,4 @@
 #!/bin/bash
 set -eu
-[ "$#" -eq 1 ] || (echo "Specify exactly one arg" ; exit 1)
-cp "$1" ~/dev/0repo/feeds
+cp "$@" ~/dev/0repo/feeds
 echo "Note: remember to commit the feed"
