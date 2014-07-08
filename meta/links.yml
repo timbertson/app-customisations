@@ -79,6 +79,10 @@ meta:
   path: ../root/udev-rules.d/99-nexus4-mtp.rules
   tags: root
 
+/etc/dnsmasq.d/self.conf:
+  path: ../root/dnsmasq.d/self.conf
+  tags: root
+
 ~/.vimrc:
   path: ../vim/vimrc
 
@@ -221,6 +225,10 @@ meta:
 
 ~/.config/dconf.user.d/immediate-focus:
   path: ../home/dconf/immediate-focus
+  tags: linux
+
+~/.config/dconf.user.d/disable-housekeeping-plugin:
+  path: ../home/dconf/disable-housekeeping-plugin
   tags: linux
 
 #TODO: make a pc xkb config

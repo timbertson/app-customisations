@@ -53,7 +53,7 @@ set nojoinspaces " just one space after a period (when joining)
 " set nofoldenable " I can never remember how to use folding
 set autoread " reload file whenever it changes on disk
 set autowrite " save file when navigating away from it or using :make (but not on quits, etc)
-set wrapmargin=5
+set wrapmargin=0
 set nowrap
 set formatoptions=crqln
 set backspace=indent,eol,start
@@ -62,10 +62,10 @@ set guioptions-=T "remove toolbar
 set guioptions-=m "remove menu bar
 set diffopt+=vertical
 set shiftround " round to multiples of shiftwidth for > and <
-set wildignore+=*.swp,*.bak,*.pyc,*.class,_build
-let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/tmp/*,**/_build/**"
+set wildignore+=*.swp,*.bak,*.pyc,*.class,_build,*.cache
+let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/tmp/*,**/_build*/**,**/0inst/**"
 let g:ctrlp_custom_ignore = {
-	\ 'dir': 'node_modules,tmp',
+	\ 'dir': 'node_modules,tmp,_build,0inst',
 	\ }
 
 set pastetoggle=<F2>

@@ -1,5 +1,7 @@
 --type-add=js=.jss,.json,.njs,.sjs
 --type-add=txt=.txt
+--type-add=ml=.ml
+--type-add=mli=.mli
 --type-set=properties=.properties
 --type-set=jss=.jss
 --type-set=in=.in

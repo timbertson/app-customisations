@@ -8,7 +8,8 @@ set additional_paths \
 	~/.cabal/bin \
 	$NODE_ROOT/bin \
 	~/bin \
-	~/.bin
+	~/.bin \
+	~/.nix-profile/bin
 
 if not contains ~/.bin/overrides $PATH
 	set -x PATH ~/.bin/overrides $PATH

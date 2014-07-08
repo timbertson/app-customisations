@@ -11,9 +11,12 @@ args = sys.argv[1:]
 if '--help' in args:
 	usage()
 
-if args and args[0] in ('off', 'no', 'n', '0'):
-	val='click'
+if args:
+	if args[0] in ('off', 'no', 'n', '0'):
+		val='click'
+	else:
+		val='sloppy'
+	os.execvp('dconf', ('dconf', 'write', '/org/gnome/desktop/wm/preferences/focus-mode', "'" + val + "'"))
 else:
-	val='sloppy'
+	os.execvp('dconf', ('dconf', 'read', '/org/gnome/desktop/wm/preferences/focus-mode'))
 
-os.execvp('gconftool', ('gconftool', '--set', '/apps/metacity/general/focus_mode', '--type=string', val))
