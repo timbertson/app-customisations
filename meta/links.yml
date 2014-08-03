@@ -79,7 +79,11 @@ meta:
   path: ../root/udev-rules.d/99-nexus4-mtp.rules
   tags: root
 
-/etc/dnsmasq.d/self.conf:
+/etc/NetworkManager/NetworkManager.conf:
+  path: ../root/NetworkManager/NetworkManager.conf
+  tags: root
+
+/etc/NetworkManager/dnsmasq.d/self.conf:
   path: ../root/dnsmasq.d/self.conf
   tags: root
 

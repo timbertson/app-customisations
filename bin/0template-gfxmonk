@@ -38,7 +38,7 @@ source_template="""
 				<command name="run" path="bin/%(name)s"/>
 			</compile:implementation>
 		</command>
-		<implementation version="{version}" released="{date}">
+		<implementation version="{version}">
 			<manifest-digest/>
 			<archive href="{archive}"/>
 		</implementation>

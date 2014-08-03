@@ -30,6 +30,7 @@
 			</runner>
 		</command>
 		<requires interface="http://gfxmonk.net/dist/0install/ack.vim.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-addon-nix.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-abolish.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-argtextobj.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-autotag.xml"/>

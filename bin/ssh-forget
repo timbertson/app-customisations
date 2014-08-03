@@ -1,0 +1,41 @@
+#!/usr/bin/env python
+# parses the output of an ssh host key vertification
+# message, and deletes the offending key.
+#
+# Obviously, only use this if you know the changed key is OK
+
+from __future__ import print_function
+import sys, collections, re, shutil, os
+
+edits = collections.defaultdict(lambda: [])
+
+patt = re.compile(r'^Offending .*key in *(?P<file>[^:]+):(?P<lineno>\d+)$')
+for line in sys.stdin.readlines():
+	line = line.strip()
+	m = re.match(patt, line)
+	if m:
+		m = m.groupdict()
+		line = int(m['lineno'])
+		filename = m['file']
+		edits[filename].append(line)
+	else:
+		# print(" # " + line.strip())
+		continue
+
+print("")
+for filename, lines in edits.items():
+	print(" ** removing line %s from %s" % (", ".join(map(str, lines)), filename), file=sys.stderr)
+	newname = filename + '.tmp'
+	shutil.copy2(filename, newname)
+	with open(filename) as f:
+		with open(filename + '.bak', 'w') as backup:
+			with open(newname, 'w') as fout:
+				for lineno, contents in enumerate(f.readlines(), 1):
+					if lineno in lines:
+						backup.write(contents)
+					else:
+						fout.write(contents)
+	os.rename(newname, filename)
+
+
+

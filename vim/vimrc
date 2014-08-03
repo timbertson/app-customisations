@@ -62,7 +62,7 @@ set guioptions-=T "remove toolbar
 set guioptions-=m "remove menu bar
 set diffopt+=vertical
 set shiftround " round to multiples of shiftwidth for > and <
-set wildignore+=*.swp,*.bak,*.pyc,*.class,_build,*.cache
+set wildignore+=*.swp,*.bak,*.pyc,*.class,*.cache
 let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/tmp/*,**/_build*/**,**/0inst/**"
 let g:ctrlp_custom_ignore = {
 	\ 'dir': 'node_modules,tmp,_build,0inst',
