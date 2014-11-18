@@ -11,6 +11,8 @@ set additional_paths \
 	~/.bin \
 	~/.nix-profile/bin
 
+set -x NIX_PATH ~/.nix-defexpr/channels
+
 if not contains ~/.bin/overrides $PATH
 	set -x PATH ~/.bin/overrides $PATH
 end

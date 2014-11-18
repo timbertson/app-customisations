@@ -63,9 +63,9 @@ set guioptions-=m "remove menu bar
 set diffopt+=vertical
 set shiftround " round to multiples of shiftwidth for > and <
 set wildignore+=*.swp,*.bak,*.pyc,*.class,*.cache
-let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/tmp/*,**/_build*/**,**/0inst/**"
+let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/tmp/*,**/_build*/**,**/0inst/**,**/*.0compile/**"
 let g:ctrlp_custom_ignore = {
-	\ 'dir': 'node_modules,tmp,_build,0inst',
+	\ 'dir': 'node_modules,tmp,_build,0inst,*.0compile',
 	\ }
 
 set pastetoggle=<F2>
@@ -251,8 +251,8 @@ map <Leader>b viw
 " and then keep extending it
 vmap <Leader>b o?\<<cr>o2/\><cr>h
 " \w should maybe do the same thing?
-nmap <leader>w <c-b>
-vmap <leader>w <c-b>
+" nmap <leader>w <c-b>
+" vmap <leader>w <c-b>
 
 xmap <Leader>s <Plug>Vsurround
 " surround selection with things:
@@ -305,8 +305,11 @@ imap <C-BS> <C-W>
 imap <C-space> _
 
 " scroll (without moving cursor) on ctrl+j/k
-map <C-k> <C-y>
-map <C-j> <C-e>
+nnoremap <C-k> <C-y>
+nnoremap <C-j> <C-e>
+
+vnoremap <C-k> <C-y>
+vnoremap <C-j> <C-e>
 
 " I want { and } to match whitespace-only lines, rather than just empty ones
 " TODO: need to omit these from the search history
@@ -377,6 +380,11 @@ let g:ctrlp_switch_buffer = 2
 " CommandT requires compilation, so we use CtrlP as a more portable fallback
 command! -narg=0 FindMeSomeFiles exec(exists(":CommandT") == 2 ? "CommandT" : "CtrlP")
 nmap <C-f> :FindMeSomeFiles<cr>
+
+" use ag if available
+if executable("ag")
+	let g:ackprg = 'ag --nogroup --nocolor --column'
+endif
 
 " but always have ctrlp available as well
 nmap <leader><C-f> :CtrlP<cr>

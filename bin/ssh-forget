@@ -8,9 +8,17 @@ from __future__ import print_function
 import sys, collections, re, shutil, os
 
 edits = collections.defaultdict(lambda: [])
+patt = re.compile(r'^Offending .*key( for IP)? in *(?P<file>[^:]+):(?P<lineno>\d+)$')
 
-patt = re.compile(r'^Offending .*key in *(?P<file>[^:]+):(?P<lineno>\d+)$')
-for line in sys.stdin.readlines():
+if sys.stdin.isatty():
+	import subprocess
+	print("  (reading input from X selection...)")
+	lines = subprocess.check_output(['xsel', '-oc', '--clear']).splitlines()
+	# print(repr(lines))
+else:
+	lines = sys.stdin.readlines()
+
+for line in lines:
 	line = line.strip()
 	m = re.match(patt, line)
 	if m:

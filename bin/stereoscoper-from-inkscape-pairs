@@ -1,0 +1,61 @@
+#!/usr/bin/env python
+from __future__ import print_function
+import os, sys
+from xml.dom import minidom
+import urllib
+import subprocess
+
+here = os.path.dirname(__file__)
+
+from optparse import OptionParser
+def extract_path(img):
+	return urllib.unquote(img[0])[len('file://'):]
+
+def main():
+	p = OptionParser()
+	p.add_option('-l', "--list", action='store_true')
+	p.add_option('-d', "--dest")
+	p.parse_args()
+	opts, args = p.parse_args()
+
+	for filename in args:
+		images = []
+		with open(filename) as inf:
+			dom = minidom.parse(inf)
+			# print(dom.toprettyxml())
+			for img in dom.getElementsByTagName('image'):
+				href = img.getAttribute('xlink:href')
+				x = float(img.getAttribute('x'))
+				y = float(img.getAttribute('y'))
+				# print("%s @ %sx%s" % (href, x, y))
+				images.append((href, (x,y)))
+		
+		images_by_height = sorted(images, key = lambda img: img[1][1])
+		for i in range(0, len(images_by_height), 2):
+			pair = images_by_height[i: i+2]
+			assert len(pair) == 2, (i, pair)
+			pair = sorted(pair, key = lambda img: img[1][0])
+			# pairs.append(list(map(extract_path, pair)))
+
+			pair = list(map(extract_path, pair))
+			print('\t'.join(pair))
+			if opts.list: continue # don't run stereoscoper
+			name = '-'.join([os.path.splitext(os.path.basename(path))[0] for path in pair]).replace('_','')
+			basedir = opts.dest or os.path.dirname(pair[0])
+			outpath = os.path.join(basedir, name + '.jpg')
+			if not os.path.exists(outpath):
+				print('Generating: %s' % outpath, file=sys.stderr)
+				subprocess.check_call([
+					'stereoscoper',
+					'--merge',
+					'--left', pair[0],
+					'--right', pair[1],
+					'--gui',
+					'--output', outpath])
+			else:
+				print('Skipping existing: %s' % outpath, file=sys.stderr)
+
+
+
+if __name__ == '__main__':
+	main()

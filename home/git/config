@@ -49,3 +49,5 @@
 	cmd = gvim --remote-tab \"$FILENAME\"
 	noconsole = yes
 	needsfile = yes
+[remote "origin"]
+	fetch = +refs/pull/*/head:refs/remotes/origin/pr/*

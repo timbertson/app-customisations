@@ -255,7 +255,9 @@ meta:
 #     tags: fedora desktop
 
 ~/.config/autostart/exaile.desktop:
-  - path: /usr/share/applications/exaile.desktop
+  # - path: /usr/share/applications/exaile.desktop
+    # dev version of exaile doesn't crap itself on docker mounts
+  - path: /home/tim/.local/share/applications/exaile.desktop
     tags: fedora desktop
 
 ~/.config/autostart/xbindkeys.desktop:

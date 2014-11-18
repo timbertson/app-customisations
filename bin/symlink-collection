@@ -7,7 +7,7 @@ def main():
 	p = optparse.OptionParser("Usage: %prog [OPTIONS] dest")
 	p.add_option('-f','--force', action='store_true', help='Overwrite existing directory (checks that it only contains symlinks first)')
 	opts, args = p.parse_args()
-	assert len(args) == 1, p.format_usage()
+	assert len(args) == 1, p.format_help()
 	destdir = args[0]
 
 	if opts.force and os.path.exists(destdir):
@@ -30,7 +30,7 @@ def main():
 		while True:
 			assert retries < 100, "Couldn't find unique name"
 			suffix = "-%s" % (retries,) if retries > 0 else ''
-			base, ext = os.path.splitext(os.path.basename(path))
+			base, ext = os.path.splitext(os.path.basename(path.rstrip(os.path.sep)))
 			filename = "".join((base, suffix, ext))
 			linkdest = os.path.join(destdir, filename)
 			if os.path.exists(linkdest):
