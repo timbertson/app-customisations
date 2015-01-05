@@ -3,6 +3,11 @@ if [ -d /usr/local/share/npm ]
 	set NODE_ROOT /usr/local/share/npm
 end
 
+# Nope.
+for var in LESSPIPE LESSOPEN LESSCLOSE
+	set -e -g $var
+end
+
 set additional_paths \
 	/sbin/ \
 	~/.cabal/bin \
