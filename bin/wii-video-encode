@@ -27,8 +27,8 @@ cmd = [
 	'mencoder',
 	'-ovc', 'xvid',
 	'-oac', 'mp3lame',
-	'-xvidencopts', 'bitrate=500',
-	'-lameopts', 'abr:br=110',
+	'-xvidencopts', 'bitrate=1000',
+	'-lameopts', 'abr:br=210',
 	'-o', outfile,
 	infile]
 print "Running command:\n%s" % (' '.join(cmd),)

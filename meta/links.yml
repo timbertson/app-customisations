@@ -291,10 +291,6 @@ meta:
   path: ../root/xsession.d/80overlayscrollbars
   tags: ubuntu root
 
-/etc/yum.repos.d/fedora-chromium-stable.repo:
-  path: ../root/yum.repos.d/fedora-chromium-stable.repo
-  tags: fedora root
-
 /etc/yum.repos.d/fedora.repo:
   path: ../root/yum.repos.d/fedora.repo
   tags: fedora root
