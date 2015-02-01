@@ -1,0 +1,15 @@
+#!/bin/bash
+set -eu
+# set -x
+pkg="$1"
+shift 1
+cmd="nix-build --show-trace --no-out-link --expr"
+if [[ "$pkg" == *.nix ]]; then
+	if [ -e "$pkg" ]; then
+		if [[ "$pkg" != /* ]]; then
+			pkg="./$pkg"
+		fi
+		exec $cmd "(import <nixpkgs> {}).callPackage $pkg {}" "$@"
+	fi
+fi
+exec $cmd "(import <nixpkgs> {}).$pkg" "$@"
