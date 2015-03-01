@@ -7,6 +7,7 @@ function fish_user_key_bindings -d "My key bindings for fish"
 	set refresh 'commandline -r ""; and commandline -f "execute" "history-search-backward"'
 	bind \cr $refresh
 	bind -k f5 $refresh
+	bind \t complete-until
 
 	## up
 	#bind --erase \e\[A

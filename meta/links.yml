@@ -244,21 +244,19 @@ meta:
     tags: pc xmodmap
 
 ## apps:
-# ~/.config/autostart/banshee.desktop:
-#   - path: /usr/share/applications/banshee.desktop
-#     tags: ubuntu desktop
-#   - path: /usr/share/applications/gnome-banshee.desktop
-#     tags: fedora desktop
+#~/.config/autostart/banshee.desktop:
+#  - path: /usr/share/applications/banshee.desktop
+#    tags: desktop
 
-# ~/.config/autostart/rhythmbox.desktop:
-#   - path: /usr/share/applications/rhythmbox.desktop
-#     tags: fedora desktop
-
-~/.config/autostart/exaile.desktop:
-  # - path: /usr/share/applications/exaile.desktop
-    # dev version of exaile doesn't crap itself on docker mounts
-  - path: /home/tim/.local/share/applications/exaile.desktop
+~/.config/autostart/rhythmbox.desktop:
+  - path: /usr/share/applications/rhythmbox.desktop
     tags: fedora desktop
+
+#~/.config/autostart/exaile.desktop:
+#  # - path: /usr/share/applications/exaile.desktop
+#    # dev version of exaile doesn't crap itself on docker mounts
+#  - path: /home/tim/.local/share/applications/exaile.desktop
+#    tags: fedora desktop
 
 ~/.config/autostart/xbindkeys.desktop:
   - path: ../home/applications/xbindkeys.desktop
@@ -303,12 +301,12 @@ meta:
   path: ../root/yum.repos.d/google-chrome.repo
   tags: fedora root
 
-/etc/yum.repos.d/steam.repo:
-  path: ../root/yum.repos.d/steam.repo
-  tags: fedora root
-
 /etc/systemd/system/user@.service:
   path: ../root/systemd/user@.service
+  tags: fedora root
+
+/usr/lib/systemd/system-sleep/apply-xkb:
+  path: ../root/systemd/apply-xkb
   tags: fedora root
 
 ## OSX

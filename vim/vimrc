@@ -238,6 +238,8 @@ vmap [ i[
 vmap ) i)
 vmap ( i(
 vmap ; ib
+" indent & brace selection
+vmap <leader>} >`<O<bs>{<esc>`>o<bs>}<esc>
 nmap c] ci]
 nmap c[ ci[
 nmap c) ci)

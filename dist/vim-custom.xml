@@ -49,6 +49,7 @@
 		<requires interface="http://gfxmonk.net/dist/0install/vim-nerdtree.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-pathogen.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-repeat.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/vim-rust.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-solarized.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-stratifiedjs.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-surround.xml"/>

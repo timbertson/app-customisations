@@ -1,0 +1,66 @@
+#!/usr/bin/env python
+from __future__ import print_function
+import subprocess, sys, os, pwd, collections
+
+DEBUG=False
+# DEBUG=True
+
+def run(args):
+	print(' '.join(['+']+args))
+	if not DEBUG:
+		subprocess.check_call(args)
+
+# users who we can steal files from (using sudo -u <user> giveto <me> <file...>)
+SUBSERVIENT_USERS = ('sandbox',)
+SUBSERVIENT_UIDS = {}
+for u in SUBSERVIENT_USERS:
+	SUBSERVIENT_UIDS[pwd.getpwnam(u).pw_uid] = u
+ME = os.getlogin()
+MY_UID = os.getuid()
+
+try:
+	args = sys.argv[1:]
+	assert len(args) >= 2
+
+	sources = args[:-1]
+	dest = args[-1]
+
+	need_ownership = collections.defaultdict(lambda: [])
+	for src in sources:
+		assert not os.path.isdir(src), "%s is a directory" % src
+		assert not os.path.islink(src), "%s is a symlink" % src
+
+		# print(repr(st))
+		while True:
+			st = os.stat(src)
+			if st.st_uid == MY_UID: break
+			owner_name = SUBSERVIENT_UIDS.get(st.st_uid, None)
+			if owner_name is None:
+				owner_name = pwd.getpwuid(st.st_uid)
+				raise AssertionError("file %s is owned by user %s" % (src, owner_name))
+			need_ownership[owner_name].append(src)
+			src = os.path.dirname(src)
+			if src == os.path.dirname(src): break
+	
+	giveto = None
+	for owner, paths in need_ownership.items():
+		if giveto is None:
+			giveto = subprocess.check_output(['which', 'giveto']).strip()
+		run(['sudo', '-u', owner_name, 'env', giveto, ME] + paths)
+
+	for src in sources:
+		if os.path.isdir(dest):
+			dest_file = os.path.join(dest, os.path.basename(src))
+		else:
+			dest_file = dest
+		run(['mv', src, dest_file])
+		run(['ln', '-s', dest_file, src])
+
+except subprocess.CalledProcessError as e:
+	sys.exit(1)
+except AssertionError as e:
+	if e.message:
+		print("Error: %s" % (e.message), file=sys.stderr)
+		sys.exit(1)
+	else:
+		raise

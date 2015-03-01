@@ -1,8 +1,0 @@
-# Place this file in your /etc/yum.repos.d/ directory
-
-[steam]
-name=Steam RPM packages (and dependencies) for Fedora
-baseurl=http://spot.fedorapeople.org/steam/fedora-$releasever/
-enabled=1
-skip_if_unavailable=1
-gpgcheck=0

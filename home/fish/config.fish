@@ -63,3 +63,8 @@ end
 if [ -r ~/.aliasrc ]
 	. ~/.aliasrc
 end
+
+# XXX fish is supposed to remember these, but it fails quite a lot.
+set fish_color_command d7ffff
+set fish_color_param afd7ff
+set fish_greeting ""
