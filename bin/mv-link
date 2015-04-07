@@ -46,6 +46,12 @@ try:
 	for owner, paths in need_ownership.items():
 		if giveto is None:
 			giveto = subprocess.check_output(['which', 'giveto']).strip()
+		# dedupe paths, but maintain order
+		_paths = []
+		for path in paths:
+			if path not in _paths:
+				_paths.append(path)
+		paths = _paths
 		run(['sudo', '-u', owner_name, 'env', giveto, ME] + paths)
 
 	for src in sources:

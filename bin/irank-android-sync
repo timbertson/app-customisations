@@ -7,7 +7,7 @@ function overwrite_android_db {
 }
 
 function do_sync {
-	irank export --interactive -d "$dest" --rsync-opt='--rsync-path=/data/data/berserker.android.apps.sshdroid/home/rsync' -- `cat ~/.config/irank/android-playlists`
+	irank export --interactive -d "$dest" --rsync-opt='--rsync-path=/data/data/berserker.android.apps.sshdroid/home/rsync' -- `grep -v '^#' ~/.config/irank/android-playlists`
 	overwrite_android_db
 
 	# echo '-------- DISK USAGE: -----------'

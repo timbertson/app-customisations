@@ -8,7 +8,7 @@ fi
 
 zeroenv="0install run http://gfxmonk.net/dist/0install/0env.xml"
 gup="http://gfxmonk.net/dist/0install/gup.xml"
-$zeroenv $gup -- $cmd
+$zeroenv $gup -- $cmd || true
 
 cmd="gup --buildable '\${watch_src_path}'; if [ \$? -eq 1 ]; then $cmd; fi"
 echo "(initial build complete - watching for changes)"
