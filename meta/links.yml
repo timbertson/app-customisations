@@ -83,10 +83,6 @@ meta:
   path: ../root/NetworkManager/NetworkManager.conf
   tags: root
 
-/etc/NetworkManager/dnsmasq.d/self.conf:
-  path: ../root/dnsmasq.d/self.conf
-  tags: root
-
 /etc/NetworkManager/dnsmasq.d:
   path: ../root/dnsmasq.d/
   tags: root
