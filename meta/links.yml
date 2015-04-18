@@ -2,7 +2,12 @@
 
 meta:
   zeroinstall_aliases:
-    vim: http://gfxmonk.net/dist/0install/vim-custom.xml
+    # NOTE: this column intentionally left blank (to prevent modeline confusion)
+    #           |
+    #  /--------/
+    #  |
+    #  V
+    vim : http://gfxmonk.net/dist/0install/vim-custom.xml
   basedir: ~/dev/app-customisations/meta
   hosts:
     meep:
