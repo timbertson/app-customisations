@@ -4,7 +4,7 @@
 	<name>MacVim</name>
 	<summary>MacVim</summary>
 	<description>MacVim (package implementation)</description>
-	<implementation id="/Users/tim/Applications/MacVim.app/Contents/MacOS" version="7.3">
+	<implementation id="/Applications/MacVim.app/Contents/MacOS" version="7.3">
 		<command name="run">
 			<environment insert="MacVim" mode="replace" name="MACVIM"/>
 			<environment insert="Vim" mode="replace" name="VIM"/>
