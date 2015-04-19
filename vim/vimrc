@@ -460,3 +460,18 @@ endfun
 
 command! -narg=* Pos call cursor(<f-args>)
 command! -narg=1 Column call cursor(line("."), <args>)
+
+" trialling...
+" hack to force autoload..
+silent! call gsel#NO_SUCH_FUNCTION()
+if exists("*gsel#DefaultMappings")
+	let g:gsel_file_list_command = "bash -c 'if git rev-parse --show-toplevel >/dev/null 2>&1; then git ls-files .; else find . -type f; fi'"
+
+	" ust a little bit roundabout... Assume if we have a systemd-user feed, we're
+	" actually running the gsel server
+	" XXX can we `test -f the existence of an abstract unix socket?
+	if filereadable($HOME."/.config/zeroinstall-plugin-manager/http\%3A\%2F\%2Fgfxmonk.net\%2Fdist\%2F0install\%2Fsystemd-user.xml/uri-list")
+		let g:gsel_command = "gsel-client"
+	endif
+	call gsel#DefaultMappings()
+endif
