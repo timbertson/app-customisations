@@ -1,0 +1,24 @@
+#!bash -eu
+# NOTE: This is a shared config.
+root="$(dirname "$2")/root"
+drv="$(readlink -f "$(dirname "$2")")/envrc.drv"
+
+cd "$root"
+file="shell.nix"
+if [ ! -e "$file" ]; then
+	gup --ifcreate "$file"
+	file="default.nix"
+fi
+
+gup -u "$file"
+nix-instantiate "$file" --show-trace  --quiet --indirect --add-root "$drv" > /dev/null
+nix-shell --show-trace --run "python" "$drv" > "$1" <<EOF
+from __future__ import print_function
+import os, sys
+for k in os.environ.keys()[:]:
+	if k.startswith('GUP_'):
+		# print("ignoring env %s" % (k,), file=sys.stderr)
+		del os.environ[k]
+os.execvp('direnv', ['direnv','dump'])
+EOF
+

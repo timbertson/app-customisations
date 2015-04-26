@@ -1,0 +1,28 @@
+#!bash -eu
+# NOTE: This is a shared config. If you want to customize it,
+# make a copy first.
+
+set -eu
+export ZEROENV_NAME='nix'
+id="$(pwd | md5sum | cut -f 1 -d ' ')"
+base="$HOME/.config/direnv-std/nix-shells"
+working="$base/$id"
+mkdir -p "$working"
+touch "$working"
+ln -sfn "$PWD" "$working/root"
+vars="$working/vars"
+gup -u "$vars"
+log_status "loading cached vars from $vars"
+
+# All vars are serialized in the dump, which accidentally serializes some dynamic data.
+# Add such vars here, as we find them :/
+ignore='DBUS_SESSION_BUS_ADDRESS'
+for var in $ignore; do
+	eval "_REAL_$var=\"\$$var\""
+done
+
+direnv_load cat "$vars"
+
+for var in $ignore; do
+	eval "export $var=\"\$_REAL_$var\""
+done

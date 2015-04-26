@@ -104,6 +104,9 @@ meta:
 ~/.config/0install.net/apps:
   path: ../home/zeroinstall_apps
 
+~/.config/direnv-std:
+  path: ../home/direnv-std
+
 ~/.zero2pypi:
   path: ../home/zero2pypi
 
