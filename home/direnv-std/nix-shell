@@ -5,6 +5,7 @@
 set -eu
 export ZEROENV_NAME='nix'
 id="$(pwd | md5sum | cut -f 1 -d ' ')"
+[ -n "$id" ]
 base="$HOME/.config/direnv-std/nix-shells"
 working="$base/$id"
 mkdir -p "$working"
@@ -18,11 +19,11 @@ log_status "loading cached vars from $vars"
 # Add such vars here, as we find them :/
 ignore='DBUS_SESSION_BUS_ADDRESS'
 for var in $ignore; do
-	eval "_REAL_$var=\"\$$var\""
+	eval "if [ -n \"\${$var:-}\" ]; then _REAL_$var=\"\$$var\"; fi"
 done
 
 direnv_load cat "$vars"
 
 for var in $ignore; do
-	eval "export $var=\"\$_REAL_$var\""
+	eval "if [ -n \"\${_REAL_$var:-}\" ]; then export $var=\"\$_REAL_$var\"; fi"
 done
