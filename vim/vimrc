@@ -8,6 +8,14 @@ if has("win32")
 	endif
 endif
 
+if has("mac")
+	set macmeta
+	" XXX am I using macvim wrong?
+	if exists("$MACVIM_PWD")
+		cd $MACVIM_PWD
+	endif
+endif
+
 if stridx(&shell, "fish") != -1
 	" vim and fish: worst of friends
 	set shell=sh
@@ -350,7 +358,7 @@ nmap <leader>Q :tabclose<cr>
 
 " map alt+slash to line comment toggle
 if has("mac")
-	map <D-/> :TComment<cr>
+	map <M-/> :TComment<cr>
 else
 	map <A-/> :TComment<cr>
 end
@@ -407,8 +415,13 @@ vmap <M-F7> y:Ack -wQ "<C-R>""<cr>
 nmap <F5> :syntax sync fromstart<cr>:redraw!<cr>
 
 " window management:
-nmap <C-tab> <c-w>w
-nmap <S-C-tab> <c-w>W
+if has("mac")
+	nmap <M-tab> <c-w>w
+	nmap <M-C-tab> <c-w>W
+else
+	nmap <C-tab> <c-w>w
+	nmap <S-C-tab> <c-w>W
+endif
 nmap <leader><c-l> <c-w>T
 
 " copy full path to clipboard

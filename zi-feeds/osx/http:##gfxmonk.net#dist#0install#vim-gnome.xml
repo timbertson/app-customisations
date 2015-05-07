@@ -21,6 +21,8 @@ if GUI:
 		try:
 			cmd.remove(flag)
 		except ValueError: pass
+	# macvim always manages to launch in $HOME
+	os.environ["MACVIM_PWD"] = os.getcwd()
 os.execvp(cmd[0], cmd)
 			</arg>
 		</command>

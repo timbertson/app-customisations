@@ -4,7 +4,7 @@
 	<name>git</name>
 	<summary>git</summary>
 	<description>git (package implementation)</description>
-	<implementation id="/usr/local/bin" version="1.8">
+	<implementation id="/usr/bin" version="1.8">
 		<command name="run" path="git"/>
 	</implementation>
 </interface>
