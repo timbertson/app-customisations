@@ -1,0 +1,108 @@
+#!/usr/bin/env python3
+# run a thing, and tell vim to jump to the first error we find
+from __future__ import print_function
+
+import os, sys, subprocess, re
+
+from optparse import OptionParser
+
+def DEBUG(*a): pass
+if os.environ.get('VIM_ERR_DEBUG','0') == '1':
+	def DEBUG(*a):
+		print('[vim-err]', *a, file=sys.stderr)
+	DEBUG("debug mode enabled...")
+
+p = OptionParser("Usage: %prog [OPTIONS] BUILD_COMMAND ...")
+p.add_option('-r', '--remote')
+p.add_option('-p', '--prompt', action='store_true')
+p.add_option('-s', '--source', dest='sources', action='append', default=[os.getcwd()], help='add source root')
+p.add_option('-c', '--context',type='int')
+p.disable_interspersed_args()
+opts, args = p.parse_args()
+
+ansi_escape = re.compile(r'\x1b[^m]*m')
+# TODO: add more formats?
+file_match = re.compile(r'''
+	(
+		([^: ]+):(\d+):(?:(\d+):)? # foo.bar:3:23
+	)|(
+		File\ "([^"]+)",\ line\ (\d+),\ characters\ (\d+)-\d+ # ocaml: File "foo.ml", line 3, characters 1-19
+	)
+	''', re.VERBOSE)
+
+assert len(args) > 0, "no arguments given"
+context = opts.context
+proc = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+status = None
+DONE = False
+# SUPPRESS = False
+REMOTE = None
+DELAYED_ACTION = None
+
+def open_remotely(opts, path, lineno, col):
+	cmd = [ 'vim' ]
+	if opts.remote is not None:
+		cmd.extend(['--servername', opts.remote])
+
+	if col is None: col = 1
+	coords = 'call cursor(%s,%s)' % (lineno, col)
+	cmd.extend([
+		'--remote-send',
+		'<esc>:drop {path}<cr>:{coords}<cr>'.format(
+			path=path.replace('\\','\\\\').replace(' ', '\\ '),
+			coords=coords,
+		),
+	])
+	DEBUG(repr(cmd))
+	return subprocess.Popen(cmd)
+
+def cleanup():
+	global DELAYED_ACTION
+	if DELAYED_ACTION:
+		DELAYED_ACTION()
+		DELAYED_ACTION = None
+	
+
+for line in proc.stdout.readlines():
+	# if SUPPRESS: continue
+	line = line.decode('utf-8')
+	print(line, end='')
+	if not DONE:
+		line = ansi_escape.sub('', line)
+		match = file_match.search(line)
+		if match:
+			DEBUG(repr(match.groups()))
+			_match_op, rel_path, lineno, col = filter(None, match.groups())
+			for source in opts.sources:
+				path = os.path.join(source, rel_path)
+				if os.path.isfile(path):
+					DONE = True
+					if opts.prompt:
+						def action():
+							global REMOTE
+							print('\n ** press return to jump to file vim **', file=sys.stderr,end='')
+							response = input()
+							DEBUG(repr(response))
+							if response == '':
+								REMOTE = open_remotely(opts, path, lineno, col)
+						DELAYED_ACTION = action
+					else:
+						REMOTE = open_remotely(opts, path, lineno, col)
+				else:
+					DEBUG("No such file: %s" %(path))
+	if DONE:
+		if context is not None:
+			if context > 0:
+				context -= 1
+			else:
+				cleanup()
+				proc.kill()
+				status = 1
+				break
+else:
+	cleanup()
+
+proc_status = proc.wait()
+if REMOTE and REMOTE.wait() != 0:
+	print(sys.stderr, "WARN: vim --remote-send failed")
+sys.exit(status or proc_status)

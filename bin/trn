@@ -1,0 +1,7 @@
+#!/bin/bash
+set -eu
+sep='\0'
+if [ "$#" -gt 0 ]; then
+	sep="$1"
+fi
+tr '\n' "$sep"

@@ -1,5 +1,4 @@
 #!bash -eu
-# NOTE: This is a shared config.
 root="$(dirname "$2")/root"
 drv="$(readlink -f "$(dirname "$2")")/envrc.drv"
 

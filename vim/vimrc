@@ -75,6 +75,7 @@ let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/tmp/*,**/_build*/*
 let g:ctrlp_custom_ignore = {
 	\ 'dir': 'node_modules,tmp,_build,0inst,*.0compile',
 	\ }
+let g:rust_recommended_style=0 " quit it with your expandtab business
 
 set pastetoggle=<F2>
 set sessionoptions="curdir,folds,localoptions,tabpages,winsize"
@@ -197,10 +198,19 @@ set list listchars=tab:▸\
 autocmd BufNewFile,BufRead * match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ *]\)\|\([^ \t]\zs\s\+$\)/
                              match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ *]\)\|\([^ \t]\zs\s\+$\)/
 
+command! -narg=0 NixSyntax call vim_addon_nix#CheckSyntax()
+
+" It's... syntastic!
+let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = {
+        \ "mode": "passive",
+        \ "active_filetypes": ["python", "nix", "ocaml", "xml"],
+        \ "passive_filetypes": [] }
+let g:syntastic_python_checkers = [ "python" ] " shut up, pylint
 
 fun! Save_if_possible()
 	if len(expand("%")) > 0 && &buftype == ""
-		:up
+		noautocmd up
 	else
 		echo "[no file]"
 	endif

@@ -19,6 +19,7 @@ meta:
         - fedora
         - shellshape
         - fish
+        - nix
     tjcee:
       tags:
         - root
@@ -34,6 +35,7 @@ meta:
        - osx
        - osx_root
        - fish
+       - nix
 
 # SELF-INSTALL:
 
@@ -106,6 +108,9 @@ meta:
 
 ~/.config/direnv-std:
   path: ../home/direnv-std
+
+~/.direnvrc:
+  path: ../home/direnv-std/direnvrc
 
 ~/.zero2pypi:
   path: ../home/zero2pypi
@@ -286,6 +291,18 @@ meta:
   uri: http://gfxmonk.net/dist/0install/shellshape.xml
   extract: gnome-shell-debug.desktop
   tags: desktop shellshape
+
+# ~/.local/share/applications/calibre.desktop:
+#   path: ../home/applications/nix/calibre.desktop
+#   tags: desktop nix
+
+~/.local/share/applications/skype.desktop:
+  path: ../home/applications/nix/skype.desktop
+  tags: desktop nix
+
+~/.local/share/applications/spotify.desktop:
+  path: ../home/applications/nix/spotify.desktop
+  tags: desktop nix
 
 ## LINUX
 

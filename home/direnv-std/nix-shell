@@ -6,8 +6,8 @@ set -eu
 export ZEROENV_NAME='nix'
 id="$(pwd | md5sum | cut -f 1 -d ' ')"
 [ -n "$id" ]
-base="$HOME/.config/direnv-std/nix-shells"
-working="$base/$id"
+base="$HOME/.config/direnv-std"
+working="$base/nix-shells/$id"
 mkdir -p "$working"
 touch "$working"
 ln -sfn "$PWD" "$working/root"
@@ -27,3 +27,4 @@ direnv_load cat "$vars"
 for var in $ignore; do
 	eval "if [ -n \"\${_REAL_$var:-}\" ]; then export $var=\"\$_REAL_$var\"; fi"
 done
+export DIRENV_CACHE="$vars"

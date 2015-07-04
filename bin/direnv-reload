@@ -1,0 +1,10 @@
+#!/bin/bash
+set -eu
+if [ -n "${DIRENV_CACHE:-}" -a -e "${DIRENV_CACHE:-}" ]; then
+	INTERACTIVE="-i"
+	if [ "x${1:-}" = "x-f" ]; then
+		INTERACTIVE=""
+	fi
+	rm $INTERACTIVE "$DIRENV_CACHE"
+fi
+direnv reload

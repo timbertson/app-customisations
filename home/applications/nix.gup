@@ -1,0 +1,2 @@
+#!bash -eu
+nix-build --out-link "$1" ../../nix/applications.nix --show-trace

@@ -14,7 +14,11 @@ set additional_paths \
 	$NODE_ROOT/bin \
 	~/bin \
 	~/.bin \
+	~/.bin/nix/bin \
 	~/.nix-profile/bin
+
+# set additional_mans \
+# 	~/.bin/nix/share/man
 
 set -x NIX_PATH ~/.nix-defexpr/channels
 
@@ -26,6 +30,13 @@ for p in $additional_paths
 		set -x PATH $PATH $p
 	end
 end
+
+# for p in $additional_mans
+# 	if not contains $p $MANPATH
+# 		set -x MANPATH $MANPATH $p
+# 	end
+# end
+
 
 set FISH_CLIPBOARD_CMD "cat" # Stop that.
 set BROWSER firefox
@@ -39,7 +50,7 @@ set -x NOSE_PROGRESSIVE_EDITOR 'gvimr'
 set -x NOSE_PROGRESSIVE_ADVISORIES 1
 
 # direnv
-if which direnv >/dev/null 2>&1
+if isatty stdin; and which direnv >/dev/null 2>&1
 	set -x DIRENV_LOG_FORMAT (set_color 777)" direnv: %s"(set_color reset)
 	eval (direnv hook fish)
 end

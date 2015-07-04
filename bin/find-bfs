@@ -1,7 +1,16 @@
 #!/bin/bash
 depth=0
+dir="."
+if [ "$#" -gt 0 ]; then
+	if [[ $1 != -* ]]; then
+		dir="$1"
+		shift 1
+	fi
+fi
+# echo "DIR=$dir"
+# echo "ARGV=$*"
 
-while find "$@" -mindepth $depth -maxdepth $depth | grep '.'
+while find "$dir" -mindepth $depth -maxdepth $depth "$@" | grep '.'
 do
     depth=$((depth + 1))
 done

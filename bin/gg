@@ -1,0 +1,17 @@
+#!/bin/bash
+set -eu
+function list {
+	# pretty lame, it just does a topleve + 1-down listing of targets
+	gup --targets
+	ls -1 | while read f; do
+		if [ -d $f ]; then
+			gup --targets "$f" | grep -v 'gup/'
+		fi
+	done
+}
+
+target="$(list | gsel-client)"
+if [ "$?" -eq 0 ]; then
+	gup $@ "$target"
+fi
+

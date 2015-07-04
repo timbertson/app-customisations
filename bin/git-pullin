@@ -1,0 +1,68 @@
+#!/bin/bash
+
+set -eu
+# set -x
+
+function assert_ok {
+	if [ -z "$1" ]; then
+		echo "Error: $2"
+		exit 1
+	fi
+}
+
+branch="$(git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||')"
+assert_ok "$branch" "Not on a branch"
+
+remote="$(git config --get "branch.$branch.remote")"
+assert_ok "$remote" "Coulnd't find remote for branch $branch"
+
+remote_ref="$(git config --get "branch.$branch.merge" | sed -e 's|^refs/heads/||')"
+assert_ok "$remote_ref" "Couldn't find merge ref for branch $branch"
+
+git fetch "$remote" "$remote_ref"
+remote_ref="$remote/$remote_ref"
+
+function with_log {
+	echo "+ $@"
+	"$@"
+}
+
+function merge_or_rebase {
+	remote_ref="$1"
+	shift 1
+	action=merge
+	if [ "$#" -gt 0 -a "x$1" = "x--rebase" ]; then
+		action=rebase
+		shift 1
+	fi
+	with_log git $action "$remote_ref" "$@"
+}
+
+stash="$(git stash create)"
+if [ -z "$stash" ]; then
+	merge_or_rebase "$@"
+else
+	merge_base="$(git merge-base FETCH_HEAD "$stash")"
+	assert_ok "$merge_base" "Couldn't find merge-base"
+
+	conflicts="$(git merge-tree "$merge_base" "$stash" FETCH_HEAD | grep '^>>' | wc -l)"
+	assert_ok "$conflicts" "git merge-tree failed"
+	if [ "$conflicts" -eq 0 ]; then
+		id="$(mktemp --dry-run XXXXX)"
+		function check_stash {
+			rv="$?"
+			if git stash list -1 | fgrep "id:$id"; then
+				echo "WARN: stash still present; you'll need to apply/drop it manually"
+			fi
+			exit "$rv"
+		}
+		trap check_stash EXIT
+		git stash save -- "-- [TMP] git-pullin id:$id --"
+		merge_or_rebase "$@"
+		with_log git stash pop
+	else
+		git merge-tree "$merge_base" "$stash" FETCH_HEAD
+		echo ""
+		echo "Error: $conflicts conflicts found (see above). You'll have to do this one yourself"
+	fi
+fi

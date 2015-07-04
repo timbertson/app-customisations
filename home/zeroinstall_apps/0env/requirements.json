@@ -1,1 +1,1 @@
-{"interface_uri": "http://gfxmonk.net/dist/0install/0env.xml", "source": false, "command": "run", "message": null, "os": null, "cpu": null}
+{"interface_uri":"http://gfxmonk.net/dist/0install/0env.xml","source":false,"may_compile":false,"extra_restrictions":{},"command":"run"}
