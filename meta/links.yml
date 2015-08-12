@@ -13,6 +13,7 @@ meta:
     meep:
       tags:
         - root
+        - multi-user
         - linux
         - mac
         - desktop
@@ -222,6 +223,23 @@ meta:
 /etc/profile.d/autojump:
   uri: http://gfxmonk.net/dist/0install/autojump.xml
   tags: desktop root
+
+## multi-user
+~/users/www-browser/.themes:
+ path: /home/tim/.themes
+ tags: multi-user linux
+
+~/users/www-browser/.config/fontconfig:
+ path: /home/tim/.config/fontconfig
+ tags: multi-user linux
+
+~/users/www-browser/Desktop:
+ path: /home/tim/Desktop
+ tags: multi-user linux
+
+~/users/www-browser/Downloads:
+ path: /home/tim/Downloads
+ tags: multi-user linux
 
 ## KEYBOARD TYPES
 ~/.xkb:

@@ -130,6 +130,10 @@ let g:indent_finder_default_style="tab"
 let g:indent_finder_default_width="2"
 
 set cursorline
+
+" Ruby scrolls horribly slow with cursorline
+autocmd FileType ruby setlocal norelativenumber nocursorline
+
 set ignorecase
 set smartcase
 set incsearch
@@ -204,9 +208,10 @@ command! -narg=0 NixSyntax call vim_addon_nix#CheckSyntax()
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {
         \ "mode": "passive",
-        \ "active_filetypes": ["python", "nix", "ocaml", "xml"],
+        \ "active_filetypes": ["python", "nix", "ocaml", "xml", "ruby"],
         \ "passive_filetypes": [] }
 let g:syntastic_python_checkers = [ "python" ] " shut up, pylint
+let g:syntastic_ocaml_checkers = [] " can't get lwt support working...
 
 fun! Save_if_possible()
 	if len(expand("%")) > 0 && &buftype == ""

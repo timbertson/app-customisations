@@ -2,7 +2,7 @@
 # NOTE: this overrides a builtin. make sure it acts the same way!
 use_nix() {
   if [ "$#" -gt 0 ]; then
-    direnv_load nix-shell --show-trace "$@" --run direnv dump
+    direnv_load nix-shell --show-trace "$@" --run 'direnv dump'
   else
     # no args - we can use the `gup` cache:
     source "$HOME/.config/direnv-std/nix-shell"
