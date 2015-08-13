@@ -22,9 +22,11 @@ if stridx(&shell, "fish") != -1
 endif
 
 " pathogen bootstrap, then use it to make $VIMPATH useful
-let &runtimepath = $PATHOGEN_ROOT . "," . &runtimepath
-let &runtimepath = pathogen#join(split($VIMPATH,g:pathsep),&runtimepath)
-call pathogen#runtime_append_all_bundles()
+if exists("$PATHOGEN_ROOT")
+	let &runtimepath = $PATHOGEN_ROOT . "," . &runtimepath
+	let &runtimepath = pathogen#join(split($VIMPATH,g:pathsep),&runtimepath)
+	call pathogen#runtime_append_all_bundles()
+endif
 
 " reload filetype detection
 filetype off

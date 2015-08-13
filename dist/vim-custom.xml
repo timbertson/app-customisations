@@ -32,20 +32,20 @@
 		</command>
 		<requires interface="http://gfxmonk.net/dist/0install/ack.vim.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-nix.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-abolish.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-argtextobj.xml"/>
+		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-abolish.xml"/> -->
+		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-argtextobj.xml"/> -->
 		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-autotag.xml"/> -->
-		<requires interface="http://gfxmonk.net/dist/0install/vim-a.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-background-make.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-camelcase-motion.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-clipbrd.xml"/>
+		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-a.xml"/> -->
+		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-background-make.xml"/> -->
+		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-camelcase-motion.xml"/> -->
+		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-clipbrd.xml"/> -->
 		<requires interface="http://gfxmonk.net/dist/0install/vim-ctrlp.xml"/>
 		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-easymotion.xml"/> -->
 		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-errormarker.xml"/> -->
 		<requires interface="http://gfxmonk.net/dist/0install/vim-fish-syntax.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-fugitive.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-gnome.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-indent-object.xml"/>
+		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-indent-object.xml"/> -->
 		<requires interface="http://gfxmonk.net/dist/0install/vim-ir-black.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-nerdtree.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-pathogen.xml"/>
@@ -57,7 +57,7 @@
 		<requires interface="http://gfxmonk.net/dist/0install/vim-syntastic.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-tabular.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-tcomment.xml"/>
-		<requires interface="http://gfxmonk.net/dist/0install/vim-vaxe.xml"/>
+		<!-- <requires interface="http://gfxmonk.net/dist/0install/vim-vaxe.xml"/> -->
 		<requires interface="http://gfxmonk.net/dist/0install/vim-visual-star-search.xml"/>
 		<requires interface="http://gfxmonk.net/dist/0install/vim-watch.xml"/>
 		<!-- these ones need custom env vars set: -->

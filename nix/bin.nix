@@ -19,6 +19,10 @@ let
 	};
 	tools = [
 		git
+		ctags
+		fish
+		(callPackage ./packages/vim-watch.nix {})
+		(callPackage ./vim {})
 	];
 	dirs = "bin etc share/man";
 in
