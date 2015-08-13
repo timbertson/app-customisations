@@ -1,7 +1,7 @@
-set NODE_ROOT /usr/lib/nodejs
-if [ -d /usr/local/share/npm ]
-	set NODE_ROOT /usr/local/share/npm
-end
+# set NODE_ROOT /usr/lib/nodejs
+# if [ -d /usr/local/share/npm ]
+# 	set NODE_ROOT /usr/local/share/npm
+# end
 
 # Nope.
 for var in LESSPIPE LESSOPEN LESSCLOSE
@@ -14,9 +14,9 @@ set additional_paths \
 	$NODE_ROOT/bin \
 	~/bin \
 	~/.bin \
-	~/.bin/nix/bin \
 	~/.nix-profile/bin
 
+# ~/.bin/nix/bin \
 # set additional_mans \
 # 	~/.bin/nix/share/man
 
@@ -31,6 +31,19 @@ for p in $additional_paths
 	end
 end
 
+# NOTE: LAST path is most overridey
+set path_overrides \
+	~/.bin/nix/bin \
+	~/.bin/overrides
+
+for p in $path_overrides
+	# echo "OVERR! $p"
+	if not contains $p $PATH
+		set -x PATH $p $PATH
+	end
+end
+
+
 # for p in $additional_mans
 # 	if not contains $p $MANPATH
 # 		set -x MANPATH $MANPATH $p
@@ -42,7 +55,6 @@ set FISH_CLIPBOARD_CMD "cat" # Stop that.
 set BROWSER firefox
 set -x EDITOR vim
 set -x force_s3tc_enable true # games often need this
-set fish_complete_list 0
 
 set -x NOSE_PROGRESSIVE_EDITOR_SHORTCUT_TEMPLATE \
 	'  {term.black}{editor} {term.cyan}+{term.bold}{line_number:<{line_number_max_width}} {term.blue}{path}{normal}{function_format}{term.yellow}{hash_if_function}{function}{normal}'
@@ -55,22 +67,12 @@ if isatty stdin; and which direnv >/dev/null 2>&1
 	eval (direnv hook fish)
 end
 
-set ZI_0COMPILE ~/dev/0install/zi-ocaml/zeroinstall-ocaml.0compile/zeroinstall-ocaml-linux-x86_64
-if [ -e $ZI_0COMPILE ]
-	set bin $ZI_0COMPILE/files
-	if not contains $bin $PATH
-		#echo "adding PATH"
-		set -x PATH $bin $PATH
-	end
-
-	set compl $ZI_0COMPILE/files/share/completions
-	if not contains $compl $fish_complete_path
-		# echo "adding fish_complete_path"
-		# echo "$fish_complete_path"
-		set -x fish_complete_path $fish_complete_path $compl
-	end
+# completions paths from env:
+if set -q FISH_COMPLETE_PATH
+	# echo "NOTE: adding $FISH_COMPLETE_PATH to $fish_complete_path"
+	set fish_complete_path (echo $FISH_COMPLETE_PATH | tr ':' '\n') $fish_complete_path /usr/share/fish/completions
 end
-	
+
 if [ -r ~/.aliasrc ]
 	. ~/.aliasrc
 end

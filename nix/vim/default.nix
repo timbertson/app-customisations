@@ -50,7 +50,7 @@ stdenv.mkDerivation {
 			--prefix PATH : ${silver-searcher}/bin \
 			--prefix PATH : ${ctags}/bin \
 		;
-		echo -e "#!${bash}/bin/bash\nexec \"$out/bin/vim\" -g \"$@\"" > $out/bin/gvim
+		echo -e "#!${bash}/bin/bash\nexec \"$out/bin/vim\" -g \"\$@\"" > $out/bin/gvim
 		chmod +x $out/bin/*
 	'';
 }
