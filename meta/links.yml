@@ -310,6 +310,11 @@ meta:
   extract: gnome-shell-debug.desktop
   tags: desktop shellshape
 
+## NIX
+~/.nixpkgs:
+  path: ../home/nixpkgs
+  tags: nix
+
 # ~/.local/share/applications/calibre.desktop:
 #   path: ../home/applications/nix/calibre.desktop
 #   tags: desktop nix
@@ -329,6 +334,10 @@ meta:
 /nix/var/nix/gcroots/my-applications:
   path: ../home/applications/nix
   tags: desktop nix
+
+/etc/nix/nix.conf:
+  path: ../root/nix/nix.conf
+  tags: nix
 
 ## LINUX
 
