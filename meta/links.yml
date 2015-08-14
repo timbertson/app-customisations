@@ -322,6 +322,14 @@ meta:
   path: ../home/applications/nix/spotify.desktop
   tags: desktop nix
 
+/nix/var/nix/gcroots/my-bin:
+  path: ../bin/nix
+  tags: nix
+
+/nix/var/nix/gcroots/my-applications:
+  path: ../home/applications/nix
+  tags: desktop nix
+
 ## LINUX
 
 /etc/modules-load.d/ecryptfs.conf:

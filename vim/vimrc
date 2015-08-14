@@ -10,10 +10,10 @@ endif
 
 if has("mac")
 	set macmeta
-	" XXX am I using macvim wrong?
-	if exists("$MACVIM_PWD")
-		cd $MACVIM_PWD
-	endif
+" 	" XXX am I using macvim wrong?
+" 	if exists("$MACVIM_PWD")
+" 		cd $MACVIM_PWD
+" 	endif
 endif
 
 if stridx(&shell, "fish") != -1
@@ -71,7 +71,7 @@ set guitablabel=%N\ %t\ %m%r
 set guioptions-=T "remove toolbar
 set guioptions-=m "remove menu bar
 set diffopt+=vertical
-set shiftround " round to multiples of shiftwidth for > and <
+" set shiftround " round to multiples of shiftwidth for > and <
 set wildignore+=*.swp,*.bak,*.pyc,*.class,*.cache
 let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/tmp/*,**/_build*/**,**/0inst/**,**/*.0compile/**"
 let g:ctrlp_custom_ignore = {
@@ -126,6 +126,7 @@ fun! GlobalTabsize(sz)
 endfun
 command! -nargs=1 Tabsize call Tabsize(<args>)
 
+set noexpandtab
 call GlobalTabsize(2)
 " defaults for indent-finder when no other preference is clear from the file
 let g:indent_finder_default_style="tab"

@@ -67,11 +67,22 @@ if isatty stdin; and which direnv >/dev/null 2>&1
 	eval (direnv hook fish)
 end
 
-# completions paths from env:
-if set -q FISH_COMPLETE_PATH
-	# echo "NOTE: adding $FISH_COMPLETE_PATH to $fish_complete_path"
-	set fish_complete_path (echo $FISH_COMPLETE_PATH | tr ':' '\n') $fish_complete_path /usr/share/fish/completions
+set extra_complete_paths \
+	~/dev/ocaml/gup/share/fish/completions \
+	~/dev/ocaml/passe/share/fish/completions \
+	/usr/share/fish/completions
+
+for p in $extra_complete_paths
+	if begin test -e $p; and not contains $p $PATH; end
+		set fish_complete_path $fish_complete_path $p
+	end
 end
+
+# completions paths from env:
+# if set -q FISH_COMPLETE_PATH
+# 	# echo "NOTE: adding $FISH_COMPLETE_PATH to $fish_complete_path"
+# 	set fish_complete_path (echo $FISH_COMPLETE_PATH | tr ':' '\n') $fish_complete_path /usr/share/fish/completions
+# end
 
 if [ -r ~/.aliasrc ]
 	. ~/.aliasrc

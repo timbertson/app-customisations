@@ -1,16 +1,19 @@
 {pkgs ? import <nixpkgs> {}}:
 with pkgs;
 let
+	vim_configurable = if stdenv.isDarwin
+		then vimUtils.makeCustomizable macvim
+		else pkgs.vim_configurable;
+	knownPlugins = vimPlugins // (pkgs.callPackage ./plugins.nix {});
 	vim = vim_configurable.customize {
-			name = "vim"; # actual binary name
-			vimrcConfig.customRC = ''
-				set nocompatible
-				source ${src}/vimrc
-			'';
-			vimrcConfig.vam.knownPlugins = vimPlugins
-				// (pkgs.callPackage ./plugins.nix {});
-
-			vimrcConfig.vam.pluginDictionaries = [
+		name = "vim"; # actual binary name
+		vimrcConfig.customRC = ''
+			set nocompatible
+			source ${src}/vimrc
+		'';
+		vimrcConfig.vam = {
+			inherit knownPlugins;
+			pluginDictionaries = [
 				# load always
 				{
 					names = [
@@ -28,15 +31,18 @@ let
 						"surround"
 						"Tagbar"
 						"tcomment"
+						"The_NERD_tree"
 						"vim-nix"
 						"vim-rust"
 						"vim-stratifiedjs"
 						"vim-visual-star-search"
-					];
+					]
+					++ (if knownPlugins.gsel == null then [] else ["gsel"]);
 				}
 				# full documentation at
 				# github.com/MarcWeber/vim-addon-manager
 			];
+		};
 	};
 	src = ../../vim;
 in

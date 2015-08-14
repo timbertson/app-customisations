@@ -58,7 +58,7 @@ in
 		"983cbd95797251097fe0a00eedcac75aa6bbff8c"
 		"6c55742c10ba62d8021808efad211410cd087f0254ee23911755934eef0df088";
 	
-	# TODO ...
+	# TODO delete this or make it proper?
 	"misc" = mk {
 		src = ../../vim;
 		buildPhase = "rm -rf ./cache";
@@ -68,5 +68,7 @@ in
 		"https://github.com/ldx/vim-indentfinder"
 		"49d0b2192614e159fcb8701d61709152acbaabf6"
 		"82ced7d8d9465ff59d34fabc4d352a8e437e99814dc8025f9d8c4476bb1317c4";
+	
+	"gsel" = if builtins.pathExists "/home/tim/dev/ocaml/gsel/vim" then mk { src = /home/tim/dev/ocaml/gsel/vim; } else null;
 
 }

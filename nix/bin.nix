@@ -25,6 +25,7 @@ let
 		git
 		ctags
 		fish
+		direnv
 		(callPackage ./packages/vim-watch.nix {})
 		(callPackage ./vim {})
 	];
