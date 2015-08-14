@@ -4,6 +4,10 @@ let
 	bash = "#!${pkgs.bash}/bin/bash";
 	wrapper = script: writeScript "wrapper" script;
 	wrappers = {
+		# ALL
+
+	} // (if stdenv.isDarwin then {} else {
+		# LINUX only...
 		"mount.ssh" = wrapper ''${bash}
 			if [ "$#" -lt 2 ]; then
 				echo "usage: mount.ssh [opts] remote local-dir"
@@ -16,7 +20,7 @@ let
 
 			${sshfsFuse}/bin/sshfs "$@"
 		'';
-	};
+	});
 	tools = [
 		git
 		ctags
