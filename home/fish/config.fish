@@ -10,23 +10,22 @@ end
 
 set additional_paths \
 	/sbin/ \
-	~/.cabal/bin \
-	$NODE_ROOT/bin \
 	~/bin \
 	~/.bin \
+	~/.bin/zi \
 	~/.nix-profile/bin
 
-# ~/.bin/nix/bin \
-# set additional_mans \
-# 	~/.bin/nix/share/man
+
+if test -f /etc/pki/tls/certs/ca-bundle.crt
+	set -x GIT_SSL_CAINFO /etc/pki/tls/certs/ca-bundle.crt
+	set -x CURL_CA_BUNDLE /etc/pki/tls/certs/ca-bundle.crt
+end
 
 set -x NIX_PATH ~/.nix-defexpr/channels
 
-if not contains ~/.bin/overrides $PATH
-	set -x PATH ~/.bin/overrides $PATH
-end
 for p in $additional_paths
 	if not contains $p $PATH
+		# echo "append PATH $p"
 		set -x PATH $PATH $p
 	end
 end
@@ -37,18 +36,27 @@ set path_overrides \
 	~/.bin/overrides
 
 for p in $path_overrides
-	# echo "OVERR! $p"
 	if not contains $p $PATH
+		#echo "prepend PATH $p"
 		set -x PATH $p $PATH
 	end
 end
 
 
-# for p in $additional_mans
-# 	if not contains $p $MANPATH
-# 		set -x MANPATH $MANPATH $p
-# 	end
-# end
+set additional_mans \
+	~/.nix-profile/share/man \
+	~/.bin/nix/share/man
+if not set -q MANPATH
+	# default manpath. Not as extensive as /etc/man.conf; but prevents
+	# dumb "man path is too long" when the default behaviour is to search $PATH
+	set -x MANPATH /usr/man /usr/share/man /usr/local/share/man
+end
+
+for p in $additional_mans
+	if not contains $p $MANPATH
+		set -x MANPATH $MANPATH $p
+	end
+end
 
 
 set FISH_CLIPBOARD_CMD "cat" # Stop that.

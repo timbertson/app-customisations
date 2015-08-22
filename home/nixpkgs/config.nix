@@ -36,6 +36,17 @@ in
 			meta.priority = 1;
 		});
 
+		nodejs = lib.overrideDerivation nodejs (base: {
+			preConfigure = ''
+				if echo '1' | gcc -E -fstack-protector-strong - > /dev/null; then
+					# we can't just test the version of gcc, since this feature is enabled by many distros prior to GCC 2.9
+					export CFLAGS='-fstack-protector-strong'
+				else
+					export CFLAGS='-fstack-protector-all'
+				fi
+			'';
+		});
+
 	} // (if stdenv.isDarwin then {
 
 		# XXX from https://github.com/NixOS/nixpkgs/issues/8728

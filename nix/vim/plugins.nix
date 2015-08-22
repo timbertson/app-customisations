@@ -65,9 +65,10 @@ in
 	};
 
 	"indent-finder" = mkgit
-		"https://github.com/ldx/vim-indentfinder"
-		"49d0b2192614e159fcb8701d61709152acbaabf6"
-		"82ced7d8d9465ff59d34fabc4d352a8e437e99814dc8025f9d8c4476bb1317c4";
+		# "https://github.com/ldx/vim-indentfinder"
+		"https://github.com/gfxmonk/indent-finder"
+		"4b92a176d2980c5fa4352232495eba416d777022"
+		"9f2be3c327d374809ac214af0b41779ead008f1c6643858d0cfecfb58470e5e9";
 	
 	"gsel" = if builtins.pathExists "/home/tim/dev/ocaml/gsel/vim" then mk { src = /home/tim/dev/ocaml/gsel/vim; } else null;
 

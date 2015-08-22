@@ -26,6 +26,7 @@ let
 		ctags
 		fish
 		direnv
+		silver-searcher
 		(callPackage ./packages/vim-watch.nix {})
 		(callPackage ./vim {})
 	];
