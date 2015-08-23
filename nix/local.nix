@@ -1,12 +1,15 @@
 {pkgs ? import <nixpkgs> {}}:
-with pkgs;
+let packagesExt = (pkgs // (import ./packages { inherit pkgs; })); in
+with packagesExt;
 let
+	isDarwin = stdenv.isDarwin;
+	isLinux = stdenv.isLinux;
 	bash = "#!${pkgs.bash}/bin/bash";
 	wrapper = script: writeScript "wrapper" script;
 	wrappers = {
 		# ALL
 
-	} // (if stdenv.isDarwin then {} else {
+	} // (if isLinux then {
 		# LINUX only...
 		"mount.ssh" = wrapper ''${bash}
 			if [ "$#" -lt 2 ]; then
@@ -20,20 +23,24 @@ let
 
 			${sshfsFuse}/bin/sshfs "$@"
 		'';
-	});
-	tools = [
+	} else {});
+	tools = lib.remove null [
 		git
+		gsel
 		ctags
 		fish
 		direnv
 		silver-searcher
-		(callPackage ./packages/vim-watch.nix {})
-		(callPackage ./vim {})
+		gup
+		vim_watch
+		vim
 	];
 	dirs = "bin etc share/man";
+	system = import ./system.nix { inherit pkgs; };
+	applications = import ./applications.nix {inherit pkgs; };
 in
 stdenv.mkDerivation {
-	name = "my-nix-scripts";
+	name = "local";
 	unpackPhase = "true";
 	buildPhase = "true";
 	installPhase = with lib; ''
@@ -58,6 +65,14 @@ stdenv.mkDerivation {
 			concatStringsSep "\n" (mapAttrsToList (name: script:
 				"ln -sfn ${script} bin/${name}"
 			) wrappers)
+		}
+
+		${
+			if isLinux then ''
+				mkdir -p share/systemd
+				ln -s "${system.config.system.build.standalone-user-units}" share/systemd/user
+				ln -s "${applications}" share/applications
+			'' else ""
 		}
 	'';
 }

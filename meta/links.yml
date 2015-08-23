@@ -155,9 +155,9 @@ meta:
   path: ../home/fish/functions
   tags: fish
 
-/usr/bin/fish:
-  path: ../bin/fish
-  tags: fish root
+# /usr/bin/fish:
+#   path: ../bin/fish
+#   tags: fish root
 
 ~/.config/fish/config.fish:
   path: ../home/fish/config.fish
@@ -254,6 +254,10 @@ meta:
   path: ../home/dconf/disable-gnome-xkb
   tags: mac fedora
 
+~/.config/dconf.user.d/xkb-mac:
+  path: ../home/dconf/xkb-mac
+  tags: mac linux
+
 ~/.config/dconf.user.d/focus-follows-mouse:
   path: ../home/dconf/focus-follows-mouse
   tags: linux
@@ -311,8 +315,13 @@ meta:
   tags: desktop shellshape
 
 ## NIX
-~/.nixpkgs:
-  path: ../home/nixpkgs
+~/.nixpkgs/config.nix:
+  path: ../nix/config.nix
+  tags: nix
+
+~/.local/nix:
+  path: ../nix/local
+  optional: true
   tags: nix
 
 # ~/.local/share/applications/calibre.desktop:
@@ -327,8 +336,9 @@ meta:
   path: ../home/applications/nix/spotify.desktop
   tags: desktop nix
 
-/nix/var/nix/gcroots/my-bin:
-  path: ../bin/nix
+/nix/var/nix/gcroots/tim-nix-local:
+  path: ../nix/local
+  optional: true
   tags: nix
 
 /nix/var/nix/gcroots/my-applications:
@@ -361,9 +371,9 @@ meta:
   path: ../root/yum.repos.d/google-chrome.repo
   tags: fedora root
 
-/etc/systemd/system/user@.service:
-  path: ../root/systemd/user@.service
-  tags: fedora root
+#/etc/systemd/system/user@.service:
+#  path: ../root/systemd/user@.service
+#  tags: fedora root
 
 /usr/lib/systemd/system-sleep/apply-xkb:
   path: ../root/systemd/apply-xkb

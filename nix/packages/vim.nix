@@ -1,15 +1,15 @@
-{pkgs ? import <nixpkgs> {}}:
+{pkgs ? import <nixpkgs> {}, pluginArgs ? {}}:
 with pkgs;
 let
 	vim_configurable = if stdenv.isDarwin
 		then vimUtils.makeCustomizable macvim
 		else pkgs.vim_configurable;
-	knownPlugins = vimPlugins // (pkgs.callPackage ./plugins.nix {});
+	knownPlugins = vimPlugins // (pkgs.callPackage ./vim-plugins.nix pluginArgs);
 	vim = vim_configurable.customize {
 		name = "vim"; # actual binary name
 		vimrcConfig.customRC = ''
 			set nocompatible
-			source ${src}/vimrc
+			source ${../../vim/vimrc}
 		'';
 		vimrcConfig.vam = {
 			inherit knownPlugins;
@@ -44,7 +44,6 @@ let
 			];
 		};
 	};
-	src = ../../vim;
 in
 stdenv.mkDerivation {
 	name = "vim-custom";

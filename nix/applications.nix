@@ -2,16 +2,16 @@
 with pkgs;
 let
 	apps = [
-		{
-			name = "Skype";
-			exec = "${skype}/bin/skype";
-			filename = "skype";
-		}
-		{
-			exec = "${spotify}/bin/spotify";
-			name = "Spotify";
-			filename = "spotify";
-		}
+		# {
+		# 	name = "Skype";
+		# 	exec = "${skype}/bin/skype";
+		# 	filename = "skype";
+		# }
+		# {
+		# 	exec = "${spotify}/bin/spotify";
+		# 	name = "Spotify";
+		# 	filename = "spotify";
+		# }
 		# {
 		# 	exec = "${calibre}/bin/calibre";
 		# 	name = "Calibre";
@@ -20,7 +20,7 @@ let
 	];
 in
 stdenv.mkDerivation {
-	name = "my-desktop-files";
+	name = "desktop-files";
 	unpackPhase = "true";
 	buildPhase = "true";
 	installPhase = with lib; ''

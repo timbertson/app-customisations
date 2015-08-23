@@ -32,7 +32,7 @@ end
 
 # NOTE: LAST path is most overridey
 set path_overrides \
-	~/.bin/nix/bin \
+	~/.local/nix/bin \
 	~/.bin/overrides
 
 for p in $path_overrides
@@ -45,7 +45,7 @@ end
 
 set additional_mans \
 	~/.nix-profile/share/man \
-	~/.bin/nix/share/man
+	~/.local/nix/share/man
 if not set -q MANPATH
 	# default manpath. Not as extensive as /etc/man.conf; but prevents
 	# dumb "man path is too long" when the default behaviour is to search $PATH

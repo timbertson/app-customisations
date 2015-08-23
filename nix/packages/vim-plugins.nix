@@ -1,4 +1,7 @@
-{pkgs}:
+{pkgs,
+	gsel ? null,
+	vim_watch
+}:
 with pkgs;
 let
 	url = url: sha: fetchurl { url = url; sha256 = sha; };
@@ -53,10 +56,7 @@ in
 		"https://github.com/bronson/vim-visual-star-search/archive/0.2.tar.gz"
 		"1xxdy8m0dcmwvxalypwmjkd5737ma8mj2zhi7lsccfspyf8b7gzk";
 
-	"vim-watch" = mkgit
-		"https://github.com/gfxmonk/vim-watch"
-		"983cbd95797251097fe0a00eedcac75aa6bbff8c"
-		"6c55742c10ba62d8021808efad211410cd087f0254ee23911755934eef0df088";
+	"vim-watch" = mk { src = "${vim_watch}/vim"; };
 	
 	# TODO delete this or make it proper?
 	"misc" = mk {
@@ -70,6 +70,7 @@ in
 		"4b92a176d2980c5fa4352232495eba416d777022"
 		"9f2be3c327d374809ac214af0b41779ead008f1c6643858d0cfecfb58470e5e9";
 	
-	"gsel" = if builtins.pathExists "/home/tim/dev/ocaml/gsel/vim" then mk { src = /home/tim/dev/ocaml/gsel/vim; } else null;
+	"gsel" = if gsel == null then null else mk { src = "${gsel}/share/vim"; };
+	# "gsel" = if builtins.pathExists "/home/tim/dev/ocaml/gsel/vim" then mk { src = /home/tim/dev/ocaml/gsel/vim; } else null;
 
 }

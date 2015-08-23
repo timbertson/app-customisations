@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -eu
+if [ "$#" -eq 0 ]; then
+	cd "$(dirname "$0")"
+	dest="local"
+	src="local"
+else
+	dest="$1"
+	src="$2"
+	gup --always
+fi
+nix-build --out-link "$dest" "$src.nix" --show-trace

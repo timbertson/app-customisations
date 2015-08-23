@@ -1,6 +1,2 @@
 #!/bin/sh
-if [ "$*" = "--versions" ]; then
-  exec 0launch -gd 'http://gfxmonk.net/dist/0install/xmlformat.xml' "$@"
-else
-  exec 0launch  'http://gfxmonk.net/dist/0install/xmlformat.xml' "$@"
-fi
+exec 0install run 'http://gfxmonk.net/dist/0install/xmlformat.xml' "$@"
