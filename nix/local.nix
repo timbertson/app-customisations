@@ -1,5 +1,5 @@
 {pkgs ? import <nixpkgs> {}}:
-let packagesExt = (pkgs // (import ./packages { inherit pkgs; })); in
+let packagesExt = import ./packages { inherit pkgs; }; in
 with packagesExt;
 let
 	isDarwin = stdenv.isDarwin;
@@ -34,9 +34,10 @@ let
 		gup
 		vim_watch
 		vim
+		pythonPackages.ipythonLight
 	];
 	dirs = "bin etc share/man";
-	system = import ./system.nix { inherit pkgs; };
+	system = import ./system.nix { pkgs = packagesExt; };
 	applications = import ./applications.nix {inherit pkgs; };
 in
 stdenv.mkDerivation {
@@ -75,4 +76,6 @@ stdenv.mkDerivation {
 			'' else ""
 		}
 	'';
+
+	passthru.pkgs = packagesExt;
 }

@@ -4,10 +4,21 @@
 with pkgs;
 lib.evalModules {
 	modules = [
+		({lib, ...}:
 		{
-			_module.check = false;  # we're building a partial nixos here; just ignore unknown config options
-			nixpkgs.system = builtins.currentSystem;
-		}
+			config = {
+				# _module.check = false;  # we're building a partial nixos here; just ignore unknown config options
+				_module.args = { inherit pkgs; };
+				nixpkgs.system = builtins.currentSystem;
+			};
+			# so that we can include _module check; we define & ignore
+			# whatever options nix complains about here:
+			options = with lib; let ignore = mkOption { type = types.unspecified; }; in {
+				users = ignore;
+				security = ignore;
+				system.requiredKernelConfig = ignore;
+			};
+		})
 		./modules/user-session.nix
 		
 		<nixpkgs/nixos/modules/system/boot/systemd.nix>
