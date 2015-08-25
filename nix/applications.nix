@@ -23,6 +23,15 @@ let
 			name = "Gnome shell";
 			filename = "gnome-shell";
 		}
+
+		{
+			exec = pkgs.writeScript "desktop-session" ''#!${pkgs.bash}/bin/bash
+				reset-input &
+				systemctl --user start desktop-session.target &
+			'';
+			name = "My desktop session";
+			filename = "desktop-session";
+		}
 	];
 in
 stdenv.mkDerivation {

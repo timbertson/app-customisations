@@ -3,6 +3,8 @@ let
 	sd = import <nixpkgs/nixos/modules/system/boot/systemd-lib.nix> { inherit config lib pkgs; };
 	optional = x: attrs: if (x == null || x == false) then {} else attrs;
 	home = builtins.getEnv "HOME";
+	displayEnv = ["DISPLAY=:0"]; # ugh...
+	sessionTask = x: {wantedBy = ["desktop-session.target"]; } // x;
 in
 {
 	config = {
@@ -36,9 +38,72 @@ in
 			services.dns-alias = {
 				serviceConfig = {
 					ExecStart = "/usr/bin/env 0install run -c ${home}/dev/oni/dns/server.xml --port 5053";
-					Restart = "always";
 					Environment = "PYTHONUNBUFFERED=1";
 					EnvironmentFile = "-%h/.config/dns-alias/env";
+				};
+			};
+
+			services.xbindkeys = sessionTask {
+				serviceConfig = {
+					ExecStart = "${pkgs.xbindkeys}/bin/xbindkeys";
+					Environment = displayEnv;
+				};
+			};
+			services.guake = sessionTask {
+				path = [ "/usr" ];
+				serviceConfig = {
+					ExecStart = "${pkgs.guake or "/usr"}/bin/guake";
+					Environment = displayEnv;
+				};
+			};
+
+			services.rygel = sessionTask {
+				path = [ "/usr" ];
+				serviceConfig = {
+					ExecStart = "${pkgs.rygel or "/usr"}/bin/rygel";
+				};
+			};
+
+			services.xflux = sessionTask {
+				serviceConfig = {
+					ExecStart = "${pkgs.xflux}/bin/xflux -l 37.7833 -g 144.9667 -k 4600 -nofork";
+					Environment = displayEnv;
+				};
+			};
+
+			services.crashplan = sessionTask {
+				path = [ "/usr" ];
+				serviceConfig = {
+					Type="forking";
+					PIDFile =    "${home}/crashplan/CrashPlanEngine.pid";
+					ExecStart =  "${home}/crashplan/bin/CrashPlanEngine start";
+					ExecStop =   "${home}/crashplan/bin/CrashPlanEngine stop";
+					ExecReload = "${home}/crashplan/bin/CrashPlanEngine restart";
+				};
+			};
+
+			# timers.daglink = {
+			# 	wantedBy = [ "default.target" "timers.target" ];
+			# 	timerConfig = {
+			# 		OnStartupSec = "10s";
+			# 	};
+			# };
+			# services.daglink = {
+			# 	serviceConfig = {
+			# 		ExecStart = "${home}/.bin/daglink -f";
+			# 	};
+			# };
+
+			timers.dconf-user-overrides = {
+				wantedBy = [ "default.target" "timers.target" ];
+				timerConfig = {
+					OnStartupSec = "0s";
+				};
+			};
+			services.dconf-user-overrides = {
+				path = [ home ];
+				serviceConfig = {
+					ExecStart = "${home}/.bin/daglink -f";
 				};
 			};
 		} [
@@ -95,7 +160,21 @@ in
 		];
 		system.build.standalone-user-units = sd.generateUnits
 			"user" # type
-			config.systemd.user.units
+			(config.systemd.user.units // {
+				# Hack; systemd.user.targetss should be supported...
+				"desktop-session.target" = rec {
+					wantedBy = [];
+					requiredBy = [];
+					unit = sd.makeUnit "desktop-session.target" {
+						inherit wantedBy requiredBy;
+						enable = true;
+						text = ''
+							[Unit]
+						'';
+					};
+				};
+			})
+
 			[ "default.target" "sockets.target" "timers.target"] # upstreamUnits
 			[] # upstreamWants
 		;

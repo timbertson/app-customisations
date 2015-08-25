@@ -1,9 +1,0 @@
-#!/usr/bin/env xdg-open
-[Desktop Entry]
-Categories=Application;Development
-Comment=tim's startup items
-Exec=/usr/bin/env 0install run /home/tim/dev/app-customisations/session/tim-session.xml slow
-Hidden=false
-Name=Tim's Startup Actions
-Type=Application
-Version=1.0

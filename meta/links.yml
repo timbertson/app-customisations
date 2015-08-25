@@ -29,9 +29,6 @@ meta:
         - ubuntu
         - ubuntu-natty
         - tv
-    "400L-77212":
-      tags:
-        - windows
     mba.local:
       tags:
        - osx
@@ -61,16 +58,6 @@ meta:
   uri: http://gfxmonk.net/dist/0install/bashcomplete.xml
   extract: bashcomplete/init
   tags: root
-
-# /usr/share/bash-completion/completions/0install:
-#   uri: http://0install.net/2007/interfaces/ZeroInstall.xml
-#   extract: share/bash-completion/completions/0install
-#   tags: root
-# 
-# /usr/share/zsh/site-functions/_0install:
-#   uri: http://0install.net/2007/interfaces/ZeroInstall.xml
-#   extract: share/zsh/site-functions/_0install
-#   tags: root
 
 /etc/X11/sessions:
   path: ../root/sessions
@@ -117,10 +104,6 @@ meta:
 ~/.zero2pypi:
   path: ../home/zero2pypi
 
-# ~/.gconf:
-#   path: ../home/gconf
-#   tags: desktop
-
 ~/.gconf/apps/gnome-terminal:
   path: ../home/gconf/apps/gnome-terminal
   tags: desktop
@@ -145,9 +128,6 @@ meta:
   path: ../home/cwiid
   tags: linux
 
-# ~/.fonts.conf:
-#   path: ../home/fonts.conf
-
 ~/.config/fontconfig/fonts.conf:
   path: ../home/fonts.conf
   tags: linux
@@ -155,10 +135,6 @@ meta:
 ~/.config/fish/functions:
   path: ../home/fish/functions
   tags: fish
-
-# /usr/bin/fish:
-#   path: ../bin/fish
-#   tags: fish root
 
 ~/.config/fish/config.fish:
   path: ../home/fish/config.fish
@@ -294,33 +270,16 @@ meta:
 #  - path: /home/tim/.local/share/applications/exaile.desktop
 #    tags: fedora desktop
 
-~/.config/autostart/xbindkeys.desktop:
-  - path: ../home/applications/xbindkeys.desktop
-    tags: tv
-
-~/.config/autostart/guake.desktop:
-  - path: ../home/applications/guake.desktop
-    tags: desktop
-
-~/.config/autostart/tim-session.desktop:
-  path: ../session/session.desktop
+~/.config/autostart/desktop.desktop:
+  path: ../nix/local/share/applications/desktop-session.desktop
+  optional: true
   tags: desktop
-
-~/Desktop/tims-startup-actions.desktop:
-  path: ../session/session.desktop
-  tags: desktop
-
-# ~/.local/share/applications/gnome-shell.desktop:
-#   uri: http://gfxmonk.net/dist/0install/shellshape.xml
-#   extract: gnome-shell-debug.desktop
-#   tags: desktop shellshape
 
 ~/.local/share/applications/gnome-shell.desktop:
   path: ../nix/local/share/applications/gnome-shell.desktop
   optional: true
   tags: desktop shellshape nix
 
-## NIX
 ~/.nixpkgs/config.nix:
   path: ../nix/config.nix
   tags: nix
@@ -335,9 +294,10 @@ meta:
   optional: true
   tags: nix systemd
 
-# ~/.local/share/applications/calibre.desktop:
-#   path: ../home/applications/nix/calibre.desktop
-#   tags: desktop nix
+~/.local/share/applications/calibre.desktop:
+  path: ../home/applications/nix/calibre.desktop
+  optional: true
+  tags: desktop nix
 
 ~/.local/share/applications/skype.desktop:
   path: ../nix/local/share/applications/skype.desktop
@@ -379,10 +339,6 @@ meta:
 /etc/yum.repos.d/google-chrome.repo:
   path: ../root/yum.repos.d/google-chrome.repo
   tags: fedora root
-
-#/etc/systemd/system/user@.service:
-#  path: ../root/systemd/user@.service
-#  tags: fedora root
 
 /usr/lib/systemd/system-sleep/apply-xkb:
   path: ../root/systemd/apply-xkb
