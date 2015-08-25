@@ -10,4 +10,5 @@ pkgs // (lib.filterAttrs (name: val: val!=null) rec {
 	gsel = tryImport "${home}/dev/ocaml/gsel/default.nix";
 	vim_watch = callPackage ./vim-watch.nix {};
 	vim = (callPackage ./vim.nix { pluginArgs = { inherit gsel vim_watch; }; });
+	shellshape = tryImport "${home}/dev/gnome-shell/shellshape@gfxmonk.net/local.nix";
 })

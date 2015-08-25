@@ -17,6 +17,12 @@ let
 		# 	name = "Calibre";
 		# 	filename = "calibre";
 		# }
+
+		{
+			exec = "/usr/bin/env XDG_DATA_DIRS=${builtins.getEnv "HOME"}/.local/nix/share:/usr/local/share/:/usr/share/ gnome-shell";
+			name = "Gnome shell";
+			filename = "gnome-shell";
+		}
 	];
 in
 stdenv.mkDerivation {

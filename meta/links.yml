@@ -310,10 +310,15 @@ meta:
   path: ../session/session.desktop
   tags: desktop
 
+# ~/.local/share/applications/gnome-shell.desktop:
+#   uri: http://gfxmonk.net/dist/0install/shellshape.xml
+#   extract: gnome-shell-debug.desktop
+#   tags: desktop shellshape
+
 ~/.local/share/applications/gnome-shell.desktop:
-  uri: http://gfxmonk.net/dist/0install/shellshape.xml
-  extract: gnome-shell-debug.desktop
-  tags: desktop shellshape
+  path: ../nix/local/share/applications/gnome-shell.desktop
+  optional: true
+  tags: desktop shellshape nix
 
 ## NIX
 ~/.nixpkgs/config.nix:
@@ -335,21 +340,19 @@ meta:
 #   tags: desktop nix
 
 ~/.local/share/applications/skype.desktop:
-  path: ../home/applications/nix/skype.desktop
+  path: ../nix/local/share/applications/skype.desktop
+  optional: true
   tags: desktop nix
 
 ~/.local/share/applications/spotify.desktop:
-  path: ../home/applications/nix/spotify.desktop
+  path: ../nix/local/share/applications/spotify.desktop
+  optional: true
   tags: desktop nix
 
 /nix/var/nix/gcroots/tim-nix-local:
   path: ../nix/local
   optional: true
   tags: nix
-
-/nix/var/nix/gcroots/my-applications:
-  path: ../home/applications/nix
-  tags: desktop nix
 
 /etc/nix/nix.conf:
   path: ../root/nix/nix.conf

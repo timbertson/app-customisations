@@ -39,6 +39,7 @@ let
 	dirs = "bin etc share/man";
 	system = import ./system.nix { pkgs = packagesExt; };
 	applications = import ./applications.nix {inherit pkgs; };
+	gnome-shell-extensions = import ./gnome-shell.nix { pkgs = packagesExt; };
 in
 stdenv.mkDerivation {
 	name = "local";
@@ -73,6 +74,18 @@ stdenv.mkDerivation {
 				mkdir -p share/systemd
 				ln -s "${system.config.system.build.standalone-user-units}" share/systemd/user
 				ln -s "${applications}" share/applications
+				mkdir -p share/gnome-shell/extensions
+				${concatStringsSep "\n" (lib.remove null (mapAttrsToList (name: src:
+					if src == null then null else ''
+						for suff in xdg/data/gnome-shell/extensions share/gnome-shell/extensions; do
+							if [ -e "${src}/$suff/${name}" ]; then
+								ln -s "${src}/$suff/${name}" share/gnome-shell/extensions/${name}
+							else
+								echo "Skipping non-existent gnome-shell extension: ${src}/$suff/${name}"
+							fi
+						done
+					''
+				) gnome-shell-extensions))}
 			'' else ""
 		}
 	'';
