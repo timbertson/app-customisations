@@ -53,12 +53,20 @@ in
 					Restart = "always";
 				};
 			};
-			services.guake = sessionTask {
+			# services.guake = sessionTask {
+			# 	path = userPath;
+			# 	script = "exec env $(dbus-session-vars) ${pkgs.guake or "/usr"}/bin/guake";
+			# 	serviceConfig = {
+			# 		# ExecStart = "${pkgs.guake or "/usr"}/bin/guake";
+			# 		Environment = displayEnv;
+			# 	};
+			# };
+
+			services.tilda = sessionTask {
 				path = userPath;
-				script = "exec env $(dbus-session-vars) ${pkgs.guake or "/usr"}/bin/guake";
+				script = "exec env $(dbus-session-vars) ${pkgs.tilda}/bin/tilda";
 				serviceConfig = {
-					# ExecStart = "${pkgs.guake or "/usr"}/bin/guake";
-					Environment = displayEnv;
+					Environment = displayEnv ++ ["TERM_SOLARIZED=1"];
 				};
 			};
 

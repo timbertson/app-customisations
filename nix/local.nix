@@ -34,6 +34,7 @@ let
 		gup
 		vim_watch
 		vim
+		tilda
 		pythonPackages.ipythonLight
 	];
 	dirs = "bin etc share/man";

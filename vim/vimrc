@@ -38,7 +38,6 @@ set number
 let g:solarized_contrast="normal"
 let g:solarized_italic=0
 set background="dark"
-" sorry solarized, but you're rubbish at terminal mode...
 if has("gui_running")
 	color solarized
 	if has("win32")
@@ -49,7 +48,13 @@ if has("gui_running")
 		set guifont=Monospace\ 11
 	endif
 else
-	color ir_black
+	" solarized is awful in most terminals which aren't configured for it:
+	if exists("$TERM_SOLARIZED")
+		let g:solarized_contrast="high"
+		color solarized
+	else
+		color ir_black
+	endif
 end
 
 set encoding=utf-8

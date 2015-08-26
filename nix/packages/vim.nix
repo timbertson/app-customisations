@@ -9,7 +9,11 @@ let
 		name = "vim"; # actual binary name
 		vimrcConfig.customRC = ''
 			set nocompatible
-			source ${../../vim/vimrc}
+			if !empty(glob("~/.vimrc"))
+				source ~/.vimrc
+			else
+				source ${../../vim/vimrc}
+			endif
 		'';
 		vimrcConfig.vam = {
 			inherit knownPlugins;
