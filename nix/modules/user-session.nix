@@ -5,6 +5,8 @@ let
 	home = builtins.getEnv "HOME";
 	displayEnv = ["DISPLAY=:0"]; # ugh...
 	sessionTask = x: {wantedBy = ["desktop-session.target"]; } // x;
+	systemPath = [ "/usr/local" "/usr" "/" ];
+	userPath = systemPath ++ [ "${home}" "${home}/dev/app-customisations" ];
 in
 {
 	config = {
@@ -44,21 +46,24 @@ in
 			};
 
 			services.xbindkeys = sessionTask {
+				path = systemPath;
 				serviceConfig = {
-					ExecStart = "${pkgs.xbindkeys}/bin/xbindkeys";
+					ExecStart = "${pkgs.xbindkeys}/bin/xbindkeys --nodaemon";
 					Environment = displayEnv;
+					Restart = "always";
 				};
 			};
 			services.guake = sessionTask {
-				path = [ "/usr" ];
+				path = userPath;
+				script = "exec env $(dbus-session-vars) ${pkgs.guake or "/usr"}/bin/guake";
 				serviceConfig = {
-					ExecStart = "${pkgs.guake or "/usr"}/bin/guake";
+					# ExecStart = "${pkgs.guake or "/usr"}/bin/guake";
 					Environment = displayEnv;
 				};
 			};
 
 			services.rygel = sessionTask {
-				path = [ "/usr" ];
+				path = systemPath;
 				serviceConfig = {
 					ExecStart = "${pkgs.rygel or "/usr"}/bin/rygel";
 				};
@@ -72,7 +77,7 @@ in
 			};
 
 			services.crashplan = sessionTask {
-				path = [ "/usr" ];
+				path = systemPath;
 				serviceConfig = {
 					Type="forking";
 					PIDFile =    "${home}/crashplan/CrashPlanEngine.pid";
@@ -101,7 +106,7 @@ in
 				};
 			};
 			services.dconf-user-overrides = {
-				path = [ home ];
+				path = userPath;
 				serviceConfig = {
 					ExecStart = "${home}/.bin/daglink -f";
 				};
@@ -111,7 +116,7 @@ in
 			(optional (builtins.pathExists "${home}/dev/web/remote") {
 				services.web-remote = let base = "${home}/dev/web/remote"; in {
 					# needed for `dbus-session-vars`
-					path = [ "/bin:/usr/bin:${home}/dev/app-customisations" ];
+					path = userPath;
 					serviceConfig = {
 						KillMode = "process";
 						Restart = "always";
