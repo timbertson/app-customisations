@@ -19,7 +19,7 @@ lib.evalModules {
 				system.requiredKernelConfig = ignore;
 			};
 		})
-		./modules/user-session.nix
+		./systemd-user.nix
 		
 		<nixpkgs/nixos/modules/system/boot/systemd.nix>
 		<nixpkgs/nixos/modules/system/etc/etc.nix>

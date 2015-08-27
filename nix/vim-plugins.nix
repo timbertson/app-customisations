@@ -1,6 +1,6 @@
 {pkgs,
 	gsel ? null,
-	vim_watch
+	vim-watch
 }:
 with pkgs;
 let
@@ -56,7 +56,7 @@ in
 		"https://github.com/bronson/vim-visual-star-search/archive/0.2.tar.gz"
 		"1xxdy8m0dcmwvxalypwmjkd5737ma8mj2zhi7lsccfspyf8b7gzk";
 
-	"vim-watch" = mk { src = "${vim_watch}/vim"; };
+	"vim-watch" = mk { src = "${vim-watch}/share/vim"; };
 	
 	# TODO delete this or make it proper?
 	"misc" = mk {

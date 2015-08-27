@@ -66,7 +66,10 @@ in
 				path = userPath;
 				script = "exec env $(dbus-session-vars) ${pkgs.tilda}/bin/tilda";
 				serviceConfig = {
-					Environment = displayEnv ++ ["TERM_SOLARIZED=1"];
+					Environment = displayEnv ++ [
+						"TERM_SOLARIZED=1"
+						"XDG_DATA_DIRS=${home}/.local/nix/share:/usr/local/share/:/usr/share/"
+					];
 				};
 			};
 

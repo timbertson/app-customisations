@@ -1,5 +1,5 @@
 {pkgs ? import <nixpkgs> {}}:
-let packagesExt = import ./packages { inherit pkgs; }; in
+let packagesExt = pkgs // (import ./packages.nix { inherit pkgs; }); in
 with packagesExt;
 let
 	isDarwin = stdenv.isDarwin;
@@ -32,7 +32,7 @@ let
 		direnv
 		silver-searcher
 		gup
-		vim_watch
+		vim-watch
 		vim
 		tilda
 		pythonPackages.ipythonLight

@@ -9,7 +9,8 @@ stdenv.mkDerivation {
 	};
 	buildInputs = [ python ];
 	installPhase = ''
-		mkdir -p $out;
-		cp -a ./* $out/
+		mkdir -p $out/share/vim;
+		cp -a ./* $out/share/vim
+		mv $out/share/vim/bin $out/bin
 	'';
 }

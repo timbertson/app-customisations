@@ -47,6 +47,22 @@ in
 			'';
 		});
 
+		# The config locking scheme relies on the binary being called "tilda",
+		# (`pgrep -C tilda`), so the wrapper needs to preserve the executable name
+		# XXX remove once 1b04fbad1c8641d00f2dd43fd5b3b48c3fc5d6e1 is merged
+		tilda = lib.overrideDerivation tilda (base: {
+			postInstall = ''
+				mkdir $out/bin/wrapped
+				mv "$out/bin/tilda" "$out/bin/wrapped/tilda"
+				makeWrapper "$out/bin/wrapped/tilda" "$out/bin/tilda" \
+						--prefix XDG_DATA_DIRS : "$GSETTINGS_SCHEMAS_PATH"
+			'';
+		});
+
+		sitePackages = if builtins.pathExists "${builtins.getEnv "HOME"}/dev/app-customisations/nix"
+			then (import ~/dev/app-customisations/nix/packages.nix { inherit pkgs; })
+			else null;
+
 	}
 	# // (import ./packages {inherit pkgs; })
 	// (if stdenv.isDarwin then {

@@ -12,7 +12,7 @@ let
 			if !empty(glob("~/.vimrc"))
 				source ~/.vimrc
 			else
-				source ${../../vim/vimrc}
+				source ${../vim/vimrc}
 			endif
 		'';
 		vimrcConfig.vam = {
@@ -31,7 +31,6 @@ let
 						"misc"
 						"repeat"
 						"Solarized"
-						# "snipmate" # ???
 						"surround"
 						"Tagbar"
 						"tcomment"
@@ -40,6 +39,7 @@ let
 						"vim-rust"
 						"vim-stratifiedjs"
 						"vim-visual-star-search"
+						"vim-watch"
 					]
 					++ (if knownPlugins.gsel == null then [] else ["gsel"]);
 				}
