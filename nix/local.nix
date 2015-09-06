@@ -23,8 +23,15 @@ let
 
 			${sshfsFuse}/bin/sshfs "$@"
 		'';
+
+		"my-gnome-shell" = wrapper ''${bash}
+			exec /usr/bin/env \
+				XDG_DATA_DIRS=${builtins.getEnv "HOME"}/.local/nix/share:/usr/local/share/:/usr/share/ \
+				gnome-shell \
+				"$@";
+		'';
 	} else {});
-	tools = lib.remove null [
+	installed = with lib; remove null [
 		git
 		gsel
 		ctags
@@ -32,64 +39,43 @@ let
 		direnv
 		silver-searcher
 		gup
+		passe-client
 		vim-watch
 		vim
 		tilda
 		pythonPackages.ipythonLight
-	];
-	dirs = "bin etc share/man";
+	] ++ (if isLinux then [
+		spotify
+		zeroinstall
+		(runCommand "systemd-units" {} ''
+			mkdir -p $out/share/systemd
+			cp -a "${system.config.system.build.standalone-user-units}" $out/share/systemd/user
+		'')
+		(import ./applications.nix {inherit pkgs; })
+		(runCommand "gnome-shell-extensions" {} ''
+			mkdir -p $out/share/gnome-shell/extensions
+			${concatStringsSep "\n" (remove null (mapAttrsToList (name: src:
+				if src == null then null else ''
+					for suff in xdg/data/gnome-shell/extensions share/gnome-shell/extensions; do
+						if [ -e "${src}/$suff/${name}" ]; then
+							ln -s "${src}/$suff/${name}" $out/share/gnome-shell/extensions/${name}
+						else
+							echo "Skipping non-existent gnome-shell extension: ${src}/$suff/${name}"
+						fi
+					done
+				'') gnome-shell-extensions))
+			}
+		'')
+	] else []) ++ (
+		mapAttrsToList (name: script:
+			runCommand "${name}-wrapper" {} ''
+				mkdir -p $out/bin
+				ln -s ${script} $out/bin/${name}
+			''
+		) wrappers
+	);
+	dirs = [ "bin" "etc" "share"];
 	system = import ./system.nix { pkgs = packagesExt; };
-	applications = import ./applications.nix {inherit pkgs; };
 	gnome-shell-extensions = import ./gnome-shell.nix { pkgs = packagesExt; };
 in
-stdenv.mkDerivation {
-	name = "local";
-	unpackPhase = "true";
-	buildPhase = "true";
-	installPhase = with lib; ''
-		mkdir "$out"
-		cd "$out"
-		mkdir -p ${dirs}
-		${
-			# TODO: link all man files, too
-			concatStringsSep "\n" (map (base:
-				''
-				for d in ${dirs}; do
-					if [ -d "${base}/$d" ]; then
-						echo "linking ${base}/$d ..."
-						${pkgs.xlibs.lndir}/bin/lndir "${base}/$d" "$d"
-					fi
-				done
-				''
-			) tools)
-		}
-
-		${
-			concatStringsSep "\n" (mapAttrsToList (name: script:
-				"ln -sfn ${script} bin/${name}"
-			) wrappers)
-		}
-
-		${
-			if isLinux then ''
-				mkdir -p share/systemd
-				ln -s "${system.config.system.build.standalone-user-units}" share/systemd/user
-				ln -s "${applications}" share/applications
-				mkdir -p share/gnome-shell/extensions
-				${concatStringsSep "\n" (lib.remove null (mapAttrsToList (name: src:
-					if src == null then null else ''
-						for suff in xdg/data/gnome-shell/extensions share/gnome-shell/extensions; do
-							if [ -e "${src}/$suff/${name}" ]; then
-								ln -s "${src}/$suff/${name}" share/gnome-shell/extensions/${name}
-							else
-								echo "Skipping non-existent gnome-shell extension: ${src}/$suff/${name}"
-							fi
-						done
-					''
-				) gnome-shell-extensions))}
-			'' else ""
-		}
-	'';
-
-	passthru.pkgs = packagesExt;
-}
+symlinkJoin "local" installed

@@ -19,7 +19,7 @@ let
 		# }
 
 		{
-			exec = "/usr/bin/env XDG_DATA_DIRS=${builtins.getEnv "HOME"}/.local/nix/share:/usr/local/share/:/usr/share/ gnome-shell";
+			exec = "${builtins.getEnv "HOME"}/.local/nix/bin/my-gnome-shell";
 			name = "Gnome shell";
 			filename = "gnome-shell";
 		}
@@ -39,8 +39,8 @@ stdenv.mkDerivation {
 	unpackPhase = "true";
 	buildPhase = "true";
 	installPhase = with lib; ''
-		mkdir "$out"
-		cd "$out"
+		mkdir -p "$out/share/applications"
+		cd "$out/share/applications"
 		${
 			concatStringsSep "\n" (map ({name, exec, filename ? null}:
 				''

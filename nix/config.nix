@@ -36,31 +36,28 @@ in
 			meta.priority = 1;
 		});
 
-		nodejs = lib.overrideDerivation nodejs (base: {
-			preConfigure = ''
-				if echo '1' | gcc -E -fstack-protector-strong - > /dev/null; then
-					# we can't just test the version of gcc, since this feature is enabled by many distros prior to GCC 2.9
-					export CFLAGS='-fstack-protector-strong'
-				else
-					export CFLAGS='-fstack-protector-all'
-				fi
-			'';
-		});
+		# nodejs = lib.overrideDerivation nodejs (base: {
+		# 	preConfigure = ''
+		# 		if echo '1' | gcc -E -fstack-protector-strong - > /dev/null; then
+		# 			# we can't just test the version of gcc, since this feature is enabled by many distros prior to GCC 2.9
+		# 			export CFLAGS='-fstack-protector-strong'
+		# 		else
+		# 			export CFLAGS='-fstack-protector-all'
+		# 		fi
+		# 	'';
+		# });
 
-		# The config locking scheme relies on the binary being called "tilda",
-		# (`pgrep -C tilda`), so the wrapper needs to preserve the executable name
-		# XXX remove once 1b04fbad1c8641d00f2dd43fd5b3b48c3fc5d6e1 is merged
-		tilda = lib.overrideDerivation tilda (base: {
-			postInstall = ''
-				mkdir $out/bin/wrapped
-				mv "$out/bin/tilda" "$out/bin/wrapped/tilda"
-				makeWrapper "$out/bin/wrapped/tilda" "$out/bin/tilda" \
-						--prefix XDG_DATA_DIRS : "$GSETTINGS_SCHEMAS_PATH"
-			'';
+		binutils-efi = lib.overrideDerivation binutils (o: {
+			# configureFlags = o.configureFlags ++ [ "--enable-targets=all"];
+			configureFlags = o.configureFlags ++ [ "--enable-targets=x86_64-pep"];
+			# configureFlags = o.configureFlags ++ [ "--enable-targets=i386-efi-pe"];
 		});
 
 		sitePackages = if builtins.pathExists "${builtins.getEnv "HOME"}/dev/app-customisations/nix"
-			then (import ~/dev/app-customisations/nix/packages.nix { inherit pkgs; })
+			then {
+				recurseForDerivations = false;
+				inherit (import ~/dev/app-customisations/nix/packages.nix { inherit pkgs; }) gup passe-client;
+			}
 			else null;
 
 	}

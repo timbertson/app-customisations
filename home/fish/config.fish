@@ -76,7 +76,7 @@ if isatty stdin; and which direnv >/dev/null 2>&1
 end
 
 set extra_complete_paths \
-	~/dev/ocaml/gup/share/fish/completions \
+	~/.local/nix/share/fish/completions \
 	~/dev/ocaml/passe/share/fish/completions \
 	/usr/share/fish/completions
 

@@ -6,7 +6,7 @@ let
 	displayEnv = ["DISPLAY=:0"]; # ugh...
 	sessionTask = x: {wantedBy = ["desktop-session.target"]; } // x;
 	systemPath = [ "/usr/local" "/usr" "/" ];
-	userPath = systemPath ++ [ "${home}" "${home}/dev/app-customisations" ];
+	userPath = systemPath ++ [ "${home}" "${home}/dev/app-customisations" "${home}/dev/app-customisations/nix/local" ];
 in
 {
 	config = {
@@ -27,6 +27,23 @@ in
 				timerConfig = {
 					OnCalendar = "21:00:00";
 					Persistent = true;
+				};
+			};
+
+			# XXX I wouldn't need to manually invoke xkb if this shift key weren't so broken :(
+			timers.xkb = {
+				wantedBy = [ "default.target" "timers.target" ];
+				timerConfig = {
+					OnBootSec = "5s";
+					OnUnitActiveSec = "30m";
+				};
+			};
+
+			services.xkb = sessionTask {
+				path = userPath;
+				serviceConfig = {
+					ExecStart = "${home}/dev/app-customisations/bin/reset-xkb";
+					Environment = displayEnv;
 				};
 			};
 
@@ -84,7 +101,14 @@ in
 				serviceConfig = {
 					ExecStart = "${pkgs.xflux}/bin/xflux -l 37.7833 -g 144.9667 -k 4600 -nofork";
 					Environment = displayEnv;
+					# xflux goes nuts when input is /dev/null, probably a read loop somewhere.
+					# Just make it a socket which nobody talks to
+					StandardInput = "socket";
 				};
+			};
+
+			sockets.xflux = sessionTask {
+				listenStreams = [ "%t/xflux.sock" ];
 			};
 
 			services.crashplan = sessionTask {

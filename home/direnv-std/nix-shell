@@ -1,4 +1,4 @@
-#!bash -eu
+#!bash
 # NOTE: This is a shared config. If you want to customize it,
 # make a copy first.
 
