@@ -35,6 +35,11 @@ meta:
        - osx_root
        - fish
        - nix
+    10574-tcuthbertson.local:
+      tags:
+       - osx
+       - fish
+       - nix
 
 # SELF-INSTALL:
 
@@ -316,7 +321,7 @@ meta:
 
 /etc/nix/nix.conf:
   path: ../root/nix/nix.conf
-  tags: nix
+  tags: nix root
 
 ## LINUX
 
