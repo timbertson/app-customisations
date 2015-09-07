@@ -42,9 +42,9 @@ let
 		passe-client
 		vim-watch
 		vim
-		tilda
 		pythonPackages.ipythonLight
 	] ++ (if isLinux then [
+		tilda
 		spotify
 		zeroinstall
 		(runCommand "systemd-units" {} ''

@@ -60,7 +60,7 @@ in
 	
 	# TODO delete this or make it proper?
 	"misc" = mk {
-		src = ../../vim;
+		src = ../vim;
 		buildPhase = "rm -rf ./cache";
 	};
 

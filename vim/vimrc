@@ -10,10 +10,6 @@ endif
 
 if has("mac")
 	set macmeta
-" 	" XXX am I using macvim wrong?
-" 	if exists("$MACVIM_PWD")
-" 		cd $MACVIM_PWD
-" 	endif
 endif
 
 if stridx(&shell, "fish") != -1
@@ -236,14 +232,8 @@ augroup END
 
 
 "" tab left & right
-if has("mac")
-	""NOTE: only run this on macvim - on gnome, it causes an ambiguous map for "<<" (unindent line)
-	map <D-j> gt
-	map <D-k> gT
-else
-	map <A-j> gt
-	map <A-k> gT
-end
+map <A-j> gt
+map <A-k> gT
 
 " Visually select the text that was last edited/pasted
 nmap gV `[V`]
@@ -380,11 +370,7 @@ nmap <leader>q :q<cr>
 nmap <leader>Q :tabclose<cr>
 
 " map alt+slash to line comment toggle
-if has("mac")
-	map <M-/> :TComment<cr>
-else
-	map <A-/> :TComment<cr>
-end
+map <A-/> :TComment<cr>
 
 " add Tcomment overrides
 autocmd FileType nix set commentstring=#\ %s
@@ -440,7 +426,7 @@ nmap <F5> :syntax sync fromstart<cr>:redraw!<cr>
 " window management:
 if has("mac")
 	nmap <M-tab> <c-w>w
-	nmap <M-C-tab> <c-w>W
+	nmap <S-M-tab> <c-w>W
 else
 	nmap <C-tab> <c-w>w
 	nmap <S-C-tab> <c-w>W

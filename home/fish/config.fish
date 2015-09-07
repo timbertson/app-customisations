@@ -75,6 +75,8 @@ if isatty stdin; and which direnv >/dev/null 2>&1
 	eval (direnv hook fish)
 end
 
+set GEM_HOME $HOME/.gem
+
 set extra_complete_paths \
 	~/.local/nix/share/fish/completions \
 	~/dev/ocaml/passe/share/fish/completions \
