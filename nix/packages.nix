@@ -6,7 +6,11 @@ let
 	opam2nix-packages = callPackage ./opam2nix-packages.nix {};
 in
 pkgs // rec {
-	gup = tryImport "${home}/dev/ocaml/gup/local.nix";
+	daglink = callPackage ./daglink.nix {};
+	gup = let
+		local = tryImport "${home}/dev/ocaml/gup/local.nix";
+		fallback = callPackage ./gup-python.nix {};
+	in if local != null then local else fallback;
 	gsel = tryImport "${home}/dev/ocaml/gsel/default.nix";
 	vim-watch = callPackage ./vim-watch.nix {};
 	vim = (callPackage ./vim.nix { pluginArgs = { inherit gsel vim-watch; }; });

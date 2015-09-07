@@ -66,7 +66,9 @@ let
 				'') gnome-shell-extensions))
 			}
 		'')
-	] else []) ++ (
+	] else [
+		daglink # non-zeroinstall fallback...
+	]) ++ (
 		mapAttrsToList (name: script:
 			runCommand "${name}-wrapper" {} ''
 				mkdir -p $out/bin

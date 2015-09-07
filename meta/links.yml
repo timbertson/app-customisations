@@ -50,30 +50,30 @@ meta:
 
 /etc/profile.d/init:
   path: ../root/profile.d/init
-  tags: root
+  tags: root bash
 /etc/profile.d/net.gfxmonk:
   path: ../root/profile.d/net.gfxmonk
-  tags: root
+  tags: root bash
 /etc/profile.d/net.gfxmonk.bashcomplete/init.sh:
   uri: http://gfxmonk.net/dist/0install/bashcomplete.xml
   extract: bashcomplete/init
-  tags: root
+  tags: root bash
 
 /etc/X11/sessions:
   path: ../root/sessions
-  tags: root
+  tags: root linux
 
 /etc/udev/rules.d/input.rules:
   path: ../root/udev-rules.d/input.rules
-  tags: root
+  tags: root linux
 
 /etc/udev/rules.d/99-nexus4-adb.rules:
   path: ../root/udev-rules.d/99-nexus4-adb.rules
-  tags: root
+  tags: root linux
 
 /etc/udev/rules.d/99-nexus4-mtp.rules:
   path: ../root/udev-rules.d/99-nexus4-mtp.rules
-  tags: root
+  tags: root linux
 
 /etc/NetworkManager/NetworkManager.conf:
   path: ../root/NetworkManager/NetworkManager.conf
@@ -352,7 +352,7 @@ meta:
   - path: ../zi-feeds/linux
     tags: linux root
 
-~/Library/KeyBindings/DefaultKeyBinding.dict:
-  path: ../osx/DefaultKeyBinding.dict
-  tags: osx
+#~/Library/KeyBindings/DefaultKeyBinding.dict:
+#  path: ../osx/DefaultKeyBinding.dict
+#  tags: osx
 
