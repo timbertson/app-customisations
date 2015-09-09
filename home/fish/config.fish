@@ -10,6 +10,7 @@ end
 
 set additional_paths \
 	/sbin/ \
+	~/.gem/ruby/2.0.0/bin \
 	~/bin \
 	~/.bin \
 	~/.bin/zi \
@@ -25,8 +26,10 @@ set -x NIX_PATH ~/.nix-defexpr/channels
 
 for p in $additional_paths
 	if not contains $p $PATH
-		# echo "append PATH $p"
-		set -x PATH $PATH $p
+		if test -e $p
+			# echo "append PATH $p"
+			set -x PATH $PATH $p
+		end
 	end
 end
 
@@ -102,3 +105,11 @@ end
 set fish_color_command d7ffff
 set fish_color_param afd7ff
 set fish_greeting ""
+
+# add site-local config
+if test -e $HOME/.config/fish/site.fish
+	. $HOME/.config/fish/site.fish
+end
+
+complete -e -c g
+complete -c g --wraps git
