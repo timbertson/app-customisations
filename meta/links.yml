@@ -357,7 +357,7 @@ meta:
   - path: ../zi-feeds/linux
     tags: linux root
 
-#~/Library/KeyBindings/DefaultKeyBinding.dict:
-#  path: ../osx/DefaultKeyBinding.dict
-#  tags: osx
+~/Library/KeyBindings/DefaultKeyBinding.dict:
+  path: ../osx/DefaultKeyBinding.dict
+  tags: osx
 

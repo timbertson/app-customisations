@@ -9,12 +9,12 @@ for var in LESSPIPE LESSOPEN LESSCLOSE
 end
 
 set additional_paths \
-	/sbin/ \
+	/sbin \
 	~/.gem/ruby/2.0.0/bin \
 	~/bin \
+	~/.nix-profile/bin \
 	~/.bin \
-	~/.bin/zi \
-	~/.nix-profile/bin
+	;
 
 
 if test -f /etc/pki/tls/certs/ca-bundle.crt
