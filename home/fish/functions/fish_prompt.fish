@@ -8,6 +8,9 @@ function fish_prompt --description 'Write out the prompt'
 	if [ -n "$ZEROENV_NAME" ]
 		printf '%s[%s] ' (set_color blue) $ZEROENV_NAME
 	end
+	if [ -n "$ENV_NAME" ]
+		printf '%s[%s] ' (set_color blue) $ENV_NAME
+	end
 	printf '%s%s' (set_color green) (whoami)
 	printf '%s' (set_color (set -q SSH_CLIENT; and echo 'red'; or echo 'yellow'))
 	printf '%s' @(hostname|cut -d . -f 1)

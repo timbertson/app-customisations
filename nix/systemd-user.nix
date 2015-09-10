@@ -86,6 +86,7 @@ in
 					Environment = displayEnv ++ [
 						"TERM_SOLARIZED=1"
 						"XDG_DATA_DIRS=${home}/.local/nix/share:/usr/local/share/:/usr/share/"
+						"SSH_AUTH_SOCK=%t/keyring/ssh"
 					];
 				};
 			};
