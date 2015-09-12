@@ -1,0 +1,4 @@
+#!bash -eu
+src="90-sandbox-any.rules"
+gup -u $src
+sudo cp $src /etc/polkit-1/rules.d/
