@@ -72,7 +72,7 @@ in
 			};
 			# services.guake = sessionTask {
 			# 	path = userPath;
-			# 	script = "exec env $(dbus-session-vars) ${pkgs.guake or "/usr"}/bin/guake";
+			# 	script = "exec env $(session-vars) ${pkgs.guake or "/usr"}/bin/guake";
 			# 	serviceConfig = {
 			# 		# ExecStart = "${pkgs.guake or "/usr"}/bin/guake";
 			# 		Environment = displayEnv;
@@ -81,7 +81,7 @@ in
 
 			services.tilda = sessionTask {
 				path = userPath;
-				script = "exec env $(dbus-session-vars) ${pkgs.tilda}/bin/tilda";
+				script = "exec env $(session-vars) ${pkgs.tilda}/bin/tilda";
 				serviceConfig = {
 					Environment = displayEnv ++ [
 						"TERM_SOLARIZED=1"
@@ -151,7 +151,7 @@ in
 
 			(optional (builtins.pathExists "${home}/dev/web/remote") {
 				services.web-remote = let base = "${home}/dev/web/remote"; in {
-					# needed for `dbus-session-vars`
+					# needed for `session-vars`
 					path = userPath;
 					serviceConfig = {
 						KillMode = "process";
