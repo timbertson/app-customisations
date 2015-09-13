@@ -6,6 +6,7 @@ let
 	displayEnv = ["DISPLAY=:0"]; # ugh...
 	sessionTask = x: {wantedBy = ["desktop-session.target"]; } // x;
 	systemPath = [ "/usr/local" "/usr" "/" ];
+	loadSessionVars = "eval \"$(session-vars --all --process gnome-shell --export)\"";
 	userPath = systemPath ++ [ "${home}" "${home}/dev/app-customisations" "${home}/dev/app-customisations/nix/local" ];
 in
 {
@@ -72,7 +73,7 @@ in
 			};
 			# services.guake = sessionTask {
 			# 	path = userPath;
-			# 	script = "exec env $(session-vars) ${pkgs.guake or "/usr"}/bin/guake";
+			# 	script = "${loadSessionVars} ${pkgs.guake or "/usr"}/bin/guake";
 			# 	serviceConfig = {
 			# 		# ExecStart = "${pkgs.guake or "/usr"}/bin/guake";
 			# 		Environment = displayEnv;
@@ -81,12 +82,12 @@ in
 
 			services.tilda = sessionTask {
 				path = userPath;
-				script = "exec env $(session-vars) ${pkgs.tilda}/bin/tilda";
+				script = "${loadSessionVars}; echo \"xxx XDG_DATA_DIRS=$XDG_DATA_DIRS\"; exec bash -x ${pkgs.tilda}/bin/tilda";
 				serviceConfig = {
 					Environment = displayEnv ++ [
 						"TERM_SOLARIZED=1"
-						"XDG_DATA_DIRS=${home}/.local/nix/share:/usr/local/share/:/usr/share/"
-						"SSH_AUTH_SOCK=%t/keyring/ssh"
+						# "XDG_DATA_DIRS=${home}/.local/nix/share:/usr/local/share/:/usr/share/"
+						# "SSH_AUTH_SOCK=%t/keyring/ssh"
 					];
 				};
 			};

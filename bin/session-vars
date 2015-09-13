@@ -60,7 +60,7 @@ DISPLAY = 'DISPLAY'
 
 def pgrep_vars(opts):
 	import getpass
-	pid_output = subprocess.check_output(['pgrep', '-u', getpass.getuser(), opts.process])
+	pid_output = subprocess.check_output(['pgrep', '--exact', '-u', getpass.getuser(), opts.process])
 	pids = list(map(int, pid_output.strip().split('\n')))
 	assert pids, "no %s process found" % (opts.process,)
 	if len(pids) > 1:
@@ -68,14 +68,19 @@ def pgrep_vars(opts):
 		logging.warn("multiple pids found")
 	pid = pids[0]
 	rv = {}
+	# logging.warn('loading %s', '/proc/%d/environ' % pid)
 	with open('/proc/%d/environ' % pid) as env_file:
 		vars = env_file.read().split('\0')
 		for var in vars:
 			if not var: continue
-			# print(repr(var))
 			k,v = var.split('=', 1)
 			rv[k]=v
 	return rv
+
+bash_safe = re.compile('^[-_a-zA-Z0-9/:.]+$')
+def bash_escape(s):
+	if re.match(bash_safe, s): return s
+	return "'" + s.replace("'", "'\\''") + "'"
 
 def main():
 	p = optparse.OptionParser()
@@ -83,6 +88,7 @@ def main():
 	p.add_option('--pure', action='store_true', default = False, help='don\'t inherit any vars')
 	p.add_option('--var', action='append', default=[], help='select specific variable (may be passed multiple times)')
 	p.add_option('--exclude', action='append', default=[], help='exclude specific variable (may be passed multiple times)')
+	p.add_option('--all', action='store_true', help='copy all env vars, not just session-related ones')
 	p.add_option('--export', action='store_true', help='prefix each line with `export` (for bash eval)')
 	p.add_option('--process', default = 'gnome-session', help='process to steal vars from')
 	opts, args = p.parse_args()
@@ -90,28 +96,28 @@ def main():
 
 	if opts.var == []:
 		opts.var = None
-	DEFAULT_VAR_PREFIX = ['XDG_', 'DBUS_', 'SSH_']
+	DEFAULT_VAR_PREFIX = ['XDG_', 'DBUS_', 'SSH_', 'LC_']
 	DEFAULT_VARS = ['DISPLAY', 'XAUTHORITY']
 
 	exports = {}
-
 	exports.update(pgrep_vars(opts))
 
 	fmt = "export %s=%s" if opts.export else "%s=%s"
 	already_set = frozenset() if opts.pure else frozenset(os.environ.keys())
 	for var, val in exports.items():
-		if var in opts.exclude: continue
-		if opts.var and var not in opts.var: continue
-		if var in already_set: continue
+		if not opts.all:
+			if var in opts.exclude: continue
+			if opts.var and var not in opts.var: continue
+			if var in already_set: continue
 
-		if not (var in DEFAULT_VARS or any((var.startswith(pfx) for pfx in DEFAULT_VAR_PREFIX))):
-			continue
+			if not (var in DEFAULT_VARS or any((var.startswith(pfx) for pfx in DEFAULT_VAR_PREFIX))):
+				continue
 
-		if '\n' in var:
-			logging.warn("token contains newline: %s" % (var,))
-			continue
+		#if '\n' in var:
+		#	logging.warn("token contains newline: %s" % (var,))
+		#	continue
 
-		print(fmt % (var,val))
+		print(fmt % (bash_escape(var),bash_escape(val)))
 
 if __name__ == '__main__':
 	main()
