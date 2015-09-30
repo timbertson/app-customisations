@@ -1,15 +1,20 @@
-#!/bin/bash
-set -eu
-if [ "$#" -eq 0 ]; then
-	cmd="gup -u all"
-else
-	cmd="gup -u $*"
-fi
+#!/usr/bin/env python
+from __future__ import print_function
+import os,sys
+from optparse import OptionParser
+p = OptionParser()
+p.add_option('-e', '--error', help='use vim-error', action='store_true')
+p.add_option('-c', '--context', help='error context', default=10, type='int')
+p.disable_interspersed_args()
+opts, args = p.parse_args()
 
-zeroenv="0install run http://gfxmonk.net/dist/0install/0env.xml"
-gup="http://gfxmonk.net/dist/0install/gup.xml"
-$zeroenv $gup -- $cmd || true
+if not args:
+	args = ['all']
 
-cmd="gup --buildable '\${watch_src_path}'; if [ \$? -eq 1 ]; then $cmd; fi"
-echo "(initial build complete - watching for changes)"
-$zeroenv $gup -- watchdog shell-command -c "$cmd" -i '*/.gup/*;*~' -D --wait --recursive ${WATCHDOG_ARGS:-} "${WATCHDOG_DIR:-.}"
+os.environ['GUP_COLOR'] = '1'
+cmd = ['gup', '-u'] + args
+if opts.error:
+	cmd = ['vim-err', '--context', str(opts.context)] + cmd
+cmd = ['vim-watch', '--clear'] + cmd
+print('+ ' + (' '.join(cmd)))
+os.execvp('vim-watch', cmd)

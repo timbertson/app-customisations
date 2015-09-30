@@ -35,6 +35,7 @@ let
 						"Tagbar"
 						"tcomment"
 						"The_NERD_tree"
+						"vim-indent-object"
 						"vim-nix"
 						"vim-rust"
 						"vim-stratifiedjs"

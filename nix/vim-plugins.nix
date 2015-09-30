@@ -34,6 +34,11 @@ in
 		"https://github.com/tpope/vim-repeat"
 		"7a6675f092842c8f81e71d5345bd7cdbf3759415"
 		"87e69508784baa66d13478c7a75672c5106a00bb12e52069312750bf872f0f5d";
+
+	"vim-indent-object" = mkgit
+		"https://github.com/michaeljsmith/vim-indent-object"
+		"1d3e4aac0117d57c3e1aaaa7e5a99f1d7553e01b"
+		"b9b044052f02010089589beefa1b1cad60603a29a940504ce380c57cdc9174cf";
 	
 	"vim-rust" = mkgit
 		"https://github.com/rust-lang/rust.vim"
