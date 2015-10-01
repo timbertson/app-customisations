@@ -1,10 +1,30 @@
-{
-	/* home */
-	"\UF729"  = "moveToBeginningOfLine:";
-	"$\UF729" = "moveToBeginningOfLineAndModifySelection:";
+/*
+ * @ = cmd
+ * $ = shift
+ *
+ * To test changes, quit/restart the relevant app.
+ */
 
-	/* end */
-	"\UF72B"  = "moveToEndOfLine:";
-	"$\UF72B" = "moveToEndOfLineAndModifySelection:";
-	
+{
+	/* Home / End */
+
+	"\UF729"   = "moveToBeginningOfLine:";
+	"$\UF729"  = "moveToBeginningOfLineAndModifySelection:";
+
+	"@\UF729"  = "moveToBeginningOfDocument:";
+	"$@\UF729" = "moveToBeginningOfDocumentAndModifySelection:";
+
+	"\UF72B"   = "moveToEndOfLine:";
+	"$\UF72B"  = "moveToEndOfLineAndModifySelection:";
+
+	"@\UF72B"  = "moveToEndOfDocument:";
+	"$@\UF72B" = "moveToEndOfDocumentAndModifySelection:";
+
+	/* Cmd+arrow */
+
+	"@\UF702"  = "moveWordBackward:";
+	"@$\UF702" = "moveWordBackwardAndModifySelection:";
+
+	"@\UF703"  = "moveWordForward:";
+	"@$\UF703" = "moveWordForwardAndModifySelection:";
 }
