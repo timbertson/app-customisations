@@ -63,28 +63,6 @@ in
 	}
 	# // (import ./packages {inherit pkgs; })
 	// (if stdenv.isDarwin then {
-
-		# XXX from https://github.com/NixOS/nixpkgs/issues/8728
-		mercurial = lib.overrideDerivation pkgs.mercurial (base: with pythonPackages; {
-			postInstall = ''
-				for i in $(cd $out/bin && ls); do
-					wrapProgram $out/bin/$i \
-						--prefix PYTHONPATH : "$(toPythonPath "$out ${curses}")" \
-						$WRAP_TK
-				done
-				mkdir -p $out/etc/mercurial
-				cat >> $out/etc/mercurial/hgrc << EOF
-				[web]
-				cacerts = ${cacert}/etc/ssl/certs/ca-bundle.crt
-				EOF
-				# copy hgweb.cgi to allow use in apache
-				mkdir -p $out/share/cgi-bin
-				cp -v hgweb.cgi contrib/hgweb.wsgi $out/share/cgi-bin
-				chmod u+x $out/share/cgi-bin/hgweb.cgi
-				# install bash completion
-				install -D -v contrib/bash_completion $out/share/bash-completion/completions/mercurial
-			'';
-		});
 	} else {});
 }
 
