@@ -73,24 +73,27 @@ in
 			};
 			# services.guake = sessionTask {
 			# 	path = userPath;
-			# 	script = "${loadSessionVars} ${pkgs.guake or "/usr"}/bin/guake";
+			# 	script = "${loadSessionVars}; ${pkgs.guake or "/usr"}/bin/guake";
 			# 	serviceConfig = {
 			# 		# ExecStart = "${pkgs.guake or "/usr"}/bin/guake";
 			# 		Environment = displayEnv;
 			# 	};
 			# };
 
-			services.tilda = sessionTask {
-				path = userPath;
-				script = "${loadSessionVars}; echo \"xxx XDG_DATA_DIRS=$XDG_DATA_DIRS\"; exec bash -x ${pkgs.tilda}/bin/tilda";
-				serviceConfig = {
-					Environment = displayEnv ++ [
-						"TERM_SOLARIZED=1"
-						# "XDG_DATA_DIRS=${home}/.local/nix/share:/usr/local/share/:/usr/share/"
-						# "SSH_AUTH_SOCK=%t/keyring/ssh"
-					];
-				};
-			};
+			# services.tilda = sessionTask {
+			# 	path = userPath;
+			# 	# script = "${loadSessionVars}; ${pkgs.tilda}/bin/tilda";
+			# 	#XXX nix-compiled tilda kills all X11 input devices on `sudo`.
+			# 	# So use distro-provided tilda because that seems to work
+			# 	script = "${loadSessionVars}; /usr/bin/tilda";
+			# 	serviceConfig = {
+			# 		Environment = displayEnv ++ [
+			# 			"TERM_SOLARIZED=1"
+			# 			# "XDG_DATA_DIRS=${home}/.local/nix/share:/usr/local/share/:/usr/share/"
+			# 			# "SSH_AUTH_SOCK=%t/keyring/ssh"
+			# 		];
+			# 	};
+			# };
 
 			services.rygel = sessionTask {
 				path = systemPath;

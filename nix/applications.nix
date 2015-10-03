@@ -19,6 +19,12 @@ let
 		# }
 
 		{
+			exec = "${pkgs.tilda}/bin/tilda";
+			name = "Tilda";
+			filename = "tilda";
+		}
+
+		{
 			exec = "${builtins.getEnv "HOME"}/.local/nix/bin/my-gnome-shell";
 			name = "Gnome shell";
 			filename = "gnome-shell";

@@ -51,6 +51,11 @@ meta:
   extract: daglink-update.desktop
   tags: linux
 
+~/.config/autostart/tilda.desktop:
+  path: ../nix/local/share/applications/tilda.desktop
+  optional: true
+  tags: linux
+
 ## BASE:
 
 /etc/profile.d/init:

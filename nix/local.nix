@@ -42,7 +42,7 @@ let
 		passe-client
 		vim-watch
 		vim
-		pythonPackages.ipythonLight
+		pythonPackages.ipython
 	] ++ (if isLinux then [
 		tilda
 		spotify

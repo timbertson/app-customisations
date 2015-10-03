@@ -424,6 +424,10 @@ vmap <M-F7> y:Ack -wQ "<C-R>""<cr>
 nmap <F5> :syntax sync fromstart<cr>:redraw!<cr>
 
 " window management:
+" a-JK doesn't get in the way of platform bindings,
+" c-tab / m-tab are historical
+map <a-J> <c-w>w
+map <a-K> <c-w>W
 if has("mac")
 	nmap <M-tab> <c-w>w
 	nmap <S-M-tab> <c-w>W
