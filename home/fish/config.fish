@@ -3,9 +3,10 @@
 # 	set NODE_ROOT /usr/local/share/npm
 # end
 
-# Nope.
-for var in LESSPIPE LESSOPEN LESSCLOSE
-	set -e -g $var
+if not set -q MANPATH
+	# default manpath. Not as extensive as /etc/man.conf; but prevents
+	# dumb "man path is too long" when the default behaviour is to search $PATH
+	set -x MANPATH /usr/man /usr/share/man /usr/local/share/man
 end
 
 set additional_paths \
@@ -16,14 +17,6 @@ set additional_paths \
 	~/.gem/ruby/2.0.0/bin \
 	~/.bin/zi \
 	;
-
-
-if test -f /etc/pki/tls/certs/ca-bundle.crt
-	set -x GIT_SSL_CAINFO /etc/pki/tls/certs/ca-bundle.crt
-	set -x CURL_CA_BUNDLE /etc/pki/tls/certs/ca-bundle.crt
-end
-
-set -x NIX_PATH ~/.nix-defexpr/channels
 
 for p in $additional_paths
 	if not contains $p $PATH
@@ -46,25 +39,47 @@ for p in $path_overrides
 	end
 end
 
+set config_roots \
+	~/.local/nix/share \
+	~/dev/ocaml/passe/share \
+	/usr/share
 
-set additional_mans \
-	~/.nix-profile/share/man \
-	~/.local/nix/share/man
-if not set -q MANPATH
-	# default manpath. Not as extensive as /etc/man.conf; but prevents
-	# dumb "man path is too long" when the default behaviour is to search $PATH
-	set -x MANPATH /usr/man /usr/share/man /usr/local/share/man
-end
+for root in $config_roots
+	# echo "# config_root: $root"
+	set p $root/fish/completions
+	if begin test -e $p; and not contains $p $fish_complete_path; end
+		# echo "# + fish_complete_path: $p"
+		set fish_complete_path $fish_complete_path $p
+	end
 
-for p in $additional_mans
-	if not contains $p $MANPATH
+	set p $root/fish/functions
+	if begin test -e $p; and not contains $p $fish_function_path; end
+		# echo "# + fish_function_path: $p"
+		set fish_function_path $fish_function_path $p
+	end
+
+	set p $root/man
+	if begin test -e $p; and not contains $p $MANPATH; end
+		# echo "# + MANPATH: $p"
 		set -x MANPATH $MANPATH $p
 	end
+
 end
 
 
-set FISH_CLIPBOARD_CMD "cat" # Stop that.
-set BROWSER firefox
+set -x NIX_PATH ~/.nix-defexpr/channels
+# needed for nix-packaged utils
+if test -f /etc/pki/tls/certs/ca-bundle.crt
+	set -x GIT_SSL_CAINFO /etc/pki/tls/certs/ca-bundle.crt
+	set -x CURL_CA_BUNDLE /etc/pki/tls/certs/ca-bundle.crt
+end
+
+# Nope.
+for var in LESSPIPE LESSOPEN LESSCLOSE
+	set -e -g $var
+end
+set FISH_CLIPBOARD_CMD "true" # Stop that.
+set -x BROWSER firefox
 set -x EDITOR vim
 set -x force_s3tc_enable true # games often need this
 
@@ -80,23 +95,6 @@ if isatty stdin; and which direnv >/dev/null 2>&1
 end
 
 set GEM_HOME $HOME/.gem
-
-set extra_complete_paths \
-	~/.local/nix/share/fish/completions \
-	~/dev/ocaml/passe/share/fish/completions \
-	/usr/share/fish/completions
-
-for p in $extra_complete_paths
-	if begin test -e $p; and not contains $p $PATH; end
-		set fish_complete_path $fish_complete_path $p
-	end
-end
-
-# completions paths from env:
-# if set -q FISH_COMPLETE_PATH
-# 	# echo "NOTE: adding $FISH_COMPLETE_PATH to $fish_complete_path"
-# 	set fish_complete_path (echo $FISH_COMPLETE_PATH | tr ':' '\n') $fish_complete_path /usr/share/fish/completions
-# end
 
 if [ -r ~/.aliasrc ]
 	. ~/.aliasrc

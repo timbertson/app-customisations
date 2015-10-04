@@ -44,7 +44,7 @@ let
 		vim
 		pythonPackages.ipython
 	] ++ (if isLinux then [
-		tilda
+		#tilda
 		spotify
 		zeroinstall
 		(runCommand "systemd-units" {} ''

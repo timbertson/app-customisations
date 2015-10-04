@@ -1,6 +1,7 @@
 {pkgs ? import <nixpkgs> {}}:
 with pkgs;
 let
+	loadSessionVars = "eval \"$(session-vars --all --process gnome-shell --export)\"";
 	apps = [
 		# {
 		# 	name = "Skype";
@@ -19,7 +20,10 @@ let
 		# }
 
 		{
-			exec = "${pkgs.tilda}/bin/tilda";
+			exec = writeScript "tilda-launch" ''${pkgs.bash}/bin/bash
+				${loadSessionVars}
+				${pkgs.tilda}/bin/tilda
+				'';
 			name = "Tilda";
 			filename = "tilda";
 		}
