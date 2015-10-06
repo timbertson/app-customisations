@@ -1,5 +1,7 @@
 function d
-	set dest (indir ~/dev/ find -L -maxdepth 2 -type d -printf '%P\n' | gsel-client)
+	set MANIFEST $HOME/dev/.projects
+	gup -qu $MANIFEST
+	set dest (cat ~/dev/.projects | gsel-client)
 	if test $status -eq 0
 		cd ~/dev/$dest
 	end
