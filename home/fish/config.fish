@@ -12,7 +12,6 @@ end
 set additional_paths \
 	/sbin \
 	~/.bin \
-	~/.nix-profile/bin \
 	~/bin \
 	~/.gem/ruby/2.0.0/bin \
 	~/.bin/zi \
@@ -30,6 +29,7 @@ end
 # NOTE: LAST path is most overridey
 set path_overrides \
 	~/.local/nix/bin \
+	~/.nix-profile/bin \
 	~/.bin/overrides
 
 for p in $path_overrides

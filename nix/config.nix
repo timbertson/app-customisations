@@ -1,40 +1,39 @@
-let
-	addVars = bin: ''
-		echo "Wrapping ${bin}"
-		bin="${bin}"
-		# EWW EWW EWW!
-		base="$(basename "$bin")"
-		dir="$(dirname "$bin")"
-		dest="$dir/.$base-wrapped"
-		if [ -e "$dest" ]; then
-			bin="$dest"
-		fi
-		wrapProgram "$bin" \
-			--set GIT_SSL_CAINFO  /etc/pki/tls/certs/ca-bundle.crt \
-			--set CURL_CA_BUNDLE /etc/pki/tls/certs/ca-bundle.crt \
-		;
-	'';
-in
 {
 	allowUnfree = true;
-	packageOverrides = pkgs: with pkgs; {
+	packageOverrides = pkgs: with pkgs; let
+		linux_cacert = "/etc/pki/tls/cacerts/ca-bundle.crt";
+		nixpkgs_cacert = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+		cacert = if builtins.pathExists linux_cacert then linux_cacert else nixpkgs_cacert;
+		addVars = bin: ''
+			bin="${bin}"
+			base="$(basename "$bin")"
+			dest="$out/bin/$base"
+			echo "Wrapping $bin -> $dest"
+			makeWrapper "$bin" "$dest" \
+				--set GIT_SSL_CAINFO ${cacert} \
+				--set CURL_CA_BUNDLE ${cacert} \
+			;
+		'';
+	in {
 		
-		# Override nix-prefetch-* scripts to include fedora's .crt files,
+		# Override nix-prefetch-* scripts to include the system's .crt files,
 		# so that https works as expected
 		# nix-prefetch-scripts = lib.overrideDerivation nix-prefetch-scripts (base: {
-		my-nix-prefetch-scripts = lib.overrideDerivation pkgs.nix-prefetch-scripts (base: {
-			preFixup = (base.preFixup or "") + ''
-				for f in $out/bin/*; do
+		my-nix-prefetch-scripts = stdenv.mkDerivation {
+			name = "my-nix-prefetch-scripts";
+			buildInputs = with pkgs; [ makeWrapper ];
+			unpackPhase = "true";
+			buildPhase = "true";
+			installPhase = ''
+				mkdir -p $out/bin
+				for f in ${pkgs.nix-prefetch-scripts}/bin/*; do
 					${addVars "$f"}
 				done
+				${addVars "${pkgs.nix}/bin/nix-prefetch-url"}
+				${addVars "${pkgs.git}/bin/git"}
 			'';
-		});
-
-		my-nix = lib.overrideDerivation nix (base: {
-			buildInputs = (base.buildInputs or []) ++ [pkgs.makeWrapper];
-			preFixup = (base.preFixup or "") + (addVars "$out/bin/nix-prefetch-url");
 			meta.priority = 1;
-		});
+		};
 
 		# nodejs = lib.overrideDerivation nodejs (base: {
 		# 	preConfigure = ''
