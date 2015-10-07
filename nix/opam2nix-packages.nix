@@ -13,8 +13,8 @@ let
 	# (rather than only when opam2nix is updated)
 	opam2nix = fetchgit {
 		url = "https://github.com/gfxmonk/opam2nix.git";
-		rev = "5c981b597007bd781fed48c03951a5a18bb6ee46";
-		sha256 = "6e7fae31d6aa8ab69653862e6c0c9e0bd535db8885cd3027b581c27ab992e895";
+		rev = "ea7bcfe04dbc625f38c00cc96ab8b4b7caac7ff4";
+		sha256 = "2d893c8b748956cf13c69057f369721b7497b6da44f237733e4a48077907b9a3";
 	};
 in
 callPackage "${src}/nix" {} { inherit src opam2nix; }

@@ -68,6 +68,7 @@ let
 		'')
 	] else [
 		daglink # non-zeroinstall fallback...
+		zeroinstall
 	]) ++ (
 		mapAttrsToList (name: script:
 			runCommand "${name}-wrapper" {} ''
