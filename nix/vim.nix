@@ -29,6 +29,7 @@ let
 						"indent-finder"
 						"ir-black"
 						"misc"
+						"multiple-cursors"
 						"repeat"
 						"Solarized"
 						"surround"

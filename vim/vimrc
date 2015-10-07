@@ -79,6 +79,7 @@ let g:ctrlp_custom_ignore = {
 	\ 'dir': 'node_modules,tmp,_build,0inst,*.0compile',
 	\ }
 let g:rust_recommended_style=0 " quit it with your expandtab business
+let g:multi_cursor_exit_from_insert_mode=0
 
 set pastetoggle=<F2>
 set sessionoptions="curdir,folds,localoptions,tabpages,winsize"
@@ -362,6 +363,10 @@ nmap <C-a> ggVG
 
 " delete to the "black hole" buffer
 map <S-k> "_d
+
+" I have never wanted these, but I do them by accident plenty...
+nunmap K
+vmap u <esc>u
 
 " new tab with <leader>T
 nmap <leader>T :tabnew<cr>
