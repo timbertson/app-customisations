@@ -22,6 +22,7 @@ let
 		{
 			exec = writeScript "tilda-launch" ''${pkgs.bash}/bin/bash
 				${loadSessionVars}
+				export TERM_SOLARIZED=1
 				${pkgs.tilda}/bin/tilda
 				'';
 			name = "Tilda";
