@@ -12,6 +12,7 @@
 			makeWrapper "$bin" "$dest" \
 				--set GIT_SSL_CAINFO ${cacert} \
 				--set CURL_CA_BUNDLE ${cacert} \
+				--set SSL_CERT_FILE ${cacert} \
 			;
 		'';
 	in {
@@ -29,8 +30,11 @@
 				for f in ${pkgs.nix-prefetch-scripts}/bin/*; do
 					${addVars "$f"}
 				done
-				${addVars "${pkgs.nix}/bin/nix-prefetch-url"}
+				for f in ${pkgs.nix}/bin/*; do
+					${addVars "$f"}
+				done
 				${addVars "${pkgs.git}/bin/git"}
+				${addVars "${pkgs.wget}/bin/wget"}
 			'';
 			meta.priority = 1;
 		};

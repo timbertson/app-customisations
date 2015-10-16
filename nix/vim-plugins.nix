@@ -1,6 +1,4 @@
-{pkgs,
-	gsel ? null,
-	vim-watch
+{pkgs, gsel ? null, vim-watch
 }:
 with pkgs;
 let

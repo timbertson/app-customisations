@@ -7,7 +7,7 @@ let
 	sessionTask = x: {wantedBy = ["desktop-session.target"]; } // x;
 	systemPath = [ "/usr/local" "/usr" "/" ];
 	loadSessionVars = "eval \"$(session-vars --all --process gnome-shell --export)\"";
-	userPath = systemPath ++ [ "${home}" "${home}/dev/app-customisations" "${home}/dev/app-customisations/nix/local" ];
+	userPath = systemPath ++ [ "${home}" "${home}/dev/app-customisations" "${home}/dev/app-customisations/nix/local" "${home}/.bin/zi"];
 in
 {
 	config = {
@@ -127,17 +127,17 @@ in
 				};
 			};
 
-			# timers.daglink = {
-			# 	wantedBy = [ "default.target" "timers.target" ];
-			# 	timerConfig = {
-			# 		OnStartupSec = "10s";
-			# 	};
-			# };
-			# services.daglink = {
-			# 	serviceConfig = {
-			# 		ExecStart = "${home}/.bin/daglink -f";
-			# 	};
-			# };
+			timers.daglink = {
+				wantedBy = [ "default.target" "timers.target" ];
+				timerConfig = {
+					OnStartupSec = "10s";
+				};
+			};
+			services.daglink = {
+				serviceConfig = {
+					ExecStart = "${home}/.bin/daglink -f";
+				};
+			};
 
 			timers.dconf-user-overrides = {
 				wantedBy = [ "default.target" "timers.target" ];
@@ -148,7 +148,7 @@ in
 			services.dconf-user-overrides = {
 				path = userPath;
 				serviceConfig = {
-					ExecStart = "${home}/.bin/daglink -f";
+					ExecStart = "/usr/bin/env dconf-user-overrides";
 				};
 			};
 		} [
