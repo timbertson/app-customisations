@@ -94,7 +94,7 @@ if isatty stdin; and which direnv >/dev/null 2>&1
 	eval (direnv hook fish)
 end
 
-set GEM_HOME $HOME/.gem
+set -x GEM_HOME $HOME/.gem
 
 if [ -r ~/.aliasrc ]
 	. ~/.aliasrc

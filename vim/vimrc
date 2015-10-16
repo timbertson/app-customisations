@@ -380,9 +380,8 @@ map <A-/> :TComment<cr>
 " add Tcomment overrides
 autocmd FileType nix set commentstring=#\ %s
 
-" option (or alt) + r to run the current file
-"nmap <D-r> :up<cr>:!%:p<cr>
-nmap <A-r> :up<cr>:!%:p<cr>
+" option (or alt) + r to redo the previous task
+nmap <a-r> :<up><cr>
 
 " ctrl+s to save things!
 nmap <C-s> :w<cr>
