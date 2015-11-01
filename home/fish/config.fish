@@ -72,6 +72,7 @@ set -x NIX_PATH ~/.nix-defexpr/channels
 if test -f /etc/pki/tls/certs/ca-bundle.crt
 	set -x GIT_SSL_CAINFO /etc/pki/tls/certs/ca-bundle.crt
 	set -x CURL_CA_BUNDLE /etc/pki/tls/certs/ca-bundle.crt
+	set -x SSL_CERT_FILE /etc/pki/tls/certs/ca-bundle.crt
 end
 
 # Nope.
