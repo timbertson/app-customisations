@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # run a thing, and tell vim to jump to the first error we find
 from __future__ import print_function
 
@@ -16,6 +16,8 @@ p = OptionParser("Usage: %prog [OPTIONS] BUILD_COMMAND ...")
 p.add_option('-r', '--remote')
 p.add_option('-p', '--prompt', action='store_true')
 p.add_option('-s', '--source', dest='sources', action='append', default=[os.getcwd()], help='add source root')
+p.add_option('--replace', action='append', default=[], help='add (literal) path replacement, e.g. /app=.')
+p.add_option('--filter', action='append', default=[], help='only match files including FILTER')
 p.add_option('-c', '--context',type='int')
 p.disable_interspersed_args()
 opts, args = p.parse_args()
@@ -26,12 +28,20 @@ file_match = re.compile(r'''
 	(
 		([^: ]+):(\d+):(?:(\d+):)? # foo.bar:3:23
 	)|(
+		([^: ]+): line (\d+)(?:, col (\d+):)? # foo.bar: line 3, col 23
+	)|(
 		File\ "([^"]+)",\ line\ (\d+),\ characters\ (\d+)-\d+ # ocaml: File "foo.ml", line 3, characters 1-19
 	)
 	''', re.VERBOSE)
 
 assert len(args) > 0, "no arguments given"
 context = opts.context
+def parse_replacement(s):
+	pair = s.split(':',1)
+	assert len(pair) == 2, "invalid replacement: %s" % (s,)
+	return pair
+
+opts.replace = list(map(parse_replacement, opts.replace))
 proc = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 status = None
 DONE = False
@@ -72,24 +82,42 @@ for line in proc.stdout.readlines():
 		match = file_match.search(line)
 		if match:
 			DEBUG(repr(match.groups()))
-			_match_op, rel_path, lineno, col = filter(None, match.groups())
-			for source in opts.sources:
-				path = os.path.join(source, rel_path)
-				if os.path.isfile(path):
-					DONE = True
-					if opts.prompt:
-						def action():
-							global REMOTE
-							print('\n ** press return to jump to file vim **', file=sys.stderr,end='')
-							response = input()
-							DEBUG(repr(response))
-							if response == '':
-								REMOTE = open_remotely(opts, path, lineno, col)
-						DELAYED_ACTION = action
+			parts = list(filter(None, match.groups()))
+			parts.pop(0) # match_op
+			rel_path = parts.pop(0)
+			if opts.filter and not any([f in rel_path for f in opts.filter]):
+				DEBUG("rel_path %r does not match any filters in %r" % (rel_path, opts.filter))
+			lineno = parts.pop(0)
+			if parts:
+				col, = parts
+			else:
+				col = None
+			for find, replace in [(None, None)] + opts.replace:
+				DEBUG("Processing replacement for %s -> %s on rel_path %s" % (find, replace, rel_path))
+				current_rel_path = rel_path
+				if find is not None:
+					if find not in current_rel_path:
+						# no hits, ignore this replacement
+						continue
+					current_rel_path = current_rel_path.replace(find, replace)
+
+				for source in opts.sources:
+					path = os.path.join(source, current_rel_path)
+					if os.path.isfile(path):
+						DONE = True
+						if opts.prompt:
+							def action():
+								global REMOTE
+								print('\n ** press return to jump to file vim **', file=sys.stderr,end='')
+								response = input()
+								DEBUG(repr(response))
+								if response == '':
+									REMOTE = open_remotely(opts, path, lineno, col)
+							DELAYED_ACTION = action
+						else:
+							REMOTE = open_remotely(opts, path, lineno, col)
 					else:
-						REMOTE = open_remotely(opts, path, lineno, col)
-				else:
-					DEBUG("No such file: %s" %(path))
+						DEBUG("No such file: %s" %(path))
 	if DONE:
 		if context is not None:
 			if context > 0:

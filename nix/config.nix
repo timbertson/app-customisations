@@ -35,6 +35,7 @@
 				done
 				${addVars "${pkgs.git}/bin/git"}
 				${addVars "${pkgs.wget}/bin/wget"}
+				${addVars "${pkgs.bundler}/bin/bundle"}
 			'';
 			meta.priority = 1;
 		};
