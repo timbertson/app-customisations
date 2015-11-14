@@ -16,6 +16,7 @@ pkgs // rec {
 	vim = (callPackage ./vim.nix { pluginArgs = { inherit gsel vim-watch; }; });
 	shellshape = tryImport "${home}/dev/gnome-shell/shellshape@gfxmonk.net/local.nix";
 	zeroinstall = opam2nix-packages.buildPackage "0install" {};
+	jsonnet = callPackage ./jsonnet.nix {};
 	passe-client = let builder = tryImport "${home}/dev/ocaml/passe/nix/local.nix"; in
 		if builder == null then null else builder { target="client"; };
 }

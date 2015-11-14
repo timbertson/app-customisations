@@ -160,7 +160,7 @@ in
 					serviceConfig = {
 						KillMode = "process";
 						Restart = "always";
-						ExecStart = "${pkgs.nodejs}/bin/node ${base}/node_modules/conductance/conductance serve ${base}/config.mho";
+						ExecStart = "${pkgs.nodejs-0_10}/bin/node ${base}/node_modules/conductance/conductance serve ${base}/config.mho";
 						Environment = [
 							# "NODE_PATH=${home}/dev/oni"
 							"NODE_ENV=production"

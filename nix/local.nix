@@ -46,6 +46,7 @@ let
 	] ++ (if isLinux then [
 		#tilda
 		spotify
+		jsonnet
 		zeroinstall
 		(runCommand "systemd-units" {} ''
 			mkdir -p $out/share/systemd

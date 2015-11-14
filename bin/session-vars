@@ -113,11 +113,13 @@ def main():
 			if not (var in DEFAULT_VARS or any((var.startswith(pfx) for pfx in DEFAULT_VAR_PREFIX))):
 				continue
 
-		#if '\n' in var:
-		#	logging.warn("token contains newline: %s" % (var,))
-		#	continue
-
-		print(fmt % (bash_escape(var),bash_escape(val)))
+		if opts.export:
+			if '\n' in var:
+				logging.warn("token contains newline: %s" % (var,))
+				continue
+			var = bash_escape(var)
+			val = bash_escape(val)
+		print(fmt % (var,val))
 
 if __name__ == '__main__':
 	main()
