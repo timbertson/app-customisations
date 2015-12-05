@@ -58,17 +58,6 @@ meta:
 
 ## BASE:
 
-/etc/profile.d/init:
-  path: ../root/profile.d/init
-  tags: root bash
-/etc/profile.d/net.gfxmonk:
-  path: ../root/profile.d/net.gfxmonk
-  tags: root bash
-/etc/profile.d/net.gfxmonk.bashcomplete/init.sh:
-  uri: http://gfxmonk.net/dist/0install/bashcomplete.xml
-  extract: bashcomplete/init
-  tags: root bash
-
 /etc/X11/sessions:
   path: ../root/sessions
   tags: root linux
@@ -206,11 +195,6 @@ meta:
   path: ../home/rygel.conf
   tags: linux
 
-## desktop-specific
-/etc/profile.d/autojump:
-  uri: http://gfxmonk.net/dist/0install/autojump.xml
-  tags: desktop root
-
 ## multi-user
 ~/users/www-browser/.themes:
  path: /home/tim/.themes
@@ -333,10 +317,6 @@ meta:
 /etc/modules-load.d/ecryptfs.conf:
   path: ../root/modules-load.d/ecryptfs.conf
   tags: fedora root
-
-/etc/X11/Xsession.d/80overlayscrollbars:
-  path: ../root/xsession.d/80overlayscrollbars
-  tags: ubuntu root
 
 /etc/yum.repos.d/fedora.repo:
   path: ../root/yum.repos.d/fedora.repo
