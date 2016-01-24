@@ -60,10 +60,9 @@
 		sitePackages = if builtins.pathExists "${builtins.getEnv "HOME"}/dev/app-customisations/nix"
 			then {
 				recurseForDerivations = false;
-				inherit (import ~/dev/app-customisations/nix/packages.nix { inherit pkgs; }) gup passe-client;
+				inherit (import ~/dev/app-customisations/nix/packages.nix { inherit pkgs; }) gup passe-client ufraw;
 			}
 			else null;
-
 	}
 	# // (import ./packages {inherit pkgs; })
 	// (if stdenv.isDarwin then {

@@ -17,6 +17,8 @@ set additional_paths \
 	~/.bin/zi \
 	;
 
+set -x NIX_BUILD_SHELL /bin/bash
+
 for p in $additional_paths
 	if not contains $p $PATH
 		if test -e $p
@@ -42,6 +44,7 @@ end
 set config_roots \
 	~/.local/nix/share \
 	~/dev/ocaml/passe/share \
+	~/.nix-profile/share \
 	/usr/share
 
 for root in $config_roots

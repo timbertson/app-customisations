@@ -17,6 +17,7 @@ pkgs // rec {
 	shellshape = tryImport "${home}/dev/gnome-shell/shellshape@gfxmonk.net/local.nix";
 	zeroinstall = opam2nix-packages.buildPackage "0install" {};
 	jsonnet = callPackage ./jsonnet.nix {};
+	ufraw = callPackage ./ufraw.nix {};
 	passe-client = let builder = tryImport "${home}/dev/ocaml/passe/nix/local.nix"; in
 		if builder == null then null else builder { target="client"; };
 }

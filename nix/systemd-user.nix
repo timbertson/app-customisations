@@ -71,6 +71,14 @@ in
 					Restart = "always";
 				};
 			};
+
+			services.dropbox = {
+				serviceConfig = {
+					ExecStart = "${pkgs.dropbox}/bin/dropbox";
+					Environment = displayEnv;
+				};
+			};
+
 			# services.guake = sessionTask {
 			# 	path = userPath;
 			# 	script = "${loadSessionVars}; ${pkgs.guake or "/usr"}/bin/guake";
