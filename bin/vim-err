@@ -23,7 +23,7 @@ p.disable_interspersed_args()
 opts, args = p.parse_args()
 
 ansi_escape = re.compile(r'\x1b[^m]*m')
-# TODO: add more formats?
+# TODO: add more formats
 file_match = re.compile(r'''
 	(
 		([^: ]+):(\d+):(?:(\d+):)? # foo.bar:3:23
@@ -36,12 +36,28 @@ file_match = re.compile(r'''
 
 assert len(args) > 0, "no arguments given"
 context = opts.context
+
 def parse_replacement(s):
-	pair = s.split(':',1)
+	pair = s.split('=',1)
 	assert len(pair) == 2, "invalid replacement: %s" % (s,)
 	return pair
 
+def each_path(envvar):
+	val = os.environ.get(envvar, None)
+	if val is not None:
+		for path in val.split(':'):
+			if not path: continue
+			yield path
+
+for source in each_path('VIM_ERR_PATH'):
+	opts.sources.append(source)
+
 opts.replace = list(map(parse_replacement, opts.replace))
+for replacement in each_path('VIM_ERR_REPLACE'):
+	opts.replace.append(parse_replacement(replacement))
+
+DEBUG("opts: %r" % opts)
+
 proc = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 status = None
 DONE = False

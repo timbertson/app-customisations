@@ -26,7 +26,8 @@ let
 
 		"my-gnome-shell" = wrapper ''${bash}
 			exec /usr/bin/env \
-				XDG_DATA_DIRS=${builtins.getEnv "HOME"}/.local/nix/share:/usr/local/share/:/usr/share/ \
+				SHELLSHAPE_DEBUG=1 \
+				XDG_DATA_DIRS=${builtins.getEnv "HOME"}/.local/share:${builtins.getEnv "HOME"}/.local/nix/share:/usr/local/share/:/usr/share/ \
 				gnome-shell \
 				"$@";
 		'';

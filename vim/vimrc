@@ -351,6 +351,9 @@ cnoremap <C-v> <C-r>+
 cnoremap <C-l> <C-v>
 inoremap <C-l> <C-v>
 
+" Use ctrl-o as a more convenient esc
+inoremap <c-o> <esc>
+
 " shift-insert for pasting from the selection buffer
 nmap <S-Ins> "*P
 imap <S-Ins> <esc>"*pa
@@ -444,7 +447,6 @@ nmap <leader><c-l> <c-w>T
 " copy full path to clipboard
 nmap <C-c> :silent let @+ = expand("%:p")<cr>
 
-nmap <A-o> :up<cr>:silent !gnome-open %:p<cr>
 command! -narg=0 Open :silent :!gnome-open "`dirname "%:p"`" &
 command! -narg=0 Term :silent :!gnome-terminal --working-directory="`dirname "%:p"`" &
 command! -narg=0 CD :lcd %:p:h
