@@ -2,14 +2,19 @@
 import sys
 import subprocess, os
 
+# e.g:
+# gup-and executable.bar
+# gup-and cat -- foo bar
+# gup-and cat grep -- -x -- foo bar
+
 targets = sys.argv[1:]
 try:
-	idx = targets.index('--')
+	idx = max(i for i, target in enumerate(targets) if target == '--')
 except ValueError:
 	cmd = []
 else:
-	cmd = targets[idx+1:]
-	targets = targets[:idx]
+	cmd = targets[:idx]
+	targets = targets[idx+1:]
 
 # print repr({'cmd':cmd,'targets':targets})
 rv = subprocess.Popen(['gup', '-u'] + targets).wait()

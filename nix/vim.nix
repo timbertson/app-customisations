@@ -9,6 +9,7 @@ let
 		name = "vim"; # actual binary name
 		vimrcConfig.customRC = ''
 			set nocompatible
+			let g:vim_addon_manager.addon_completion_lhs=""
 			if !empty(glob("~/.vimrc"))
 				source ~/.vimrc
 			else

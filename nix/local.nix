@@ -48,6 +48,7 @@ let
 		#tilda
 		spotify
 		jsonnet
+		pythonPackages.youtube-dl
 		zeroinstall
 		(runCommand "systemd-units" {} ''
 			mkdir -p $out/share/systemd

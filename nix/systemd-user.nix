@@ -35,22 +35,22 @@ in
 				};
 			};
 
-			# XXX I wouldn't need to manually invoke xkb if this shift key weren't so broken :(
-			timers.xkb = {
-				wantedBy = [ "default.target" "timers.target" ];
-				timerConfig = {
-					OnBootSec = "5s";
-					OnUnitActiveSec = "30m";
-				};
-			};
+			# # XXX I wouldn't need to manually invoke xkb if this shift key weren't so broken :(
+			# timers.xkb = {
+			# 	wantedBy = [ "default.target" "timers.target" ];
+			# 	timerConfig = {
+			# 		OnBootSec = "5s";
+			# 		OnUnitActiveSec = "30m";
+			# 	};
+			# };
 
-			services.xkb = sessionTask {
-				path = userPath;
-				serviceConfig = {
-					ExecStart = "${home}/dev/app-customisations/bin/reset-xkb";
-					Environment = displayEnv;
-				};
-			};
+			# services.xkb = sessionTask {
+			# 	path = userPath;
+			# 	serviceConfig = {
+			# 		ExecStart = "${home}/dev/app-customisations/bin/reset-xkb";
+			# 		Environment = displayEnv;
+			# 	};
+			# };
 
 			# usermode DNS alias
 			sockets.dns-alias = {
@@ -79,7 +79,7 @@ in
 			services.dropbox = {
 				serviceConfig = {
 					ExecStart = "${pkgs.dropbox}/bin/dropbox";
-					Environment = displayEnv;
+					Environment = displayEnv ++ libglEnv;
 				};
 			};
 
@@ -107,7 +107,7 @@ in
 			# 	};
 			# };
 
-			services.rygel = sessionTask {
+			services.rygel = {
 				path = systemPath;
 				serviceConfig = {
 					ExecStart = "${pkgs.rygel or "/usr"}/bin/rygel";

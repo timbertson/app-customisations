@@ -15,7 +15,7 @@ meta:
         - root
         - multi-user
         - linux
-        - mac
+        # - mac
         - desktop
         - fedora
         - shellshape
@@ -215,19 +215,19 @@ meta:
 ## KEYBOARD TYPES
 ~/.xkb:
   path: ../home/xkb-mac
-  tags: mac fedora
+  tags: mac fedora xkb
 
 /bin/reset-xkb:
   path: ../bin/reset-xkb
-  tags: mac fedora
+  tags: mac fedora xkb
 
 ~/.config/dconf.user.d/disable-gnome-xkb:
   path: ../home/dconf/disable-gnome-xkb
-  tags: mac fedora
+  tags: mac fedora xkb
 
 ~/.config/dconf.user.d/xkb-mac:
   path: ../home/dconf/xkb-mac
-  tags: mac linux
+  tags: mac linux xkb
 
 ~/.config/dconf.user.d/focus-follows-mouse:
   path: ../home/dconf/focus-follows-mouse
@@ -332,7 +332,7 @@ meta:
 
 /usr/lib/systemd/system-sleep/apply-xkb:
   path: ../root/systemd/apply-xkb
-  tags: fedora root
+  tags: fedora root xkb
 
 ## OSX
 
