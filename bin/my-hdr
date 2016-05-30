@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+
+import sys, os, subprocess
+args = sys.argv[1:]
+
+def base(path):
+	path = os.path.basename(path)
+	return os.path.splitext(path)[0]
+
+filepaths = list(filter(os.path.exists, args))
+assert len(filepaths) > 1, "Pass in at least two files"
+filenames = list(map(base, filepaths))
+basedir = os.path.dirname(filepaths[0])
+name = "%s-%s.exr" % (filenames[0], filenames[-1])
+
+cmd = [
+	'luminance-hdr-cli',
+	'--align', 'AIS',
+	'--save', os.path.join(basedir, name),
+	] + args
+print(repr(cmd))
+subprocess.check_call(cmd)
+

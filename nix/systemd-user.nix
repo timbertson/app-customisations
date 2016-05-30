@@ -4,6 +4,7 @@ let
 	optional = x: attrs: if (x == null || x == false) then {} else attrs;
 	home = builtins.getEnv "HOME";
 	displayEnv = ["DISPLAY=:0"]; # ugh...
+	libglEnv = ["LD_LIBRARY_PATH=${pkgs.mesa}/lib"];
 	sessionTask = x: {wantedBy = ["desktop-session.target"]; } // x;
 	systemPath = [ "/usr/local" "/usr" "/" ];
 	loadSessionVars = "eval \"$(session-vars --all --process gnome-shell --export)\"";
@@ -95,8 +96,8 @@ in
 			# services.tilda = sessionTask {
 			# 	path = userPath;
 			# 	# script = "${loadSessionVars}; ${pkgs.tilda}/bin/tilda";
-			# 	#XXX nix-compiled tilda kills all X11 input devices on `sudo`.
-			# 	# So use distro-provided tilda because that seems to work
+			# 	#XXX tilda kills all X11 input devices on `sudo` if run via systemd.
+			# 	# So I'm just using a tilda.desktop app on autostart instead
 			# 	script = "${loadSessionVars}; /usr/bin/tilda";
 			# 	serviceConfig = {
 			# 		Environment = displayEnv ++ [
@@ -173,7 +174,7 @@ in
 					serviceConfig = {
 						KillMode = "process";
 						Restart = "always";
-						ExecStart = "${pkgs.nodejs-0_10}/bin/node ${base}/node_modules/conductance/conductance serve ${base}/config.mho";
+						ExecStart = "${pkgs.nodejs}/bin/node ${base}/node_modules/conductance/conductance serve ${base}/config.mho";
 						Environment = [
 							# "NODE_PATH=${home}/dev/oni"
 							"NODE_ENV=production"

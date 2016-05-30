@@ -1,8 +1,11 @@
 #!/bin/bash
 # if flash gets updated while firefox is open, it never "notices" the new version
-# (It get's used, so that's safe. But when the old version gets blacklisted
+# (It gets used, so that's safe. But when the old version gets blacklisted
 # firefox will give you warnings)
 set -eux
+if [ "$(id -un)" = tim ]; then
+	exec sudo -u www-browser "$0" "$@"
+fi
 cd ~/.mozilla/firefox
 ls -1d *.default | while read profile; do
 	rm -f "$profile/pluginreg.dat"

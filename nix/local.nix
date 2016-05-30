@@ -37,6 +37,7 @@ let
 		gsel
 		ctags
 		fish
+		nodejs
 		direnv
 		silver-searcher
 		gup
@@ -50,6 +51,9 @@ let
 		jsonnet
 		pythonPackages.youtube-dl
 		zeroinstall
+		eog-rate
+		dumbattr
+		trash
 		(runCommand "systemd-units" {} ''
 			mkdir -p $out/share/systemd
 			cp -a "${system.config.system.build.standalone-user-units}" $out/share/systemd/user
@@ -84,4 +88,4 @@ let
 	system = import ./system.nix { pkgs = packagesExt; };
 	gnome-shell-extensions = import ./gnome-shell.nix { pkgs = packagesExt; };
 in
-symlinkJoin "local" installed
+symlinkJoin { name = "local"; paths = installed; }

@@ -62,7 +62,7 @@ if [ -z "$irank_test" ]; then
 		echo "Usage: $0 [--quick|--ask]" >&2
 		exit 0
 	elif [ "$1" = "--quick" ]; then
-		do_update_playlists=1
+		do_update_playlists=0
 		shift
 	elif [ "$1" = "--ask" ]; then
 		ask=1

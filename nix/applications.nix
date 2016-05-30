@@ -20,10 +20,11 @@ let
 		# }
 
 		{
-			exec = writeScript "tilda-launch" ''${pkgs.bash}/bin/bash
+			exec = writeScript "tilda-launch" ''#!${pkgs.bash}/bin/bash
 				${loadSessionVars}
+				export GTK_THEME='Adwaita:dark'
 				export TERM_SOLARIZED=1
-				${pkgs.tilda}/bin/tilda
+				exec ${pkgs.tilda}/bin/tilda
 				'';
 			name = "Tilda";
 			filename = "tilda";

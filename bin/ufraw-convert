@@ -1,0 +1,33 @@
+#!/usr/bin/env python
+from __future__ import print_function
+import os, optparse, sys, subprocess
+p = optparse.OptionParser('Usage: ufraw-convert --dest=DEST dir1 [dir2 ...]')
+p.add_option('--dest')
+opts, args = p.parse_args()
+assert args, "argument(s) required"
+assert opts.dest and os.path.isdir(opts.dest)
+EXTS = ['.arw', '.dng']
+def interesting_ext(filename):
+	ext = os.path.splitext(filename)[1].lower()
+	print(repr(ext))
+	return ext in EXTS
+
+files = []
+for basedir in args:
+	files.extend([
+		os.path.join(basedir, filename)
+		for filename in os.listdir(basedir)
+		if interesting_ext(filename)
+	])
+print(repr(files))
+
+subprocess.check_call(['ufraw-batch',
+	'--exposure=auto',
+	'--clip=film',
+	'--out-type=jpg',
+	'--overwrite',
+	'--auto-crop',
+	'--black=auto',
+	'--gamma=0.35',
+	'--out-path=' + opts.dest,
+	] + files)
