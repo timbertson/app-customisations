@@ -3,11 +3,13 @@ set -eu
 function list {
 	# pretty lame, it just does a topleve + 1-down listing of targets
 	gup --targets
-	ls -1 | while read f; do
-		if [ -d $f ]; then
-			gup --targets "$f" | grep -v 'gup/'
-		fi
-	done
+	if [ "$?" -eq 0 ]; then
+		ls -1 | while read f; do
+			if [ -d "$f" ]; then
+				gup --targets "$f" | grep -v 'gup/'
+			fi
+		done
+	fi
 }
 
 target="$(list | gsel-client)"

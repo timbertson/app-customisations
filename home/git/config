@@ -2,9 +2,11 @@
 	st = status
 	ci = commit
 	co = checkout
+	go = checkout
 	br = branch
 	sh = !git-sh
 	sub = submodule
+	mb = merge-base HEAD
 	ff = pull --ff-only
 	up = !git pull && git submodule sync && git submodule init && git submodule update && git sub
 	patch = format-patch --stdout
