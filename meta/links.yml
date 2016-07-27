@@ -35,7 +35,8 @@ meta:
        - osx_root
        - fish
        - nix
-    10574-tcuthbertson.local:
+    tcuthbertson-mac:
+      regex: ".*tcuthbertson.*\\.local"
       tags:
        - osx
        - fish
