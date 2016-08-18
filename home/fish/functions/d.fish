@@ -6,7 +6,7 @@ function d
 		set needs_build 0
 	end
 	set dest (cat ~/dev/.projects | gsel-client)
-	if test needs_build = 1
+	if test $needs_build = 1
 		gup -qu $MANIFEST &
 	end
 	if test $status -eq 0

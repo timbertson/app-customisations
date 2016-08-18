@@ -68,10 +68,10 @@ in
 	};
 
 	"indent-finder" = mkgit
-		# "https://github.com/ldx/vim-indentfinder"
-		"https://github.com/gfxmonk/indent-finder"
-		"4b92a176d2980c5fa4352232495eba416d777022"
-		"9f2be3c327d374809ac214af0b41779ead008f1c6643858d0cfecfb58470e5e9";
+		"https://github.com/ldx/vim-indentfinder"
+		# "https://github.com/gfxmonk/indent-finder"
+		"e787533ff1a0943a185ea8d59743f9dce03daddf"
+		"d693548b2523e3aa0bcf3f93c51d580e179f7383af5b33f22420f06692f74a0c";
 	
 	"gsel" = if gsel == null then null else mk { src = "${gsel}/share/vim"; };
 	# "gsel" = if builtins.pathExists "/home/tim/dev/ocaml/gsel/vim" then mk { src = /home/tim/dev/ocaml/gsel/vim; } else null;

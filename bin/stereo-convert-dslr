@@ -1,9 +1,5 @@
 #!/bin/sh
 set -xeu
-[ -d orig ]
-#ls -1 orig | piep 'path.join("orig", p) | \
-	#_=sh("stereoscoper","--swap","--slice", "-4", "--dest","cross-eyed",p) | \
-	#_=sh("stereoscoper","--slice", "4", "--dest","straight",p)'
-
-stereoscoper --slice=4 --swap --dest cross-eyed orig "$@"
-stereoscoper --slice=4        --dest straight orig "$@"
+orig="$1"
+shift 1
+stereo-convert "$orig" --slice=4 "$@"

@@ -203,7 +203,7 @@ def main():
 	mbdb = (load_db if existing else init_db)(mb_path)
 	version = irank.version()
 	mb.set_useragent("irank", version, "https://github.com/gfxmonk/python-irank")
-	mb.set_rate_limit()
+	mb.set_rate_limit(2)
 	try:
 		if not (existing and options.quick):
 			db = irank_db.load(app.db_path)

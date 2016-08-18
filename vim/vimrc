@@ -122,6 +122,7 @@ fun! Tabsize(sz)
 	let &l:softtabstop=a:sz
 endfun
 fun! GlobalTabsize(sz)
+	let g:indent_preferred_width=a:sz
 	let &shiftwidth=a:sz
 	let &tabstop=a:sz
 	let &softtabstop=a:sz
@@ -129,10 +130,11 @@ endfun
 command! -nargs=1 Tabsize call Tabsize(<args>)
 
 set noexpandtab
+let g:indent_preferred_expandtab=0
 call GlobalTabsize(2)
 " defaults for indent-finder when no other preference is clear from the file
-let g:indent_finder_default_style="tab"
-let g:indent_finder_default_width="2"
+" let g:indent_finder_default_style="tab"
+" let g:indent_finder_default_width="2"
 
 set cursorline
 
@@ -250,6 +252,13 @@ vmap <M-S-J> ]e`[V`]
 vmap <M-Up> [e`[V`]
 vmap <M-S-K> [e`[V`]
 
+" I have never wanted these, but I do them by accident plenty:
+" Stop looking up stuff with `man` by accident!
+nnoremap K <nop>
+vnoremap K <nop>
+" stop swapping case of stuff in visual mode - I meant undo
+vmap u <esc>u
+
 " use , for ;
 nnoremap , ;
 vnoremap , ;
@@ -364,9 +373,6 @@ nmap <C-a> ggVG
 " delete to the "black hole" buffer
 map <S-k> "_d
 
-" I have never wanted these, but I do them by accident plenty...
-nunmap K
-vmap u <esc>u
 
 " new tab with <leader>T
 nmap <leader>T :tabnew<cr>
