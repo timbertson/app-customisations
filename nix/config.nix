@@ -21,6 +21,7 @@
 		# so that https works as expected
 		# nix-prefetch-scripts = lib.overrideDerivation nix-prefetch-scripts (base: {
 		my-nix-prefetch-scripts = stdenv.mkDerivation {
+			priority=100;
 			name = "my-nix-prefetch-scripts";
 			buildInputs = with pkgs; [ makeWrapper ];
 			unpackPhase = "true";

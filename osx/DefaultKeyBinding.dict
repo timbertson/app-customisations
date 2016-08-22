@@ -22,9 +22,11 @@
 
 	/* Cmd+arrow */
 
+	/* (taken care of by karabiner)
 	"@\UF702"  = "moveWordBackward:";
 	"@$\UF702" = "moveWordBackwardAndModifySelection:";
 
 	"@\UF703"  = "moveWordForward:";
 	"@$\UF703" = "moveWordForwardAndModifySelection:";
+	*/
 }
