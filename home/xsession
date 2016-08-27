@@ -1,0 +1,8 @@
+#!/bin/bash
+set -eux
+wrapper="$(which my-gnome-wrapper 2>/dev/null)"
+if [ -n "$wrapper" ] ; then
+	exec "$wrapper" gnome-session
+else
+	exec gnome-session
+fi

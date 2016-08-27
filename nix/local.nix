@@ -25,10 +25,13 @@ let
 		'';
 
 		"my-gnome-shell" = wrapper ''${bash}
+			exec my-gnome-wrapper gnome-shell "$@"
+		'';
+
+		"my-gnome-wrapper" = wrapper ''${bash}
 			exec /usr/bin/env \
 				SHELLSHAPE_DEBUG=1 \
 				XDG_DATA_DIRS=${builtins.getEnv "HOME"}/.local/share:${builtins.getEnv "HOME"}/.local/nix/share:/usr/local/share/:/usr/share/ \
-				gnome-shell \
 				"$@";
 		'';
 	} else {});

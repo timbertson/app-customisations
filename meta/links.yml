@@ -173,9 +173,6 @@ meta:
 ~/.rainbow:
   path: ../home/rainbow
 
-~/.ipython/profile_default/ipython_config.py:
-  path: ../home/ipython_config.py
-
 ~/.gizmod:
   path: ../home/gizmod
   tags: linux
@@ -250,6 +247,10 @@ meta:
   - path: ../home/xmodmaprc-pc
     tags: pc xmodmap
 
+~/.xsession:
+  - path: ../home/xsession
+    tags: desktop
+
 ## apps:
 #~/.config/autostart/banshee.desktop:
 #  - path: /usr/share/applications/banshee.desktop
@@ -269,11 +270,6 @@ meta:
   path: ../nix/local/share/applications/desktop-session.desktop
   optional: true
   tags: desktop
-
-~/.local/share/applications/gnome-shell.desktop:
-  path: ../nix/local/share/applications/gnome-shell.desktop
-  optional: true
-  tags: desktop shellshape nix
 
 ~/.nixpkgs/config.nix:
   path: ../nix/config.nix
