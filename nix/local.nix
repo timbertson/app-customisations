@@ -42,7 +42,8 @@ let
 		fish
 		nodejs
 		direnv
-		silver-searcher
+		# silver-searcher
+		ripgrep
 		gup
 		passe-client
 		vim-watch

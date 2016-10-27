@@ -21,6 +21,6 @@ pkgs // rec {
 	eog-rate = tryImport "${home}/dev/python/eog-rate/nix/local.nix";
 	dumbattr = tryImport "${home}/dev/python/dumbattr/nix/local.nix";
 	trash = tryImport "${home}/dev/python/trash/default.nix";
-	passe-client = let builder = tryImport "${home}/dev/ocaml/passe/nix/local.nix"; in
+	passe-client = let builder = tryImport "${home}/dev/ocaml/passe-stable/nix/local.nix"; in
 		if builder == null then null else builder { target="client"; };
 }

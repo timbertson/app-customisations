@@ -11,8 +11,8 @@ let
 in
 {
 	"ack.vim" = mkurl
-		"https://github.com/mileszs/ack.vim/archive/1.0.8.tar.gz"
-		"0xxxnipbh9xqn4bbviy1z932na64bscdx2sswpndf5dqwp67s8ch";
+		"https://github.com/mileszs/ack.vim/archive/1.0.9.tar.gz"
+		"1arcann0jkdr5z1393n2i379w0m5k4znz8ky08l69201xmggb2jr";
 
 	"vim-nix" = mkgit
 		"https://github.com/spwhitt/vim-nix"

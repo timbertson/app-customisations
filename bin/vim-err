@@ -7,13 +7,18 @@ import os, sys, subprocess, re
 from optparse import OptionParser
 
 def DEBUG(*a): pass
-if os.environ.get('VIM_ERR_DEBUG','0') == '1':
+def enable_debug(*a):
+	global DEBUG
 	def DEBUG(*a):
 		print('[vim-err]', *a, file=sys.stderr)
 	DEBUG("debug mode enabled...")
 
+if os.environ.get('VIM_ERR_DEBUG','0') == '1':
+	enable_debug()
+
 p = OptionParser("Usage: %prog [OPTIONS] BUILD_COMMAND ...")
 p.add_option('-r', '--remote')
+p.add_option('-v', '--verbose', action='store_true')
 p.add_option('-p', '--prompt', action='store_true')
 p.add_option('-s', '--source', dest='sources', action='append', default=[os.getcwd()], help='add source root')
 p.add_option('--replace', action='append', default=[], help='add (literal) path replacement, e.g. /app=.')
@@ -21,6 +26,8 @@ p.add_option('--filter', action='append', default=[], help='only match files inc
 p.add_option('-c', '--context',type='int')
 p.disable_interspersed_args()
 opts, args = p.parse_args()
+if opts.verbose:
+	enable_debug()
 
 ansi_escape = re.compile(r'\x1b[^m]*m')
 # TODO: add more formats
