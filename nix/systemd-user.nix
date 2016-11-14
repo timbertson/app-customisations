@@ -12,6 +12,7 @@ let
 		"${home}"
 		"${home}/dev/app-customisations"
 		"${home}/dev/app-customisations/nix/local"
+		"${home}/dev/app-customisations/zi"
 	];
 in
 {

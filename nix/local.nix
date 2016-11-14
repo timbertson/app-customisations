@@ -44,6 +44,7 @@ let
 		direnv
 		# silver-searcher
 		ripgrep
+		music-import
 		gup
 		passe-client
 		vim-watch
