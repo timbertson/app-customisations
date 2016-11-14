@@ -24,12 +24,58 @@ if exists("$PATHOGEN_ROOT")
 	call pathogen#runtime_append_all_bundles()
 endif
 
+if !has('nvim')
+	set autoindent                 " Indent at the same level of the previous line
+	set autoread                   " Automatically read a file changed outside of vim
+	set backspace=indent,eol,start " Backspace for dummies
+	set complete-=i                " Exclude files completion
+	set display=lastline           " Show as much as possible of the last line
+	set encoding=utf-8             " Set default encoding
+	set history=10000              " Maximum history record
+	set hlsearch                   " Highlight search terms
+	set incsearch                  " Find as you type search
+	set laststatus=2               " Always show status line
+	set mouse=a                    " Automatically enable mouse usage
+	set smarttab                   " Smart tab
+	set ttyfast                    " Faster redrawing
+	set viminfo+=!                 " Viminfo include !
+	set wildmenu                   " Show list instead of just completing
+	set ttymouse=xterm2
+endif
+
+set noexpandtab
+let g:indent_preferred_expandtab=0
+" defaults for indent-finder when no other preference is clear from the file
+" let g:indent_finder_default_style="tab"
+" let g:indent_finder_default_width="2"
+
+set cursorline
+" Ruby scrolls horribly slow with cursorline
+autocmd FileType ruby setlocal norelativenumber nocursorline
+
+set ignorecase
+set smartcase
+set scrolloff=3
+set sidescrolloff=5
+set wildmode=longest,list
+set cinkeys-=#
+" allow status-bar windows (0-height)
+set wmh=0
+
 " reload filetype detection
 filetype off
 filetype plugin indent on
 
 syntax on
 syntax sync minlines=200 " don't lose track of syntax highlighting when in large syntax blocks
+
+"highlight any spaces that are followed by a tab (the horror!)
+" and any _single_ space that comes after ^\t+ (this is usually accedental)
+" and also trailing spaces
+autocmd ColorScheme * highlight ExtraWhitespace ctermfg=red guifg=red term=undercurl cterm=undercurl gui=undercurl
+au InsertEnter * match
+au InsertLeave * match ExtraWhitespace /\S\zs\s\+$\|\t\zs \ze[^ #*]/
+
 set number
 let g:solarized_contrast="normal"
 let g:solarized_italic=0
@@ -53,21 +99,19 @@ else
 	endif
 end
 
-set encoding=utf-8
 set textwidth=0
 set copyindent
+set preserveindent
 " insert a tab at the start of the line, without messing up existing (mixed) indents
 nmap <leader><tab> m'0i<tab><esc>`'l
 set noswapfile
 set nobackup
 set nojoinspaces " just one space after a period (when joining)
 " set nofoldenable " I can never remember how to use folding
-set autoread " reload file whenever it changes on disk
 set autowrite " save file when navigating away from it or using :make (but not on quits, etc)
 set wrapmargin=0
 set nowrap
 set formatoptions=crqln
-set backspace=indent,eol,start
 set guitablabel=%N\ %t\ %m%r
 set guioptions-=T "remove toolbar
 set guioptions-=m "remove menu bar
@@ -82,11 +126,11 @@ let g:rust_recommended_style=0 " quit it with your expandtab business
 let g:multi_cursor_exit_from_insert_mode=0
 
 set pastetoggle=<F2>
-set sessionoptions="curdir,folds,localoptions,tabpages,winsize"
-autocmd SessionLoadPost * tab ball
-set sessionoptions=blank,buffers,curdir,folds,resize,tabpages,winsize
-command! -narg=0 SSession :mksession! .vimsession
-command! -narg=0 LSession :source .vimsession
+" set sessionoptions="curdir,folds,localoptions,tabpages,winsize"
+" autocmd SessionLoadPost * tab ball
+" set sessionoptions=blank,buffers,curdir,folds,resize,tabpages,winsize
+" command! -narg=0 SSession :mksession! .vimsession
+" command! -narg=0 LSession :source .vimsession
 
 fun! FnEmailMode()
 	setlocal spell mousemodel=popup
@@ -108,11 +152,6 @@ fun! NoWrap()
 endfun
 command! NoWrap call NoWrap()
 
-" default to email mode when we were spawned by the edit server
-if $FROM_EDIT_SERVER == 'true'
-	call FnEmailMode()
-end
-
 command! Emailmode call FnEmailMode()
 
 command! -nargs=0 Spaces set et noet< | retab
@@ -128,30 +167,7 @@ fun! GlobalTabsize(sz)
 	let &softtabstop=a:sz
 endfun
 command! -nargs=1 Tabsize call Tabsize(<args>)
-
-set noexpandtab
-let g:indent_preferred_expandtab=0
 call GlobalTabsize(2)
-" defaults for indent-finder when no other preference is clear from the file
-" let g:indent_finder_default_style="tab"
-" let g:indent_finder_default_width="2"
-
-set cursorline
-
-" Ruby scrolls horribly slow with cursorline
-autocmd FileType ruby setlocal norelativenumber nocursorline
-
-set ignorecase
-set smartcase
-set incsearch
-set scrolloff=3
-set sidescrolloff=5
-set wildmode=longest,list
-set autoindent
-set cinkeys-=#
-set mouse=a
-" allow status-bar windows (0-height)
-set wmh=0
 
 " statusbar config:
 set statusline=%< " truncation point
@@ -171,43 +187,24 @@ set statusline+=%{&ff} "file format
 set statusline+=• " separator
 set statusline+=%{strlen(&fenc)?&fenc:'none'} "file encoding
 set statusline+=\  "end with a space
-set laststatus=2 " always show the status bar
 
 " set iskeyword-=_ \" allow underscore to delimit words"
 
 
 set tags+=.tags
 let g:autotagTagsFile=".tags"
-let g:EasyMotion_leader_key = '<Leader>m'
-let g:EasyMotion_mapping_f = '<leader>f'
-let g:EasyMotion_mapping_F = '<leader>F'
-let g:EasyMotion_mapping_w = '<leader>w'
-let g:EasyMotion_mapping_W = '<leader>W'
-let g:EasyMotion_mapping_j = '<leader>j'
-let g:EasyMotion_mapping_k = '<leader>k'
-omap <silent> i_ <Plug>CamelCaseMotion_iw
-xmap <silent> i_ <Plug>CamelCaseMotion_iw
-omap <silent> i- <Plug>CamelCaseMotion_iw
-xmap <silent> i- <Plug>CamelCaseMotion_iw
-map <silent> _ <Plug>CamelCaseMotion_w
-map <silent> <a--> <Plug>CamelCaseMotion_b
 
 " (do it poorly in the terminal, because sometimes utf8 is broken)
 fun! Lame_tabs()
-	autocmd BufNewFile,BufRead * set list listchars=tab:>\ 
-	set list listchars=tab:>\ 
+	autocmd BufNewFile,BufRead * set list listchars=tab:>\ "(eol)
+	set list listchars=tab:>\ "(eol)
 endfun
 command! LameTabs call Lame_tabs()
 
 " draw tabs
-autocmd BufNewFile,BufRead * set list listchars=tab:▸\ 
-set list listchars=tab:▸\ 
+autocmd BufNewFile,BufRead * set list listchars=tab:▸\ "(eol)
+set list listchars=tab:▸\ "(eol)
 
-"highlight any spaces that are followed by a tab (the horror!)
-" and any _single_ space that comes after ^\t+ (this is usually accedental)
-" and also trailing spaces
-autocmd BufNewFile,BufRead * match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ *]\)\|\([^ \t]\zs\s\+$\)/
-                             match Error /\(  \+\t\@=\)\|\(^\(\t\+\)\zs \ze[^ *]\)\|\([^ \t]\zs\s\+$\)/
 
 command! -narg=0 NixSyntax call vim_addon_nix#CheckSyntax()
 
@@ -429,8 +426,8 @@ nmap <leader>e :NERDTreeToggle<cr>
 nmap <leader>E :NERDTreeFind<cr>
 
 " find usages
-nmap <a-F7> :Ack -wQ <c-r><c-w><cr>
-vmap <M-F7> y:Ack -wQ "<C-R>""<cr>
+nmap <a-F7> :Ack -wF <c-r><c-w><cr>
+vmap <M-F7> y:Ack -wF "<C-R>""<cr>
 
 " refresh / redraw
 nmap <F5> :syntax sync fromstart<cr>:redraw!<cr>
@@ -474,14 +471,6 @@ command! -narg=0 ClearMarkers :sign unplace *
 " pyflakes shouldn't use quickfix; I use that for other stuff!
 let g:pyflakes_use_quickfix = 0
 
-" 0install tools helpers
-command! -narg=0 Zeroreadme !cd %:p:h && 0readme %:t
-command! -narg=0 Zerocopy !cd %:p:h && gnome-terminal -x /bin/bash -c "echo %:p; mkzero-gfxmonk -c %:t; bash"
-command! -narg=0 Zerosign !cd %:p:h && gnome-terminal -x `which 0publish` --xmlsign %:p
-command! Version !version
-
-command! -narg=1 Boom put =system(\"boom echo <args>\")
-
 if has("win32unix")
 	" make `gf` work on windows paths
 	set isfname+=:
@@ -504,10 +493,8 @@ silent! call gsel#NO_SUCH_FUNCTION()
 if exists("*gsel#DefaultMappings")
 	let g:gsel_file_list_command = "bash -c 'if git rev-parse --show-toplevel >/dev/null 2>&1; then git ls-files .; else find . -type f; fi'"
 
-	" ust a little bit roundabout... Assume if we have a systemd-user feed, we're
-	" actually running the gsel server
-	" XXX can we `test -f the existence of an abstract unix socket?
-	if filereadable($HOME."/.config/zeroinstall-plugin-manager/http\%3A\%2F\%2Fgfxmonk.net\%2Fdist\%2F0install\%2Fsystemd-user.xml/uri-list")
+	let units = systemlist("systemctl --user list-units gsel-server.socket --no-pager --no-legend")
+	if len(units) > 0
 		let g:gsel_command = "gsel-client"
 	endif
 	call gsel#DefaultMappings()
