@@ -25,6 +25,7 @@ let
 				{
 					names = [
 						"ack.vim"
+						"ctrlp"
 						"fish-syntax"
 						"fugitive"
 						"indent-finder"
@@ -45,7 +46,7 @@ let
 						"vim-watch"
 					]
 					++ (if knownPlugins.gsel == null then [] else ["gsel"])
-					++ (if stdenv.isDarwin then ["ctrlp"] else ["command-t"])
+					++ (if stdenv.isDarwin then [] else ["command-t"])
 					;
 				}
 				# full documentation at

@@ -123,7 +123,7 @@ set diffopt+=vertical
 set wildignore+=*.swp,*.bak,*.pyc,*.class,*.cache
 let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/tmp/*,**/_build*/**,**/0inst/**,**/*.0compile/**"
 let g:ctrlp_custom_ignore = {
-	\ 'dir': 'node_modules,tmp,_build,0inst,*.0compile',
+	\ 'dir': 'node_modules,tmp,log,_build,0inst,*.0compile',
 	\ }
 let g:rust_recommended_style=0 " quit it with your expandtab business
 let g:multi_cursor_exit_from_insert_mode=0
@@ -404,6 +404,7 @@ nmap <leader>p V{jo}ko
 let g:ctrlp_map=''
 let g:ctrlp_working_path_mode=2 " current directory
 "let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --cached --other'] " include untracked files
+let g:ctrlp_user_command = 'rg --files %s'
 let g:ctrlp_by_filename = 1
 let g:ctrlp_switch_buffer = 2
 
