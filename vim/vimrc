@@ -32,7 +32,6 @@ if !has('nvim')
 	set display=lastline           " Show as much as possible of the last line
 	set encoding=utf-8             " Set default encoding
 	set history=10000              " Maximum history record
-	set hlsearch                   " Highlight search terms
 	set incsearch                  " Find as you type search
 	set laststatus=2               " Always show status line
 	set mouse=a                    " Automatically enable mouse usage
@@ -43,6 +42,7 @@ if !has('nvim')
 	set ttymouse=xterm2
 endif
 
+set nohlsearch                   " Highlight search terms
 set noexpandtab
 let g:indent_preferred_expandtab=0
 " defaults for indent-finder when no other preference is clear from the file
@@ -345,10 +345,15 @@ vnoremap <C-k> <C-y>
 vnoremap <C-j> <C-e>
 
 " I want { and } to match whitespace-only lines, rather than just empty ones
-" TODO: need to omit these from the search history
-noremap { :silent ?^\s*$<cr>:silent nohl<cr>
-noremap } :silent /^\s*$<cr>:silent nohl<cr>
-nnoremap <leader><esc> :nohl<cr>
+function! Silentjump(pattern)
+	let l:prev=@/
+	exec (a:pattern)
+	let @/=l:prev
+endfun
+
+noremap { :silent call Silentjump("?^\\s*$")<cr>
+noremap } :silent call Silentjump("/^\\s*$")<cr>
+nnoremap <leader><esc> :set hlsearch!<cr>
 
 vnoremap { ?^\s*$<cr>
 vnoremap } /^\s*$<cr>
