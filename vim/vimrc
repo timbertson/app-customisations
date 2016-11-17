@@ -115,6 +115,9 @@ set formatoptions=crqln
 set guitablabel=%N\ %t\ %m%r
 set guioptions-=T "remove toolbar
 set guioptions-=m "remove menu bar
+set splitright
+set splitbelow
+set showcmd
 set diffopt+=vertical
 " set shiftround " round to multiples of shiftwidth for > and <
 set wildignore+=*.swp,*.bak,*.pyc,*.class,*.cache
@@ -345,6 +348,7 @@ vnoremap <C-j> <C-e>
 " TODO: need to omit these from the search history
 noremap { :silent ?^\s*$<cr>:silent nohl<cr>
 noremap } :silent /^\s*$<cr>:silent nohl<cr>
+nnoremap <leader><esc> :nohl<cr>
 
 vnoremap { ?^\s*$<cr>
 vnoremap } /^\s*$<cr>

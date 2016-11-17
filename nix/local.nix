@@ -49,6 +49,7 @@ let
 		passe-client
 		vim-watch
 		vim
+		vim.vimrc
 		pythonPackages.ipython
 	] ++ (if isLinux then [
 		#tilda

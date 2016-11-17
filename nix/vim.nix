@@ -8,9 +8,8 @@ let
 		then vimUtils.makeCustomizable macvim
 		else pkgs.vim_configurable;
 	knownPlugins = vimPlugins // (pkgs.callPackage ./vim-plugins.nix pluginArgs);
-	vim = vim_configurable.customize {
-		name = "vim"; # actual binary name
-		vimrcConfig.customRC = ''
+	vimrcConfig = {
+		customRC = ''
 			set nocompatible
 			let g:vim_addon_manager.addon_completion_lhs=""
 			if !empty(glob("~/.vimrc"))
@@ -19,21 +18,19 @@ let
 				source ${../vim/vimrc}
 			endif
 		'';
-		vimrcConfig.vam = {
+		vam = {
 			inherit knownPlugins;
 			pluginDictionaries = [
 				# load always
 				{
 					names = [
 						"ack.vim"
-						"ctrlp"
-						"command-t"
 						"fish-syntax"
 						"fugitive"
 						"indent-finder"
 						"ir-black"
 						"misc"
-						"multiple-cursors"
+						# "multiple-cursors"
 						"repeat"
 						"Solarized"
 						"surround"
@@ -47,18 +44,31 @@ let
 						"vim-visual-star-search"
 						"vim-watch"
 					]
-					++ (if knownPlugins.gsel == null then [] else ["gsel"]);
+					++ (if knownPlugins.gsel == null then [] else ["gsel"])
+					++ (if stdenv.isDarwin then ["ctrlp"] else ["command-t"])
+					;
 				}
 				# full documentation at
 				# github.com/MarcWeber/vim-addon-manager
 			];
 		};
 	};
+	vim = vim_configurable.customize {
+		name = "vim"; # actual binary name
+		inherit vimrcConfig;
+	};
+	vimrc = vimUtils.vimrcFile vimrcConfig;
 in
 stdenv.mkDerivation {
 	name = "vim-custom";
 	buildInputs = [ makeWrapper ];
 	unpackPhase = "true";
+	passthru = {
+		vimrc = runCommand "vimrc" {} ''
+			mkdir -p $out/share/vim/
+			ln -s ${vimrc} $out/share/vim/vimrc
+		'';
+	};
 	installPhase = ''
 		mkdir -p $out/bin
 		makeWrapper ${vim}/bin/vim $out/bin/vim \

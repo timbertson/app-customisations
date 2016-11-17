@@ -1,5 +1,4 @@
-{pkgs, gsel ? null, vim-watch
-}:
+{pkgs, gsel ? null, vim-watch }:
 with pkgs;
 let
 	url = url: sha: fetchurl { url = url; sha256 = sha; };
