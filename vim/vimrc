@@ -353,7 +353,7 @@ endfun
 
 noremap { :silent call Silentjump("?^\\s*$")<cr>
 noremap } :silent call Silentjump("/^\\s*$")<cr>
-nnoremap <leader><esc> :set hlsearch!<cr>
+nnoremap <leader>h :set hlsearch!<cr>
 
 vnoremap { ?^\s*$<cr>
 vnoremap } /^\s*$<cr>
@@ -410,7 +410,6 @@ let g:ctrlp_map=''
 let g:ctrlp_working_path_mode=2 " current directory
 "let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --cached --other'] " include untracked files
 let g:ctrlp_user_command = 'rg --files %s'
-let g:ctrlp_by_filename = 1
 let g:ctrlp_switch_buffer = 2
 
 " CommandT requires compilation, so we use CtrlP as a more portable fallback

@@ -18,6 +18,7 @@
 	changes = !git show-branch HEAD origin/"$(git name-rev HEAD | awk '{print $2}')"
 	l = log --color --graph --pretty=format:'%C(yellow)%h%Creset -%C(bold blue)%d%Creset %s %Cgreen(%cr) %C(bold)<%an>%Creset' --abbrev-commit --date=relative --date-order
 	lb = log --color --graph --pretty=format:'%C(yellow)%h%Creset -%C(bold blue)%d%Creset %s %Cgreen(%cr) %C(bold)<%an>%Creset' --abbrev-commit --date=relative --date-order --branches
+	lm = log --color --graph --pretty=format:'%C(yellow)%h%Creset -%C(bold blue)%d%Creset %s %Cgreen(%cr) %C(bold)<%an>%Creset' --abbrev-commit --date=relative --topo-order --merges
 	pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 }; f"
 [color]
 	branch = auto

@@ -1,5 +1,6 @@
 {
 	allowUnfree = true;
+	allowBroken = true; # e.g. pathpy
 	packageOverrides = pkgs: with pkgs; let
 		linux_cacert = "/etc/pki/tls/cacerts/ca-bundle.crt";
 		nixpkgs_cacert = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
