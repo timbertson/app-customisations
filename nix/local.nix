@@ -50,7 +50,7 @@ let
 		vim-watch
 		vim
 		vim.vimrc
-		pythonPackages.ipython
+		python3Packages.ipython
 	] ++ (if isLinux then [
 		#tilda
 		spotify

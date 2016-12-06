@@ -54,6 +54,12 @@ in
 		"https://github.com/tomtom/tcomment_vim/archive/3.07.tar.gz"
 		"04dplapgh8z90174pxr6iacwizlblizgn8158w07cdg7xds3gww5";
 
+	"vala.vim" = mkgit
+		"https://github.com/arrufat/vala.vim.git"
+		"d987cdb93daae420b69c3b1d803a85d6e1d10494"
+		"15g221ivyg1dzr4ddvx9cdz0lshg7kzfyn8mnrcskq1h7aqsrsqz"
+		;
+
 	"vim-visual-star-search" = mkurl
 		"https://github.com/bronson/vim-visual-star-search/archive/0.2.tar.gz"
 		"1xxdy8m0dcmwvxalypwmjkd5737ma8mj2zhi7lsccfspyf8b7gzk";

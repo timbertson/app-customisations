@@ -101,7 +101,6 @@ end
 
 set textwidth=0
 set copyindent
-set preserveindent
 " insert a tab at the start of the line, without messing up existing (mixed) indents
 nmap <leader><tab> m'0i<tab><esc>`'l
 set noswapfile
@@ -219,6 +218,12 @@ let g:syntastic_mode_map = {
         \ "passive_filetypes": [] }
 let g:syntastic_python_checkers = [ "python" ] " shut up, pylint
 let g:syntastic_ocaml_checkers = [] " can't get lwt support working...
+
+" neomake
+let g:neomake_gup_maker = { 'exe': 'gup', 'args': ['compile'] }
+let g:neomake_enabled_makers = ["gup"]
+nnoremap <leader>g :Neomake<cr>
+nnoremap <leader>G :Neomake!<cr>
 
 fun! Save_if_possible()
 	if len(expand("%")) > 0 && &buftype == ""
@@ -353,7 +358,7 @@ endfun
 
 noremap { :silent call Silentjump("?^\\s*$")<cr>
 noremap } :silent call Silentjump("/^\\s*$")<cr>
-nnoremap <leader>h :set hlsearch!<cr>
+nnoremap <leader>S :set hlsearch!<cr>
 
 vnoremap { ?^\s*$<cr>
 vnoremap } /^\s*$<cr>
@@ -391,6 +396,8 @@ map <A-/> :TComment<cr>
 
 " add Tcomment overrides
 autocmd FileType nix set commentstring=#\ %s
+autocmd FileType vala set commentstring=//\ %s
+autocmd FileType help set nolist
 
 " option (or alt) + r to redo the previous task
 nmap <a-r> :<up><cr>
