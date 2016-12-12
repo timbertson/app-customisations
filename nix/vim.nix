@@ -38,6 +38,7 @@ let
 						"Solarized"
 						"surround"
 						"Tagbar"
+						"targets"
 						"tcomment"
 						"The_NERD_tree"
 						"vala.vim"

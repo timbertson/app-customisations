@@ -50,6 +50,11 @@ in
 		preBuild = "cd vim/stratifiedjs";
 	});
 
+	"targets" = mkgit
+		"https://github.com/wellle/targets.vim"
+		"c12d4ea9e5032c9e5b88e2115a80b8772d15d0df"
+		"11n95r6ahq8y41qmvcadrr1smmd13iffiny0sx336k747m9mvwfq";
+
 	"tcomment" = mkurl
 		"https://github.com/tomtom/tcomment_vim/archive/3.07.tar.gz"
 		"04dplapgh8z90174pxr6iacwizlblizgn8158w07cdg7xds3gww5";
@@ -73,10 +78,9 @@ in
 	};
 
 	"indent-finder" = mkgit
-		"https://github.com/ldx/vim-indentfinder"
-		# "https://github.com/gfxmonk/indent-finder"
-		"e787533ff1a0943a185ea8d59743f9dce03daddf"
-		"d693548b2523e3aa0bcf3f93c51d580e179f7383af5b33f22420f06692f74a0c";
+		"https://github.com/gfxmonk/indent-finder"
+		"4b92a176d2980c5fa4352232495eba416d777022"
+		"05xx8nz64v24chdb84jv17b33j7aaz0bc7mrj9gxinzbzj4bin22";
 	
 	"gsel" = if gsel == null then null else mk { src = "${gsel}/share/vim"; };
 	# "gsel" = if builtins.pathExists "/home/tim/dev/ocaml/gsel/vim" then mk { src = /home/tim/dev/ocaml/gsel/vim; } else null;
