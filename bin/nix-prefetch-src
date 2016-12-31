@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+from __future__ import print_function
+
+import os, sys
+import json, subprocess
+
+args = sys.argv[1:]
+if args:
+  input_path, output_path = args
+if not args:
+  input_path = 'src.in.json'
+  output_path = 'src.json'
+
+print("loading %s" % input_path)
+# with open(input_path) as input_file:
+with open(input_path) as f:
+	input_json = json.load(f)
+
+# interpret {placeholders} (note: not recursive or even ordered)
+for k, v in input_json.items():
+  if '{' in v:
+    input_json[k] = v.format(**input_json)
+
+print(' -> ' + repr(input_json))
+
+alg = 'sha256'
+hash = subprocess.check_output([
+  'nix-prefetch-zip',
+  '--hash-type', alg,
+  'https://github.com/{owner}/{repo}/archive/{rev}.tar.gz'.format(**input_json),
+]).decode('ascii').strip()
+
+output_keys = ['rev', 'owner', 'repo']
+output_json = dict(filter(lambda k: k[0] in output_keys, input_json.items()))
+output_json[alg] = hash
+
+print(' -> ' + repr(output_json))
+
+with open(output_path, 'w') as dest:
+	json.dump(output_json, dest, sort_keys=True, indent=2, separators=(',', ': '))
