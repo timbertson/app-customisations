@@ -17,6 +17,11 @@ if stridx(&shell, "fish") != -1
 	set shell=sh
 endif
 
+" defaults for indent-finder when no other preference is clear from the file
+let g:indent_preferred_expandtab=0
+let g:indent_finder_default_style="tab"
+let g:indent_finder_default_width="2"
+
 " pathogen bootstrap, then use it to make $VIMPATH useful
 if exists("$PATHOGEN_ROOT")
 	let &runtimepath = $PATHOGEN_ROOT . "," . &runtimepath
@@ -44,11 +49,6 @@ endif
 
 set nohlsearch                   " Highlight search terms
 set noexpandtab
-let g:indent_preferred_expandtab=0
-" defaults for indent-finder when no other preference is clear from the file
-" let g:indent_finder_default_style="tab"
-" let g:indent_finder_default_width="2"
-
 set cursorline
 " Ruby scrolls horribly slow with cursorline
 autocmd FileType ruby setlocal norelativenumber nocursorline
@@ -220,10 +220,10 @@ let g:syntastic_python_checkers = [ "python" ] " shut up, pylint
 let g:syntastic_ocaml_checkers = [] " can't get lwt support working...
 
 " neomake
-let g:neomake_gup_maker = { 'exe': 'gup', 'args': ['compile'] }
-let g:neomake_enabled_makers = ["gup"]
-nnoremap <leader>g :Neomake<cr>
-nnoremap <leader>G :Neomake!<cr>
+" let g:neomake_gup_maker = { 'exe': 'gup', 'args': ['compile'] }
+" let g:neomake_enabled_makers = ["gup"]
+" nnoremap <leader>g :Neomake<cr>
+" nnoremap <leader>G :Neomake!<cr>
 
 fun! Save_if_possible()
 	if len(expand("%")) > 0 && &buftype == ""
@@ -426,6 +426,15 @@ nmap <C-f> :FindMeSomeFiles<cr>
 " use rg/ag if available
 if executable("rg")
 	let g:ackprg = 'rg --vimgrep --no-heading'
+
+	" vim-grepper
+	if !exists("g:grepper")
+		let g:grepper = {}
+	endif
+	let g:grepper.tools = ['rg', 'git']
+	command! -nargs=+ Rg Grepper -tool rg -noprompt -query <args>
+	command! -nargs=+ RgBuf Grepper -tool rg -buffers -noprompt -query <args>
+
 elseif executable("ag")
 	let g:ackprg = 'ag --nogroup --nocolor --column'
 endif
@@ -442,8 +451,7 @@ nmap <leader>e :NERDTreeToggle<cr>
 nmap <leader>E :NERDTreeFind<cr>
 
 " find usages
-nmap <a-F7> :Ack -wF <c-r><c-w><cr>
-vmap <M-F7> y:Ack -wF "<C-R>""<cr>
+nmap <a-F7> :Grepper -cword -noprompt<cr>
 
 " refresh / redraw
 nmap <F5> :syntax sync fromstart<cr>:redraw!<cr>

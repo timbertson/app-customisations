@@ -13,6 +13,11 @@ in
 		"https://github.com/mileszs/ack.vim/archive/1.0.9.tar.gz"
 		"1arcann0jkdr5z1393n2i379w0m5k4znz8ky08l69201xmggb2jr";
 
+	"asyncrun" = mkgit
+		"https://github.com/skywind3000/asyncrun.vim"
+		"8f419d9be2377d33bb3f6848b1bf2e2b3be9fd07"
+		"0daxd33sw3rf3q5jlg6a7d14qfdfygyr4ndi7mvxyavjx2i5mgb7";
+
 	"vim-nix" = mkgit
 		"https://github.com/spwhitt/vim-nix"
 		"636b8bc437bd0a24a4202a7d906b2b40eac219fa"
@@ -32,6 +37,11 @@ in
 		"7a6675f092842c8f81e71d5345bd7cdbf3759415"
 		"87e69508784baa66d13478c7a75672c5106a00bb12e52069312750bf872f0f5d";
 
+	"vim-grepper" = mkgit
+		"https://github.com/mhinz/vim-grepper"
+		"aba22535b1ab4011dbb7e627a4294530d1f29a04"
+		"09r7lsazskb1yy63inhbjgh456idcay6175m0b5izadzq9nr58rc";
+	
 	"vim-indent-object" = mkgit
 		"https://github.com/michaeljsmith/vim-indent-object"
 		"1d3e4aac0117d57c3e1aaaa7e5a99f1d7553e01b"

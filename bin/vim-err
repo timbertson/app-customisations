@@ -74,8 +74,15 @@ DELAYED_ACTION = None
 
 def open_remotely(opts, path, lineno, col):
 	cmd = [ 'vim' ]
-	if opts.remote is not None:
-		cmd.extend(['--servername', opts.remote])
+	remote_name = opts.remote
+	if remote_name is None:
+		try:
+			remote_name = os.environ['VIM_SVRNAME']
+		except KeyError:
+			pass
+	
+	if remote_name is not None:
+		cmd.extend(['--servername', remote_name])
 
 	if col is None: col = 1
 	coords = 'call cursor(%s,%s)' % (lineno, col)

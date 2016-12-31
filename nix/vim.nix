@@ -24,7 +24,8 @@ let
 				# load always
 				{
 					names = [
-						"ack.vim"
+						"asyncrun"
+						# "ack.vim"
 						"ctrlp"
 						"fish-syntax"
 						"fugitive"
@@ -32,7 +33,7 @@ let
 						"ir-black"
 						"misc"
 						# "multiple-cursors"
-						"neomake"
+						# "neomake"
 						"repeat"
 						"sensible"
 						"Solarized"
@@ -43,6 +44,7 @@ let
 						"The_NERD_tree"
 						"vala.vim"
 						"vim-indent-object"
+						"vim-grepper"
 						"vim-nix"
 						"vim-rust"
 						"vim-stratifiedjs"
