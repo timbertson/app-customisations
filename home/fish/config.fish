@@ -13,8 +13,6 @@ set additional_paths \
 	/sbin \
 	~/.bin \
 	~/bin \
-	~/.gem/ruby/2.0.0/bin \
-	~/.bin/zi \
 	;
 
 set -x NIX_BUILD_SHELL /bin/bash

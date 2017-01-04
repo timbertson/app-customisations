@@ -1,8 +1,7 @@
 /* Allow admins to assume `sandbox` without password */
 polkit.addRule(function(action, subject) {
-
-    // polkit.log('Got user "' + action.lookup('user') + '", wheel ? ' + subject.isInGroup("wheel"));
-    if (action.lookup('user') == "sandbox" && subject.isInGroup("wheel")) {
-        return polkit.Result.YES;
-    }
+  // polkit.log('Got user "' + action.lookup('user') + '", wheel ? ' + subject.isInGroup("wheel"));
+  if (action.lookup('user') == "sandbox" && subject.isInGroup("wheel")) {
+    return polkit.Result.YES;
+  }
 });

@@ -1,4 +1,7 @@
 #!bash -eu
-src="90-sandbox-any.rules"
+src="90-sandbox-any.rules 90-allow-systemd-user-units.rules"
 gup -u $src
 sudo cp $src /etc/polkit-1/rules.d/
+
+# since this is tied to the systemd-user-units, might as well...
+sudo loginctl enable-linger sandbox

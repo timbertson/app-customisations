@@ -1,13 +1,6 @@
 # vim: set et:
 
 meta:
-  zeroinstall_aliases:
-    # NOTE: this column intentionally left blank (to prevent modeline confusion)
-    #           |
-    #  /--------/
-    #  |
-    #  V
-    vim : http://gfxmonk.net/dist/0install/vim-custom.xml
   basedir: ~/dev/app-customisations/meta
   hosts:
     meep:
@@ -47,10 +40,10 @@ meta:
 ~/.config/daglink/links.yml:
   path: links.yml
 
-~/.config/autostart/daglink-update.desktop:
-  uri: http://gfxmonk.net/dist/0install/daglink.xml
-  extract: daglink-update.desktop
-  tags: linux
+  #~/.config/autostart/daglink-update.desktop:
+  #  uri: http://gfxmonk.net/dist/0install/daglink.xml
+  #  extract: daglink-update.desktop
+  #  tags: linux
 
 ~/.config/autostart/tilda.desktop:
   path: ../nix/local/share/applications/tilda.desktop
@@ -59,21 +52,13 @@ meta:
 
 ## BASE:
 
-/etc/X11/sessions:
-  path: ../root/sessions
-  tags: root linux
+/etc/security/pam.env.conf:
+  path: ../root/pam/environment.conf
+  tags: linux root
 
-/etc/udev/rules.d/input.rules:
-  path: ../root/udev-rules.d/input.rules
-  tags: root linux
-
-/etc/udev/rules.d/99-nexus4-adb.rules:
-  path: ../root/udev-rules.d/99-nexus4-adb.rules
-  tags: root linux
-
-/etc/udev/rules.d/99-nexus4-mtp.rules:
-  path: ../root/udev-rules.d/99-nexus4-mtp.rules
-  tags: root linux
+/etc/gdm/env.d/nix-xdg.env:
+  path: ../root/gdm/env.d/xdg-nix.env
+  tags: linux root nix
 
 /etc/NetworkManager/NetworkManager.conf:
   path: ../root/NetworkManager/NetworkManager.conf
@@ -91,9 +76,6 @@ meta:
 
 ~/.bin:
   path: ../bin
-
-~/.config/0install.net/apps:
-  path: ../home/zeroinstall_apps
 
 ~/.config/direnv-std:
   path: ../home/direnv-std
@@ -318,14 +300,6 @@ meta:
   path: ../root/modules-load.d/ecryptfs.conf
   tags: fedora root
 
-/etc/yum.repos.d/fedora.repo:
-  path: ../root/yum.repos.d/fedora.repo
-  tags: fedora root
-
-/etc/yum.repos.d/fedora-updates.repo:
-  path: ../root/yum.repos.d/fedora-updates.repo
-  tags: fedora root
-
 /etc/yum.repos.d/google-chrome.repo:
   path: ../root/yum.repos.d/google-chrome.repo
   tags: fedora root
@@ -335,12 +309,6 @@ meta:
   tags: fedora root xkb
 
 ## OSX
-
-/usr/share/0install.net/native_feeds:
-  - path: ../zi-feeds/osx
-    tags: osx_root
-  - path: ../zi-feeds/linux
-    tags: linux root
 
 ~/Library/KeyBindings/DefaultKeyBinding.dict:
   path: ../osx/DefaultKeyBinding.dict

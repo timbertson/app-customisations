@@ -51,13 +51,19 @@ let
 		vim
 		vim.vimrc
 		python3Packages.ipython
+
+		(buildFromGitHub ./sources/piep.json)
+		(buildFromGitHub ./sources/version.json)
+		(buildFromGitHub ./sources/daglink.json)
 	] ++ (if isLinux then [
 		#tilda
-		spotify
+		#spotify
+		xbindkeys
 		jsonnet
 		pythonPackages.youtube-dl
-		zeroinstall
+		# zeroinstall
 		eog-rate
+		vlc
 		dumbattr
 		trash
 		(runCommand "systemd-units" {} ''
@@ -80,8 +86,6 @@ let
 			}
 		'')
 	] else [
-		daglink # non-zeroinstall fallback...
-		zeroinstall
 	]) ++ (
 		mapAttrsToList (name: script:
 			runCommand "${name}-wrapper" {} ''

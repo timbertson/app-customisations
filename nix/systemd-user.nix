@@ -75,6 +75,7 @@ in
 					ExecStart = "${pkgs.xbindkeys}/bin/xbindkeys --nodaemon";
 					Environment = displayEnv;
 					Restart = "always";
+					RestartSec = "2";
 				};
 			};
 
@@ -188,18 +189,18 @@ in
 				};
 			})
 
-			({
-				services.edit-server = {
-					path = [ "${home}/.bin" ];
-					serviceConfig = {
-						ExecStart = "/usr/bin/env 0install run -c http://gfxmonk.net/dist/0install/edit-server.xml";
-					};
-				};
-				sockets.edit-server = {
-					listenStreams = [ "9292" ];
-					wantedBy = [ "default.target" "sockets.target"];
-				};
-			})
+			# ({
+			# 	services.edit-server = {
+			# 		path = [ "${home}/.bin" ];
+			# 		serviceConfig = {
+			# 			ExecStart = "/usr/bin/env 0install run -c http://gfxmonk.net/dist/0install/edit-server.xml";
+			# 		};
+			# 	};
+			# 	sockets.edit-server = {
+			# 		listenStreams = [ "9292" ];
+			# 		wantedBy = [ "default.target" "sockets.target"];
+			# 	};
+			# })
 
 			(optional (pkgs.gsel or null) {
 				# gsel server (if gsel exists)

@@ -14,10 +14,13 @@ nix-instantiate "$file" --show-trace  --quiet --indirect --add-root "$drv" > /de
 nix-shell --show-trace --run "python" "$drv" > "$1" <<EOF
 from __future__ import print_function
 import os, sys
-for k in os.environ.keys()[:]:
+remove_keys = []
+for k in os.environ.keys():
 	if k.startswith('GUP_') or k in ['TERM_SOLARIZED']:
 		# print("ignoring env %s" % (k,), file=sys.stderr)
-		del os.environ[k]
+		remove_keys.append(k)
+for k in remove_keys:
+	del os.environ[k]
 os.execvp('direnv', ['direnv','dump'])
 EOF
 
