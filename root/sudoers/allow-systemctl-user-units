@@ -1,5 +1,0 @@
-%wheel ALL=(root) NOPASSWD: \
-	/usr/bin/systemctl start user@[0-9][0-9][0-9][0-9].service, \
-	/usr/bin/systemctl stop user@[0-9][0-9][0-9][0-9].service, \
-	/usr/bin/systemctl restart user@[0-9][0-9][0-9][0-9].service, \
-	/usr/bin/systemctl status user@[0-9][0-9][0-9][0-9].service

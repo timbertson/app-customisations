@@ -1,6 +1,0 @@
-#!/bin/sh
-if [ "$*" = "--versions" ]; then
-  exec 0install run -gd 'http://gfxmonk.net/dist/0install/0shell.xml' "$@"
-else
-  exec 0install run  'http://gfxmonk.net/dist/0install/0shell.xml' "$@"
-fi

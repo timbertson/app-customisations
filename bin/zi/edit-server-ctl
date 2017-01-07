@@ -1,2 +1,0 @@
-#!/bin/sh
-exec 0install run --command 'ctl' 'http://gfxmonk.net/dist/0install/edit-server.xml' "$@"

@@ -1,6 +1,0 @@
-#!/bin/sh
-if [ "$*" = "--versions" ]; then
-  exec 0launch -gd 'http://gfxmonk.net/dist/0install/coffee-spec.xml' "$@"
-else
-  exec 0launch  'http://gfxmonk.net/dist/0install/coffee-spec.xml' "$@"
-fi

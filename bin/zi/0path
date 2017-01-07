@@ -1,2 +1,0 @@
-#!/bin/sh
-exec 0launch 'http://gfxmonk.net/dist/0install/0path.xml' "$@"

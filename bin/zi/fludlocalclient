@@ -1,6 +1,0 @@
-#!/bin/sh
-if [ "$*" = "--versions" ]; then
-  exec 0install run -gd 'http://gfxmonk.net/dist/0install/flud.xml' "$@"
-else
-  exec 0install run --main 'fludlocalclient' 'http://gfxmonk.net/dist/0install/flud.xml' "$@"
-fi

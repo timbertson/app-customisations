@@ -1,2 +1,6 @@
 #!bash -eu
 gup -u polkit/all sudoers/all
+
+#suggested:
+# pkcon remove setroubleshoot
+# pkcon install tracker-preferences (and then disable tracker)

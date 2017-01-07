@@ -1,3 +1,0 @@
-Cmnd_Alias SUSPEND = /usr/bin/systemctl suspend,/usr/bin/systemctl suspend -i
-%wheel ALL=(root) NOPASSWD: SUSPEND
-Defaults!SUSPEND !requiretty

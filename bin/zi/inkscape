@@ -1,2 +1,0 @@
-#!/bin/sh
-exec 0launch 'http://0install.net/2006/3rd-party/Inkscape.xml' "$@"

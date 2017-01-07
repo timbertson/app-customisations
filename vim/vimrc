@@ -432,7 +432,7 @@ if executable("rg")
 		let g:grepper = {}
 	endif
 	let g:grepper.tools = ['rg', 'git']
-	command! -nargs=+ Rg Grepper -tool rg -noprompt -query <args>
+	command! -complete=file -nargs=+ Rg Grepper -tool rg -noprompt -query <args>
 	command! -nargs=+ RgBuf Grepper -tool rg -buffers -noprompt -query <args>
 
 elseif executable("ag")

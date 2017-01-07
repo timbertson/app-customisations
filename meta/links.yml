@@ -15,6 +15,7 @@ meta:
         - fish
         - nix
         - systemd
+        - meep
     tjcee:
       tags:
         - root
@@ -224,6 +225,10 @@ meta:
   path: ../home/dconf/disable-housekeeping-plugin
   tags: linux
 
+~/.config/dconf.user.d/shellshape:
+  path: ../home/dconf/shellshape
+  tags: linux
+
 #TODO: make a pc xkb config
 
 ~/.xmodmaprc:
@@ -304,9 +309,18 @@ meta:
   path: ../root/yum.repos.d/google-chrome.repo
   tags: fedora root
 
-/usr/lib/systemd/system-sleep/apply-xkb:
-  path: ../root/systemd/apply-xkb
-  tags: fedora root xkb
+# /usr/lib/systemd/system-sleep/apply-xkb:
+#   path: ../root/systemd/apply-xkb
+#   tags: fedora root xkb
+
+# note: hardware specific
+/usr/lib/systemd/system-sleep/reset-ehci-driver:
+  path: ../root/systemd/reset-ehci-driver
+  tags: fedora root meep
+
+/etc/selinux/config:
+  path: ../root/selinux/config
+  tags: linux root
 
 ## OSX
 

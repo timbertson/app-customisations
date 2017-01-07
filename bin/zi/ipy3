@@ -1,2 +1,0 @@
-#!/bin/sh
-exec 0launch --command 'python3' 'http://gfxmonk.net/dist/0install/ipython.xml' "$@"

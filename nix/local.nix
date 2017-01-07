@@ -24,20 +24,22 @@ let
 			${sshfsFuse}/bin/sshfs "$@"
 		'';
 
-		"my-gnome-shell" = wrapper ''${bash}
-			exec my-gnome-wrapper gnome-shell "$@"
-		'';
-
-		"my-gnome-wrapper" = wrapper ''${bash}
-			exec /usr/bin/env \
-				SHELLSHAPE_DEBUG=1 \
-				XDG_DATA_DIRS=${builtins.getEnv "HOME"}/.local/share:${builtins.getEnv "HOME"}/.local/nix/share:/usr/local/share/:/usr/share/ \
-				"$@";
-		'';
+		# "my-gnome-shell" = wrapper ''${bash}
+		# 	exec my-gnome-wrapper gnome-shell "$@"
+		# '';
+    #
+		# "my-gnome-wrapper" = wrapper ''${bash}
+		# 	exec /usr/bin/env \
+		# 		SHELLSHAPE_DEBUG=1 \
+		# 		XDG_DATA_DIRS=${builtins.getEnv "HOME"}/.local/share:${builtins.getEnv "HOME"}/.local/nix/share:/usr/local/share/:/usr/share/ \
+		# 		"$@";
+		# '';
 	} else {});
 	installed = with lib; remove null [
+		my-nix-prefetch-scripts
+		daglink
 		git
-		gsel
+		# gsel (XXX failing)
 		ctags
 		fish
 		nodejs
@@ -54,16 +56,15 @@ let
 
 		(buildFromGitHub ./sources/piep.json)
 		(buildFromGitHub ./sources/version.json)
-		(buildFromGitHub ./sources/daglink.json)
 	] ++ (if isLinux then [
 		#tilda
 		#spotify
 		xbindkeys
 		jsonnet
 		pythonPackages.youtube-dl
-		# zeroinstall
 		eog-rate
 		vlc
+		parcellite
 		dumbattr
 		trash
 		(runCommand "systemd-units" {} ''

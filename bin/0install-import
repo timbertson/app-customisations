@@ -1,4 +1,0 @@
-#!/bin/sh
-set -eux
-[ "$#" -eq 1 ]
-exec 0install import ~/Sites/gfxmonk/dist/0install/"$1"

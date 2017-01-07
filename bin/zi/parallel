@@ -1,2 +1,0 @@
-#!/bin/sh
-exec 0install run  'http://git.savannah.gnu.org/cgit/parallel.git/plain/packager/0install/parallel.xml' "$@"

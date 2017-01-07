@@ -1,0 +1,6 @@
+#!/bin/bash
+# http://www.bjornlindqvist.se/blog/2016/01/ehci-error
+if [ "$1" = "post" ]; then
+	echo 0000:00:12.2 > /sys/bus/pci/drivers/ehci-pci/unbind
+	echo 0000:00:12.2 > /sys/bus/pci/drivers/ehci-pci/bind
+fi

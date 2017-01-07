@@ -31,12 +31,6 @@ let
 		}
 
 		{
-			exec = "${builtins.getEnv "HOME"}/.local/nix/bin/my-gnome-shell";
-			name = "Gnome shell";
-			filename = "gnome-shell";
-		}
-
-		{
 			exec = pkgs.writeScript "desktop-session" ''#!${pkgs.bash}/bin/bash
 				reset-input &
 				systemctl --user start desktop-session.target &

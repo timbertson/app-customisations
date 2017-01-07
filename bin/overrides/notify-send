@@ -1,2 +1,0 @@
-#!/bin/sh
-exec 0install run http://gfxmonk.net/dist/0install/libnotify-bin.xml --hint=int:transient:1 "$@"

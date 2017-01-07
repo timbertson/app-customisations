@@ -1,7 +1,0 @@
-#!/bin/sh
-if [ "$1" == "new" ]; then
-	shift 1
-	exec 0install run 'http://gfxmonk.net/dist/0install/0downstream.xml' new --prefix="http://gfxmonk.net/dist/0install/" "$@"
-fi
-
-exec 0install run 'http://gfxmonk.net/dist/0install/0downstream.xml' "$@"

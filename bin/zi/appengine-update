@@ -1,2 +1,0 @@
-#!/bin/bash
-exec 0install run --command="update" http://gfxmonk.net/dist/0install/google-app-engine.xml . "$@"

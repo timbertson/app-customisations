@@ -10,3 +10,4 @@ else
 	gup --always
 fi
 nix-build --out-link "$dest" "$src.nix" --show-trace
+nix-store --add --add-root --indirect "$2"

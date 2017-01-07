@@ -80,6 +80,7 @@ stdenv.mkDerivation {
 		mkdir -p $out/bin
 		makeWrapper ${vim}/bin/vim $out/bin/vim \
 			--prefix PATH : ${silver-searcher}/bin \
+			--prefix PATH : ${python}/bin \
 			--prefix PATH : ${ctags}/bin \
 		;
 		echo -e "#!${bash}/bin/bash\nexec \"$out/bin/vim\" -g \"\$@\"" > $out/bin/gvim

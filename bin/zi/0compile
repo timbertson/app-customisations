@@ -1,6 +1,0 @@
-#!/bin/sh
-if [ "$*" = "--versions" ]; then
-  exec 0launch -gd 'http://0install.net/2006/interfaces/0compile.xml' "$@"
-else
-  exec 0launch  'http://0install.net/2006/interfaces/0compile.xml' "$@"
-fi

@@ -12,7 +12,6 @@ let
 		"${home}"
 		"${home}/dev/app-customisations"
 		"${home}/dev/app-customisations/nix/local"
-		"${home}/dev/app-customisations/zi"
 	];
 in
 {
@@ -25,7 +24,7 @@ in
 					Restart="no";
 					Environment = [
 						"PYTHONUNBUFFERED=1"
-						"PATH=/usr/bin/:${home}/.bin/zi:${home}/.bin:${home}/bin"
+						"PATH=/usr/bin/:${home}/.bin:${home}/bin"
 					];
 				};
 			};
@@ -36,23 +35,6 @@ in
 					Persistent = true;
 				};
 			};
-
-			# # XXX I wouldn't need to manually invoke xkb if this shift key weren't so broken :(
-			# timers.xkb = {
-			# 	wantedBy = [ "default.target" "timers.target" ];
-			# 	timerConfig = {
-			# 		OnBootSec = "5s";
-			# 		OnUnitActiveSec = "30m";
-			# 	};
-			# };
-
-			# services.xkb = sessionTask {
-			# 	path = userPath;
-			# 	serviceConfig = {
-			# 		ExecStart = "${home}/dev/app-customisations/bin/reset-xkb";
-			# 		Environment = displayEnv;
-			# 	};
-			# };
 
 			# usermode DNS alias
 			sockets.dns-alias = {
@@ -83,6 +65,13 @@ in
 				serviceConfig = {
 					ExecStart = "${pkgs.dropbox}/bin/dropbox";
 					Environment = displayEnv ++ libglEnv;
+				};
+			};
+
+			services.parcellite = sessionTask {
+				script = "${loadSessionVars}; ${pkgs.parcellite}/bin/parcellite";
+				serviceConfig = {
+					Environment = displayEnv;
 				};
 			};
 
@@ -151,7 +140,7 @@ in
 			services.daglink = {
 				path = userPath;
 				serviceConfig = {
-					ExecStart = "${home}/.bin/daglink -f";
+					ExecStart = "${pkgs.daglink}/bin/daglink -f";
 				};
 			};
 
