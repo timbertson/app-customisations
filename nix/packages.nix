@@ -26,6 +26,7 @@ pkgs // rec {
 	inherit tryImport default buildFromGitHub;
 	daglink = (buildFromGitHub ./sources/daglink.json);
 	opam2nix = opam2nix-packages.opam2nix;
+	pyperclip = callPackage ./pyperclip.nix {};
 	gup = default pkgs.gup (tryImport "${home}/dev/ocaml/gup/local.nix" {});
 	gsel = tryImport "${home}/dev/ocaml/gsel/default.nix" {};
 	vim-watch = callPackage ./vim-watch.nix {};

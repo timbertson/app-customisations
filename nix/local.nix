@@ -53,6 +53,7 @@ let
 		vim
 		vim.vimrc
 		python3Packages.ipython
+		pyperclip
 
 		(buildFromGitHub ./sources/piep.json)
 		(buildFromGitHub ./sources/version.json)
