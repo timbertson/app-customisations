@@ -5,9 +5,9 @@ if [ "$#" -eq 0 ]; then
 	dest="local"
 	src="local"
 else
-	dest="$1"
+	dest="$2"
 	src="$2"
 	gup --always
 fi
 nix-build --out-link "$dest" "$src.nix" --show-trace
-nix-store --add --add-root --indirect "$2"
+nix-store --add --add-root --indirect "$dest"

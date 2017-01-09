@@ -19,12 +19,12 @@ in
 		systemd.user = lib.fold lib.recursiveUpdate {
 			# album releases cron job
 			services.album-releases = {
+				path = userPath;
 				serviceConfig = {
-					ExecStart = "${pkgs.gup}/bin/gup ${home}/Sites/couch/album-releases/all";
+					ExecStart = "${pkgs.gup}/bin/gup ${home}/dev/web/album-releases/all";
 					Restart="no";
 					Environment = [
 						"PYTHONUNBUFFERED=1"
-						"PATH=/usr/bin/:${home}/.bin:${home}/bin"
 					];
 				};
 			};
@@ -45,7 +45,7 @@ in
 			};
 			services.dns-alias = {
 				serviceConfig = {
-					ExecStart = "/usr/bin/env 0install run -c ${home}/dev/oni/dns/server.xml --port 5053";
+					ExecStart = "${pkgs.dns-alias}/bin/dns-alias --port 5053";
 					Environment = "PYTHONUNBUFFERED=1";
 					EnvironmentFile = "-%h/.config/dns-alias/env";
 				};
@@ -153,7 +153,10 @@ in
 			services.dconf-user-overrides = {
 				path = userPath;
 				serviceConfig = {
-					ExecStart = "${home}/.bin/zi/dconf-user-overrides";
+					Environment = [
+						"XDG_DATA_DIRS=/usr/local/share/:/usr/share/:${pkgs.shellshape}/share/gnome-shell/extensions/shellshape@gfxmonk.net/data"
+					];
+					ExecStart = "${pkgs.dconf-user-overrides}/bin/dconf-user-overrides";
 				};
 			};
 		} [
@@ -178,19 +181,6 @@ in
 				};
 			})
 
-			# ({
-			# 	services.edit-server = {
-			# 		path = [ "${home}/.bin" ];
-			# 		serviceConfig = {
-			# 			ExecStart = "/usr/bin/env 0install run -c http://gfxmonk.net/dist/0install/edit-server.xml";
-			# 		};
-			# 	};
-			# 	sockets.edit-server = {
-			# 		listenStreams = [ "9292" ];
-			# 		wantedBy = [ "default.target" "sockets.target"];
-			# 	};
-			# })
-
 			(optional (pkgs.gsel or null) {
 				# gsel server (if gsel exists)
 				services.gsel-server = {
@@ -211,7 +201,7 @@ in
 		system.build.standalone-user-units = sd.generateUnits
 			"user" # type
 			(config.systemd.user.units // {
-				# Hack; systemd.user.targetss should be supported...
+				# Hack; systemd.user.targets should be supported...
 				"desktop-session.target" = rec {
 					wantedBy = [];
 					requiredBy = [];

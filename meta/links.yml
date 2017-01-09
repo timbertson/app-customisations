@@ -66,8 +66,12 @@ meta:
   tags: root
 
 /etc/NetworkManager/dnsmasq.d:
-  path: ../root/dnsmasq.d/
-  tags: root
+  path: ~/.config/dnsmasq.d
+  tags: root linux
+
+~/.config/dnsmasq.d/localhost.conf:
+  path: ../root/dnsmasq.d/localhost.conf
+  tags: root linux
 
 ~/.vimrc:
   path: ../vim/vimrc

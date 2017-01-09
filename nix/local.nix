@@ -12,6 +12,7 @@ let
 	} // (if isLinux then {
 		# LINUX only...
 		"mount.ssh" = wrapper ''${bash}
+			set -eu
 			if [ "$#" -lt 2 ]; then
 				echo "usage: mount.ssh [opts] remote local-dir"
 				exit 2
@@ -52,6 +53,7 @@ let
 		vim-watch
 		vim
 		vim.vimrc
+		python2Packages.ipython
 		python3Packages.ipython
 		pyperclip
 
@@ -63,10 +65,13 @@ let
 		xbindkeys
 		jsonnet
 		pythonPackages.youtube-dl
+		irank
+		irank-releases
 		eog-rate
 		vlc
 		parcellite
 		dumbattr
+		shellshape
 		trash
 		(runCommand "systemd-units" {} ''
 			mkdir -p $out/share/systemd
