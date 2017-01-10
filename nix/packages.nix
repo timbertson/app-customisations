@@ -47,6 +47,7 @@ pkgs // rec {
 		dnslib = tryCallPackage "${home}/dev/python/dns-alias/nix/dnslib.nix" { inherit pythonPackages; };
 	};
 	shellshape = tryImport "${home}/dev/gnome-shell/shellshape@gfxmonk.net/local.nix" {};
+	snip = tryImport "${home}/dev/haskell/snip/nix/default.nix" {};
 	trash = tryImport "${home}/dev/python/trash/default.nix" {};
 	vim = (callPackage ./vim.nix { pluginArgs = { inherit gsel vim-watch; }; });
 	vim-watch = callPackage ./vim-watch.nix {};
