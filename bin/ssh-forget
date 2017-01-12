@@ -12,8 +12,12 @@ patt = re.compile(r'^Offending .*key( for IP)? in *(?P<file>[^:]+):(?P<lineno>\d
 
 if sys.stdin.isatty():
 	import subprocess
-	print("  (reading input from X selection...)")
-	lines = subprocess.check_output(['xsel', '-oc', '--clear']).splitlines()
+	print("  (reading input from clipboard...)")
+	try:
+		contents = subprocess.check_output(['xsel', '-oc', '--clear'])
+	except (subprocess.CalledProcessError, OSError):
+		contents = subprocess.check_output(['pyperclip', '-o'])
+	lines = contents.splitlines()
 	# print(repr(lines))
 else:
 	lines = sys.stdin.readlines()
