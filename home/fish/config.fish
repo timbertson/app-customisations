@@ -29,8 +29,7 @@ end
 # NOTE: LAST path is most overridey
 set path_overrides \
 	~/.local/nix/bin \
-	~/.nix-profile/bin \
-	~/.bin/overrides
+	~/.nix-profile/bin
 
 for p in $path_overrides
 	if not contains $p $PATH
