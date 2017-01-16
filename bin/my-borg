@@ -1,0 +1,190 @@
+#!/usr/bin/env python3
+
+import os, sys, re, subprocess, json, errno, pwd, optparse
+
+DRY_RUN = False
+DRY_RUN_ARGS = ['--dry-run'] if DRY_RUN else []
+
+p = optparse.OptionParser()
+p.add_option('--user')
+p.add_option('--dry-run', action='store_true')
+opts, args = p.parse_args()
+assert opts.user, "--user required"
+assert len(args) == 0, "too many arguments"
+
+USER = pwd.getpwnam(opts.user)
+UID = USER.pw_uid
+GID = USER.pw_gid
+expanduser = lambda p: p.replace('~', USER.pw_dir)
+confdir=expanduser('~/.config/my-borg')
+
+statusdir=expanduser('~/.cache/my-borg')
+if not os.path.exists(statusdir):
+	os.mkdir(statusdir)
+os.chown(statusdir, UID, GID)
+
+def clear_state(key):
+	try:
+		os.unlink(os.path.join(statusdir, key))
+	except OSError as e:
+		if e.errno == errno.ENOENT:
+			pass
+		else:
+			raise
+
+def write_state(key, contents):
+	path = os.path.join(statusdir, key)
+	with open(path, 'w') as f:
+		f.write(contents)
+		os.fchown(f.fileno(), UID, GID)
+
+def mark_progress():
+	write_state('job.pid', str(os.getpid()))
+
+def mark_result(error):
+	contents = 'ok' if error is None else 'error %s' % (error)
+	write_state('job', contents)
+
+def prefix(archive):
+	return archive+'.'
+
+class Skip(RuntimeError): pass
+
+def main():
+	with open(os.path.join(confdir, 'config.json')) as f:
+		lines = []
+		for line in f:
+			if re.match('^\s*#', line):
+				continue
+			lines.append(line)
+		config = json.loads(''.join(lines))
+
+	paths = [repo['path'] for repo in config['repos']]
+	if not any(map(os.path.exists, paths)):
+		print("Warning: no paths are currently present; skipping")
+		raise Skip()
+
+	for repo in config['repos']:
+		BORG_ROOT = repo['path']
+		ARCHIVES = repo['archives']
+
+		for archive in ARCHIVES:
+			paths = archive['paths']
+			if not isinstance(paths, list):
+				paths = [paths]
+			archive['paths'] = list(map(expanduser, paths))
+
+		excludes_file = os.path.join(confdir, 'exclude')
+		generations_file = os.path.join(confdir, 'generations.json')
+
+		try:
+			with open(generations_file) as f:
+				generations = json.load(f)
+		except OSError as e:
+			if e.errno == errno.ENOENT:
+				generations = {}
+			else:
+				raise
+
+		def save_generations():
+			tmp = generations_file + '.tmp'
+			with open(tmp, 'w') as f:
+				json.dump(generations, f, indent=2, sort_keys=True)
+				os.fchown(f.fileno(), UID, GID)
+			os.rename(tmp, generations_file)
+
+		borgenv = os.environ.copy()
+		borgenv['BORG_PASSPHRASE'] = open(os.path.join(confdir, 'passphrase')).read().strip()
+
+		EXTRA_FLAGS = ['--progress'] if sys.stdin.isatty else []
+
+		def _borg_cmd(cmd):
+			cmd = ['borg'] + list(cmd)
+			print('+ %s' % ' '.join(cmd))
+			return cmd
+
+		def _runner(fn):
+			def _run(*cmd, **k):
+				cmd = _borg_cmd(cmd)
+				try:
+					return fn(cmd, env=borgenv, **k)
+				except subprocess.CalledProcessError as e:
+					raise RuntimeError("Command `%s` failed" % ' '.join(cmd[:2]))
+			return _run
+
+		borg = _runner(subprocess.check_call)
+		borg_output = _runner(subprocess.check_output)
+
+		# XXX this is a bit rubbish...
+		borg('break-lock', BORG_ROOT)
+
+		# TODO --list-format seemingly does nothing
+		def get_extant_archives():
+			lines = borg_output('list', BORG_ROOT).splitlines()
+			return [line.decode('utf-8').split()[0] for line in lines]
+		extant_archives = get_extant_archives()
+
+		for archive in ARCHIVES:
+			mark_progress()
+			archive_name = archive['name']
+			paths = archive['paths']
+
+			print("\n\n ==== %s ====" % (archive_name,))
+			gen = generations.get(archive_name, 0) + 1
+			def archive_generation(gen):
+				return  archive_name + ('.%d' % gen)
+			while archive_generation(gen) in extant_archives:
+				print('...skipping %s, as it already seems present' % archive_generation(gen))
+				gen += 1
+
+			borg('create',
+				'--stats',
+				'--verbose',
+				*EXTRA_FLAGS,
+				'--exclude-from', excludes_file,
+				'--exclude-if-present', '.nobackup',
+				'--one-file-system',
+				'--compression', 'zlib,6',
+				BORG_ROOT+'::' + archive_generation(gen),
+				*paths
+			)
+			generations[archive_name] = gen
+			save_generations()
+
+			borg('check',
+				'--last', '2',
+				'--prefix', prefix(archive_name),
+				BORG_ROOT)
+
+			borg('prune',
+				*DRY_RUN_ARGS,
+				'--verbose',
+				'--list',
+				# '--keep-hourly', '1',
+				'--keep-daily', '7',
+				# '--keep-weekly', '3',
+				'--prefix', prefix(archive_name),
+				BORG_ROOT
+			)
+
+		for archive_name in extant_archives:
+			print(" - %s" % archive_name)
+			used = False
+			for key in [archive['name'] for archive in ARCHIVES]:
+				if archive_name.startswith(prefix(key)):
+					used = True
+					break
+			if not used:
+				print("deleting unknown archive: %s" % archive_name)
+				if not DRY_RUN:
+					borg("delete", BORG_ROOT + '::' + archive_name)
+
+try:
+	mark_progress()
+	main()
+	mark_result(error = None)
+except Skip:
+	pass
+except Exception as e:
+	mark_result(error = str(e))
+	raise
