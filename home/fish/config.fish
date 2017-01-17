@@ -33,8 +33,10 @@ set path_overrides \
 
 for p in $path_overrides
 	if not contains $p $PATH
-		#echo "prepend PATH $p"
-		set -x PATH $p $PATH
+		if test -e $p
+			#echo "prepend PATH $p"
+			set -x PATH $p $PATH
+		end
 	end
 end
 
@@ -45,25 +47,26 @@ set config_roots \
 	/usr/share
 
 for root in $config_roots
-	# echo "# config_root: $root"
-	set p $root/fish/completions
-	if begin test -e $p; and not contains $p $fish_complete_path; end
-		# echo "# + fish_complete_path: $p"
-		set fish_complete_path $fish_complete_path $p
-	end
+	if test -e $config_root
+		# echo "# config_root: $root"
+		set p $root/fish/completions
+		if begin test -e $p; and not contains $p $fish_complete_path; end
+			# echo "# + fish_complete_path: $p"
+			set fish_complete_path $fish_complete_path $p
+		end
 
-	set p $root/fish/functions
-	if begin test -e $p; and not contains $p $fish_function_path; end
-		# echo "# + fish_function_path: $p"
-		set fish_function_path $fish_function_path $p
-	end
+		set p $root/fish/functions
+		if begin test -e $p; and not contains $p $fish_function_path; end
+			# echo "# + fish_function_path: $p"
+			set fish_function_path $fish_function_path $p
+		end
 
-	set p $root/man
-	if begin test -e $p; and not contains $p $MANPATH; end
-		# echo "# + MANPATH: $p"
-		set -x MANPATH $MANPATH $p
+		set p $root/man
+		if begin test -e $p; and not contains $p $MANPATH; end
+			# echo "# + MANPATH: $p"
+			set -x MANPATH $MANPATH $p
+		end
 	end
-
 end
 
 
