@@ -72,6 +72,7 @@ let
 		parcellite
 		dumbattr
 		shellshape
+		snip
 		trash
 		(runCommand "systemd-units" {} ''
 			mkdir -p $out/share/systemd

@@ -21,8 +21,10 @@ setup(
 
 	install_requires=[],
 
+	# or, with less cross-platform compat:
+	# scripts = ['bin/TODO'],
 	entry_points={
-		'console_scripts': [ 'TODO' ],
+		'console_scripts': [ 'TODO=todo:main' ],
 	},
 )
 
