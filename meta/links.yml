@@ -279,6 +279,19 @@ meta:
   optional: true
   tags: nix systemd
 
+/etc/systemd/system/multi-user.target.wants/borg.timer:
+  optional: true
+  path: ../nix/local/share/systemd/system/multi-user.target.wants/borg.timer
+  tags: systemd
+/etc/systemd/system/borg.timer:
+  optional: true
+  path: ../nix/local/share/systemd/system/borg.timer
+  tags: systemd
+/etc/systemd/system/borg.service:
+  optional: true
+  path: ../nix/local/share/systemd/system/borg.service
+  tags: systemd
+
 ~/.local/share/applications/calibre.desktop:
   path: ../home/applications/nix/calibre.desktop
   optional: true

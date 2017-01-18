@@ -37,9 +37,9 @@ let
 		# '';
 	} else {});
 	installed = with lib; remove null [
+		git
 		my-nix-prefetch-scripts
 		daglink
-		git
 		# gsel (XXX failing)
 		ctags
 		fish
@@ -77,6 +77,7 @@ let
 		(runCommand "systemd-units" {} ''
 			mkdir -p $out/share/systemd
 			cp -a "${system.config.system.build.standalone-user-units}" $out/share/systemd/user
+			cp -a "${system.config.system.build.standalone-units}" $out/share/systemd/system
 		'')
 		(import ./applications.nix {inherit pkgs; })
 		(runCommand "gnome-shell-extensions" {} ''
@@ -106,4 +107,14 @@ let
 	system = import ./system.nix { pkgs = packagesExt; };
 	gnome-shell-extensions = import ./gnome-shell.nix { pkgs = packagesExt; };
 in
-symlinkJoin { name = "local"; paths = installed; }
+symlinkJoin { name = "local"; paths = installed;
+	postBuild = ''
+		for bin in $out/bin/*; do
+			final_dest="$(readlink -f "$bin")"
+			intermediate="$(readlink "$bin")"
+			if [ "$final_dest" != "$intermediate" ]; then
+				ln -sfn "$final_dest" "$bin"
+			fi
+		done
+	'';
+}

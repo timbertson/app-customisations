@@ -2,12 +2,18 @@
 with pkgs;
 let
 	home = builtins.getEnv "HOME";
-	tryImport = path: args: if builtins.pathExists path
-		then (import (builtins.toPath path) ({ inherit pkgs; } // args))
+	tryInvoke = fn: path: if builtins.pathExists path
+		then fn (builtins.toPath path)
 		else null;
-	tryCallPackage = path: args: if builtins.pathExists path
-		then (callPackage (builtins.toPath path) args)
-		else null;
+
+	tryBuildHaskell = tryInvoke (path:
+		pkgs.haskell.packages.ghc7102.callPackage path { }
+	);
+	tryImport = path: args: tryInvoke (path:
+		import path ({ inherit pkgs; } // args)
+	) path;
+	tryCallPackage = path: args: tryInvoke (path: callPackage path args) path;
+
 	default = dfl: obj: if obj == null then dfl else obj;
 	opam2nix-packages = callPackage ./opam2nix-packages.nix {};
 	buildFromGitHub = jsonFile:
@@ -38,6 +44,7 @@ pkgs // rec {
 	irank-releases = callPackage ./irank-releases.nix {};
 	jsonnet = callPackage ./jsonnet.nix {};
 	music-import = tryImport "${home}/dev/python/music-import/nix/local.nix" {};
+	my-borg = tryImport "${home}/dev/python/my-borg/default.nix" {};
 	my-nix-prefetch-scripts = callPackage ./nix-prefetch-scripts.nix {};
 	opam2nix = opam2nix-packages.opam2nix;
 	passe-client = let builder = tryImport "${home}/dev/ocaml/passe-stable/nix/local.nix" {}; in
@@ -47,7 +54,8 @@ pkgs // rec {
 		dnslib = tryCallPackage "${home}/dev/python/dns-alias/nix/dnslib.nix" { inherit pythonPackages; };
 	};
 	shellshape = tryImport "${home}/dev/gnome-shell/shellshape@gfxmonk.net/local.nix" {};
-	snip = tryImport "${home}/dev/haskell/snip/nix/default.nix" {};
+	snip = tryBuildHaskell "${home}/dev/haskell/snip/nix/default.nix" ;
+
 	trash = tryImport "${home}/dev/python/trash/default.nix" {};
 	vim = (callPackage ./vim.nix { pluginArgs = { inherit gsel vim-watch; }; });
 	vim-watch = callPackage ./vim-watch.nix {};

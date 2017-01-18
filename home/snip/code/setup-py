@@ -6,7 +6,7 @@ here = path.abspath(path.dirname(__file__))
 
 def read(relpath):
 	with open(path.join(here, *relpath.split('/')), encoding='utf-8') as f:
-		return f.read()
+		return f.read().strip()
 
 setup(
 	name='TODO',

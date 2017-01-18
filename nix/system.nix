@@ -17,6 +17,8 @@ lib.evalModules {
 				users = ignore;
 				security = ignore;
 				system.requiredKernelConfig = ignore;
+				services.dbus = ignore;
+				environment.systemPackages = ignore;
 			};
 		})
 		./systemd-user.nix

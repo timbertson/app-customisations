@@ -16,6 +16,28 @@ let
 in
 {
 	config = {
+		systemd = {
+			services.borg = {
+				script = ''
+					${pkgs.my-borg}/bin/my-borg --user tim
+					${pkgs.my-borg}/bin/my-borg --user tim --check-only
+				'';
+				serviceConfig = {
+					Restart="no";
+					Environment = [
+						"PYTHONUNBUFFERED=1"
+					];
+				};
+			};
+			timers.borg = {
+				wantedBy = [ "multi-user.target" ];
+				timerConfig = {
+					OnCalendar = "20:00:00";
+					Persistent = true;
+				};
+			};
+		};
+
 		systemd.user = lib.fold lib.recursiveUpdate {
 			# album releases cron job
 			services.album-releases = {
@@ -217,6 +239,13 @@ in
 
 			[ "default.target" "sockets.target" "timers.target"] # upstreamUnits
 			[] # upstreamWants
+		;
+
+		system.build.standalone-units = sd.generateUnits
+			"system"
+			config.systemd.units
+			[ "sockets.target" "timers.target"] # upstreamUnits
+			[ "multi-user.target.wants" ] # upstreamWants
 		;
 	};
 }
