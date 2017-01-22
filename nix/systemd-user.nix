@@ -16,28 +16,6 @@ let
 in
 {
 	config = {
-		systemd = {
-			services.borg = {
-				script = ''
-					${pkgs.my-borg}/bin/my-borg --user tim
-					${pkgs.my-borg}/bin/my-borg --user tim --check-only
-				'';
-				serviceConfig = {
-					Restart="no";
-					Environment = [
-						"PYTHONUNBUFFERED=1"
-					];
-				};
-			};
-			timers.borg = {
-				wantedBy = [ "multi-user.target" ];
-				timerConfig = {
-					OnCalendar = "20:00:00";
-					Persistent = true;
-				};
-			};
-		};
-
 		systemd.user = lib.fold lib.recursiveUpdate {
 			# album releases cron job
 			services.album-releases = {
@@ -57,6 +35,30 @@ in
 					Persistent = true;
 				};
 			};
+
+
+
+			services.borg =
+			# NOTE: must be copied to /etc/systemd/system
+			# by gup target root/systemd/all
+			let
+				# exe = "${pkgs.my-borg}/bin/my-borg";
+				exe = "${home}/.local/nix/bin/my-dev/python/my-borg/bin/my-borg";
+			in
+			{
+				serviceConfig = {
+					ExecStart = "${home}/.local/nix/bin/my-borg-task";
+					Restart="no";
+				};
+			};
+			timers.borg = {
+				wantedBy = [ "multi-user.target" ];
+				timerConfig = {
+					OnStartupSec = "5min";
+					Persistent = true;
+				};
+			};
+
 
 			# usermode DNS alias
 			sockets.dns-alias = {
@@ -85,7 +87,7 @@ in
 
 			services.dropbox = {
 				serviceConfig = {
-					ExecStart = "${pkgs.dropbox}/bin/dropbox";
+					ExecStart = "${home}/.dropbox-dist/dropboxd";
 					Environment = displayEnv ++ libglEnv;
 				};
 			};
@@ -239,13 +241,6 @@ in
 
 			[ "default.target" "sockets.target" "timers.target"] # upstreamUnits
 			[] # upstreamWants
-		;
-
-		system.build.standalone-units = sd.generateUnits
-			"system"
-			config.systemd.units
-			[ "sockets.target" "timers.target"] # upstreamUnits
-			[ "multi-user.target.wants" ] # upstreamWants
 		;
 	};
 }

@@ -13,3 +13,4 @@ vim/.netrwhist
 .tags
 *-local.xml
 /nix/local
+bin/size-tree.exe

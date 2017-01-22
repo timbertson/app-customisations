@@ -1,0 +1,11 @@
+#!bash -eux
+nix="../../nix/local"
+dir="$nix/share/systemd/user"
+if [ ! -e "$nix" ]; then
+	gup -u "$nix"
+fi
+units=(borg.timer borg.service)
+for unit in "${units[@]}"; do
+	gup -u "$dir/$unit"
+	sudo cp --dereference "$dir/$unit" /etc/systemd/system/
+done

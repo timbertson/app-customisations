@@ -1,0 +1,145 @@
+#!/usr/bin/env ocamlscript
+Ocaml.packs := ["str"; "unix"]
+--
+(*
+* Input format:
+*
+* <size> <path>
+*
+* ...where paths are sorted in topological order (i.e. folder contents appear directly after their parent directory)
+*)
+
+type path = string list
+let string_of_path = String.concat "/"
+
+type entry = {
+	path: path;
+	size: int;
+}
+
+type node = {
+	parent: node option;
+	entry: entry;
+}
+
+let parse_size str =
+	let (amount, units) = let open Str in match full_split (regexp "[0-9]+") str with
+		| [Delim amount] -> amount, "b"
+		| [Delim amount; Text units] -> amount, units
+		| _ -> failwith ("Unparseable size: " ^ str)
+	in
+	let amount = int_of_string amount in
+	let open List in
+	if units = "b" then
+		amount
+	else let amount = amount * 1024 in if units = "k" then
+		amount
+	else let amount = amount * 1024 in if units = "m" then
+		amount
+	else let amount = amount * 1024 in
+		amount
+
+let () =
+	let minimum_reportable = ref 0 in
+	let verbose = ref false in
+	let human_sizes = ref false in
+	let source = ref None in
+	Arg.parse
+		[
+			"--verbose", Arg.Set verbose, "verbose logging";
+			"-m", Arg.String (fun str -> minimum_reportable := parse_size str), "minimum size (in bytes) to report";
+			"-h", Arg.Set human_sizes, "display sizes in human-readable units";
+		]
+		(fun arg -> match !source with
+			| Some _ -> failwith "too many args"
+			| None -> source := Some arg
+		)
+		"Usage: size-tree [OPTIONS] [INPUT]"
+	;
+
+	let minimum_reportable = !minimum_reportable in
+
+	let next_line =
+		let source = match !source with
+			| Some path -> open_in path
+			| None ->
+				if Unix.isatty Unix.stdin then prerr_endline "WARN: reading from stdin";
+				stdin
+		in
+		fun () -> try Some (input_line source) with End_of_file -> None
+	in
+
+	let format_size = if !human_sizes
+		then fun size -> (
+			let rec fmt amount = function
+				| [] -> assert false
+				| units :: more_units ->
+					if amount < 1024.0 || more_units = [] then (
+						Printf.sprintf "%0.1f%s" amount units
+					) else (
+						fmt (amount /. 1024.0) more_units
+					)
+			in
+			fmt (float_of_int size) ["b"; "k"; "m"; "g"]
+		)
+		else string_of_int
+	in
+
+	let root = { parent = None; entry = { path = []; size = 0 } } in
+
+	let rec process ~node entry =
+		let pop_node () =
+			(* we're popping an item off the stack, accumulate its total size into the parent *)
+			let size = node.entry.size in
+			if size > minimum_reportable then
+				Printf.printf "%-10s %s\n" (format_size size) (string_of_path node.entry.path);
+
+			match node.parent with
+				| Some parent ->
+					let parent_with_child_size = { parent with
+						entry = { parent.entry with
+							size = parent.entry.size + size
+						}
+					} in
+					process ~node:parent_with_child_size entry
+				| None -> failwith "pop_node"
+		in
+
+		let rec traverse node_path entry_path : node = match node_path, entry_path with
+			| [], [] -> failwith "I don't think this can happen?"
+			| node_part::node_path, entry_part::entry_path ->
+				if node_part = entry_part
+					then traverse node_path entry_path (* proceed further into path *)
+					else pop_node ()
+				| node_part::node_path, [] ->
+					(* current node is longer than this path *)
+					pop_node ()
+				| [], entry_part::entry_path ->
+					(* we've got a child - add it *)
+					{
+						parent = Some node;
+						entry = entry;
+					}
+		in
+		traverse node.entry.path entry.path
+	in
+
+	let rec loop node = match next_line () with
+		| None -> ()
+		| Some line ->
+			let node = try (
+				let entry = match Str.bounded_split (Str.regexp " +") line 2 with
+					| [size; path] ->
+						{ size = int_of_string size; path = Str.split (Str.regexp "/") path }
+					| _ -> failwith "Invalid line"
+				in
+				process ~node entry
+			) with e -> (
+				prerr_endline ("Error handling line: " ^ line);
+				prerr_endline (Printexc.to_string e);
+				Printexc.print_backtrace stderr;
+				exit 1
+			) in
+			loop node
+	in
+	loop root

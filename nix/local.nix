@@ -59,7 +59,7 @@ let
 
 		(buildFromGitHub ./sources/piep.json)
 		(buildFromGitHub ./sources/version.json)
-	] ++ (if isLinux then [
+	] ++ (if isLinux then with ocamlPackages_4_03; [
 		#tilda
 		#spotify
 		xbindkeys
@@ -68,6 +68,9 @@ let
 		irank
 		irank-releases
 		eog-rate
+		my-borg-task
+		ocamlscript
+		ocaml
 		vlc
 		parcellite
 		dumbattr
@@ -77,7 +80,6 @@ let
 		(runCommand "systemd-units" {} ''
 			mkdir -p $out/share/systemd
 			cp -a "${system.config.system.build.standalone-user-units}" $out/share/systemd/user
-			cp -a "${system.config.system.build.standalone-units}" $out/share/systemd/system
 		'')
 		(import ./applications.nix {inherit pkgs; })
 		(runCommand "gnome-shell-extensions" {} ''

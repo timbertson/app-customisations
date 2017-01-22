@@ -1,5 +1,5 @@
 #!bash -eu
-gup -u polkit/all sudoers/all
+gup -u polkit/all sudoers/all systemd/all
 
 #suggested:
 # pkcon remove setroubleshoot

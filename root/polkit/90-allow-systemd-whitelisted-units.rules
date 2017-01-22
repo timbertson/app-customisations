@@ -1,0 +1,11 @@
+/* Allow admins to control user units without password */
+polkit.addRule(function(action, subject) {
+  // polkit.log('Got action "' + action.id + '", unit = ' + action.lookup("unit"));
+  if (action.id == "org.freedesktop.systemd1.manage-units" && subject.isInGroup("wheel")) {
+    var unitName = action.lookup('unit');
+    var serviceUnitPattern = /^user@\d+\.service$/;
+    if (['borg.service', 'borg.timer', 'docker.service'].indexOf(unitName) !== -1) {
+      return polkit.Result.YES;
+    }
+  }
+});

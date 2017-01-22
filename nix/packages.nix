@@ -44,7 +44,7 @@ pkgs // rec {
 	irank-releases = callPackage ./irank-releases.nix {};
 	jsonnet = callPackage ./jsonnet.nix {};
 	music-import = tryImport "${home}/dev/python/music-import/nix/local.nix" {};
-	my-borg = tryImport "${home}/dev/python/my-borg/default.nix" {};
+	my-borg-task = callPackage ./my-borg-task.nix {};
 	my-nix-prefetch-scripts = callPackage ./nix-prefetch-scripts.nix {};
 	opam2nix = opam2nix-packages.opam2nix;
 	passe-client = let builder = tryImport "${home}/dev/ocaml/passe-stable/nix/local.nix" {}; in

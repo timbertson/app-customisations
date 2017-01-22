@@ -1,5 +1,5 @@
 #!bash -eu
-src="90-sandbox-any.rules 90-allow-systemd-user-units.rules"
+src="90-sandbox-any.rules 90-allow-systemd-user-units.rules 90-allow-systemd-whitelisted-units.rules"
 gup -u $src
 sudo cp $src /etc/polkit-1/rules.d/
 
