@@ -40,7 +40,7 @@ let
 		git
 		my-nix-prefetch-scripts
 		daglink
-		# gsel (XXX failing)
+		gsel
 		ctags
 		fish
 		nodejs

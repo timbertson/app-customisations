@@ -514,7 +514,7 @@ command! -narg=1 Column call cursor(line("."), <args>)
 " trialling...
 " hack to force autoload..
 silent! call gsel#NO_SUCH_FUNCTION()
-if exists("*gsel#DefaultMappings")
+if exists("*gsel#DefaultMappings") && executable("gsel")
 	let g:gsel_file_list_command = "bash -c 'if git rev-parse --show-toplevel >/dev/null 2>&1; then git ls-files .; else find . -type f; fi'"
 
 	let units = systemlist("systemctl --user list-units gsel-server.socket --no-pager --no-legend")
