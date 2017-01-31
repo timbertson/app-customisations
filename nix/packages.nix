@@ -53,7 +53,7 @@ pkgs // rec {
 	pythonPackages = pkgs.pythonPackages // {
 		dnslib = tryCallPackage "${home}/dev/python/dns-alias/nix/dnslib.nix" { inherit pythonPackages; };
 	};
-	shellshape = tryImport "${home}/dev/gnome-shell/shellshape@gfxmonk.net/local.nix" {};
+	shellshape = tryImport "${home}/dev/gnome-shell/shellshape@gfxmonk.net/default.nix" {};
 	snip = tryBuildHaskell "${home}/dev/haskell/snip/nix/default.nix" ;
 
 	trash = tryImport "${home}/dev/python/trash/default.nix" {};
