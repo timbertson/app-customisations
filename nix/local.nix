@@ -2,14 +2,17 @@
 let packagesExt = pkgs // (import ./packages.nix { inherit pkgs; }); in
 with packagesExt;
 let
+	home = builtins.getEnv "HOME";
+	isMinimal = builtins.pathExists "${home}/dev/app-customisations/nix/.minimal";
 	isDarwin = stdenv.isDarwin;
 	isLinux = stdenv.isLinux;
+	maximal = pkg: if isMinimal then null else pkg;
 	bash = "#!${pkgs.bash}/bin/bash";
 	wrapper = script: writeScript "wrapper" script;
 	wrappers = {
 		# ALL
 
-	} // (if isLinux then {
+	} // (if isLinux && !isMinimal then {
 		# LINUX only...
 		"mount.ssh" = wrapper ''${bash}
 			set -eu
@@ -25,43 +28,33 @@ let
 			${sshfsFuse}/bin/sshfs "$@"
 		'';
 
-		# "my-gnome-shell" = wrapper ''${bash}
-		# 	exec my-gnome-wrapper gnome-shell "$@"
-		# '';
-    #
-		# "my-gnome-wrapper" = wrapper ''${bash}
-		# 	exec /usr/bin/env \
-		# 		SHELLSHAPE_DEBUG=1 \
-		# 		XDG_DATA_DIRS=${builtins.getEnv "HOME"}/.local/share:${builtins.getEnv "HOME"}/.local/nix/share:/usr/local/share/:/usr/share/ \
-		# 		"$@";
-		# '';
 	} else {});
 	installed = with lib; remove null [
 		git
 		my-nix-prefetch-scripts
 		daglink
-		gsel
-		ctags
+		(maximal gsel)
+		(maximal ctags)
 		fish
-		nodejs
+		(maximal nodejs)
 		direnv
-		# silver-searcher
 		ripgrep
-		music-import
+		(maximal music-import)
 		gup
-		passe-client
+		(maximal passe-client)
 		vim-watch
 		vim
 		vim.vimrc
-		python2Packages.ipython
-		python3Packages.ipython
+		(maximal python2Packages.ipython)
+		(maximal python3Packages.ipython)
 		pyperclip
 
-		(buildFromGitHub ./sources/piep.json)
-		(buildFromGitHub ./sources/version.json)
-	] ++ (if isLinux then with ocamlPackages_4_03; [
+		(buildFromSource ./sources/piep.json)
+		(buildFromSource ./sources/version.json)
+	] ++ (if isMinimal then [] else if isLinux then with ocamlPackages_4_03; [
 		#tilda
-		#spotify
+		pythonPackages.gsutil
+		spotify
 		xbindkeys
 		jsonnet
 		pythonPackages.youtube-dl
@@ -97,6 +90,7 @@ let
 			}
 		'')
 	] else [
+		# darwin
 	]) ++ (
 		mapAttrsToList (name: script:
 			runCommand "${name}-wrapper" {} ''

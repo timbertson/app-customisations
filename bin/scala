@@ -1,6 +1,0 @@
-#!/bin/sh
-if [ "$*" = "--versions" ]; then
-  exec 0launch -gd 'http://www.chrisbalogh.com/zero-install/scala.xml' "$@"
-else
-  exec 0launch  'http://www.chrisbalogh.com/zero-install/scala.xml' "$@"
-fi

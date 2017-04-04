@@ -229,6 +229,7 @@ in
 				"desktop-session.target" = rec {
 					wantedBy = [];
 					requiredBy = [];
+					aliases = [];
 					unit = sd.makeUnit "desktop-session.target" {
 						inherit wantedBy requiredBy;
 						enable = true;

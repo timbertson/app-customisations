@@ -38,14 +38,12 @@ function apply_remote_rating_changes {
 
 	local_db="$1"
 	num_updates="$(num_remote_rating_changes "$local_db")"
-	if [ "$num_updates" -eq 0 ]; then
-		return 0
+	if [ "$num_updates" -gt 0 ]; then
+		echo "applying $num_updates updates..."
+		irank rating-sync --no "$local_db" || ( \
+			zenity --question --no-markup --text='Rating update FAILED. Do you want to continue, ERASING all failed ratings?' --cancel-label='Cancel' --ok-label='ERASE' && \
+				zenity --question --no-markup --text='SERIOUSLY?' --cancel-label='No!' --ok-label='Yes, ERASE ratings')
 	fi
-
-	echo "applying $num_updates updates..."
-	irank rating-sync --no "$local_db" || ( \
-		zenity --question --no-markup --text='Rating update FAILED. Do you want to continue, ERASING all failed ratings?' --cancel-label='Cancel' --ok-label='ERASE' && \
-			zenity --question --no-markup --text='SERIOUSLY?' --cancel-label='No!' --ok-label='Yes, ERASE ratings')
 
 	echo "updating playlists after rating update"
 	irank db

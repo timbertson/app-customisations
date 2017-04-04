@@ -25,6 +25,7 @@ stdenv.mkDerivation {
 	buildInputs = with pkgs; [ makeWrapper ];
 	unpackPhase = "true";
 	buildPhase = "true";
+	dontGzipMan = "true"; # They already are, ya fool!
 	installPhase = ''
 		mkdir -p $out/bin $out/share
 		for f in ${pkgs.nix-prefetch-scripts}/bin/*; do

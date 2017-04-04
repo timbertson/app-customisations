@@ -1,5 +1,3 @@
 ./gup-update:
-	piep.json
-	version.json
-	daglink.json
+	*.json
 
