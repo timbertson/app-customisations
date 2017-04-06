@@ -45,12 +45,12 @@ in
 	"vim-indent-object" = mkgit
 		"https://github.com/michaeljsmith/vim-indent-object"
 		"1d3e4aac0117d57c3e1aaaa7e5a99f1d7553e01b"
-		"b9b044052f02010089589beefa1b1cad60603a29a940504ce380c57cdc9174cf";
+		"1xxl5pwbz56qjfxw6l686m1qc4a3q0r7afa9r5gjhgd1jy67z7d7";
 	
 	"vim-rust" = mkgit
 		"https://github.com/rust-lang/rust.vim"
 		"fa1bccc2bfc223326fb28869ed0461f39c7fa04a"
-		"8fb3e69a8834e65f1b33f2cc83b1ad36e65b273ea14443a43f2cbc9d66307f42";
+		"1i3qqcx7k6ai2bc9dq3g0arghz9fxylcdhdlcfy0hyghsrhv4ci7";
 	
 	"vim-stratifiedjs" = (mk {
 		src = fetchurl {

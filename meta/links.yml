@@ -23,6 +23,11 @@ meta:
         - ubuntu
         - ubuntu-natty
         - tv
+    docker-dev:
+      tags:
+        - linux
+        - fish
+        - nix
     mba.local:
       tags:
        - osx
