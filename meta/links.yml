@@ -8,7 +8,6 @@ meta:
         - root
         - multi-user
         - linux
-        # - mac
         - desktop
         - fedora
         - shellshape
@@ -78,8 +77,12 @@ meta:
   path: ../root/dnsmasq.d/localhost.conf
   tags: root linux
 
+~/.vim:
+  path: ../vim
+
 ~/.vimrc:
   path: ../vim/vimrc
+  tags: linux nix
 
 ~/.vim:
   path: ../vim
@@ -208,19 +211,19 @@ meta:
 ## KEYBOARD TYPES
 ~/.xkb:
   path: ../home/xkb-mac
-  tags: mac fedora xkb
+  tags: mac-kb fedora xkb
 
 /bin/reset-xkb:
   path: ../bin/reset-xkb
-  tags: mac fedora xkb
+  tags: mac-kb fedora xkb
 
 ~/.config/dconf.user.d/disable-gnome-xkb:
   path: ../home/dconf/disable-gnome-xkb
-  tags: mac fedora xkb
+  tags: mac-kb fedora xkb
 
 ~/.config/dconf.user.d/xkb-mac:
   path: ../home/dconf/xkb-mac
-  tags: mac linux xkb
+  tags: mac-kb linux xkb
 
 ~/.config/dconf.user.d/focus-follows-mouse:
   path: ../home/dconf/focus-follows-mouse
@@ -242,7 +245,7 @@ meta:
 
 ~/.xmodmaprc:
   - path: ../home/xmodmaprc-mac
-    tags: mac xmodmap
+    tags: mac-kb xmodmap
   - path: ../home/xmodmaprc-pc
     tags: pc xmodmap
 

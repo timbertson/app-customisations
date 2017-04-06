@@ -42,11 +42,17 @@ function stop_container() {
 }
 
 MODE="ssh"
+SSH_ARGS=(-t)
 
 for i in "$@"; do
 	case "$i" in
 		-x)
 			set -x
+			shift
+		;;
+
+		-X)
+			SSH_ARGS+=(-X)
 			shift
 		;;
 
@@ -131,7 +137,7 @@ if [ "$MODE" == "ssh" ]; then
 			"$@"
 		echo "SSH started on localhost:$SSH_PORT"
 	)
-	exec ssh -X -t localhost -p "$SSH_PORT" "$USER_SHELL"
+	exec ssh "${SSH_ARGS[@]}" localhost -p "$SSH_PORT" "$USER_SHELL"
 elif [ "$MODE" == "failsafe" ]; then
 	exec docker run "${RUN_ARGS[@]}" -ti "$IMAGE_NAME" /bin/bash
 elif [ "$MODE" == "attach" ]; then
