@@ -42,7 +42,7 @@ pkgs // rec {
 	my-borg-task = callPackage ./my-borg-task.nix {};
 	my-nix-prefetch-scripts = callPackage ./nix-prefetch-scripts.nix {};
 	opam2nix = opam2nix-packages.opam2nix;
-	passe-client = tryImport "${home}/dev/ocaml/passe/default.nix" { target="client"; opam2nix = opam2nix-packages; };
+	passe-client = tryImport "${home}/dev/ocaml/passe-stable/default.nix" { target="client"; opam2nix = opam2nix-packages; };
 	pyperclip = callPackage ./pyperclip.nix {};
 	pythonPackages = pkgs.pythonPackages // {
 		dnslib = tryCallPackage "${home}/dev/python/dns-alias/nix/dnslib.nix" { inherit pythonPackages; };

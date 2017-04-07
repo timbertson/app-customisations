@@ -130,6 +130,12 @@ in
 				};
 			};
 
+			services.st = {
+				serviceConfig = {
+					ExecStart = "${pkgs.syncthing}/bin/syncthing";
+				};
+			};
+
 			services.xflux = sessionTask {
 				serviceConfig = {
 					ExecStart = "${pkgs.xflux}/bin/xflux -l 37.7833 -g 144.9667 -k 4600 -nofork";

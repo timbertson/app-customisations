@@ -2,17 +2,21 @@
 let packagesExt = pkgs // (import ./packages.nix { inherit pkgs; }); in
 with packagesExt;
 let
-	home = builtins.getEnv "HOME";
-	isMinimal = builtins.pathExists "${home}/dev/app-customisations/nix/.minimal";
+	defaultOpts = {
+		syncthing = false;
+		maximal = false;
+	};
+	opts = defaultOpts // (if builtins.pathExists ./opts.nix then import ./opts.nix else {});
 	isDarwin = stdenv.isDarwin;
 	isLinux = stdenv.isLinux;
-	maximal = pkg: if isMinimal then null else pkg;
+	optional = flag: pkg: if flag then pkg else null;
+	maximal = pkg: optional opts.maximal pkg;
 	bash = "#!${pkgs.bash}/bin/bash";
 	wrapper = script: writeScript "wrapper" script;
 	wrappers = {
 		# ALL
 
-	} // (if isLinux && !isMinimal then {
+	} // (if isLinux && opts.maximal then {
 		# LINUX only...
 		"mount.ssh" = wrapper ''${bash}
 			set -eu
@@ -29,7 +33,7 @@ let
 		'';
 
 	} else {});
-	installed = with lib; remove null [
+	installed = with lib; remove null ([
 		git
 		my-nix-prefetch-scripts
 		daglink
@@ -48,10 +52,11 @@ let
 		(maximal python2Packages.ipython)
 		(maximal python3Packages.ipython)
 		pyperclip
+		(optional opts.syncthing syncthing)
 
 		(buildFromSource ./sources/piep.json)
 		(buildFromSource ./sources/version.json)
-	] ++ (if isMinimal then [] else if isLinux then with ocamlPackages_4_03; [
+	] ++ (if !opts.maximal then [] else if isLinux then with ocamlPackages_4_03; [
 		#tilda
 		pythonPackages.gsutil
 		spotify
@@ -98,7 +103,7 @@ let
 				ln -s ${script} $out/bin/${name}
 			''
 		) wrappers
-	);
+	));
 	dirs = [ "bin" "etc" "share"];
 	system = import ./system.nix { pkgs = packagesExt; };
 	gnome-shell-extensions = import ./gnome-shell.nix { pkgs = packagesExt; };
