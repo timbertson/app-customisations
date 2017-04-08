@@ -5,6 +5,7 @@ let
 	defaultOpts = {
 		syncthing = false;
 		maximal = false;
+		git-readonly = false;
 	};
 	home = builtins.getEnv "HOME";
 	optsPath = "${home}/.nixpkgs/opts.nix";
@@ -36,7 +37,7 @@ let
 
 	} else {});
 	installed = with lib; remove null ([
-		git
+		(if opts.git-readonly then callPackages ./git-readonly.nix {} else git)
 		my-nix-prefetch-scripts
 		daglink
 		(maximal gsel)
