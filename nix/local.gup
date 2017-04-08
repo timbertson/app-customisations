@@ -2,12 +2,16 @@
 set -eu
 if [ "$#" -eq 0 ]; then
 	cd "$(dirname "$0")"
-	dest="local"
-	src="local"
+	dest="$(basename "$0" .gup)"
+	src="local.nix"
 else
 	dest="$2"
-	src="$2"
+	src="$2.nix"
 	gup --always
 fi
-nix-build --out-link "$dest" "$src.nix" --show-trace
+if [ ! -f "$src" ]; then
+	# support linking this gupfile elsewhere..
+	src="$HOME/dev/app-customisations/nix/$src"
+fi
+nix-build --out-link "$dest" "$src" --show-trace
 nix-store --add --add-root --indirect "$dest"
