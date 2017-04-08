@@ -280,7 +280,13 @@ meta:
 ~/.local/nix:
   path: ../nix/local
   optional: true
-  tags: nix
+  tags: nix linux
+
+# to prevent clashes, OSX has to build ~/.local/nix out of tree
+~/.local/nix.gup:
+  path: ../nix/local.gup
+  optional: true
+  tags: nix osx
 
 ~/.config/systemd/user:
   path: ../nix/local/share/systemd/user

@@ -6,7 +6,9 @@ let
 		syncthing = false;
 		maximal = false;
 	};
-	opts = defaultOpts // (if builtins.pathExists ./opts.nix then import ./opts.nix else {});
+	home = builtins.getEnv "HOME";
+	optsPath = "${home}/.nixpkgs/opts.nix";
+	opts = defaultOpts // (if builtins.pathExists optsPath then import optsPath else {});
 	isDarwin = stdenv.isDarwin;
 	isLinux = stdenv.isLinux;
 	optional = flag: pkg: if flag then pkg else null;
