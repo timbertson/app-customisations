@@ -15,6 +15,7 @@ RUN_ARGS=(\
 	--cap-add=SYS_PTRACE \
 	-p "127.0.0.1:$SSH_PORT:$SSH_PORT" \
 	--volume ~/docker/home:/home/tim \
+	--volume /tmp/.X11-unix:/tmp/.X11-unix \
 	--volume dev-nix:/nix
 )
 DETACH="--detach"
@@ -82,7 +83,7 @@ for i in "$@"; do
 			shift
 		;;
 
-		-f|--foregreound)
+		-f|--foreground)
 			DETACH="-ti"
 			shift
 		;;
