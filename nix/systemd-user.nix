@@ -132,6 +132,7 @@ in
 
 			services.st = {
 				serviceConfig = {
+					Environment = ["STTRACE=connections,discover"];
 					ExecStart = "${pkgs.syncthing}/bin/syncthing";
 				};
 			};
@@ -150,16 +151,16 @@ in
 				listenStreams = [ "%t/xflux.sock" ];
 			};
 
-			services.crashplan = sessionTask {
-				path = systemPath;
-				serviceConfig = {
-					Type="forking";
-					PIDFile =    "${home}/crashplan/CrashPlanEngine.pid";
-					ExecStart =  "${home}/crashplan/bin/CrashPlanEngine start";
-					ExecStop =   "${home}/crashplan/bin/CrashPlanEngine stop";
-					ExecReload = "${home}/crashplan/bin/CrashPlanEngine restart";
-				};
-			};
+			# services.crashplan = sessionTask {
+			# 	path = systemPath;
+			# 	serviceConfig = {
+			# 		Type="forking";
+			# 		PIDFile =    "${home}/crashplan/CrashPlanEngine.pid";
+			# 		ExecStart =  "${home}/crashplan/bin/CrashPlanEngine start";
+			# 		ExecStop =   "${home}/crashplan/bin/CrashPlanEngine stop";
+			# 		ExecReload = "${home}/crashplan/bin/CrashPlanEngine restart";
+			# 	};
+			# };
 
 			timers.daglink = {
 				wantedBy = [ "default.target" "timers.target" ];

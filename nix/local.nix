@@ -61,7 +61,7 @@ let
 		(buildFromSource ./sources/version.json)
 	] ++ (if !opts.maximal then [] else if isLinux then with ocamlPackages_4_03; [
 		#tilda
-		pythonPackages.gsutil
+		google-cloud-sdk
 		spotify
 		xbindkeys
 		jsonnet
@@ -77,6 +77,7 @@ let
 		dumbattr
 		shellshape
 		snip
+		template
 		trash
 		(runCommand "systemd-units" {} ''
 			mkdir -p $out/share/systemd

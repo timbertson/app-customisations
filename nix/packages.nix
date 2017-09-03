@@ -36,7 +36,7 @@ pkgs // rec {
 	gsel = tryImport "${home}/dev/ocaml/gsel/default.nix" {};
 	gup = default pkgs.gup (tryImport "${home}/dev/ocaml/gup/local.nix" {});
 	irank = tryImport "${home}/dev/python/irank/default.nix" {};
-	irank-releases = callPackage ./irank-releases.nix {};
+	irank-releases = callPackage ./irank-releases.nix { inherit irank; };
 	jsonnet = callPackage ./jsonnet.nix {};
 	music-import = tryImport "${home}/dev/python/music-import/nix/local.nix" {};
 	my-borg-task = callPackage ./my-borg-task.nix {};
@@ -49,7 +49,7 @@ pkgs // rec {
 	};
 	shellshape = tryImport "${home}/dev/gnome-shell/shellshape@gfxmonk.net/default.nix" {};
 	snip = tryBuildHaskell "${home}/dev/haskell/snip/nix/default.nix" ;
-
+	template = tryImport "${home}/dev/python/template/default.nix" {};
 	trash = tryImport "${home}/dev/python/trash/default.nix" {};
 	vim = (callPackage ./vim.nix { pluginArgs = { inherit gsel vim-watch; }; });
 	vim-watch = callPackage ./vim-watch.nix {};

@@ -157,6 +157,7 @@ def populate_db(mbdb, options, irank_db):
 			logging.info("getting releases[%d:%d] for artist %s [%s]", offset, offset+limit, artist, artist_id)
 			recordings = mb.browse_releases(artist=artist_id, release_type=['album', 'ep'], includes=['url-rels'], offset=offset, limit=limit)['release-list']
 			# recordings = sorted(recordings, key=lambda rec: rec.get('date', ''))
+			logging.info("got %d recordings", len(recordings))
 			for title, recordings in itertools.groupby(recordings, lambda x: x['title']):
 				recordings = list(recordings)
 				dates = list(map(lambda rec: rec.get('date', ''), recordings))
@@ -203,7 +204,8 @@ def main():
 	mbdb = (load_db if existing else init_db)(mb_path)
 	version = irank.version()
 	mb.set_useragent("irank", version, "https://github.com/gfxmonk/python-irank")
-	mb.set_rate_limit(2)
+	logging.debug("setting rate limit to 2/s")
+	mb.set_rate_limit(new_requests = 2)
 	try:
 		if not (existing and options.quick):
 			db = irank_db.load(app.db_path)

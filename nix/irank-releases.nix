@@ -1,15 +1,15 @@
-{ lib, stdenv, makeWrapper, pythonPackages }:
+{ lib, stdenv, makeWrapper, pythonPackages, irank }:
 let
-	pythonDeps = with pythonPackages; [ musicbrainzngs pyyaml ];
+	pythonDeps = [ irank ] ++ (with pythonPackages; [ musicbrainzngs pyyaml ]);
+	pythonpath = lib.concatStringsSep ":" (map (dep: "${dep}/lib/${pythonPackages.python.libPrefix}/site-packages") pythonDeps);
 in
 stdenv.mkDerivation {
 	name = "irank-releases";
 	buildInputs = [ makeWrapper ];
-	propagatedBuildInputs = pythonDeps;
+	shellHook = ''
+		export PYTHONPATH="${pythonpath}"
+	'';
 	buildCommand =
-		let pythonpath =
-			lib.concatStringsSep ":" (map (dep: "${dep}/lib/${pythonPackages.python.libPrefix}/site-packages") pythonDeps);
-		in
 		''
 			mkdir -p "$out/bin"
 			makeWrapper ${../bin/irank-releases.py} "$out/bin/irank-releases" \

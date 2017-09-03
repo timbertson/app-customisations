@@ -4,6 +4,11 @@ pkgs.stdenv.mkDerivation {
 	name = "git-ro";
 	buildCommand = ''
 		mkdir -p $out/bin
+		cat > $out/bin/git-rw <<"EOF"
+#!/${pkgs.bash}/bin/bash
+exec "${pkgs.git}/bin/git" "$@"
+EOF
+
 		cat > $out/bin/git <<"EOF"
 #!/${pkgs.bash}/bin/bash
 set -e
@@ -36,6 +41,8 @@ for f in "$@"; do
 done
 callgit
 EOF
+
 	chmod +x $out/bin/git
+	chmod +x $out/bin/git-rw
 	'';
 }
