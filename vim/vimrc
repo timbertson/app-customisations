@@ -344,6 +344,10 @@ map <S-Space> b
 " foward & back words at a time
 map <S-h> b
 map <S-l> w
+" scroll half screen
+map <A-l> zL
+map <A-h> zH
+map <A-Space> zH
 
 " ctrl + backspace for deleting a word
 imap <C-BS> <C-W>
