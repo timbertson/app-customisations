@@ -1,0 +1,11 @@
+#!/bin/bash
+set -eu
+# set -x
+fswatch /tmp/vim-watch/ | while read f; do
+  echo "$(date "+%H:%M:%S"): reloading ..."
+  osascript -e '
+    tell application "Google Chrome"
+      reload active tab of window 1
+    end tell
+  '
+done

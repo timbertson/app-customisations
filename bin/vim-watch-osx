@@ -1,0 +1,7 @@
+#!/bin/bash
+fswatch /tmp/vim-watch/save | while read f; do
+	echo " -- $(date) -- "
+	env "$@"
+	echo " -- (waiting ... ) -- "
+	echo ""
+done
