@@ -1,2 +1,0 @@
-# usage: addsubtree http://github.com/tpope/vim-fugitive.git vim/bundle/vim-subtree
-git-subtree add --squash --prefix="$2" "$1" master

@@ -29,7 +29,7 @@ in
 pkgs // rec {
 	inherit tryImport default buildFromSource;
 	daglink = buildFromSource ./sources/daglink.json;
-	dconf-user-overrides = callPackage ./dconf-user-overrides.nix {};
+	dconf-user-overrides = tryImport "${home}/dev/python/dconf-user-overrides/nix/local.nix" {};
 	dns-alias = tryCallPackage "${home}/dev/python/dns-alias/nix/default.nix" { inherit pythonPackages; };
 	dumbattr = tryImport "${home}/dev/python/dumbattr/nix/local.nix" {};
 	eog-rate = tryImport "${home}/dev/python/eog-rate/nix/local.nix" {};

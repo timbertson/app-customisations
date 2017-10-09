@@ -1,6 +1,12 @@
-#!bash -eu
-gup -u polkit/all sudoers/all systemd/all
+#!/usr/bin/env bash
+set -eu
+if [ -z "${GUP_TARGET:-}" ]; then
+	echo 'Reexecuting with bundled `gup`...'
+	base="$(dirname "$0")"
+	exec "$base/bootstrap/gup" "$base/install"
+fi
+exit 1
 
-#suggested:
-# pkcon remove setroubleshoot
-# pkcon install tracker-preferences (and then disable tracker)
+export PATH="$HOME/.nix-profile/bin:$PATH"
+export NIX_PATH="$HOME/.nix-defexpr/channels"
+gup -u root/polkit/all root/sudoers/all root/systemd/all root/shell root/packages

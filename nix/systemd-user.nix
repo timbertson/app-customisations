@@ -3,11 +3,11 @@ let
 	sd = import <nixpkgs/nixos/modules/system/boot/systemd-lib.nix> { inherit config lib pkgs; };
 	optional = x: attrs: if (x == null || x == false) then {} else attrs;
 	home = builtins.getEnv "HOME";
-	displayEnv = ["DISPLAY=:0"]; # ugh...
+	displayEnv = ["DISPLAY=:1"]; # ugh...
 	libglEnv = ["LD_LIBRARY_PATH=${pkgs.mesa}/lib"];
 	sessionTask = x: {wantedBy = ["desktop-session.target"]; } // x;
 	systemPath = [ "/usr/local" "/usr" "/" ];
-	loadSessionVars = "eval \"$(session-vars --all --process gnome-shell --export)\"";
+	loadSessionVars = "eval \"$(/home/tim/.bin/session-vars --all --process gnome-shell --export)\"";
 	userPath = systemPath ++ [
 		"${home}"
 		"${home}/dev/app-customisations"
@@ -137,19 +137,19 @@ in
 				};
 			};
 
-			services.xflux = sessionTask {
-				serviceConfig = {
-					ExecStart = "${pkgs.xflux}/bin/xflux -l 37.7833 -g 144.9667 -k 4600 -nofork";
-					Environment = displayEnv;
-					# xflux goes nuts when input is /dev/null, probably a read loop somewhere.
-					# Just make it a socket which nobody talks to
-					StandardInput = "socket";
-				};
-			};
-
-			sockets.xflux = sessionTask {
-				listenStreams = [ "%t/xflux.sock" ];
-			};
+			# services.xflux = sessionTask {
+			# 	serviceConfig = {
+			# 		ExecStart = "${pkgs.xflux}/bin/xflux -l 37.7833 -g 144.9667 -k 4600 -nofork";
+			# 		Environment = displayEnv;
+			# 		# xflux goes nuts when input is /dev/null, probably a read loop somewhere.
+			# 		# Just make it a socket which nobody talks to
+			# 		StandardInput = "socket";
+			# 	};
+			# };
+      #
+			# sockets.xflux = sessionTask {
+			# 	listenStreams = [ "%t/xflux.sock" ];
+			# };
 
 			# services.crashplan = sessionTask {
 			# 	path = systemPath;
@@ -184,10 +184,11 @@ in
 			services.dconf-user-overrides = {
 				path = userPath;
 				serviceConfig = {
+					ExecStart = "${pkgs.dconf-user-overrides}/bin/dconf-user-overrides";
 					Environment = [
 						"XDG_DATA_DIRS=/usr/local/share/:/usr/share/:${pkgs.shellshape}/share/gnome-shell/extensions/shellshape@gfxmonk.net/data"
+						"GIO_EXTRA_MODULES=${pkgs.gnome3.dconf.lib}/lib/gio/modules"
 					];
-					ExecStart = "${pkgs.dconf-user-overrides}/bin/dconf-user-overrides";
 				};
 			};
 		} [

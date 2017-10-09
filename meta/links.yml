@@ -14,7 +14,17 @@ meta:
         - fish
         - nix
         - systemd
-        - meep
+    pew:
+      tags:
+        - root
+        - multi-user
+        - linux
+        - desktop
+        - fedora
+        - shellshape
+        - fish
+        - nix
+        - systemd
     tjcee:
       tags:
         - root
