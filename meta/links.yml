@@ -203,7 +203,7 @@ meta:
 
 ## multi-user
 ~/users/www-browser/.themes:
- path: /home/tim/.themes
+ path: /home/tim/.local/share/themes
  tags: multi-user linux
 
 ~/users/www-browser/.config/fontconfig:

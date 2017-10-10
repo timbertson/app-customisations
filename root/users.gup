@@ -1,0 +1,45 @@
+#!/usr/bin/env python
+from __future__ import print_function
+import os
+
+if os.geteuid() != 0:
+	print("reexecing as root...")
+	os.execvp('sudo', ['sudo','python', __file__])
+
+import pwd
+import subprocess
+users = {}
+for user in pwd.getpwall():
+	users[user.pw_name] = user
+
+def run(cmd):
+	print(' + ' + ' '.join(cmd))
+	subprocess.check_call(cmd)
+
+# print(repr(users))
+def make_user(name, uid, groupname=None):
+	user = users.get(name)
+	home = '/home/'+name
+	if not os.path.lexists(home):
+		print('creating home directory for %s' % (name,))
+		run(['ln', '-s', 'tim/users/'+name, home])
+	if user is None:
+		cmd = ['adduser', '-d', home, '--uid', uid, '--no-create-home']
+		if groupname is not None:
+			cmd.extend(['--gid', groupname])
+		else:
+			cmd.extend(['--user-group'])
+		print('creating user %s' % (name,))
+		run(cmd)
+	else:
+		print('user %s already exists' % (name,))
+		if groupname is not None:
+			import grp
+			gid = user.pw_gid
+			group = grp.getgrgid(gid)
+			if group.gr_name != groupname:
+				print('fixing %s group (%s -> %s)' % (name, group.gr_name, groupname))
+				run(['usermod', '-g', groupname, name])
+
+make_user('www-browser', uid=1001, groupname='tim')
+make_user('sandbox', uid=1002)

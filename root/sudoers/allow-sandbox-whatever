@@ -1,4 +1,3 @@
-Defaults:username !requiretty
 Defaults:www-browser !requiretty
 %wheel ALL=(sandbox) NOPASSWD: ALL
 %wheel ALL=(www-browser) NOPASSWD: ALL
