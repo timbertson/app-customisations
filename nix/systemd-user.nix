@@ -80,7 +80,7 @@ in
 				serviceConfig = {
 					ExecStart = "${pkgs.xbindkeys}/bin/xbindkeys --nodaemon";
 					Environment = displayEnv;
-					Restart = "always";
+					Restart = "on-abnormal";
 					RestartSec = "2";
 				};
 			};

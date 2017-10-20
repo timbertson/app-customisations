@@ -6,3 +6,4 @@ __pycache__
 .gup/
 .envrc
 .DS_Store
+.merlin

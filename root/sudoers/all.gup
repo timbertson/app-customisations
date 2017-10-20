@@ -1,5 +1,5 @@
 #!bash -eu
-src="allow-sandbox-whatever"
+src="local-rules"
 gup -u $src
 visudo --check -f $src
 sudo cp $src /etc/sudoers.d/

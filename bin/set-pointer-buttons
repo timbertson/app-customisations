@@ -1,21 +1,82 @@
 #!/usr/bin/env python
 from __future__ import print_function
 from optparse import OptionParser
-import os, sys, subprocess, logging
+import os, sys, subprocess, logging, itertools
 
 logging.basicConfig(level=logging.WARN, format=(os.path.basename(__file__) + ": %(msg)s"))
 
-def _run(*a, **k):
-	return subprocess.check_output(*a, **k)
+def print_cmd(cmd):
+	logging.info(' + ' + ' '.join(cmd))
+
+def _run_output(cmd, **k):
+	print_cmd(cmd)
+	return subprocess.check_output(cmd, **k)
+
+def _run(cmd, **k):
+	print_cmd(cmd)
+	return subprocess.check_call(cmd, **k)
+
+class BaseDevice(object):
+	def __repr__(self):
+		return("%s(%r)" % (type(self).__name__, self.props))
+
+	def __str__(self):
+		return repr(self)
+
+class LibinputDevice(BaseDevice):
+	def __init__(self, lines):
+		props = {}
+		for line in lines:
+			key, val = line.split(':', 1)
+			props[key.strip()] = val.strip()
+		self.props = props
+
+	def matches_name(self, name):
+		return name in self.props['Device']
+
+	def is_pointer(self):
+		return 'pointer' in self.props['Capabilities']
+
+	def is_virtual(self):
+		return False # haven't seen any yet...
+
+	def id(self):
+		return int(self.props['Group']) # XXX is it the group? Or the number portion of `Kernel`?
+
+class XinputDevice(BaseDevice):
+	def __init__(self, line):
+		props = {}
+		props['name'], props['tags'], props['device_type'] = line.split('\t')
+		props['name'] = props['name'].strip()
+		self.props = props
+
+	def matches_name(self, name):
+		return name in self.props['name']
+
+	def is_pointer(self):
+		return 'pointer' in self.props['device_type']
+
+	def is_virtual(self):
+		return 'Virtual' in self.props['name']
+
+	def id(self):
+		key, id = self.props['tags'].split('=', 1)
+		assert key == 'id', "unknown key from `xinput list`: %s" % (key,)
+		return int(id)
 
 def main():
 	p = OptionParser()
 	p.add_option('-n', '--name', help='Change only devices containing NAME')
 	p.add_option('-v', '--verbose', help='Verbose logging', action='store_true')
+	p.add_option('--wayland', action='store_true')
+	p.add_option('--xorg', action='store_false', dest='wayland')
 	opts, args = p.parse_args()
 
 	if opts.verbose:
-		logging.getLogger().setLevel(logging.INFO)
+		logging.getLogger().setLevel(logging.DEBUG)
+
+	is_wayland = ('WAYLAND_DISPLAY' in os.environ) if opts.wayland is None else opts.wayland
+	logging.info("wayland=%r" % (is_wayland))
 
 	changes = {}
 	for arg in args:
@@ -26,37 +87,54 @@ def main():
 		assert k not in changes, "already mapped button %s" % key
 		changes[k] = v
 	
-	def print_inputs(desc):
-		logging.info("inputs (%s):\n   %s" % (desc, "\n   ".join(['\t'.join(line) for line in input_list])))
+	def print_devices(desc):
+		logging.info("Devices (%s):" % (desc,))
+		for device in devices:
+			logging.info(" - %r" % (device,))
 
-	input_list = [line.split('\t') for line in _run(['xinput', 'list']).splitlines()]
-	print_inputs("initial")
-	input_list = [line for line in input_list if 'pointer' in line[-1]]
-	print_inputs("pointer")
-	input_list = [line for line in input_list if 'Virtual' not in line[0]]
-	print_inputs("nonvirtual")
+	devices = []
+	if is_wayland:
+		output = _run_output(['sudo', 'libinput', 'list-devices']).splitlines()
+		device_sections = itertools.groupby(output, bool)
+		for nonzero, section in device_sections:
+			if nonzero:
+				devices.append(LibinputDevice(section))
+	else:
+		output = _run_output(['xinput', 'list']).splitlines()
+		for line in output:
+			devices.append(XinputDevice(line))
+
+	def filter_list(pred, devices):
+		return list(filter(pred, devices))
+	
+	print_devices("initial")
+
+	devices = filter_list(lambda dev: dev.is_pointer(), devices)
+	print_devices("pointer")
+
+	devices = filter_list(lambda dev: not dev.is_virtual(), devices)
+	print_devices("nonvirtual")
 
 	if opts.name is not None:
-		input_list = [line for line in input_list if opts.name in line[0]]
-		print_inputs("matching name")
-	assert len(input_list) > 0, "no input devices found%s" % ("" if opts.name is None else (" matching name " + repr(opts.name)))
+		devices = filter_list(lambda dev: dev.matches_name(opts.name), devices)
+		print_devices("matching name")
 
-	if len(input_list) > 1:
+	assert len(devices) > 0, "no input devices found%s" % ("" if opts.name is None else (" matching name " + repr(opts.name)))
+
+	if len(devices) > 1:
 		logging.warn("multiple matching input devices found")
 
-	for line in input_list:
-		key, id = line[1].split('=', 1)
-		assert key == 'id', "inknown key from `xinput list`: %s" % (key,)
-		id = int(id)
-		mapping = _run(['xinput', 'get-button-map', str(id)]).strip().split(' ')
+	for device in devices:
+		id = device.id()
+		mapping = _run_output(['xinput', 'get-button-map', str(id)]).strip().split(' ')
 		mapping = range(1, len(mapping)+1)
 		for btn, val in changes.items():
 			idx=btn-1
 			assert idx < len(mapping), "can't set button %s - pointer<%s> only has %s buttons!" % (btn, id, len(mapping))
 			mapping[idx] = str(val)
 		mapping = list(map(str, mapping))
-		logging.info("Setting input device %s button map to %s" % (id, " ".join(mapping)))
-		subprocess.check_call(['xinput', 'set-button-map', str(id)] + mapping)
+		logging.warn("Setting input device %s button map to %s" % (id, " ".join(mapping)))
+		_run(['xinput', 'set-button-map', str(id)] + mapping)
 
 try:
 	main()

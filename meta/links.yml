@@ -334,10 +334,6 @@ meta:
 
 ## LINUX
 
-/etc/modules-load.d/ecryptfs.conf:
-  path: ../root/modules-load.d/ecryptfs.conf
-  tags: fedora root
-
 /etc/yum.repos.d/google-chrome.repo:
   path: ../root/yum.repos.d/google-chrome.repo
   tags: fedora root
