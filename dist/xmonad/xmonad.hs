@@ -1,1 +1,0 @@
-../../ubuntu/home/xmonad.hs

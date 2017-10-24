@@ -7,3 +7,4 @@ __pycache__
 .envrc
 .DS_Store
 .merlin
+/nix/local.tgz

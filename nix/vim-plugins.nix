@@ -93,6 +93,14 @@ in
 		"05xx8nz64v24chdb84jv17b33j7aaz0bc7mrj9gxinzbzj4bin22";
 	
 	"gsel" = if gsel == null then null else mk { src = "${gsel}/share/vim"; };
-	# "gsel" = if builtins.pathExists "/home/tim/dev/ocaml/gsel/vim" then mk { src = /home/tim/dev/ocaml/gsel/vim; } else null;
 
+	"NeoSolarized" = mkgit
+		"https://github.com/icymind/NeoSolarized"
+		"2651e90402a70794d8bc653f16d8515b99f6c7c5"
+		"0sgyq34wl8bndsbg7sjwz4rny0bjpg1skybsha22b87626zyvyq4";
+
+		"neoterm" = mkgit
+			"https://github.com/kassio/neoterm"
+			"701c9fb20ebac1c4d05410f8054fa004bc9ecba4"
+			"1wblgjn4c6ai7jb46xv3vx4dpwbmxrs5wr1824z2blnb17glas7p";
 }

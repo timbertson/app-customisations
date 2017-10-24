@@ -100,6 +100,8 @@ end
 
 set -x GEM_HOME $HOME/.gem
 
+set -x FZF_DEFAULT_OPTS '--color=spinner:-1,info:8 --height=50% --min-height 5 --reverse'
+
 if [ -r ~/.aliasrc ]
 	. ~/.aliasrc
 end

@@ -1,7 +1,6 @@
 {pkgs ? import <nixpkgs> {}}:
-let packagesExt = pkgs // (import ./packages.nix { inherit pkgs; }); in
-with packagesExt;
 let
+	stdenv = pkgs.stdenv;
 	defaultOpts = {
 		syncthing = false;
 		maximal = false;
@@ -10,8 +9,14 @@ let
 	home = builtins.getEnv "HOME";
 	optsPath = "${home}/.nixpkgs/opts.nix";
 	opts = defaultOpts // (if builtins.pathExists optsPath then import optsPath else {});
+	packagesExt = pkgs // (import ./packages.nix {
+		inherit pkgs;
+		enableNeovim = stdenv.isLinux && opts.maximal;
+	});
 	isDarwin = stdenv.isDarwin;
 	isLinux = stdenv.isLinux;
+in
+with packagesExt; let
 	optional = flag: pkg: if flag then pkg else null;
 	maximal = pkg: optional opts.maximal pkg;
 	bash = "#!${pkgs.bash}/bin/bash";
@@ -40,8 +45,8 @@ let
 		(if opts.git-readonly then callPackages ./git-readonly.nix {} else git)
 		my-nix-prefetch-scripts
 		daglink
-		(maximal gsel)
 		(maximal ctags)
+		(maximal fzf)
 		fish
 		(maximal nodejs)
 		direnv
@@ -57,8 +62,8 @@ let
 		pyperclip
 		(optional opts.syncthing syncthing)
 
-		(buildFromSource ./sources/piep.json)
-		(buildFromSource ./sources/version.json)
+		(buildFromSource ./sources/piep.json {})
+		(buildFromSource ./sources/version.json {})
 	] ++ (if !opts.maximal then [] else if isLinux then with ocamlPackages_4_03; [
 		#tilda
 		google-cloud-sdk
@@ -70,6 +75,8 @@ let
 		irank-releases
 		eog-rate
 		my-borg-task
+		neovim
+		neovim-remote
 		ocamlscript
 		ocaml
 		vlc

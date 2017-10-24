@@ -1,4 +1,4 @@
-{pkgs ? import <nixpkgs> {}}:
+{pkgs ? import <nixpkgs> {}, enableNeovim ? false }:
 with pkgs;
 let
 	home = builtins.getEnv "HOME";
@@ -16,19 +16,19 @@ let
 
 	default = dfl: obj: if obj == null then dfl else obj;
 	opam2nix-packages = callPackage ./opam2nix-packages.nix {};
-	buildFromSource = jsonFile:
+	buildFromSource = jsonFile: attrs:
 		let
-			attrs = pkgs.nix-update-source.fetch jsonFile;
-			pkg = (callPackage "${attrs.src}/nix/default.nix" {});
+			fetched = pkgs.nix-update-source.fetch jsonFile;
+			pkg = (callPackage "${fetched.src}/nix/default.nix" attrs);
 		in
 		lib.overrideDerivation pkg (base: {
-			name = "${attrs.repo}-${attrs.version or attrs.fetch.version}";
-			inherit (attrs) src;
+			name = "${fetched.repo}-${fetched.version or fetched.fetch.version}";
+			inherit (fetched) src;
 		});
 in
 pkgs // rec {
 	inherit tryImport default buildFromSource;
-	daglink = buildFromSource ./sources/daglink.json;
+	daglink = buildFromSource ./sources/daglink.json {};
 	dconf-user-overrides = tryImport "${home}/dev/python/dconf-user-overrides/nix/local.nix" {};
 	dns-alias = tryCallPackage "${home}/dev/python/dns-alias/nix/default.nix" { inherit pythonPackages; };
 	dumbattr = tryImport "${home}/dev/python/dumbattr/nix/local.nix" {};
@@ -51,6 +51,10 @@ pkgs // rec {
 	snip = tryBuildHaskell "${home}/dev/haskell/snip/nix/default.nix" ;
 	template = tryImport "${home}/dev/python/template/default.nix" {};
 	trash = tryImport "${home}/dev/python/trash/default.nix" {};
-	vim = (callPackage ./vim.nix { pluginArgs = { inherit gsel vim-watch; }; });
-	vim-watch = callPackage ./vim-watch.nix {};
+	vim = (callPackage ./vim.nix { pluginArgs = { inherit vim-watch; }; });
+	neovim = vim.neovim;
+
+	vim-watch = default
+		(buildFromSource ./sources/vim-watch.json { inherit enableNeovim; })
+		(tryImport "${home}/dev/vim/vim-watch/nix/local.nix" { inherit enableNeovim; });
 }

@@ -1,4 +1,3 @@
-set nocompatible
 let g:pathsep = ':'
 if has("win32")
 	let g:pathsep = ';'
@@ -14,7 +13,7 @@ endif
 
 if stridx(&shell, "fish") != -1
 	" vim and fish: worst of friends
-	set shell=sh
+	set shellpipe="2>&1|tee"
 endif
 
 " defaults for indent-finder when no other preference is clear from the file
@@ -22,14 +21,19 @@ let g:indent_preferred_expandtab=0
 let g:indent_finder_default_style="tab"
 let g:indent_finder_default_width="2"
 
-" pathogen bootstrap, then use it to make $VIMPATH useful
-if exists("$PATHOGEN_ROOT")
-	let &runtimepath = $PATHOGEN_ROOT . "," . &runtimepath
-	let &runtimepath = pathogen#join(split($VIMPATH,g:pathsep),&runtimepath)
-	call pathogen#runtime_append_all_bundles()
-endif
+if has('nvim')
+	tnoremap <Esc> <C-\><C-n>
+" leader-t for toggling the terminal
+	let g:neoterm_autoinsert=1
+	" not sure which of these will grow on me...
+	nnoremap <leader>t :Ttoggle<cr>
+	nnoremap `` :Ttoggle<cr>
 
-if !has('nvim')
+	" pass some handy shortcuts through normal-mode
+	autocmd TermOpen * nnoremap <buffer> <C-r> a<C-r><C-\><C-n>
+	autocmd TermOpen * nnoremap <buffer> <C-c> a<C-c><C-\><C-n>
+else
+	" nice defaults which nvim already uses
 	set autoindent                 " Indent at the same level of the previous line
 	set autoread                   " Automatically read a file changed outside of vim
 	set backspace=indent,eol,start " Backspace for dummies
@@ -39,7 +43,6 @@ if !has('nvim')
 	set history=10000              " Maximum history record
 	set incsearch                  " Find as you type search
 	set laststatus=2               " Always show status line
-	set mouse=a                    " Automatically enable mouse usage
 	set smarttab                   " Smart tab
 	set ttyfast                    " Faster redrawing
 	set viminfo+=!                 " Viminfo include !
@@ -47,6 +50,7 @@ if !has('nvim')
 	set ttymouse=xterm2
 endif
 
+set mouse=a                    " Automatically enable mouse usage
 set nohlsearch                   " Highlight search terms
 set noexpandtab
 set cursorline
@@ -77,8 +81,11 @@ au InsertEnter * match
 au InsertLeave * match ExtraWhitespace /\S\zs\s\+$\|\t\zs \ze[^ #*]/
 
 set number
-let g:solarized_contrast="normal"
+set termguicolors
+let g:solarized_contrast="high"
+let g:neosolarized_contrast="normal"
 let g:solarized_italic=0
+let g:neosolarized_vertSplitBgTrans=0
 set background="dark"
 if has("gui_running")
 	color solarized
@@ -90,9 +97,9 @@ if has("gui_running")
 		set guifont=Monospace\ 11
 	endif
 else
-	" solarized is awful in most terminals which aren't configured for it:
-	if exists("$TERM_SOLARIZED")
-		let g:solarized_contrast="high"
+	if exists("$COLORTERM") && $COLORTERM == "truecolor"
+		color NeoSolarized
+	elseif exists("$TERM_SOLARIZED")
 		color solarized
 	else
 		color ir_black
@@ -419,9 +426,14 @@ let g:ctrlp_working_path_mode=2 " current directory
 let g:ctrlp_user_command = 'rg --files %s'
 let g:ctrlp_switch_buffer = 2
 
-" CommandT requires compilation, so we use CtrlP as a more portable fallback
-command! -narg=0 FindMeSomeFiles exec(exists(":CommandT") == 2 ? "CommandT" : "CtrlP")
-nmap <C-f> :FindMeSomeFiles<cr>
+" fuzzy finding mappings
+nmap <C-f> :GFiles<cr>
+nmap <C-b> :Buffers<cr>
+if has("gui_running") && !has("terminal")
+	" gvim without a terminal. fzf is rubbish, fallback to ctrlp
+	nmap <C-f> :CtrlP<cr>
+	nmap <C-b> :CtrlPBuffer<cr>
+end
 
 " use rg/ag if available
 if executable("rg")
@@ -444,7 +456,7 @@ nmap <leader><C-f> :CtrlP<cr>
 nmap <C-b> :CtrlPBuffer<cr>
 " nmap <leader>b :FuzzyFinderBuffer<cr>
 " nmap <leader>F :FuzzyFinderTaggedFile<cr>
-nmap <leader>t :CtrlPTag<cr>
+" nmap <leader>t :CtrlPTag<cr>
 
 " leader-t for showing nerd-tree
 nmap <leader>e :NERDTreeToggle<cr>
@@ -510,16 +522,3 @@ endfun
 
 command! -narg=* Pos call cursor(<f-args>)
 command! -narg=1 Column call cursor(line("."), <args>)
-
-" trialling...
-" hack to force autoload..
-silent! call gsel#NO_SUCH_FUNCTION()
-if exists("*gsel#DefaultMappings") && executable("gsel")
-	let g:gsel_file_list_command = "bash -c 'if git rev-parse --show-toplevel >/dev/null 2>&1; then git ls-files .; else find . -type f; fi'"
-
-	let units = systemlist("systemctl --user list-units gsel-server.socket --no-pager --no-legend")
-	if len(units) > 0
-		let g:gsel_command = "gsel-client"
-	endif
-	call gsel#DefaultMappings()
-endif
