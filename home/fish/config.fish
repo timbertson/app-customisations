@@ -85,6 +85,9 @@ end
 set FISH_CLIPBOARD_CMD "true" # Stop that.
 set -x BROWSER firefox
 set -x EDITOR vim
+if test -n "$NVIM_LISTEN_ADDRESS"
+	set -x EDITOR "nvr -cc split --remote-wait +'set bufhidden=wipe'"
+end
 set -x force_s3tc_enable true # games often need this
 
 set -x NOSE_PROGRESSIVE_EDITOR_SHORTCUT_TEMPLATE \

@@ -8,20 +8,21 @@ let
 	src = fetchgit 	{
 		"url" = "https://github.com/timbertson/opam2nix-packages.git";
 		"fetchSubmodules" = false;
-		"sha256" = "0ksj4bys5ci53iypf678d531444dykdcvxl7iy75bwila2sw70rd";
-		"rev" = "9636765ca43dedeeecab1ddcf47a59fa23778f9c";
+		"sha256" = "15jx91aigg85gzyidpa4xabcniz86phqr3v248dnzvls8j448w50";
+		"rev" = "65cd9e1ea26ada2367fd127304d3359c6c7643e0";
 	};
 	opam2nix = fetchgit 	{
 		"url" = "https://github.com/timbertson/opam2nix.git";
 		"fetchSubmodules" = false;
-		"sha256" = "0vf0k0y817fc8x9h1rg26ngvz3wyvwx600qh9p98dk3mai88cyga";
-		"rev" = "96c8d83a3262917562b243ebb5d0a8da0c7335a3";
+		"sha256" = "1xf7qhkd34dykx23hawmswla0b78s6g83y2mz74jh32ydg2x5i4g";
+		"rev" = "ccd6f4d4f8afc1f515fce373c50df721d5a86a6c";
 	};
 in
 if devRepo != "" then
 	let toPath = s: /. + s; in
 	callPackage "${devRepo}/nix" {} {
 		src = toPath "${devRepo}/nix/local.tgz";
-		opam2nix = toPath "${devRepo}/opam2nix/nix/local.tgz";
+		opam2nix = let devSrc = "${devRepo}/opam2nix/nix/local.tgz"; in
+			if builtins.pathExists devSrc then toPath devSrc else opam2nix;
 	}
 else callPackage "${src}/nix" {} { inherit src opam2nix; }

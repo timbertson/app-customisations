@@ -89,8 +89,8 @@ in
 
 	"indent-finder" = mkgit
 		"https://github.com/gfxmonk/indent-finder"
-		"4b92a176d2980c5fa4352232495eba416d777022"
-		"05xx8nz64v24chdb84jv17b33j7aaz0bc7mrj9gxinzbzj4bin22";
+		"a38cebd04988262eb6798eb2884ff67b46815aac"
+		"1hd8mk5k2jbpw5njjqy0kp8c46xnxzbl1zsq54d0wbyxxjyp8kdr";
 	
 	"gsel" = if gsel == null then null else mk { src = "${gsel}/share/vim"; };
 

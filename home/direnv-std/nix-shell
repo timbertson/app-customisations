@@ -17,7 +17,7 @@ log_status "loading cached vars from $vars"
 
 # All vars are serialized in the dump, which accidentally serializes some dynamic data.
 # Add such vars here, as we find them :/
-ignore='DBUS_SESSION_BUS_ADDRESS'
+ignore='DBUS_SESSION_BUS_ADDRESS NVIM_TERMINAL NVIM_LISTEN_ADDRESS XTERM COLORTERM'
 for var in $ignore; do
 	eval "if [ -n \"\${$var:-}\" ]; then _REAL_$var=\"\$$var\"; fi"
 done

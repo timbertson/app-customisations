@@ -18,6 +18,7 @@ if os.environ.get('VIM_ERR_DEBUG','0') == '1':
 
 p = OptionParser("Usage: %prog [OPTIONS] BUILD_COMMAND ...")
 p.add_option('-r', '--remote')
+p.add_option('-n', '--nvim', action='store_true', default = 'NVIM_LISTEN_ADDRESS' in os.environ)
 p.add_option('-v', '--verbose', action='store_true')
 p.add_option('-p', '--prompt', action='store_true')
 p.add_option('-s', '--source', dest='sources', action='append', default=[os.getcwd()], help='add source root')
@@ -73,13 +74,10 @@ REMOTE = None
 DELAYED_ACTION = None
 
 def open_remotely(opts, path, lineno, col):
-	cmd = [ 'vim' ]
+	cmd = [ 'nvr' if opts.nvim else 'vim' ]
 	remote_name = opts.remote
 	if remote_name is None:
-		try:
-			remote_name = os.environ['VIM_SVRNAME']
-		except KeyError:
-			pass
+		remote_name = os.environ.get('VIM_SVRNAME')
 	
 	if remote_name is not None:
 		cmd.extend(['--servername', remote_name])

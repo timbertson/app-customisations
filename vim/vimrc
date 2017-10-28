@@ -23,15 +23,22 @@ let g:indent_finder_default_width="2"
 
 if has('nvim')
 	tnoremap <Esc> <C-\><C-n>
+	tnoremap <leader><Esc> <Esc>
 " leader-t for toggling the terminal
 	let g:neoterm_autoinsert=1
 	" not sure which of these will grow on me...
 	nnoremap <leader>t :Ttoggle<cr>
 	nnoremap `` :Ttoggle<cr>
+	let $NVIM_TERMINAL = 1
 
 	" pass some handy shortcuts through normal-mode
 	autocmd TermOpen * nnoremap <buffer> <C-r> a<C-r><C-\><C-n>
 	autocmd TermOpen * nnoremap <buffer> <C-c> a<C-c><C-\><C-n>
+	autocmd TermOpen * nnoremap <buffer> <tab> a
+
+	" and break out of insert mode via window-switching
+	tmap <A-J> <esc><A-J>
+	tmap <A-K> <esc><A-K>
 else
 	" nice defaults which nvim already uses
 	set autoindent                 " Indent at the same level of the previous line
@@ -247,22 +254,17 @@ augroup END
 
 
 "" tab left & right
-map <A-j> gt
-map <A-k> gT
+nmap <A-j> :silent call Save_if_possible()<cr>gt
+nmap <A-k> :silent call Save_if_possible()<cr>gT
+
+" window management:
+" a-JK doesn't get in the way of platform bindings,
+nmap <a-J> :silent call Save_if_possible()<cr><c-w>w
+nmap <a-K> :silent call Save_if_possible()<cr><c-w>W
+
 
 " Visually select the text that was last edited/pasted
 nmap gV `[V`]
-
-" Bubble single lines
-nmap <M-Down> ]e
-nmap <M-S-J> ]e
-nmap <M-Up> [e
-nmap <M-S-K> [e
-" Bubble selection
-vmap <M-Down> ]e`[V`]
-vmap <M-S-J> ]e`[V`]
-vmap <M-Up> [e`[V`]
-vmap <M-S-K> [e`[V`]
 
 " I have never wanted these, but I do them by accident plenty:
 " Stop looking up stuff with `man` by accident!
@@ -451,13 +453,6 @@ elseif executable("ag")
 	let g:ackprg = 'ag --nogroup --nocolor --column'
 endif
 
-" but always have ctrlp available as well
-nmap <leader><C-f> :CtrlP<cr>
-nmap <C-b> :CtrlPBuffer<cr>
-" nmap <leader>b :FuzzyFinderBuffer<cr>
-" nmap <leader>F :FuzzyFinderTaggedFile<cr>
-" nmap <leader>t :CtrlPTag<cr>
-
 " leader-t for showing nerd-tree
 nmap <leader>e :NERDTreeToggle<cr>
 nmap <leader>E :NERDTreeFind<cr>
@@ -467,20 +462,6 @@ nmap <a-F7> :Grepper -cword -noprompt<cr>
 
 " refresh / redraw
 nmap <F5> :syntax sync fromstart<cr>:redraw!<cr>
-
-" window management:
-" a-JK doesn't get in the way of platform bindings,
-" c-tab / m-tab are historical
-map <a-J> <c-w>w
-map <a-K> <c-w>W
-if has("mac")
-	nmap <M-tab> <c-w>w
-	nmap <S-M-tab> <c-w>W
-else
-	nmap <C-tab> <c-w>w
-	nmap <S-C-tab> <c-w>W
-endif
-nmap <leader><c-l> <c-w>T
 
 " copy full path to clipboard
 nmap <C-c> :silent let @+ = expand("%:p")<cr>
@@ -521,4 +502,4 @@ fun! Snip(name)
 endfun
 
 command! -narg=* Pos call cursor(<f-args>)
-command! -narg=1 Column call cursor(line("."), <args>)
+command! -narg=1 Col call cursor(line("."), <args>)

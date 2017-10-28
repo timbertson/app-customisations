@@ -44,6 +44,7 @@ with packagesExt; let
 	installed = with lib; remove null ([
 		(if opts.git-readonly then callPackages ./git-readonly.nix {} else git)
 		my-nix-prefetch-scripts
+		(maximal abduco)
 		daglink
 		(maximal ctags)
 		(maximal fzf)
