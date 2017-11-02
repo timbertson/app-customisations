@@ -11,7 +11,7 @@ let
 	opts = defaultOpts // (if builtins.pathExists optsPath then import optsPath else {});
 	packagesExt = pkgs // (import ./packages.nix {
 		inherit pkgs;
-		enableNeovim = stdenv.isLinux && opts.maximal;
+		enableNeovim = true;
 	});
 	isDarwin = stdenv.isDarwin;
 	isLinux = stdenv.isLinux;
@@ -47,7 +47,7 @@ with packagesExt; let
 		(maximal abduco)
 		daglink
 		(maximal ctags)
-		(maximal fzf)
+		fzf
 		fish
 		(maximal nodejs)
 		direnv
@@ -58,6 +58,8 @@ with packagesExt; let
 		vim-watch
 		vim
 		vim.vimrc
+		neovim
+		(maximal neovim-remote)
 		(maximal python2Packages.ipython)
 		(maximal python3Packages.ipython)
 		pyperclip
@@ -76,8 +78,6 @@ with packagesExt; let
 		irank-releases
 		eog-rate
 		my-borg-task
-		neovim
-		neovim-remote
 		ocamlscript
 		ocaml
 		vlc

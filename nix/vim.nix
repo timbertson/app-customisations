@@ -1,12 +1,6 @@
 {pkgs ? import <nixpkgs> {}, pluginArgs ? {}}:
 with pkgs;
 let
-	macvim = lib.overrideDerivation (pkgs.macvim) (o: {
-		configureFlags = o.configureFlags ++ [ "--enable-perlinterp=no" ];
-	});
-	vim_configurable = if stdenv.isDarwin
-		then vimUtils.makeCustomizable macvim
-		else pkgs.vim_configurable;
 	knownPlugins = (pkgs.callPackage ./vim-plugins.nix pluginArgs) // vimPlugins;
 	vimrcConfig = {
 		customRC = ''

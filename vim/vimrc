@@ -7,7 +7,7 @@ if has("win32")
 	endif
 endif
 
-if has("mac")
+if has("mac") && has("gui_running")
 	set macmeta
 endif
 
