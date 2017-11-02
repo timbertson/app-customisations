@@ -100,6 +100,9 @@ meta:
 ~/.bin:
   path: ../bin
 
+~/dev/.projects.gup:
+  path: ../home/dev/projects.gup
+
 ~/.config/direnv-std:
   path: ../home/direnv-std
 
