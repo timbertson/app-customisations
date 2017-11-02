@@ -11,6 +11,7 @@
 				(import (/. + HOME + "/dev/app-customisations/nix/packages.nix") { inherit pkgs; })
 				// {recurseForDerivations = false; }
 			else null;
+		jre = jre8;
 	};
 }
 
