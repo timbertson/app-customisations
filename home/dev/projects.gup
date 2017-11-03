@@ -1,7 +1,4 @@
 #!bash -eu
 ROOT="$HOME/dev"
 cd "$ROOT"
-find -L -maxdepth 1 -type d -printf '%P\n' | grep '^[^.]'| while read f; do
-	gup -u "$ROOT/$f"
-	find -L "$f" -maxdepth 1 -type d -printf "$f/%P\n" >> "$1"
-done
+find -L . -maxdepth 2 -type d -not -name '.*' | sed -e 's|^\./||' > "$1"
