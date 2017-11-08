@@ -62,6 +62,7 @@ with packagesExt; let
 		(maximal neovim-remote)
 		(maximal python2Packages.ipython)
 		(maximal python3Packages.ipython)
+		python3Packages.python
 		pyperclip
 		(optional opts.syncthing syncthing)
 
