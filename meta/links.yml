@@ -315,11 +315,6 @@ meta:
   optional: true
   tags: desktop nix
 
-~/.local/share/applications/spotify.desktop:
-  path: ../nix/local/share/applications/spotify.desktop
-  optional: true
-  tags: desktop nix
-
 /nix/var/nix/gcroots/tim-nix-local:
   path: ../nix/local
   optional: true

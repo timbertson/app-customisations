@@ -9,11 +9,6 @@ let
 		# 	filename = "skype";
 		# }
 		# {
-		# 	exec = "${spotify}/bin/spotify";
-		# 	name = "Spotify";
-		# 	filename = "spotify";
-		# }
-		# {
 		# 	exec = "${calibre}/bin/calibre";
 		# 	name = "Calibre";
 		# 	filename = "calibre";

@@ -71,7 +71,6 @@ with packagesExt; let
 	] ++ (if !opts.maximal then [] else if isLinux then with ocamlPackages_4_03; [
 		#tilda
 		google-cloud-sdk
-		spotify
 		xbindkeys
 		jsonnet
 		pythonPackages.youtube-dl

@@ -8,4 +8,5 @@ __pycache__
 .DS_Store
 .merlin
 /nix/local.tgz
+/nix/local
 .idea/
