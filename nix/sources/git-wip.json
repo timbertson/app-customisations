@@ -1,0 +1,17 @@
+{
+  "fetch": {
+    "args": {
+      "owner": "timbertson",
+      "repo": "git-wip",
+      "rev": "version-0.1.0",
+      "sha256": "10q2399jfn0ls53cava5wmwz6p7kgrjyifk4q6bn5z37wlqdcg6i"
+    },
+    "fn": "fetchFromGitHub",
+    "rev": "version-0.1.0",
+    "version": "0.1.0"
+  },
+  "owner": "timbertson",
+  "repo": "git-wip",
+  "rev": "version-{version}",
+  "type": "fetchFromGitHub"
+}

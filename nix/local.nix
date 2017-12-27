@@ -53,6 +53,7 @@ with packagesExt; let
 		direnv
 		ripgrep
 		(maximal music-import)
+		git-wip
 		gup
 		(maximal passe-client)
 		vim-watch

@@ -33,6 +33,7 @@ pkgs // rec {
 	dns-alias = tryCallPackage "${home}/dev/python/dns-alias/nix/default.nix" { inherit pythonPackages; };
 	dumbattr = tryImport "${home}/dev/python/dumbattr/nix/local.nix" {};
 	eog-rate = tryImport "${home}/dev/python/eog-rate/nix/local.nix" {};
+	git-wip = buildFromSource ./sources/git-wip.json {};
 	gsel = tryImport "${home}/dev/ocaml/gsel/default.nix" {};
 	gup = default pkgs.gup (tryImport "${home}/dev/ocaml/gup/local.nix" {});
 	irank = tryImport "${home}/dev/python/irank/default.nix" {};
