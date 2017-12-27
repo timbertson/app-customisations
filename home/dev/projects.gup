@@ -1,4 +1,5 @@
 #!bash -eu
 ROOT="$HOME/dev"
 cd "$ROOT"
+gup --always
 find -L . -maxdepth 2 -type d -not -name '.*' | sed -e 's|^\./||' > "$1"

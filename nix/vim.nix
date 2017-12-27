@@ -46,6 +46,7 @@ let
 						"vim-nix"
 						"vim-rust"
 						"vim-stratifiedjs"
+						"vim-swift"
 						"vim-visual-star-search"
 						"vim-watch"
 					]

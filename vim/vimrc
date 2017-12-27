@@ -462,7 +462,8 @@ nmap <leader>e :NERDTreeToggle<cr>
 nmap <leader>E :NERDTreeFind<cr>
 
 " find usages
-nmap <a-F7> :Grepper -cword -noprompt<cr>
+nmap <A-F7> :Grepper -cword -open -noprompt<cr>
+nmap <leader><F7> :Grepper -cword -open -noprompt<cr>
 
 " refresh / redraw
 nmap <F5> :syntax sync fromstart<cr>:redraw!<cr>

@@ -103,4 +103,10 @@ in
 			"https://github.com/kassio/neoterm"
 			"701c9fb20ebac1c4d05410f8054fa004bc9ecba4"
 			"1wblgjn4c6ai7jb46xv3vx4dpwbmxrs5wr1824z2blnb17glas7p";
+
+		"vim-swift" = mkgit
+			"https://github.com/bumaociyuan/vim-swift"
+			"de1210420a53d491dfc468a8a0e000a9ff29c700"
+			"1lhdalnjlhl084ngvs42ifwq1hici6lxpxmr2a1l7vixdj7mcac1";
+
 }
