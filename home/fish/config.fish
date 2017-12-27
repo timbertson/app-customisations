@@ -85,7 +85,7 @@ for var in LESSPIPE LESSOPEN LESSCLOSE
 end
 set FISH_CLIPBOARD_CMD "true" # Stop that.
 set -x BROWSER firefox
-set -x EDITOR vim
+set -x EDITOR nvim
 if test -n "$NVIM_LISTEN_ADDRESS"
 	set -x EDITOR "nvr -cc split --remote-wait +'set bufhidden=wipe'"
 end
