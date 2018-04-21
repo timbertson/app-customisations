@@ -13,9 +13,6 @@ function fish_prompt --description 'Write out the prompt'
 	if [ $__exit_status != 0 ]
 		printf '%s[%s]\n' (set_color black) $__exit_status
 	end
-	if [ -n "$ZEROENV_NAME" ]
-		printf '%s[%s] ' (set_color blue) $ZEROENV_NAME
-	end
 	if [ -n "$ENV_NAME" ]
 		printf '%s[%s] ' (set_color blue) $ENV_NAME
 	end

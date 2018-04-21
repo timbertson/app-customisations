@@ -16,7 +16,7 @@ from __future__ import print_function
 import os, sys
 remove_keys = []
 for k in os.environ.keys():
-	if k.startswith('GUP_') or k in ['TERM_SOLARIZED']:
+	if k.startswith('GUP_'):
 		# print("ignoring env %s" % (k,), file=sys.stderr)
 		remove_keys.append(k)
 for k in remove_keys:

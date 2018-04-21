@@ -10,3 +10,4 @@ __pycache__
 /nix/local.tgz
 /nix/local
 .idea/
+.mypy_cache/

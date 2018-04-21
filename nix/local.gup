@@ -13,5 +13,12 @@ if [ ! -f "$src" ]; then
 	# support linking this gupfile elsewhere..
 	src="$HOME/dev/app-customisations/nix/$src"
 fi
+export NIX_PIN_CONFIG="$HOME/.config/nix-pin/pins.nix"
+if ! [ -f "$NIX_PIN_CONFIG" ]; then
+	echo "Setting up nix-pin"
+	nixPin="$(nix-build --no-out-link -A nix-pin '<nixpkgs>')"
+	[ -n "$nixPin" ]
+	"$nixPin/bin/nix-pin" setup
+fi
 nix-build --out-link "$dest" "$src" --show-trace
 nix-store --add --add-root --indirect "$dest"

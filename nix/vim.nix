@@ -87,24 +87,17 @@ stdenv.mkDerivation {
 			installPhase = ''
 				mkdir -p $out/bin
 				mkdir -p $out/libexec/nvim
-				ORIG_BINARY=${pkgs.neovim}/bin/.nvim-wrapped
+				ORIG_BINARY=${pkgs.neovim}/bin/nvim
 				NEW_BINARY=$out/libexec/nvim/nvim
 
-				ORIG_WRAPPER=${pkgs.neovim}/bin/nvim
-				NEW_WRAPPER=$out/libexec/nvim/nvim-wrapper
-
 				cp -a $ORIG_BINARY $NEW_BINARY
-				substitute $ORIG_WRAPPER $NEW_WRAPPER \
-					--replace $ORIG_BINARY $NEW_BINARY \
-				;
-				chmod +x $NEW_WRAPPER
 
-				makeWrapper $NEW_WRAPPER $out/bin/nvim \
+				makeWrapper $NEW_BINARY $out/bin/nvim \
 					${wrapperArgs} \
 					--add-flags -u \
 					--add-flags ${vimrc} \
 				;
-				chmod +x $out/bin/*
+				chmod +x $out/bin/nvim
 			'';
 		};
 	};

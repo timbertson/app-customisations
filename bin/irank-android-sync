@@ -7,7 +7,7 @@ function overwrite_android_db {
 }
 
 function do_sync {
-	irank export --interactive -d "$dest" -- `grep -v '^#' ~/.config/irank/android-playlists`
+	irank export "$@" -d "$dest" -- `grep -v '^#' ~/.config/irank/android-playlists`
 	overwrite_android_db
 
 	# echo '-------- DISK USAGE: -----------'
@@ -43,22 +43,28 @@ function apply_remote_rating_changes {
 		irank rating-sync --no "$local_db" || ( \
 			zenity --question --no-markup --text='Rating update FAILED. Do you want to continue, ERASING all failed ratings?' --cancel-label='Cancel' --ok-label='ERASE' && \
 				zenity --question --no-markup --text='SERIOUSLY?' --cancel-label='No!' --ok-label='Yes, ERASE ratings')
-	fi
 
-	echo "updating playlists after rating update"
-	irank db
-	echo "copying new irank DB to device"
-	overwrite_android_db
+		echo "updating playlists after rating update"
+		irank db
+		echo "copying new irank DB to device"
+		overwrite_android_db
+	fi
 }
 
 
 if [ -z "$irank_test" ]; then
 	set -e
 	do_update_playlists=1
+	do_update_ratings=1
 	ask=0
+	headless=0
 	if [ "$1" = "--help" ]; then
 		echo "Usage: $0 [--quick|--ask]" >&2
 		exit 0
+	elif [ "$1" = "--headless" ]; then
+		headless=1
+		do_update_ratings=0
+		shift
 	elif [ "$1" = "--quick" ]; then
 		do_update_playlists=0
 		shift
@@ -88,15 +94,16 @@ if [ -z "$irank_test" ]; then
 	[ -n "$host" -o -d "$dest" ]
 
 	sqlite_db=/tmp/irank.sqlite
-	has_db="$(ssh $host -- sh -c "'if [ -f "$host_path"/irank.sqlite ]; then echo OK; else echo NO; fi'")"
-	if [ "$has_db" = "NO" ]; then
-		do_update_ratings=0
-		num_updates="0"
-	else
-		[ "$has_db" = "OK" ]
-		scp "$dest/irank.sqlite" "$sqlite_db"
-		do_update_ratings=1
-		num_updates="$(num_remote_rating_changes "$sqlite_db")"
+	if [ "$do_update_ratings" -eq 1 ]; then
+		has_db="$(ssh $host -- if [ -f "$host_path"/irank.sqlite ]\; then echo OK\; else echo NO\; fi)"
+		if [ "$has_db" = "NO" ]; then
+			do_update_ratings=0
+			num_updates="0"
+		else
+			[ "$has_db" = "OK" ]
+			scp "$dest/irank.sqlite" "$sqlite_db"
+			num_updates="$(num_remote_rating_changes "$sqlite_db")"
+		fi
 	fi
 
 	if [ "$ask" = 1 ]; then
@@ -105,7 +112,13 @@ if [ -z "$irank_test" ]; then
 	fi
 
 	if [ "$do_update_ratings" -eq 1 ]; then apply_remote_rating_changes "$sqlite_db"; fi
-	if [ "$do_update_playlists" -eq 1 ]; then do_sync; fi
+	if [ "$do_update_playlists" -eq 1 ]; then
+		if [ "$headless" -eq 1 ]; then
+			do_sync
+		else
+			do_sync --interactive
+		fi
+	fi
 else
 	echo "# (sourced)"
 	dest="$HOME/.tmp/android"

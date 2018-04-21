@@ -4,7 +4,7 @@ let
 	optional = x: attrs: if (x == null || x == false) then {} else attrs;
 	home = builtins.getEnv "HOME";
 	displayEnv = ["DISPLAY=:1"]; # ugh...
-	libglEnv = ["LD_LIBRARY_PATH=${pkgs.mesa}/lib"];
+	libglEnv = ["LD_LIBRARY_PATH=${pkgs.libGLU}/lib"];
 	sessionTask = x: {wantedBy = ["desktop-session.target"]; } // x;
 	systemPath = [ "/usr/local" "/usr" "/" ];
 	loadSessionVars = "eval \"$(/home/tim/.bin/session-vars --all --process gnome-shell --export)\"";

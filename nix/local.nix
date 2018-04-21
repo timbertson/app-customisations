@@ -52,6 +52,7 @@ with packagesExt; let
 		(maximal nodejs)
 		direnv
 		ripgrep
+		nix-pin
 		(maximal music-import)
 		git-wip
 		gup
@@ -74,6 +75,7 @@ with packagesExt; let
 		google-cloud-sdk
 		xbindkeys
 		jsonnet
+		parallel
 		pythonPackages.youtube-dl
 		irank
 		irank-releases
@@ -86,6 +88,7 @@ with packagesExt; let
 		dumbattr
 		shellshape
 		snip
+		stereoscoper
 		template
 		trash
 		(runCommand "systemd-units" {} ''

@@ -5,6 +5,7 @@ from optparse import OptionParser
 p = OptionParser()
 p.add_option('-e', '--error', help='use vim-error', action='store_true')
 p.add_option('-c', '--context', help='error context', default=10, type='int')
+p.add_option('-n', '--neovim', help='use neovim', action='store_true')
 p.disable_interspersed_args()
 opts, args = p.parse_args()
 
@@ -12,9 +13,15 @@ if not args:
 	args = ['all']
 
 os.environ['GUP_COLOR'] = '1'
+
+watch_cmd = ['vim-watch', '--clear']
+if opts.neovim:
+	watch_cmd.append('--neovim')
+
 cmd = ['gup', '-u'] + args
 if opts.error:
 	cmd = ['vim-err', '--context', str(opts.context)] + cmd
-cmd = ['vim-watch', '--clear'] + cmd
+
+cmd = watch_cmd + cmd
 print('+ ' + (' '.join(cmd)))
 os.execvp('vim-watch', cmd)

@@ -1,25 +1,34 @@
 {pkgs ? import <nixpkgs> {}, enableNeovim ? false }:
-with pkgs;
 let
 	home = builtins.getEnv "HOME";
 	tryInvoke = fn: path: if builtins.pathExists path
 		then fn (builtins.toPath path)
 		else null;
-
-	tryBuildHaskell = tryInvoke (path:
-		pkgs.haskell.packages.ghc7102.callPackage path { }
-	);
 	tryImport = path: args: tryInvoke (path:
 		import path ({ inherit pkgs; } // args)
 	) path;
+	nix-pin = (
+		let
+			local = tryImport "${home}/dev/nix/nix-pin/default.nix" {};
+			upstream = pkgs.nix-pin;
+		in
+		if local != null then local else upstream);
+in
+with nix-pin.augmentedPkgs;
+let
 	tryCallPackage = path: args: tryInvoke (path: callPackage path args) path;
+	tryBuildHaskell = tryInvoke (path:
+		pkgs.haskell.packages.ghc7103.callPackage path { }
+	);
 
 	default = dfl: obj: if obj == null then dfl else obj;
-	opam2nix-packages = callPackage ./opam2nix-packages.nix {};
+	opam2nix = callPackage ./opam2nix-packages.nix {};
 	buildFromSource = jsonFile: attrs:
 		let
 			fetched = pkgs.nix-update-source.fetch jsonFile;
 			pkg = (callPackage "${fetched.src}/nix/default.nix" attrs);
+			# TODO:
+			# pkg = fetched.overrideSrc (callPackage "${fetched.src}/nix/default.nix" attrs);
 		in
 		lib.overrideDerivation pkg (base: {
 			name = "${fetched.repo}-${fetched.version or fetched.fetch.version}";
@@ -42,14 +51,14 @@ pkgs // rec {
 	music-import = tryImport "${home}/dev/python/music-import/nix/local.nix" {};
 	my-borg-task = callPackage ./my-borg-task.nix {};
 	my-nix-prefetch-scripts = callPackage ./nix-prefetch-scripts.nix {};
-	opam2nix = opam2nix-packages.opam2nix;
-	passe-client = tryImport "${home}/dev/ocaml/passe-stable/nix/local.nix" { target="client"; opam2nix = opam2nix-packages; };
+	passe-client = tryImport "${home}/dev/ocaml/passe/nix/local.nix" { target="client"; inherit opam2nix; };
 	pyperclip = callPackage ./pyperclip.nix {};
 	pythonPackages = pkgs.pythonPackages // {
 		dnslib = tryCallPackage "${home}/dev/python/dns-alias/nix/dnslib.nix" { inherit pythonPackages; };
 	};
 	shellshape = tryImport "${home}/dev/gnome-shell/shellshape@gfxmonk.net/default.nix" {};
 	snip = tryBuildHaskell "${home}/dev/haskell/snip/nix/default.nix" ;
+	stereoscoper = tryImport "${home}/dev/python/stereoscoper/default.nix" {};
 	template = tryImport "${home}/dev/python/template/default.nix" {};
 	trash = tryImport "${home}/dev/python/trash/default.nix" {};
 	vim = (callPackage ./vim.nix { pluginArgs = { inherit vim-watch; }; });
@@ -58,4 +67,4 @@ pkgs // rec {
 	vim-watch = default
 		(buildFromSource ./sources/vim-watch.json { inherit enableNeovim; })
 		(tryImport "${home}/dev/vim/vim-watch/nix/local.nix" { inherit enableNeovim; });
-}
+} // nix-pin.pins
