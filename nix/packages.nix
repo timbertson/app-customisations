@@ -12,7 +12,7 @@ let
 			local = tryImport "${home}/dev/nix/nix-pin/default.nix" {};
 			upstream = pkgs.nix-pin;
 		in
-		if local != null then local else upstream);
+		if local != null then local else upstream).api {};
 in
 with nix-pin.augmentedPkgs;
 let
@@ -63,6 +63,13 @@ pkgs // rec {
 	trash = tryImport "${home}/dev/python/trash/default.nix" {};
 	vim = (callPackage ./vim.nix { pluginArgs = { inherit vim-watch; }; });
 	neovim = vim.neovim;
+	fish = lib.overrideDerivation pkgs.fish (o: {
+		# workaround for https://github.com/NixOS/nixpkgs/issues/39328
+		buildInputs = o.buildInputs ++ [ makeWrapper ];
+		postInstall = (o.postInstall or "") + ''
+			wrapProgram $out/bin/fish --set LOCALE_ARCHIVE ${pkgs.glibcLocales}/lib/locale/locale-archive
+		'';
+	});
 
 	vim-watch = default
 		(buildFromSource ./sources/vim-watch.json { inherit enableNeovim; })

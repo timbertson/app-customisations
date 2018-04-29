@@ -11,7 +11,7 @@ fi
 
 gup -u "$file"
 nix-instantiate "$file" --show-trace  --quiet --indirect --add-root "$drv" > /dev/null
-nix-shell --show-trace --run "python" "$drv" > "$1" <<EOF
+nix-shell --show-trace --run "python" "$file" > "$1" <<EOF
 from __future__ import print_function
 import os, sys
 remove_keys = []
