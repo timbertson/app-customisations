@@ -63,10 +63,10 @@ pkgs // rec {
 	trash = tryImport "${home}/dev/python/trash/default.nix" {};
 	vim = (callPackage ./vim.nix { pluginArgs = { inherit vim-watch; }; });
 	neovim = vim.neovim;
-	fish = lib.overrideDerivation pkgs.fish (o: {
+	fish = if pkgs.glibcLocales == null then pkgs.fish else lib.overrideDerivation pkgs.fish (o: {
 		# workaround for https://github.com/NixOS/nixpkgs/issues/39328
 		buildInputs = o.buildInputs ++ [ makeWrapper ];
-		postInstall = (o.postInstall or "") + ''
+		postInstall = ''
 			wrapProgram $out/bin/fish --set LOCALE_ARCHIVE ${pkgs.glibcLocales}/lib/locale/locale-archive
 		'';
 	});
