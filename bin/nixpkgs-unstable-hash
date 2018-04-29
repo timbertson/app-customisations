@@ -1,0 +1,3 @@
+#!/bin/bash
+set -eu
+curl -L -Ss https://nixos.org/channels/nixpkgs-unstable/git-revision
