@@ -51,7 +51,7 @@ pkgs // rec {
 	music-import = tryImport "${home}/dev/python/music-import/nix/local.nix" {};
 	my-borg-task = callPackage ./my-borg-task.nix {};
 	my-nix-prefetch-scripts = callPackage ./nix-prefetch-scripts.nix {};
-	passe-client = tryImport "${home}/dev/ocaml/passe/nix/local.nix" { target="client"; inherit opam2nix; };
+	passe = tryImport "${home}/dev/ocaml/passe/nix/default.nix" { target="client"; inherit opam2nix; };
 	pyperclip = callPackage ./pyperclip.nix {};
 	pythonPackages = pkgs.pythonPackages // {
 		dnslib = tryCallPackage "${home}/dev/python/dns-alias/nix/dnslib.nix" { inherit pythonPackages; };

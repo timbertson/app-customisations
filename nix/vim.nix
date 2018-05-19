@@ -2,6 +2,11 @@
 with pkgs;
 let
 	knownPlugins = (pkgs.callPackage ./vim-plugins.nix pluginArgs) // vimPlugins;
+
+	neovimUpstream = pkgs.wrapNeovim (lib.overrideDerivation pkgs.neovim-unwrapped (o: {
+		patches = (o.patches or []) ++ [ ./nvim-mouse.diff ];
+	}) ) { };
+
 	vimrcConfig = {
 		customRC = ''
 			set nocompatible
@@ -87,7 +92,7 @@ stdenv.mkDerivation {
 			installPhase = ''
 				mkdir -p $out/bin
 				mkdir -p $out/libexec/nvim
-				ORIG_BINARY=${pkgs.neovim}/bin/nvim
+				ORIG_BINARY=${neovimUpstream}/bin/nvim
 				NEW_BINARY=$out/libexec/nvim/nvim
 
 				cp -a $ORIG_BINARY $NEW_BINARY

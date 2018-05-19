@@ -56,7 +56,7 @@ with packagesExt; let
 		(maximal music-import)
 		git-wip
 		gup
-		(maximal passe-client)
+		(maximal passe)
 		vim-watch
 		vim
 		vim.vimrc
