@@ -1,6 +1,7 @@
 {
 	allowUnfree = true;
 	allowBroken = true; # e.g. pathpy
+	allowUnsupportedSystem = true;
 	packageOverrides = pkgs: with pkgs;
 		let
 			HOME = builtins.getEnv "HOME";
