@@ -12,6 +12,7 @@
 	patch = format-patch --stdout
 	show-branches = !git show-branch origin/master $(git branch | cut -c3-)
 	branches = !git show-branch --color=always | less -SR
+	br = branch --sort=-committerdate
 	delete-merged-branches = !git branch --merged origin/master --format '%(refname:short)' | tr '\\n' '\\0' | xargs -0 --no-run-if-empty git branch -d
 	root = rev-parse --show-toplevel
 	pushall = !git push && git push --tags
@@ -40,11 +41,11 @@
 	changed = red
 	untracked = cyan
 [merge]
-	tool = gvimdiff
+	tool = vimdiff
+[mergetool "vimdiff"]
+	cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J' -c ':diffoff' -c ':set hlsearch' -c '/^[<=>]\\{7\\}.*'
 [mergetool]
 	keepBackup = false
-; [diff]
-; 	noprefix = true
 [user]
 	name = Tim Cuthbertson
 	email = tim@gfxmonk.net
