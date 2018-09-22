@@ -49,6 +49,7 @@ with packagesExt; let
 		(maximal ctags)
 		fzf
 		fish
+		(maximal glibcLocales)
 		(maximal nodejs)
 		direnv
 		ripgrep

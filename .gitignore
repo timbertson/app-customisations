@@ -14,3 +14,4 @@ vim/.netrwhist
 *-local.xml
 /nix/local
 bin/size-tree.exe
+nix/cachix

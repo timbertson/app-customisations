@@ -13,6 +13,7 @@ let
 			upstream = pkgs.nix-pin;
 		in
 		if local != null then local else upstream).api {};
+	pins = nix-pin.pins;
 in
 with nix-pin.augmentedPkgs;
 let
@@ -22,7 +23,7 @@ let
 	);
 
 	default = dfl: obj: if obj == null then dfl else obj;
-	opam2nix = callPackage ./opam2nix-packages.nix {};
+	opam2nix = pins.opam2nix; # or callPackage ./opam2nix-packages.nix {};
 	buildFromSource = jsonFile: attrs:
 		let
 			fetched = pkgs.nix-update-source.fetch jsonFile;
@@ -44,14 +45,14 @@ pkgs // rec {
 	eog-rate = tryImport "${home}/dev/python/eog-rate/nix/local.nix" {};
 	git-wip = buildFromSource ./sources/git-wip.json {};
 	gsel = tryImport "${home}/dev/ocaml/gsel/default.nix" {};
-	gup = default pkgs.gup (tryImport "${home}/dev/ocaml/gup/local.nix" {});
+	gup = default pkgs.gup (pins.gup or tryImport "${home}/dev/ocaml/gup/nix/gup-ocaml.nix" {});
 	irank = tryImport "${home}/dev/python/irank/default.nix" {};
 	irank-releases = callPackage ./irank-releases.nix { inherit irank; };
 	jsonnet = callPackage ./jsonnet.nix {};
 	music-import = tryImport "${home}/dev/python/music-import/nix/local.nix" {};
 	my-borg-task = callPackage ./my-borg-task.nix {};
 	my-nix-prefetch-scripts = callPackage ./nix-prefetch-scripts.nix {};
-	passe = tryImport "${home}/dev/ocaml/passe/nix/default.nix" { target="client"; inherit opam2nix; };
+	# passe = tryImport "${home}/dev/ocaml/passe/nix/default.nix" { target="client"; inherit opam2nix; };
 	pyperclip = callPackage ./pyperclip.nix {};
 	pythonPackages = pkgs.pythonPackages // {
 		dnslib = tryCallPackage "${home}/dev/python/dns-alias/nix/dnslib.nix" { inherit pythonPackages; };

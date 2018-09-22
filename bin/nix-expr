@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+import os,sys
+args = sys.argv[1:]
+expr = args.pop(0)
+args = [
+	'nix-instantiate',
+	'--eval',
+	'--expr',
+	'let pkgs = (import <nixpkgs> {}); in with pkgs; with lib; ' + expr,
+] + args
+
+print(' + ' + repr(args))
+os.execvp(args[0], args)

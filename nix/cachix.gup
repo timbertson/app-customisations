@@ -1,0 +1,5 @@
+#!bash -eux
+nix-build https://github.com/cachix/cachix/tarball/master \
+	--substituters https://cachix.cachix.org \
+	--trusted-public-keys cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM= \
+	--out-link "$1"

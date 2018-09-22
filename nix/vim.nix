@@ -3,9 +3,7 @@ with pkgs;
 let
 	knownPlugins = (pkgs.callPackage ./vim-plugins.nix pluginArgs) // vimPlugins;
 
-	neovimUpstream = pkgs.wrapNeovim (lib.overrideDerivation pkgs.neovim-unwrapped (o: {
-		patches = (o.patches or []) ++ [ ./nvim-mouse.diff ];
-	}) ) { };
+	neovimUpstream = pkgs.wrapNeovim pkgs.neovim-unwrapped { };
 
 	vimrcConfig = {
 		customRC = ''
