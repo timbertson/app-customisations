@@ -14,6 +14,7 @@ set additional_paths \
 	~/.bin \
 	~/.local/nix/bin \
 	~/.nix-profile/bin \
+	~/.cargo/bin
 	;
 
 set -x NIX_BUILD_SHELL /bin/bash

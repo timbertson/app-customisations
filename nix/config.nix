@@ -8,6 +8,8 @@
 			HOME = builtins.getEnv "HOME";
 		in
 	{
+		# disable fancy language server rubbish
+		python3Packages = pkgs.python3Packages // { python-language-server = python3Packages.python-language-server.override { providers = []; }; };
 		nix-pin = (pkgs.nix-pin.api {}).pins.nix-pin or pkgs.nix-pin;
 		sitePackages = if builtins.pathExists "${HOME}/dev/app-customisations/nix"
 			then

@@ -54,7 +54,7 @@ let
 						"vim-watch"
 					]
 					# ++ (if knownPlugins.gsel == null then [] else ["gsel"])
-					# ++ (if stdenv.isDarwin then [] else ["command-t"])
+					++ (if stdenv.isDarwin then [] else ["LanguageClient-neovim"])
 					;
 				}
 				# full documentation at

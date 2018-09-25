@@ -27,7 +27,7 @@ if has('nvim')
 " leader-t for toggling the terminal
 	let g:neoterm_autoinsert=1
 	" not sure which of these will grow on me...
-	nnoremap <leader>t :Ttoggle<cr>
+	" nnoremap <leader>t :Ttoggle<cr>
 	nnoremap `` :Ttoggle<cr>
 	let $NVIM_TERMINAL = 1
 
@@ -457,7 +457,21 @@ elseif executable("ag")
 	let g:ackprg = 'ag --nogroup --nocolor --column'
 endif
 
-" leader-t for showing nerd-tree
+" language-server mappings
+nmap <leader>/ :call LanguageClient#textDocument_hover()<cr>
+nmap <leader>a :call LanguageClient#textDocument_hover()<cr>
+" nmap gd :call LanguageClient#textDocument_definition()<cr>
+nmap g<f7> :call LanguageClient#textDocument_references()<cr>
+nmap <leader>p :pclose<cr>
+nmap <leader><esc> :pclose<cr>
+command! -nargs=0 LC call LanguageClient#startServer()
+command! -nargs=0 LCoff call LanguageClient#exit()
+let g:LanguageClient_autoStart = 0
+let g:LanguageClient_serverCommands = {}
+let g:LanguageClient_serverCommands.python = ['pyls']
+let g:LanguageClient_serverCommands.rust = ['rls']
+
+" leader-e for showing nerd-tree
 nmap <leader>e :NERDTreeToggle<cr>
 nmap <leader>E :NERDTreeFind<cr>
 

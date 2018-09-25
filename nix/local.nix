@@ -13,6 +13,27 @@ let
 		inherit pkgs;
 		enableNeovim = true;
 	});
+	addQtTomfoolery = pkg: bins: with pkgs; stdenv.mkDerivation {
+		# see https://github.com/NixOS/nixpkgs/pull/33146#issuecomment-364147289
+		inherit (pkg) name version;
+		buildInputs = [ makeWrapper ];
+		buildCommand = let
+			qt = qt5.qtbase;
+			wrapBin = bin: ''
+				chmod +w "$(dirname "$out/${bin}")"
+				rm "$out/${bin}"
+				makeWrapper "${pkg}/${bin}" "$out/${bin}" \
+					--set QT_QPA_PLATFORM_PLUGIN_PATH "${qt.bin}/lib/qt-${qt.qtCompatVersion}/plugins/platforms" \
+				;
+				find $out/share/applications -type f | while read f; do
+					substituteInPlace "$f" --replace "${pkg}/${bin}" "$out/${bin}"
+				done
+			'';
+		in ''
+			cp -r "${pkg}" "$out"
+			${lib.concatStringsSep "\n" (map wrapBin bins)}
+		'';
+	};
 	isDarwin = stdenv.isDarwin;
 	isLinux = stdenv.isLinux;
 in
@@ -39,7 +60,6 @@ with packagesExt; let
 
 			${sshfsFuse}/bin/sshfs "$@"
 		'';
-
 	} else {});
 	installed = with lib; remove null ([
 		(if opts.git-readonly then callPackages ./git-readonly.nix {} else git)
@@ -84,7 +104,7 @@ with packagesExt; let
 		my-borg-task
 		ocamlscript
 		ocaml
-		vlc
+		# (addQtTomfoolery vlc ["bin/vlc"])
 		parcellite
 		dumbattr
 		shellshape
