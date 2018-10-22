@@ -1,6 +1,11 @@
 #!bash -eu
 root="$(dirname "$2")/root"
-drv="$(readlink -f "$(dirname "$2")")/envrc.drv"
+READLINK="readlink"
+NIX_READLINK="$HOME/.nix-profile/bin/readlink"
+if [ -e "$NIX_READLINK" ]; then
+	READLINK="$NIX_READLINK"
+fi
+drv="$("$READLINK" -f "$(dirname "$2")")/envrc.drv"
 
 cd "$root"
 file="shell.nix"
