@@ -41,6 +41,7 @@ with packagesExt; let
 	optional = flag: pkg: if flag then pkg else null;
 	maximal = pkg: optional opts.maximal pkg;
 	darwin = pkg: optional isDarwin pkg;
+	notDarwin = pkg: optional (!isDarwin) pkg;
 	bash = "#!${pkgs.bash}/bin/bash";
 	wrapper = script: writeScript "wrapper" script;
 	wrappers = {
@@ -63,7 +64,7 @@ with packagesExt; let
 		'';
 	} else {});
 	installed = with lib; remove null ([
-		(if opts.git-readonly then callPackages ./git-readonly.nix {} else git)
+		(if opts.git-readonly then callPackages ./git-readonly.nix {} else (notDarwin git))
 		my-nix-prefetch-scripts
 		(darwin coreutils)
 		(darwin cacert)
@@ -158,5 +159,9 @@ symlinkJoin { name = "local"; paths = installed;
 				ln -sfn "$final_dest" "$bin"
 			fi
 		done
-	'';
+	'' + (
+		# on darwin, git complains about OSX config, so detele it :(
+		if isDarwin then ''
+		rm -f $out/bin/git
+		'' else "");
 }

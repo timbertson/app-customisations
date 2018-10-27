@@ -17,6 +17,10 @@
 				// {recurseForDerivations = false; }
 			else null;
 		jre = jre8;
+
+		docker-credential-gcr = let o = pkgs.docker-credential-gcr; in lib.extendDerivation true {
+			meta = (o.meta // { platforms = go.meta.platforms; });
+		} o;
 	};
 }
 
