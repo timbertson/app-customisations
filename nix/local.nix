@@ -40,6 +40,7 @@ in
 with packagesExt; let
 	optional = flag: pkg: if flag then pkg else null;
 	maximal = pkg: optional opts.maximal pkg;
+	darwin = pkg: optional isDarwin pkg;
 	bash = "#!${pkgs.bash}/bin/bash";
 	wrapper = script: writeScript "wrapper" script;
 	wrappers = {
@@ -64,8 +65,11 @@ with packagesExt; let
 	installed = with lib; remove null ([
 		(if opts.git-readonly then callPackages ./git-readonly.nix {} else git)
 		my-nix-prefetch-scripts
+		(darwin coreutils)
+		(darwin cacert)
 		(maximal abduco)
 		daglink
+		dtach
 		(maximal ctags)
 		fzf
 		fish
@@ -132,7 +136,7 @@ with packagesExt; let
 			}
 		'')
 	] else [
-		# darwin
+		# darwin maximal
 	]) ++ (
 		mapAttrsToList (name: script:
 			runCommand "${name}-wrapper" {} ''
