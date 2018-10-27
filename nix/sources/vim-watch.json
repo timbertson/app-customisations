@@ -3,12 +3,12 @@
     "args": {
       "owner": "timbertson",
       "repo": "vim-watch",
-      "rev": "version-0.3",
-      "sha256": "176jzwd9rcpvs001r4hn2is6j10n7n4wqz7i0cri5sflnhlsfc8p"
+      "rev": "version-0.3.2",
+      "sha256": "1hla5036xs37329y8vayfb7shfkapqhnw7ls84alkhp0lpifspzi"
     },
     "fn": "fetchFromGitHub",
-    "rev": "version-0.3",
-    "version": "0.3"
+    "rev": "version-0.3.2",
+    "version": "0.3.2"
   },
   "owner": "timbertson",
   "repo": "vim-watch",

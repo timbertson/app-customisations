@@ -6,7 +6,7 @@ args = [
 	'nix-instantiate',
 	'--eval',
 	'--expr',
-	'let pkgs = (import <nixpkgs> {}); in with pkgs; with lib; ' + expr,
+	'let pkgs = (import <nixpkgs> {}); in with builtins; with pkgs; with lib; ' + expr,
 ] + args
 
 print(' + ' + repr(args))
