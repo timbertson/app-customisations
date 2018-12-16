@@ -1,7 +1,7 @@
 #!bash -eu
 root="$(dirname "$2")/root"
 READLINK="readlink"
-NIX_READLINK="$HOME/.nix-profile/bin/readlink"
+NIX_READLINK="$HOME/.local/nix/bin/readlink"
 if [ -e "$NIX_READLINK" ]; then
 	READLINK="$NIX_READLINK"
 fi

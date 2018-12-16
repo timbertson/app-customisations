@@ -13,6 +13,7 @@
 	show-branches = !git show-branch origin/master $(git branch | cut -c3-)
 	branches = !git show-branch --color=always | less -SR
 	br = branch --sort=-committerdate
+	t = tag --sort=-committerdate
 	delete-merged-branches = !git branch --merged origin/master --format '%(refname:short)' | tr '\\n' '\\0' | xargs -0 --no-run-if-empty git branch -d
 	root = rev-parse --show-toplevel
 	pushall = !git push && git push --tags

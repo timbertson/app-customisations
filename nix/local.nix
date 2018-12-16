@@ -74,6 +74,7 @@ with packagesExt; let
 		(maximal ctags)
 		fzf
 		fish
+		(darwin fswatch)
 		(maximal glibcLocales)
 		(maximal nodejs)
 		direnv

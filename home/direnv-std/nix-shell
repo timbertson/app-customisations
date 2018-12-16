@@ -16,7 +16,7 @@ vars="$working/vars"
 
 # Some vars should *not* be saved to the vars dump, as they are context-dependant.
 # Add these vars here, as we find them :/
-ignore='DBUS_SESSION_BUS_ADDRESS NVIM_TERMINAL NVIM_LISTEN_ADDRESS XTERM COLORTERM TERM_SOLARIZED SSH_CLIENT SSH_CONNECTION SSH_TTY'
+ignore='DBUS_SESSION_BUS_ADDRESS NVIM_TERMINAL NVIM_LISTEN_ADDRESS XTERM COLORTERM TERM_SOLARIZED SSH_CLIENT SSH_CONNECTION SSH_TTY SSH_AUTH_SOCK'
 declare -A SHADOWED_VARS
 
 for var in $ignore; do
