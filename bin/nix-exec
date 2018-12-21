@@ -1,5 +1,0 @@
-#!/bin/bash
-set -eu
-out="$(nix-build --no-out-link)"
-[ -n "$out" ]
-exec "$out" "$@"

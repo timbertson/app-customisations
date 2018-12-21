@@ -19,7 +19,7 @@ with nix-pin.augmentedPkgs;
 let
 	tryCallPackage = path: args: tryInvoke (path: callPackage path args) path;
 	tryBuildHaskell = tryInvoke (path:
-		pkgs.haskell.packages.ghc7103.callPackage path { }
+		pkgs.haskell.packages.ghc862.callPackage path { }
 	);
 
 	default = dfl: obj: if obj == null then dfl else obj;

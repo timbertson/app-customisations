@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import subprocess
-import os, sys
+import os, sys, shutil
 
 outfile = None
 try:
@@ -22,16 +22,21 @@ if not outfile:
 		if not os.path.exists(outfile):
 			break
 
+tmpfile='tmp-'+outfile
+if os.path.exists(tmpfile):
+	os.unlink(tmpfile)
 
 cmd = [
-	'mencoder',
-	'-ovc', 'xvid',
-	'-oac', 'mp3lame',
-	'-xvidencopts', 'bitrate=2000',
-	'-lameopts', 'abr:br=210',
-	'-o', outfile,
-	infile]
+	'ffmpeg',
+	'-i', infile,
+	'-codec:v', 'h264',
+	'-b:v', '512k', # video bitrate
+	'-codec:a', 'mp3',
+	'-b:a', '68k', # audio bitrate
+	tmpfile]
+
 print "Running command:\n%s" % (' '.join(cmd),)
 subprocess.check_call(cmd)
+shutil.move(tmpfile, outfile)
 print "Created %r" % (outfile,)
 

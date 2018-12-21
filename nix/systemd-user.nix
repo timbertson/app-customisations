@@ -193,17 +193,16 @@ in
 			};
 		} [
 
-			(optional (builtins.pathExists "${home}/dev/web/remote") {
-				services.web-remote = let base = "${home}/dev/web/remote"; in {
+			(let remocaml = "${home}/dev/web/remocaml"; in optional (builtins.pathExists remocaml) {
+				services.web-remote = {
 					# needed for `session-vars`
 					path = userPath;
 					serviceConfig = {
 						KillMode = "process";
 						Restart = "always";
-						ExecStart = "${pkgs.nodejs}/bin/node ${base}/node_modules/conductance/conductance serve ${base}/config.mho";
+						ExecStart = "${remocaml}/_build/install/default/bin/remocaml";
 						Environment = [
-							# "NODE_PATH=${home}/dev/oni"
-							"NODE_ENV=production"
+							"REMOCAML_EPHEMERAL=60"
 						];
 					};
 				};
