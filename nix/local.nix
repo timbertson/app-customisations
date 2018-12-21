@@ -88,7 +88,7 @@ with packagesExt; let
 		vim
 		vim.vimrc
 		neovim
-		(maximal neovim-remote)
+		neovim-remote
 		(maximal python2Packages.ipython)
 		(maximal python3Packages.ipython)
 		python3Packages.python

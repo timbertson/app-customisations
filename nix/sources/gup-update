@@ -15,7 +15,7 @@ if len(dirs) != 1:
 	raise AssertionError("Expected exactly one %s directory, but found %s:\n%s" % (
 		name,
 		len(dirs),
-		repr(dirs)
+		repr({'dirs': dirs, 'categories': categories})
 	))
 
 dir = dirs[0]
