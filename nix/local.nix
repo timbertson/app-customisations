@@ -85,7 +85,7 @@ with packagesExt; let
 		gup
 		(maximal passe)
 		vim-watch
-		vim
+		# vim
 		vim.vimrc
 		neovim
 		neovim-remote
