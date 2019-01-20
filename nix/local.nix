@@ -122,6 +122,10 @@ with packagesExt; let
 			mkdir -p $out/share/systemd
 			cp -a "${system.config.system.build.standalone-user-units}" $out/share/systemd/user
 		'')
+		(runCommand "ocaml-language-server" {} ''
+			mkdir -p $out/bin
+			ln -s "${nodePackages.ocaml-language-server}/bin/ocaml-language-server" "$out/bin"
+		'')
 		(import ./applications.nix {inherit pkgs; })
 		(runCommand "gnome-shell-extensions" {} ''
 			mkdir -p $out/share/gnome-shell/extensions

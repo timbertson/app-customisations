@@ -470,6 +470,8 @@ let g:LanguageClient_autoStart = 0
 let g:LanguageClient_serverCommands = {}
 let g:LanguageClient_serverCommands.python = ['pyls']
 let g:LanguageClient_serverCommands.rust = ['rls']
+let g:LanguageClient_serverCommands.scala = ['node', './server-proxy.js']
+let g:LanguageClient_serverCommands.ocaml = ['ocaml-language-server', '--stdio']
 
 " leader-e for showing nerd-tree
 nmap <leader>e :NERDTreeToggle<cr>
