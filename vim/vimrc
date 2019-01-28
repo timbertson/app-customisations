@@ -491,6 +491,8 @@ nmap <leader>g :call LanguageClient#textDocument_documentSymbol()<cr>
 set completeopt=menuone,preview,noinsert
 imap <c-a> <c-x><c-o>
 imap <c-o> <c-x><c-o>
+" when completion is shown, use tab to accept
+inoremap <tab> <c-r>=pumvisible() ? "\<lt>c-y>" : "\<lt>tab>"<cr>
 nmap g<f7> :call LanguageClient#textDocument_references()<cr>
 nmap <leader>p :pclose<cr>
 nmap <leader><esc> :pclose<cr>
