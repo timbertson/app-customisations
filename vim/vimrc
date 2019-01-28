@@ -24,10 +24,9 @@ let g:indent_finder_default_width="2"
 if has('nvim')
 	tnoremap <Esc> <C-\><C-n>
 	tnoremap <leader><Esc> <Esc>
-" leader-t for toggling the terminal
+" double-backtick for toggling the terminal
 	let g:neoterm_autoinsert=1
 	" not sure which of these will grow on me...
-	" nnoremap <leader>t :Ttoggle<cr>
 	nnoremap `` :Ttoggle<cr>
 	let $NVIM_TERMINAL = 1
 
@@ -252,6 +251,7 @@ augroup mkd
 	autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt spell mousemodel=popup textwidth=70;
 augroup END
 
+let g:no_plugin_maps = 1
 
 "" tab left & right
 nmap <A-j> :silent call Save_if_possible()<cr>gt
@@ -318,6 +318,24 @@ nmap <leader>` vi`
 " ]] to go to next (/prev) quickfix item
 nmap <A-]> :cn<cr>
 nmap <A-[> :cp<cr>
+augroup quickfix
+	autocmd!
+	autocmd FileType qf setlocal wrap
+augroup END
+fun! Close_all_quckfix_windows()
+	" NOTE: iterate backwards from, so it doesn't affect the loop when buffers
+	" past the closed ones have their numbers shuffled
+	let l:b=bufnr('$')
+	while l:b > 0
+		" echo b
+		if getbufvar(b, '&buftype') == 'quickfix'
+			exe "bdelete" b
+			" echo "bdelete" b
+		endif
+		let l:b -= 1
+	endwhile
+endfun
+nmap <leader>` :call Close_all_quckfix_windows()<cr>
 
 " + expands a selection in both directions by one character
 vmap + loho
@@ -457,16 +475,32 @@ elseif executable("ag")
 	let g:ackprg = 'ag --nogroup --nocolor --column'
 endif
 
+set switchbuf="usetab,split"
+
 " language-server mappings
+let g:my_languageclient_select_opts = {
+	\ 'gotoCmd': 'split',
+	\ }
+
 nmap <leader>/ :call LanguageClient#textDocument_hover()<cr>
 nmap <leader>a :call LanguageClient#textDocument_hover()<cr>
-" nmap gd :call LanguageClient#textDocument_definition()<cr>
+nmap <leader>d :call LanguageClient#textDocument_definition(g:my_languageclient_select_opts)<cr>
+nmap <leader>t :call LanguageClient#workspace_symbol("", g:my_languageclient_select_opts)<cr>
+nmap <leader>g :call LanguageClient#textDocument_documentSymbol()<cr>
+" single-chord omnicomplete
+set completeopt="menuone,preview,noinsert"
+imap <c-k> <c-x><c-o>
+imap <c-o> <c-x><c-o>
 nmap g<f7> :call LanguageClient#textDocument_references()<cr>
 nmap <leader>p :pclose<cr>
 nmap <leader><esc> :pclose<cr>
 command! -nargs=0 LC call LanguageClient#startServer()
 command! -nargs=0 LCoff call LanguageClient#exit()
 let g:LanguageClient_autoStart = 0
+let g:LanguageClient_loggingFile="/tmp/languageClient.log"
+let g:LanguageClient_serverStderr="/tmp/languageServer.log"
+let g:LanguageClient_loggingLevel='INFO'
+
 let g:LanguageClient_serverCommands = {}
 let g:LanguageClient_serverCommands.python = ['pyls']
 let g:LanguageClient_serverCommands.rust = ['rls']
