@@ -488,8 +488,8 @@ nmap <leader>d :call LanguageClient#textDocument_definition(g:my_languageclient_
 nmap <leader>t :call LanguageClient#workspace_symbol("", g:my_languageclient_select_opts)<cr>
 nmap <leader>g :call LanguageClient#textDocument_documentSymbol()<cr>
 " single-chord omnicomplete
-set completeopt="menuone,preview,noinsert"
-imap <c-k> <c-x><c-o>
+set completeopt=menuone,preview,noinsert
+imap <c-a> <c-x><c-o>
 imap <c-o> <c-x><c-o>
 nmap g<f7> :call LanguageClient#textDocument_references()<cr>
 nmap <leader>p :pclose<cr>
