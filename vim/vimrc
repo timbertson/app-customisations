@@ -488,11 +488,16 @@ nmap <leader>d :call LanguageClient#textDocument_definition(g:my_languageclient_
 nmap <leader>t :call LanguageClient#workspace_symbol("", g:my_languageclient_select_opts)<cr>
 nmap <leader>g :call LanguageClient#textDocument_documentSymbol()<cr>
 " single-chord omnicomplete
-set completeopt=menuone,preview,noinsert
+set completeopt=menuone,preview " ,noinsert
 imap <c-a> <c-x><c-o>
 imap <c-o> <c-x><c-o>
-" when completion is shown, use tab to accept
+
+" when completion is shown, use tab/return/space to accept and esc to cancel
 inoremap <tab> <c-r>=pumvisible() ? "\<lt>c-y>" : "\<lt>tab>"<cr>
+inoremap <cr> <c-r>=pumvisible() ? "\<lt>c-y>" : "\<lt>cr>"<cr>
+inoremap <space> <c-r>=pumvisible() ? "\<lt>c-y>" : "\<lt>space>"<cr>
+inoremap <esc> <c-r>=pumvisible() ? "\<lt>c-e>" : "\<lt>esc>"<cr>
+
 nmap g<f7> :call LanguageClient#textDocument_references()<cr>
 nmap <leader>p :pclose<cr>
 nmap <leader><esc> :pclose<cr>

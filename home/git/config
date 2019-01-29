@@ -57,3 +57,7 @@
 	cmd = gvim --remote-tab \"$FILENAME\"
 	noconsole = yes
 	needsfile = yes
+[wip]
+	remote = origin
+	remote = mba
+	remote = pew
