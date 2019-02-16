@@ -136,4 +136,4 @@ if begin isatty stderr; and not test -f ~/.config/status-check/IGNORE_THIS_MACHI
 end
 
 set -x CONDUIT_TLS native # https://github.com/ocaml/opam-publish/issues/58
-set -x PASSE_SERVER https://passe-passe.a3c1.starter-us-west-1.openshiftapps.com/
+set -x PASSE_SERVER https://passe.gfxmonk.net/
