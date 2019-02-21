@@ -5,49 +5,53 @@
 # Obviously, only use this if you know the changed key is OK
 
 from __future__ import print_function
-import sys, collections, re, shutil, os
+import sys, collections, re, shutil, os, subprocess
+
+args = sys.argv[1:]
 
 edits = collections.defaultdict(lambda: [])
 patt = re.compile(r'^Offending .*key( for IP)? in *(?P<file>[^:]+):(?P<lineno>\d+)$')
 
-if sys.stdin.isatty():
-	import subprocess
-	print("  (reading input from clipboard...)")
-	try:
-		contents = subprocess.check_output(['xsel', '-oc', '--clear'])
-	except (subprocess.CalledProcessError, OSError):
-		contents = subprocess.check_output(['pyperclip', '-o'])
-	lines = contents.splitlines()
-	# print(repr(lines))
+if args:
+	cmd = ['sed', '-i.bak', '-e', '/'+("|".join(args)) + '/d', os.path.expanduser('~/.ssh/known_hosts')]
+	print(" + %s" % (" ".join(cmd)))
+	subprocess.check_call(cmd)
 else:
-	lines = sys.stdin.readlines()
-
-for line in lines:
-	line = line.strip()
-	m = re.match(patt, line)
-	if m:
-		m = m.groupdict()
-		line = int(m['lineno'])
-		filename = m['file']
-		edits[filename].append(line)
+	if sys.stdin.isatty():
+		import subprocess
+		print("  (reading input from clipboard...)")
+		try:
+			contents = subprocess.check_output(['xsel', '-oc', '--clear'])
+		except (subprocess.CalledProcessError, OSError):
+			contents = subprocess.check_output(['pyperclip', '-o'])
+		lines = contents.splitlines()
+		# print(repr(lines))
 	else:
-		# print(" # " + line.strip())
-		continue
+		lines = sys.stdin.readlines()
 
-print("")
-for filename, lines in edits.items():
-	print(" ** removing line %s from %s" % (", ".join(map(str, lines)), filename), file=sys.stderr)
-	newname = filename + '.tmp'
-	shutil.copy2(filename, newname)
-	with open(filename) as f:
-		with open(filename + '.bak', 'w') as backup:
-			with open(newname, 'w') as fout:
-				for lineno, contents in enumerate(f.readlines(), 1):
-					if lineno in lines:
-						backup.write(contents)
-					else:
-						fout.write(contents)
-	os.rename(newname, filename)
+	for line in lines:
+		line = line.strip()
+		m = re.match(patt, line)
+		if m:
+			m = m.groupdict()
+			line = int(m['lineno'])
+			filename = m['file']
+			edits[filename].append(line)
+		else:
+			# print(" # " + line.strip())
+			continue
 
-
-
+	print("")
+	for filename, lines in edits.items():
+		print(" ** removing line %s from %s" % (", ".join(map(str, lines)), filename), file=sys.stderr)
+		newname = filename + '.tmp'
+		shutil.copy2(filename, newname)
+		with open(filename) as f:
+			with open(filename + '.bak', 'w') as backup:
+				with open(newname, 'w') as fout:
+					for lineno, contents in enumerate(f.readlines(), 1):
+						if lineno in lines:
+							backup.write(contents)
+						else:
+							fout.write(contents)
+		os.rename(newname, filename)
