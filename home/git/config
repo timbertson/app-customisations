@@ -1,5 +1,7 @@
 [alias]
 	st = status
+	f = fetch
+	fo = !git fetch && git checkout
 	ci = commit
 	co = checkout
 	go = checkout
