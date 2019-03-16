@@ -3,12 +3,12 @@
     "args": {
       "owner": "timbertson",
       "repo": "git-wip",
-      "rev": "version-0.1.3",
-      "sha256": "0x19xkl12sc8yr668kmygi005q6gydb859pffk4fakw1549i3i0d"
+      "rev": "version-0.1.4",
+      "sha256": "1dgsd3k8amsp867iyvd7w2by5qlcrgzbis1wrp7c9v6md99zx3ix"
     },
     "fn": "fetchFromGitHub",
-    "rev": "version-0.1.3",
-    "version": "0.1.3"
+    "rev": "version-0.1.4",
+    "version": "0.1.4"
   },
   "owner": "timbertson",
   "repo": "git-wip",
