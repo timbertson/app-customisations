@@ -1,7 +1,0 @@
-#!/bin/sh
-
-if [ "$#" -gt 0 ]; then
-	exec gvim --remote-tab "$@"
-fi
-
-exec gvim "$@"

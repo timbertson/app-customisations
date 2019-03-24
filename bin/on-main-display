@@ -1,5 +1,0 @@
-#!/bin/bash
-export DISPLAY=:0
-. "$(ls -1rt "$HOME/.dbus/session-bus"/*-0 | tail -n 1)"
-export DBUS_SESSION_BUS_ADDRESS
-exec "$@"

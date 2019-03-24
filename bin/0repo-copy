@@ -1,4 +1,0 @@
-#!/bin/bash
-set -eu
-cp "$@" ~/dev/0repo/feeds
-echo "Note: remember to commit the feed"

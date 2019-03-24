@@ -1,4 +1,0 @@
-#!bash -eu
-# delegate to all nix buildables
-gup -u share
-# gup -u ../bin/nix ../home/applications/nix

@@ -1,8 +1,0 @@
-#!/bin/sh
-if [ "$#" -lt 2 ]; then
-	echo "Usage: copyto dest src [src2 ...]" >&2
-	exit 1
-fi
-dest="$1"
-shift 1
-exec cp "$@" "$dest"

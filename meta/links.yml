@@ -286,8 +286,8 @@ meta:
   optional: true
   tags: desktop
 
-~/.nixpkgs/config.nix:
-  path: ../nix/config.nix
+~/.config/nixpkgs/overlays/site.nix:
+  path: ../nix/overlay-user.nix
   tags: nix
 
 ~/.local/nix:

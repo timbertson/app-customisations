@@ -1,11 +1,6 @@
 {pkgs ? import <nixpkgs> {}}:
 let
 	stdenv = pkgs.stdenv;
-	defaultOpts = {
-		syncthing = false;
-		maximal = false;
-		git-readonly = false;
-	};
 	home = builtins.getEnv "HOME";
 	optsPath = "${home}/.nixpkgs/opts.nix";
 	opts = defaultOpts // (if builtins.pathExists optsPath then import optsPath else {});
@@ -13,56 +8,10 @@ let
 		inherit pkgs;
 		enableNeovim = true;
 	});
-	addQtTomfoolery = pkg: bins: with pkgs; stdenv.mkDerivation {
-		# see https://github.com/NixOS/nixpkgs/pull/33146#issuecomment-364147289
-		inherit (pkg) name version;
-		buildInputs = [ makeWrapper ];
-		buildCommand = let
-			qt = qt5.qtbase;
-			wrapBin = bin: ''
-				chmod +w "$(dirname "$out/${bin}")"
-				rm "$out/${bin}"
-				makeWrapper "${pkg}/${bin}" "$out/${bin}" \
-					--set QT_QPA_PLATFORM_PLUGIN_PATH "${qt.bin}/lib/qt-${qt.qtCompatVersion}/plugins/platforms" \
-				;
-				find $out/share/applications -type f | while read f; do
-					substituteInPlace "$f" --replace "${pkg}/${bin}" "$out/${bin}"
-				done
-			'';
-		in ''
-			cp -r "${pkg}" "$out"
-			${lib.concatStringsSep "\n" (map wrapBin bins)}
-		'';
-	};
 	isDarwin = stdenv.isDarwin;
 	isLinux = stdenv.isLinux;
 in
 with packagesExt; let
-	optional = flag: pkg: if flag then pkg else null;
-	maximal = pkg: optional opts.maximal pkg;
-	darwin = pkg: optional isDarwin pkg;
-	notDarwin = pkg: optional (!isDarwin) pkg;
-	bash = "#!${pkgs.bash}/bin/bash";
-	wrapper = script: writeScript "wrapper" script;
-	wrappers = {
-		# ALL
-
-	} // (if isLinux && opts.maximal then {
-		# LINUX only...
-		"mount.ssh" = wrapper ''${bash}
-			set -eu
-			if [ "$#" -lt 2 ]; then
-				echo "usage: mount.ssh [opts] remote local-dir"
-				exit 2
-			fi
-			if [ ! -e "$2" ]; then
-				echo "Making directory: $2"
-				mkdir -p "$2"
-			fi
-
-			${sshfsFuse}/bin/sshfs "$@"
-		'';
-	} else {});
 	installed = with lib; remove null ([
 		(if opts.git-readonly then callPackages ./git-readonly.nix {} else (notDarwin git))
 		my-nix-prefetch-scripts
@@ -85,7 +34,6 @@ with packagesExt; let
 		gup
 		(maximal passe)
 		vim-watch
-		# vim
 		vim.vimrc
 		neovim
 		neovim-remote
@@ -94,7 +42,6 @@ with packagesExt; let
 		python3Packages.python
 		pyperclip
 		(optional opts.syncthing syncthing)
-
 		(buildFromSource ./sources/piep.json {})
 		(buildFromSource ./sources/version.json {})
 	] ++ (if !opts.maximal then [] else if isLinux then with ocamlPackages_4_03; [
@@ -110,7 +57,6 @@ with packagesExt; let
 		my-borg-task
 		ocamlscript
 		ocaml
-		# (addQtTomfoolery vlc ["bin/vlc"])
 		parcellite
 		dumbattr
 		shellshape

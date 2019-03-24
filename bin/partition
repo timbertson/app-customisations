@@ -1,7 +1,0 @@
-#!/bin/bash
-# partition stdin by lines matching pattern, then lines not matching pattern
-set -e
-tmp="$(tempfile -d /tmp -p partition)"
-tee "$tmp" | grep "$@"
-cat "$tmp" | grep -v "$@"
-rm "$tmp"

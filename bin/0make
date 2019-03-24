@@ -1,6 +1,0 @@
-#!/bin/sh
-if [ "$*" = "--versions" ]; then
-  exec 0launch -gd 'http://riscque.net/0make' "$@"
-else
-  exec 0launch  'http://riscque.net/0make' "$@"
-fi

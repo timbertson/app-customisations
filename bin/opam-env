@@ -1,8 +1,0 @@
-#!/bin/bash
-eval "$(opam config env --sh)"
-export ZEROENV_NAME='opam'
-if [ "$#" -gt 0 ]; then
-       exec "$@"
-else
-       exec $SHELL
-fi

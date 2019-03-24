@@ -1,4 +1,4 @@
-{pkgs, gsel ? null, vim-watch }:
+{pkgs, vim-watch }:
 with pkgs;
 let
 	url = url: sha: fetchurl { url = url; sha256 = sha; };
@@ -92,8 +92,6 @@ in
 		"a38cebd04988262eb6798eb2884ff67b46815aac"
 		"1hd8mk5k2jbpw5njjqy0kp8c46xnxzbl1zsq54d0wbyxxjyp8kdr";
 	
-	"gsel" = if gsel == null then null else mk { src = "${gsel}/share/vim"; };
-
 	"NeoSolarized" = mkgit
 		"https://github.com/icymind/NeoSolarized"
 		"2651e90402a70794d8bc653f16d8515b99f6c7c5"

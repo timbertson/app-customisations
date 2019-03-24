@@ -1,5 +1,0 @@
-#!/bin/bash
-
-set -e
-[ -n "$1" ]
-cat "$1" | sed -e 's/^add/ remove/' -e 's/^remove/ add/' | sort -r | xmodmap -

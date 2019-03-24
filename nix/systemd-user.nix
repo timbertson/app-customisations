@@ -10,8 +10,8 @@ let
 	loadSessionVars = "eval \"$(/home/tim/.bin/session-vars --all --process gnome-shell --export)\"";
 	userPath = systemPath ++ [
 		"${home}"
-		"${home}/dev/app-customisations"
-		"${home}/dev/app-customisations/nix/local"
+		"${builtins.toString ../}"
+		"${builtins.toString ./local}"
 	];
 in
 {
@@ -35,8 +35,6 @@ in
 					Persistent = true;
 				};
 			};
-
-
 
 			services.borg =
 			# NOTE: must be copied to /etc/systemd/system
@@ -211,23 +209,6 @@ in
 					wantedBy = [ "default.target" "sockets.target"];
 				};
 			})
-
-			# (optional (pkgs.gsel or null) {
-			# 	# gsel server (if gsel exists)
-			# 	services.gsel-server = {
-			# 		# wantedBy = [ "default.target" ];
-			# 		serviceConfig = {
-			# 			ExecStart = "${pkgs.gsel}/bin/gsel --server";
-			# 			Environment = "OCAMLRUNPARAM=b";
-			# 			Restart = "on-failure";
-			# 		};
-			# 	};
-			# 	sockets.gsel-server = {
-			# 		wantedBy = [ "default.target" "sockets.target"];
-			# 		listenStreams = [ "@%t/gsel.sock" ];
-			# 	};
-			# })
-
 		];
 		system.build.standalone-user-units = sd.generateUnits
 			"user" # type

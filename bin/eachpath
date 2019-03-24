@@ -1,6 +1,0 @@
-#!/bin/bash
-set -e
-[ "$#" -gt 1 ] || (echo "usage: eachpath 'foo:bar:baz' action"; exit 1)
-str="$1"
-shift 1
-echo -n "$str" | parallel -d: "$@"
