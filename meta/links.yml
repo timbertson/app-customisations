@@ -10,7 +10,6 @@ meta:
         - linux
         - desktop
         - fedora
-        - shellshape
         - fish
         - nix
         - systemd
@@ -21,7 +20,6 @@ meta:
         - linux
         - desktop
         - fedora
-        - shellshape
         - fish
         - nix
         - systemd
@@ -252,7 +250,7 @@ meta:
 
 ~/.config/dconf.user.d/shellshape:
   path: ../home/dconf/shellshape
-  tags: linux
+  tags: linux shellshape
 
 #TODO: make a pc xkb config
 
@@ -285,6 +283,10 @@ meta:
   path: ../nix/local/share/applications/desktop-session.desktop
   optional: true
   tags: desktop
+
+~/.config/nixpkgs/config.nix:
+  path: ../nix/config.nix
+  tags: nix
 
 ~/.config/nixpkgs/overlays/site.nix:
   path: ../nix/overlay-user.nix

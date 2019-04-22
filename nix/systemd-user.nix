@@ -184,7 +184,7 @@ in
 				serviceConfig = {
 					ExecStart = "${pkgs.dconf-user-overrides}/bin/dconf-user-overrides";
 					Environment = [
-						"XDG_DATA_DIRS=/usr/local/share/:/usr/share/:${pkgs.shellshape}/share/gnome-shell/extensions/shellshape@gfxmonk.net/data"
+						# "XDG_DATA_DIRS=/usr/local/share/:/usr/share/:${pkgs.shellshape}/share/gnome-shell/extensions/shellshape@gfxmonk.net/data"
 						"GIO_EXTRA_MODULES=${pkgs.gnome3.dconf.lib}/lib/gio/modules"
 					];
 				};

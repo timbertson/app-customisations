@@ -1,0 +1,16 @@
+{
+  "fetch": {
+    "args": {
+      "owner": "timbertson",
+      "repo": "nix-source-automation",
+      "rev": "8f04ac9a178d82ce55f87563f136923008dab957",
+      "sha256": "0xfpgq3mvk4qszs3vww0xz25378gyxqb1dk8ylbn0h45g0fd9k8y"
+    },
+    "fn": "fetchFromGitHub",
+    "rev": "8f04ac9a178d82ce55f87563f136923008dab957"
+  },
+  "owner": "timbertson",
+  "repo": "nix-source-automation",
+  "rev": "impl",
+  "type": "fetchFromGitHub"
+}

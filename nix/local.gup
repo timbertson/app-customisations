@@ -3,18 +3,9 @@ set -eu
 if [ "$#" -eq 0 ]; then
 	cd "$(dirname "$0")"
 	dest="$(basename "$0" .gup)"
-	src="default.nix"
 else
 	dest="$2"
-	src="$2.nix"
 	gup --always
 fi
-# export NIX_PIN_CONFIG="$HOME/.config/nix-pin/pins.nix"
-# if ! [ -f "$NIX_PIN_CONFIG" ]; then
-# 	echo "Setting up nix-pin"
-# 	nixPin="$(nix-build --no-out-link -A nix-pin '<nixpkgs>')"
-# 	[ -n "$nixPin" ]
-# 	"$nixPin/bin/nix-pin" setup
-# fi
-nix-build --out-link "$dest" "$src" -A siteInstalled --show-trace
+nix-build --out-link "$dest" default.nix -A siteInstalled --show-trace
 nix-store --add --add-root --indirect "$dest"

@@ -6,7 +6,6 @@ let
 		maximal = false;
 		git-readonly = false;
 		gnome-shell = false;
-		syncthing = false;
 		systemd = false;
 		vim-ide = false;
 	};
@@ -34,16 +33,6 @@ let
 
 	home = builtins.getEnv "HOME";
 
-	tryCallPackageFrom = src: path: args: withExtantPath path (path:
-		src.callPackage path args
-	);
-
-	tryCallPackage = tryCallPackageFrom self;
-
-	tryBuildHaskell = tryInvoke (path:
-		pkgs.haskell.packages.ghc862.callPackage path { }
-	);
-
 	buildFromSource = jsonFile: attrs:
 		let
 			fetched = super.nix-update-source.fetch jsonFile;
@@ -62,13 +51,13 @@ in
 		;
 	};
 
-	installedPackages = with self; (let
+	installedPackages = with self; builtins.trace "Features: ${builtins.toJSON self.features}" (let
 		maximal = ifEnabled "maximal";
 		darwin = pkg: orNull stdenv.isDarwin pkg;
 		linux = pkg: orNull stdenv.isLinux pkg;
 		bash = "#!${pkgs.bash}/bin/bash";
 		wrapper = script: writeScript "wrapper" script;
-	in lib.remove null ([
+	in ([]) ++ lib.remove null ([
 		(buildFromSource ./sources/piep.json {})
 		(buildFromSource ./sources/version.json {})
 		daglink
@@ -77,21 +66,13 @@ in
 		(darwin fswatch)
 		direnv
 		dtach
-		(firstNonNull [gup-ocaml gup])
+		(self.gup-ocaml or gup)
 		fish
 		fzf
 		git-wip
 		(if (isEnabled "git-readonly" || stdenv.isDarwin) then null else git)
 		(ifEnabled "git-readonly" (callPackage ./git-readonly.nix {}))
 		(ifEnabled "gnome-shell" my-gnome-shell-extensions)
-		(ifEnabled "syncthing" syncthing)
-		(maximal abduco)
-		(maximal ctags)
-		(maximal glibcLocales)
-		(maximal nodejs)
-		(maximal music-import)
-		(maximal python3Packages.ipython)
-		(maximal passe)
 		my-nix-prefetch-scripts
 		neovim
 		neovim-remote
@@ -107,30 +88,31 @@ in
 	] ++ map maximal (
 		[
 			# maximal:
-			snip
-			stereoscoper
+			abduco
+			ctags
+			glibcLocales
+			nodejs
+			python3Packages.ipython
 			pythonPackages.youtube-dl
-			trash
+			syncthing
 		] ++ map linux [
 			# linux + maximal
 			desktopFiles.my-desktop-session
 			desktopFiles.tilda-launch
 			desktopFiles.calibre
-			dumbattr
-			eog-rate
-			irank
-			irank-releases
+
 			jsonnet
 			my-borg-task
 			my-gnome-shell-extensions
-			(ifEnabled "systemd" my-systemd-units)
+			# (ifEnabled "systemd" my-systemd-units)
+
 			ocaml
 			parcellite
 			xbindkeys
 		]) # /maximal
 	));
 
-	siteInstalled = self.symlinkJoin {
+	siteInstalled = super.symlinkJoin {
 		name = "local";
 		paths = self.installedPackages;
 		postBuild = ''
@@ -152,11 +134,7 @@ in
 
 	# plain ol' packages:
 	daglink = buildFromSource ./sources/daglink.json {};
-	dconf-user-overrides = tryCallPackage "${home}/dev/python/dconf-user-overrides/nix/local.nix" {};
 	desktopFiles = callPackage ./apps.nix {};
-	dns-alias = tryCallPackage "${home}/dev/python/dns-alias/nix/default.nix" {};
-	dumbattr = tryCallPackage "${home}/dev/python/dumbattr/nix/local.nix" {};
-	eog-rate = tryCallPackage "${home}/dev/python/eog-rate/nix/local.nix" {};
 	fish = if super.glibcLocales == null then super.fish else lib.overrideDerivation super.fish (o: {
 		# workaround for https://github.com/NixOS/nixpkgs/issues/39328
 		buildInputs = o.buildInputs ++ [ self.makeWrapper ];
@@ -164,10 +142,10 @@ in
 			wrapProgram $out/bin/fish --set LOCALE_ARCHIVE ${self.glibcLocales}/lib/locale/locale-archive
 		'';
 	});
-	git-wip = buildFromSource ./sources/git-wip.json {};
-	gup-ocaml = (tryCallPackageFrom super "${home}/dev/ocaml/gup/nix/gup-ocaml.nix" {});
-	irank = tryCallPackage "${home}/dev/python/irank/default.nix" {};
-	irank-releases = callPackage ({ lib, stdenv, makeWrapper, pythonPackages, irank }:
+	git-wip = firstNonNull [
+		(buildFromSource ./sources/git-wip.json {})
+	];
+	irank-releases = if self ? irank then (callPackage ({ lib, stdenv, makeWrapper, pythonPackages, irank }:
 		let
 			pythonDeps = [ irank ] ++ (with pythonPackages; [ musicbrainzngs pyyaml ]);
 			pythonpath = lib.concatStringsSep ":" (map (dep: "${dep}/lib/${pythonPackages.python.libPrefix}/site-packages") pythonDeps);
@@ -185,7 +163,7 @@ in
 						--prefix PYTHONPATH : ${pythonpath} \
 						;
 				'';
-		});
+		}) {}) else null;
 
 	jsonnet = callPackage ({ stdenv, fetchurl }:
 		let
@@ -205,10 +183,9 @@ in
 				cp jsonnet $out/bin/
 				cp libjsonnet.so $out/lib/
 			'';
-		});
+		}) {};
 
-	music-import = tryCallPackage "${home}/dev/python/music-import/nix/local.nix" {};
-	my-systemd-units = (runCommand "systemd-units" {} ''
+	my-systemd-units = (pkgs.runCommand "systemd-units" {} ''
 		mkdir -p $out/share/systemd
 		cp -a "${system.config.system.build.standalone-user-units}" $out/share/systemd/user
 	'');
@@ -240,13 +217,13 @@ in
 					--prefix PATH : $out/bin \
 					;
 			'';
-		});
+		}) {};
 
 	my-gnome-shell-extensions =
 		let exts = {
 			"scroll-workspaces@gfxmonk.net" = "${home}/dev/gnome-shell/scroll-workspaces";
 			"impatience@gfxmonk.net" = "${home}/dev/gnome-shell/impatience@gfxmonk.net";
-		}; in (runCommand "gnome-shell-extensions" {} ''
+		}; in (pkgs.runCommand "gnome-shell-extensions" {} ''
 		mkdir -p $out/share/gnome-shell/extensions
 		${concatStringsSep "\n" (remove null (mapAttrsToList (name: src:
 			if src == null then null else ''
@@ -305,12 +282,11 @@ in
 		});
 
 	neovim = callPackage ./vim.nix {};
-	ocaml-language-server = (runCommand "ocaml-language-server" {} ''
+	ocaml-language-server = (pkgs.runCommand "ocaml-language-server" {} ''
 		mkdir -p $out/bin
-		ln -s "${nodePackages.ocaml-language-server}/bin/ocaml-language-server" "$out/bin"
+		ln -s "${pkgs.nodePackages.ocaml-language-server}/bin/ocaml-language-server" "$out/bin"
 	'');
-	opam2nix = tryCallPackageFrom super ./opam2nix-packages {};
-	passe = tryCallPackage "${home}/dev/ocaml/passe/nix/default.nix" { target="client"; };
+	opam2nix = super.callPackage ./opam2nix-packages {};
 	pyperclip = callPackage ({ lib, fetchgit, pythonPackages, which, xsel }:
 		pythonPackages.buildPythonPackage rec {
 			name = "pyperclip-${version}";
@@ -323,19 +299,12 @@ in
 			doCheck = false;
 			propagatedBuildInputs = [ which xsel ];
 		}) {};
-	pythonPackages = super.pythonPackages // {
-		dnslib = tryCallPackage "${home}/dev/python/dns-alias/nix/dnslib.nix" { inherit pythonPackages; };
-	};
+	# pythonPackages = super.pythonPackages // {
+	# 	# dnslib = tryCallLocal "${home}/dev/python/dns-alias" "nix/dnslib.nix" "HEAD" { inherit pythonPackages; };
+	# };
 	python3Packages = super.python3Packages // {
 		python-language-server = super.python3Packages.python-language-server.override { providers = []; };
 	};
-	shellshape = tryCallPackage "${home}/dev/gnome-shell/shellshape@gfxmonk.net/default.nix" {};
-	snip = tryBuildHaskell "${home}/dev/haskell/snip/nix/default.nix" ;
-	stereoscoper = tryCallPackage "${home}/dev/python/stereoscoper/default.nix" {};
-	trash = tryCallPackage "${home}/dev/python/trash/default.nix" {};
 	vimPlugins = (callPackage ./vim-plugins.nix {}) // super.vimPlugins;
-	vim-watch = firstNonNull [
-		(tryCallPackage "${home}/dev/vim/vim-watch/nix/local.nix" { enableNeovim = true; })
-		(buildFromSource ./sources/vim-watch.json { enableNeovim = true; })
-	];
+	vim-watch = buildFromSource ./sources/vim-watch.json { enableNeovim = true; };
 })

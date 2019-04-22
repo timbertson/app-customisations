@@ -1,13 +1,23 @@
 with builtins;
 let
-	maybeImport = p: if pathExists p then [import p] else [];
+	hostname = if pathExists "/etc/hostname"
+		then replaceStrings ["\n"] [""] (readFile "/etc/hostname")
+		else "unknown";
+
+	maybeImport = p: if pathExists p
+		then trace "Including optional overlay: ${toString p}" [(import p)]
+		else trace "Ignoring optional overlay: ${toString p}" [];
+
 in
 import <nixpkgs> {
+	config = (import ./config.nix);
 	overlays = [
 		(import ./system.nix)
+		(import ./overlay-user.nix)
 		(import ./overlay.nix)
+		(import ./overlay-wrangle.nix)
 	]
 		++ (maybeImport ./overlay-local.nix)
-		++ (maybeImport (./. + "host-${getEnv "HOSTNAME"}.nix"))
+		++ (maybeImport (./. + "/host-${hostname}.nix"))
 	;
 }
