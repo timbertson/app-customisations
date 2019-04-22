@@ -508,11 +508,13 @@ nmap <leader>p :pclose<cr>
 nmap <leader><esc> :pclose<cr>
 command! -nargs=0 LC call LanguageClient#startServer()
 command! -nargs=0 LCoff call LanguageClient#exit()
+
 let g:LanguageClient_autoStart = 0
 let g:LanguageClient_loggingFile="/tmp/languageClient.log"
 let g:LanguageClient_serverStderr="/tmp/languageServer.log"
 let g:LanguageClient_loggingLevel='INFO'
-
+let g:LanguageClient_useVirtualText=0
+let g:LanguageClient_diagnosticsList="Disabled"
 let g:LanguageClient_serverCommands = {}
 let g:LanguageClient_serverCommands.python = ['pyls']
 let g:LanguageClient_serverCommands.rust = ['rls']
