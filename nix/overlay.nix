@@ -3,6 +3,7 @@ with builtins;
 with super.lib;
 let
 	defaultFeatures = {
+		node = true;
 		maximal = false;
 		git-readonly = false;
 		gnome-shell = false;
@@ -27,9 +28,11 @@ let
 			lib.warn "Unknown feature: ${feature}" (assert false; null)
 		else getAttr feature self.features;
 
-	ifEnabled = feature: x: if isEnabled feature then x else null;
-
 	orNull = cond: x: if cond then x else null;
+
+	ifEnabled = feature: x: orNull (isEnabled feature) x;
+
+	anyEnabled = features: x: orNull (any isEnabled features) x;
 
 	home = builtins.getEnv "HOME";
 
@@ -73,6 +76,7 @@ in
 		(if (isEnabled "git-readonly" || stdenv.isDarwin) then null else git)
 		(ifEnabled "git-readonly" (callPackage ./git-readonly.nix {}))
 		(ifEnabled "gnome-shell" my-gnome-shell-extensions)
+		(anyEnabled [ "node" "maximal"] nodejs)
 		my-nix-prefetch-scripts
 		neovim
 		neovim-remote
@@ -91,7 +95,6 @@ in
 			abduco
 			ctags
 			glibcLocales
-			nodejs
 			python3Packages.ipython
 			pythonPackages.youtube-dl
 			syncthing
