@@ -33,7 +33,7 @@ let
 		irank = { path = "~/dev/python/irank"; nix = "default.nix"; };
 		passe = { path = "~/dev/ocaml/passe"; nix = "nix/default.nix";
 			call = { pkgs, path }: pkgs.callPackage path { target = "client"; }; ref = "wrangle"; };
-		snip = { path = "~/dev/haskell/snip"; nix = "nix/default.nix"; call = callWith self.haskell.packages.ghc862.callPackage; };
+		snip = { path = "~/dev/haskell/snip"; nix = "nix/default.nix"; call = callWith self.haskell.packages.ghc864.callPackage; };
 		stereoscoper = { path = "~/dev/python/stereoscoper"; nix = "default.nix"; };
 		trash = { path = "~/dev/python/trash"; nix = "default.nix"; };
 		vim-watch = { path = "~/dev/vim/vim-watch"; nix = "nix/local.nix";
