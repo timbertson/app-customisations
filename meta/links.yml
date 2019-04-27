@@ -107,9 +107,6 @@ meta:
 ~/.direnvrc:
   path: ../home/direnv-std/direnvrc
 
-~/.zero2pypi:
-  path: ../home/zero2pypi
-
 ~/.gconf/apps/gnome-terminal:
   path: ../home/gconf/apps/gnome-terminal
   tags: desktop
@@ -146,10 +143,6 @@ meta:
   path: ../home/fish/config.fish
   tags: fish
 
-~/.Xresources:
-  path: ../home/Xresources
-  tags: desktop
-
 ~/.inputrc:
   path: ../home/inputrc
   tags: linux
@@ -166,24 +159,8 @@ meta:
   - path: ../home/xbindkeysrc-tv.scm
     tags: tv
 
-~/.ackrc:
-  path: ../home/ackrc
-
-~/.zshrc:
-  path: ../home/zshrc
-  tags: linux
 ~/.bashrc:
   path: ../home/bashrc
-  tags: linux
-
-~/.rainbow:
-  path: ../home/rainbow
-
-~/.ipython/profile_default/ipython_config.py:
-  path: ../home/ipython_config.py
-
-~/.gizmod:
-  path: ../home/gizmod
   tags: linux
 
 ~/.snip:
@@ -259,10 +236,6 @@ meta:
     tags: mac-kb xmodmap
   - path: ../home/xmodmaprc-pc
     tags: pc xmodmap
-
-~/.xsession:
-  - path: ../home/xsession
-    tags: desktop
 
 ## apps:
 #~/.config/autostart/banshee.desktop:
