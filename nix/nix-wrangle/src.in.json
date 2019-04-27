@@ -1,0 +1,6 @@
+{
+	"type": "fetchFromGitHub",
+	"repo": "nix-source-automation",
+	"owner": "timbertson",
+	"rev": "impl"
+}

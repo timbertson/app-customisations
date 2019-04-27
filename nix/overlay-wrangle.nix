@@ -1,9 +1,7 @@
 self: super:
 with super.lib;
 let
-	wrangleSrc = super.nix-update-source.fetch ./sources/nix-source-automation.json;
-	wrangle = (super.callPackage "${wrangleSrc.src}/nix/api.nix" {});
-
+	wrangle = super.nix-wrangle.api {};
 	callArgs = a: { pkgs, path }: pkgs.callPackage path args;
 	callWith = fn: { pkgs, path }: fn path {};
 
