@@ -7,5 +7,5 @@ else
 	dest="$2"
 	gup --always
 fi
-nix-build --out-link "$dest" default.nix -A siteInstalled --show-trace
+nix-build --out-link "$dest" default.nix -A siteInstalled --show-trace --option build-use-chroot false
 nix-store --add --add-root --indirect "$dest"

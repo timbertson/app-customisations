@@ -10,7 +10,7 @@ let
 	loadSessionVars = "eval \"$(/home/tim/.bin/session-vars --all --process gnome-shell --export)\"";
 	userPath = systemPath ++ [
 		"${home}"
-		"${builtins.toString ../}"
+		"${builtins.toString ../.}"
 		"${builtins.toString ./local}"
 	];
 in
@@ -59,19 +59,19 @@ in
 
 
 			# usermode DNS alias
-			sockets.dns-alias = {
-				wantedBy = [ "default.target" "sockets.target"];
-				socketConfig = {
-					ListenDatagram = "127.0.0.1:5053";
-				};
-			};
-			services.dns-alias = {
-				serviceConfig = {
-					ExecStart = "${pkgs.dns-alias}/bin/dns-alias --port 5053";
-					Environment = "PYTHONUNBUFFERED=1";
-					EnvironmentFile = "-%h/.config/dns-alias/env";
-				};
-			};
+			# sockets.dns-alias = {
+			# 	wantedBy = [ "default.target" "sockets.target"];
+			# 	socketConfig = {
+			# 		ListenDatagram = "127.0.0.1:5053";
+			# 	};
+			# };
+			# services.dns-alias = {
+			# 	serviceConfig = {
+			# 		ExecStart = "${pkgs.dns-alias}/bin/dns-alias --port 5053";
+			# 		Environment = "PYTHONUNBUFFERED=1";
+			# 		EnvironmentFile = "-%h/.config/dns-alias/env";
+			# 	};
+			# };
 
 			services.xbindkeys = sessionTask {
 				path = systemPath;

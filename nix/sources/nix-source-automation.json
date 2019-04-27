@@ -3,11 +3,11 @@
     "args": {
       "owner": "timbertson",
       "repo": "nix-source-automation",
-      "rev": "8f04ac9a178d82ce55f87563f136923008dab957",
-      "sha256": "0xfpgq3mvk4qszs3vww0xz25378gyxqb1dk8ylbn0h45g0fd9k8y"
+      "rev": "1cfc0414cf94200f614142ad5643fd597ea3bff7",
+      "sha256": "0vq2dw2sbigbxqyyrmx0qnd6ki0qaa4biyla7b81cng759klhypa"
     },
     "fn": "fetchFromGitHub",
-    "rev": "8f04ac9a178d82ce55f87563f136923008dab957"
+    "rev": "1cfc0414cf94200f614142ad5643fd597ea3bff7"
   },
   "owner": "timbertson",
   "repo": "nix-source-automation",

@@ -107,7 +107,7 @@ in
 			jsonnet
 			my-borg-task
 			my-gnome-shell-extensions
-			# (ifEnabled "systemd" my-systemd-units)
+			(ifEnabled "systemd" my-systemd-units)
 
 			ocaml
 			parcellite
@@ -190,7 +190,7 @@ in
 
 	my-systemd-units = (pkgs.runCommand "systemd-units" {} ''
 		mkdir -p $out/share/systemd
-		cp -a "${system.config.system.build.standalone-user-units}" $out/share/systemd/user
+		cp -a "${self.system.config.system.build.standalone-user-units}" $out/share/systemd/user
 	'');
 	my-borg-task = callPackage ({ pkgs }:
 		with pkgs;

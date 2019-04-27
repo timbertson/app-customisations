@@ -17,8 +17,6 @@ set additional_paths \
 	~/.cargo/bin
 	;
 
-set -x NIX_BUILD_SHELL /bin/bash
-
 for p in $additional_paths
 	if not contains $p $PATH
 		if test -e $p
