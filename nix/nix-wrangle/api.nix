@@ -23,7 +23,7 @@ let
 				# we were invoked with a base path
 				fullPath = relativePath: (
 					if path == null
-						then abort "Cannot use relativePath without specifying path"
+						then abort "relativePath only supported when using `inject` with a path"
 						else "${settings.path}/${relativePath}"
 				);
 
@@ -62,10 +62,11 @@ let
 				defaultCall = { pkgs, path }: pkgs.callPackage path {};
 				callImpl = attrs.call or defaultCall;
 
-				callWith = args: overrideSrc {
+				callWith = args:
+					builtins.trace "[wrangle] Building ${name} from ${nix} with ${src}" (overrideSrc {
 					inherit src version;
 					drv = callImpl args;
-				};
+				});
 				drv = callWith { pkgs = _nixpkgs; path = nix; };
 				overlay = (self: super:
 					let
@@ -90,7 +91,7 @@ let
 		importJsonSrc = path:
 			let attrs = if isAttrs path
 				then path
-				else builtins.trace "Importing ${path}" (importJSON path);
+				else builtins.trace "[wrangle] Loading ${path}" (importJSON path);
 			in
 			assert attrs.wrangle.apiversion == 1; attrs;
 
@@ -158,7 +159,7 @@ let
 
 		derivations = args: mapAttrs (name: node: node.drv) (importFrom args).sources;
 
-		callPackage = arg:
+		inject = arg:
 			let
 				isPath = p: builtins.typeOf p == "path";
 				argValue = if isPath arg then import arg else arg;
@@ -183,15 +184,18 @@ let
 					imports = importFrom { inherit path sources extend; };
 					pkgs = pkgsOfImport imports {inherit overlays extend importArgs; };
 					base = pkgs.callPackage nix args;
-					overridden = if imports ? self then
-						let self = makeImport { inherit path; } null imports.self; in
+					overridden = let selfSrc = imports.sources.self or null; in (if selfSrc != null then
+						builtins.trace "[wrangle] injecting src from `self` dependency" (
+						let selfImpl = makeImport { inherit path; } selfSrc.name selfSrc.attrs; in
 						overrideSrc {
-							inherit (self) src version;
+							inherit (selfImpl) src version;
 							drv = base;
-						} else base;
+						})
+					else
+						builtins.trace "[wrangle] no `self` dependency found" base
+					);
 				in
 				overridden
 			) attrs;
-
 	});
 in api
