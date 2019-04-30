@@ -54,6 +54,8 @@ in
 		;
 	};
 
+	installedDerivations = map (o: o.drvPath) self.installedPackages;
+
 	installedPackages = with self; builtins.trace "Features: ${builtins.toJSON self.features}" (let
 		maximal = ifEnabled "maximal";
 		darwin = pkg: orNull stdenv.isDarwin pkg;
@@ -75,6 +77,8 @@ in
 		git-wip
 		(if (isEnabled "git-readonly" || stdenv.isDarwin) then null else git)
 		(ifEnabled "git-readonly" (callPackage ./git-readonly.nix {}))
+		irank
+		irank-releases
 		(ifEnabled "gnome-shell" my-gnome-shell-extensions)
 		(anyEnabled [ "node" "maximal"] nodejs)
 		my-nix-prefetch-scripts
@@ -111,6 +115,7 @@ in
 
 			ocaml
 			parcellite
+			my-qt5
 			xbindkeys
 		]) # /maximal
 	));
@@ -148,7 +153,7 @@ in
 	git-wip = firstNonNull [
 		(buildFromSource ./sources/git-wip.json {})
 	];
-	irank-releases = if self ? irank then (callPackage ({ lib, stdenv, makeWrapper, pythonPackages, irank }:
+	irank-releases = if true then (callPackage ({ lib, stdenv, makeWrapper, pythonPackages, irank }:
 		let
 			pythonDeps = [ irank ] ++ (with pythonPackages; [ musicbrainzngs pyyaml ]);
 			pythonpath = lib.concatStringsSep ":" (map (dep: "${dep}/lib/${pythonPackages.python.libPrefix}/site-packages") pythonDeps);
@@ -283,6 +288,16 @@ in
 			'';
 			meta.priority = 1;
 		});
+
+	# Make a consistent path for setting $QT_QPA_PLATFORM_PLUGIN_PATH
+	# (see https://github.com/NixOS/nixpkgs/issues/24256)
+	my-qt5 = stdenv.mkDerivation {
+		name = "my-qt5";
+		buildCommand = ''
+			mkdir -p "$out/lib/qt5"
+			ln -s ${self.qt5.qtbase.bin}/lib/qt-5*/plugins "$out/lib/qt5/plugins"
+		'';
+	};
 
 	neovim = callPackage ./vim.nix {};
 	ocaml-language-server = (pkgs.runCommand "ocaml-language-server" {} ''

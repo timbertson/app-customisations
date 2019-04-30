@@ -135,3 +135,6 @@ end
 
 set -x CONDUIT_TLS native # https://github.com/ocaml/opam-publish/issues/58
 set -x PASSE_SERVER https://passe.gfxmonk.net/
+
+# https://github.com/NixOS/nixpkgs/issues/24256
+set -x QT_QPA_PLATFORM_PLUGIN_PATH "$HOME/.local/nix/lib/qt5/plugins/platforms"
