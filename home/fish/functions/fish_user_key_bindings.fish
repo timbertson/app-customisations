@@ -9,4 +9,6 @@ function fish_user_key_bindings -d "My key bindings for fish"
 	bind --erase -k f5
 	bind \cr __rerun_last_line
 	bind -k f5 __rerun_last_line
+	bind --user \e'[1;5A' history-token-search-backward # ctrl-up
+	bind --user \e'[1;5B' history-token-search-forward # ctrl-down
 end
