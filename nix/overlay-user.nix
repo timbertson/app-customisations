@@ -7,7 +7,6 @@ self: super:
 		python-language-server = super.python3Packages.python-language-server.override { providers = []; };
 	};
 
-	jre = self.jre8;
 	# docker-credential-gcr = let o = pkgs.docker-credential-gcr; in lib.extendDerivation true {
 	# 	meta = (o.meta // { platforms = go.meta.platforms; });
 	# } o;

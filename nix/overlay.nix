@@ -7,6 +7,7 @@ let
 		maximal = false;
 		git-readonly = false;
 		gnome-shell = false;
+		jdk = false;
 		systemd = false;
 		vim-ide = false;
 	};
@@ -77,8 +78,9 @@ in
 		git-wip
 		(if (isEnabled "git-readonly" || stdenv.isDarwin) then null else git)
 		(ifEnabled "git-readonly" (callPackage ./git-readonly.nix {}))
-		irank
+		(self.irank or null)
 		irank-releases
+		(ifEnabled "jdk" (callPackage ./jdks.nix {}))
 		(ifEnabled "gnome-shell" my-gnome-shell-extensions)
 		(anyEnabled [ "node" "maximal"] nodejs)
 		my-nix-prefetch-scripts
@@ -153,7 +155,7 @@ in
 	git-wip = firstNonNull [
 		(buildFromSource ./sources/git-wip.json {})
 	];
-	irank-releases = if true then (callPackage ({ lib, stdenv, makeWrapper, pythonPackages, irank }:
+	irank-releases = if self ? irank then (callPackage ({ lib, stdenv, makeWrapper, pythonPackages, irank }:
 		let
 			pythonDeps = [ irank ] ++ (with pythonPackages; [ musicbrainzngs pyyaml ]);
 			pythonpath = lib.concatStringsSep ":" (map (dep: "${dep}/lib/${pythonPackages.python.libPrefix}/site-packages") pythonDeps);
