@@ -6,11 +6,11 @@
 ;(xbindkey '(shift "b:5") "xte 'mouseclick 7'")
 
 ; meta + scroll to resize major window
-(xbindkey '(shift mod4 "b:4") "xte 'keyup Shift_L' 'key h' 'keydown Shift_L'")
-(xbindkey '(shift mod4 "b:5") "xte 'keyup Shift_L' 'key l' 'keydown Shift_L'")
+; (xbindkey '(shift mod4 "b:4") "xte 'keyup Shift_L' 'key h' 'keydown Shift_L'")
+; (xbindkey '(shift mod4 "b:5") "xte 'keyup Shift_L' 'key l' 'keydown Shift_L'")
 ; meta + shift + scroll = resize minor window
-(xbindkey '(alt mod4 "b:4") "xte 'keyup Alt_L' 'key u' 'keydown Alt_L'")
-(xbindkey '(alt mod4 "b:5") "xte 'keyup Alt_L' 'key i' 'keydown Alt_L'")
+; (xbindkey '(alt mod4 "b:4") "xte 'keyup Alt_L' 'key u' 'keydown Alt_L'")
+; (xbindkey '(alt mod4 "b:5") "xte 'keyup Alt_L' 'key i' 'keydown Alt_L'")
 ; alt + scroll to switch tabs
 (xbindkey '(alt "b:4") "xte 'keyup Alt_L' 'keydown Control_L' 'key Page_Up' 'keyup Control_L' 'keydown Alt_L'")
 (xbindkey '(alt "b:5") "xte 'keyup Alt_L' 'keydown Control_L' 'key Page_Down' 'keyup Control_L' 'keydown Alt_L'")
