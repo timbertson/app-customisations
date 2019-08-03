@@ -7,7 +7,8 @@ function overwrite_android_db {
 }
 
 function do_sync {
-	irank export "$@" -d "$dest" -- `grep -v '^#' ~/.config/irank/android-playlists`
+	playlists="$(grep -v '^#' ~/.config/irank/android-playlists | tr '\n' ' ')"
+	irank export "$@" -d "$dest" --limit 6.0 --merge ~/Music/Other/Phone -- $playlists
 	overwrite_android_db
 
 	# echo '-------- DISK USAGE: -----------'
