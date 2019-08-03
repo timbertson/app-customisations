@@ -36,16 +36,6 @@ let
 	anyEnabled = features: x: orNull (any isEnabled features) x;
 
 	home = builtins.getEnv "HOME";
-
-	buildFromSource = jsonFile: attrs:
-		let
-			fetched = super.nix-update-source.fetch jsonFile;
-			pkg = (callPackage "${fetched.src}/nix/default.nix" attrs);
-		in
-		pkg.overrideAttrs (base: {
-			name = "${fetched.repo}-${fetched.version or fetched.fetch.version}";
-			inherit (fetched) src;
-		});
 in
 {
 	features = defaultFeatures;
@@ -64,8 +54,6 @@ in
 		bash = "#!${pkgs.bash}/bin/bash";
 		wrapper = script: writeScript "wrapper" script;
 	in ([]) ++ lib.remove null ([
-		(buildFromSource ./sources/piep.json {})
-		(buildFromSource ./sources/version.json {})
 		daglink
 		(darwin coreutils)
 		(darwin cacert)
@@ -86,7 +74,6 @@ in
 		my-nix-prefetch-scripts
 		neovim
 		neovim-remote
-		nix-pin
 		pyperclip
 		python3Packages.python
 		ripgrep
@@ -143,7 +130,6 @@ in
 } // (let pkgs = self; in {
 
 	# plain ol' packages:
-	daglink = buildFromSource ./sources/daglink.json {};
 	desktopFiles = callPackage ./apps.nix {};
 	fish = if super.glibcLocales == null then super.fish else lib.overrideDerivation super.fish (o: {
 		# workaround for https://github.com/NixOS/nixpkgs/issues/39328
@@ -152,9 +138,6 @@ in
 			wrapProgram $out/bin/fish --set LOCALE_ARCHIVE ${self.glibcLocales}/lib/locale/locale-archive
 		'';
 	});
-	git-wip = firstNonNull [
-		(buildFromSource ./sources/git-wip.json {})
-	];
 	irank-releases = if self ? irank then (callPackage ({ lib, stdenv, makeWrapper, pythonPackages, irank }:
 		let
 			pythonDeps = [ irank ] ++ (with pythonPackages; [ musicbrainzngs pyyaml ]);
@@ -174,26 +157,6 @@ in
 						;
 				'';
 		}) {}) else null;
-
-	jsonnet = callPackage ({ stdenv, fetchurl }:
-		let
-			version = "0.8.5";
-		in
-		stdenv.mkDerivation {
-			name = "jsonnet-${version}";
-			src = fetchurl {
-				url = "https://github.com/google/jsonnet/archive/v${version}.tar.gz";
-				sha256 = "1b6whj7ad0zlq3smrnf6c6friipkgny6kqdcbjnbll21jmpzhkai";
-			};
-			makeFlags = "libjsonnet.so jsonnet";
-			installPhase = ''
-				mkdir $out
-				mkdir $out/bin
-				mkdir $out/lib
-				cp jsonnet $out/bin/
-				cp libjsonnet.so $out/lib/
-			'';
-		}) {};
 
 	my-systemd-units = (pkgs.runCommand "systemd-units" {} ''
 		mkdir -p $out/share/systemd
@@ -326,5 +289,4 @@ in
 		python-language-server = super.python3Packages.python-language-server.override { providers = []; };
 	};
 	vimPlugins = (callPackage ./vim-plugins.nix {}) // super.vimPlugins;
-	vim-watch = buildFromSource ./sources/vim-watch.json { enableNeovim = true; };
 })

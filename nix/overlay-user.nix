@@ -10,10 +10,4 @@ self: super:
 	# docker-credential-gcr = let o = pkgs.docker-credential-gcr; in lib.extendDerivation true {
 	# 	meta = (o.meta // { platforms = go.meta.platforms; });
 	# } o;
-
-	# Not the full derivation, contains only the `api` attribute for use in nix expressions
-	nix-wrangle = {
-		api = args: super.callPackage ./nix-wrangle/api.nix args;
-	};
 }
-

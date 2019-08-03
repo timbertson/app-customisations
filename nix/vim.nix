@@ -17,6 +17,7 @@ let
 				# load always
 				{
 					names = [
+						"async.vim"
 						"asyncrun"
 						"fish-syntax"
 						"fugitive"
@@ -36,8 +37,9 @@ let
 						"tcomment"
 						"The_NERD_tree"
 						"vala.vim"
-						"vim-indent-object"
 						"vim-grepper"
+						"vim-indent-object"
+						"vim-lsp"
 						"vim-nix"
 						"vim-rust"
 						"vim-stratifiedjs"

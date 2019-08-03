@@ -18,6 +18,11 @@ in
 		"8f419d9be2377d33bb3f6848b1bf2e2b3be9fd07"
 		"0daxd33sw3rf3q5jlg6a7d14qfdfygyr4ndi7mvxyavjx2i5mgb7";
 
+	"async.vim" = mkgit
+		"https://github.com/prabirshrestha/async.vim"
+		"f3014550d7a799097e56b094104dd2cd66cf2612"
+		"0zn25qwycynagrij5rsp1x7kbfz612gn7xda0hvm4y7qr3pal77p";
+
 	"vim-nix" = mkgit
 		"https://github.com/spwhitt/vim-nix"
 		"636b8bc437bd0a24a4202a7d906b2b40eac219fa"
@@ -46,6 +51,11 @@ in
 		"https://github.com/michaeljsmith/vim-indent-object"
 		"1d3e4aac0117d57c3e1aaaa7e5a99f1d7553e01b"
 		"1xxl5pwbz56qjfxw6l686m1qc4a3q0r7afa9r5gjhgd1jy67z7d7";
+	
+	"vim-lsp" = mkgit
+		"https://github.com/prabirshrestha/vim-lsp"
+		"fe5057641cadba27caa26df74efa896e4255308e"
+		"1p27fcvgz5g1apn31f4fl0h37sf6sl2kd4wskx2jjix66ny25k0r";
 	
 	"vim-rust" = mkgit
 		"https://github.com/rust-lang/rust.vim"
@@ -97,14 +107,14 @@ in
 		"2651e90402a70794d8bc653f16d8515b99f6c7c5"
 		"0sgyq34wl8bndsbg7sjwz4rny0bjpg1skybsha22b87626zyvyq4";
 
-		"neoterm" = mkgit
-			"https://github.com/kassio/neoterm"
-			"701c9fb20ebac1c4d05410f8054fa004bc9ecba4"
-			"1wblgjn4c6ai7jb46xv3vx4dpwbmxrs5wr1824z2blnb17glas7p";
+	"neoterm" = mkgit
+		"https://github.com/kassio/neoterm"
+		"701c9fb20ebac1c4d05410f8054fa004bc9ecba4"
+		"1wblgjn4c6ai7jb46xv3vx4dpwbmxrs5wr1824z2blnb17glas7p";
 
-		"vim-swift" = mkgit
-			"https://github.com/bumaociyuan/vim-swift"
-			"de1210420a53d491dfc468a8a0e000a9ff29c700"
-			"1lhdalnjlhl084ngvs42ifwq1hici6lxpxmr2a1l7vixdj7mcac1";
+	"vim-swift" = mkgit
+		"https://github.com/bumaociyuan/vim-swift"
+		"de1210420a53d491dfc468a8a0e000a9ff29c700"
+		"1lhdalnjlhl084ngvs42ifwq1hici6lxpxmr2a1l7vixdj7mcac1";
 
 }

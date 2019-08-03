@@ -1,3 +1,0 @@
-#!bash -eux
-gup --always
-cp -a "$HOME/dev/nix/nix-source-automation/nix" "$1"

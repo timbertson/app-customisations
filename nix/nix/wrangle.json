@@ -1,0 +1,90 @@
+{
+  "sources": {
+    "daglink": {
+      "fetch": {
+        "owner": "timbertson",
+        "repo": "daglink",
+        "rev": "40fd87d4bbc76cc3d5b2accb5fbd736a272f8d39",
+        "sha256": "0z41vlxhj3883aidiqdpm2cg9a6b2h9s210q21yblk5pfs43gipg"
+      },
+      "nix": "nix/",
+      "owner": "timbertson",
+      "ref": "version-<version>",
+      "repo": "daglink",
+      "type": "github",
+      "version": "0.6"
+    },
+    "git-wip": {
+      "fetch": {
+        "owner": "timbertson",
+        "repo": "git-wip",
+        "rev": "01e1dd81afd1de79661373c536c9da9f24d58dda",
+        "sha256": "05xa3k2asx5gi36i0yf8kcs2mpbizp5jj8gy8qmyzs6cqmgjh6z3"
+      },
+      "nix": "nix/",
+      "owner": "timbertson",
+      "ref": "version-<version>",
+      "repo": "git-wip",
+      "type": "github",
+      "version": "0.1.5"
+    },
+    "nix-wrangle": {
+      "fetch": {
+        "owner": "timbertson",
+        "repo": "nix-wrangle",
+        "rev": "b97dd5ec5b1a8ad0aa57be9381dd5182dce86eef",
+        "sha256": "1gy7adsih770637r5aqcypcm477ri55mni67l8q5r1lhgcpv38f1"
+      },
+      "nix": "default.nix",
+      "owner": "timbertson",
+      "ref": "v1",
+      "repo": "nix-wrangle",
+      "type": "github"
+    },
+    "piep": {
+      "fetch": {
+        "owner": "timbertson",
+        "repo": "piep",
+        "rev": "a072734fd044e39478669e728f43e927a8ff2111",
+        "sha256": "0xjnbk5cm4g660zafvi1gfvlpxda92646bz82r8010bcaw11zsrn"
+      },
+      "nix": "nix/",
+      "owner": "timbertson",
+      "ref": "version-<version>",
+      "repo": "piep",
+      "type": "github",
+      "version": "0.8.1"
+    },
+    "version": {
+      "fetch": {
+        "owner": "timbertson",
+        "repo": "version",
+        "rev": "a16ac8c53cf8d7f08a6889570d9897946394fe42",
+        "sha256": "056l8m0xxl1h7x4fd1hf754w8q4sibpqnwgnbk5af5i66399az61"
+      },
+      "nix": "nix/",
+      "owner": "timbertson",
+      "ref": "version-<version>",
+      "repo": "version",
+      "type": "github",
+      "version": "0.13.1"
+    },
+    "vim-watch": {
+      "fetch": {
+        "owner": "timbertson",
+        "repo": "vim-watch",
+        "rev": "0f870928fd973c47c6728ee578f07701910a16f0",
+        "sha256": "1rr2yysqc66kajpqwm5yvxarjn8shyf9447mi780n4p4wg5806dh"
+      },
+      "nix": "nix/",
+      "owner": "timbertson",
+      "ref": "version-<version>",
+      "repo": "vim-watch",
+      "type": "github",
+      "version": "0.3.3"
+    }
+  },
+  "wrangle": {
+    "apiversion": 1
+  }
+}

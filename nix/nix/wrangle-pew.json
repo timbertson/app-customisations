@@ -1,0 +1,127 @@
+{
+  "sources": {
+    "dconf-user-overrides": {
+      "fetch": {
+        "path": "/home/tim/dev/python/dconf-user-overrides",
+        "ref": "HEAD"
+      },
+      "nix": "nix",
+      "path": "/home/tim/dev/python/dconf-user-overrides",
+      "ref": "HEAD",
+      "type": "git-local"
+    },
+    "git-wip": {
+      "fetch": {
+        "path": "/home/tim/dev/python/git-wip",
+        "ref": "HEAD"
+      },
+      "nix": "nix/",
+      "path": "/home/tim/dev/python/git-wip",
+      "ref": "HEAD",
+      "type": "git-local"
+    },
+    "gup-ocaml": {
+      "fetch": {
+        "path": "/home/tim/dev/ocaml/gup",
+        "ref": "HEAD"
+      },
+      "nix": "default.nix",
+      "path": "/home/tim/dev/ocaml/gup",
+      "ref": "HEAD",
+      "type": "git-local"
+    },
+    "irank": {
+      "fetch": {
+        "path": "/home/tim/dev/python/irank",
+        "ref": "HEAD"
+      },
+      "nix": "default.nix",
+      "path": "/home/tim/dev/python/irank",
+      "ref": "HEAD",
+      "type": "git-local"
+    },
+    "music-import": {
+      "fetch": {
+        "path": "/home/tim/dev/python/music-import/",
+        "ref": "HEAD"
+      },
+      "nix": "nix/local.nix",
+      "path": "/home/tim/dev/python/music-import/",
+      "ref": "HEAD",
+      "type": "git-local"
+    },
+    "opam2nix": {
+      "fetch": {
+        "path": "/home/tim/dev/ocaml/opam2nix-packages",
+        "ref": "HEAD"
+      },
+      "nix": "nix",
+      "path": "/home/tim/dev/ocaml/opam2nix-packages",
+      "ref": "HEAD",
+      "type": "git-local"
+    },
+    "opam2nixBin": {
+      "fetch": {
+        "path": "/home/tim/dev/ocaml/opam2nix",
+        "ref": "HEAD"
+      },
+      "nix": "nix",
+      "path": "/home/tim/dev/ocaml/opam2nix",
+      "ref": "HEAD",
+      "type": "git-local"
+    },
+    "passe": {
+      "fetch": {
+        "path": "/home/tim/dev/ocaml/passe",
+        "ref": "HEAD"
+      },
+      "nix": "nix",
+      "path": "/home/tim/dev/ocaml/passe",
+      "ref": "HEAD",
+      "type": "git-local"
+    },
+    "snip": {
+      "fetch": {
+        "path": "/home/tim/dev/haskell/snip",
+        "ref": "HEAD"
+      },
+      "nix": "nix",
+      "path": "/home/tim/dev/haskell/snip",
+      "ref": "HEAD",
+      "type": "git-local"
+    },
+    "stereoscoper": {
+      "fetch": {
+        "path": "/home/tim/dev/python/stereoscoper",
+        "ref": "HEAD"
+      },
+      "nix": "default.nix",
+      "path": "/home/tim/dev/python/stereoscoper",
+      "ref": "HEAD",
+      "type": "git-local"
+    },
+    "trash": {
+      "fetch": {
+        "path": "/home/tim/dev/python/trash",
+        "ref": "HEAD"
+      },
+      "nix": "default.nix",
+      "path": "/home/tim/dev/python/trash",
+      "ref": "HEAD",
+      "type": "git-local"
+    },
+    "vim-watch": {
+      "fetch": {
+        "path": "/home/tim/dev/vim/vim-watch",
+        "ref": "HEAD"
+      },
+      "nix": "nix/",
+      "path": "/home/tim/dev/vim/vim-watch",
+      "ref": "HEAD",
+      "type": "git-local"
+    }
+  },
+  "wrangle": {
+    "apiversion": 1
+  }
+}
