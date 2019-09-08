@@ -50,6 +50,16 @@
       "ref": "HEAD",
       "type": "git-local"
     },
+    "nix-wrangle": {
+      "fetch": {
+        "path": "/home/tim/dev/nix/nix-wrangle/",
+        "ref": "HEAD"
+      },
+      "nix": "default.nix",
+      "path": "/home/tim/dev/nix/nix-wrangle/",
+      "ref": "HEAD",
+      "type": "git-local"
+    },
     "opam2nix": {
       "fetch": {
         "path": "/home/tim/dev/ocaml/opam2nix-packages",

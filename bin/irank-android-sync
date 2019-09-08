@@ -10,7 +10,7 @@ function do_sync {
 	playlists="$(grep -v '^#' ~/.config/irank/android-playlists | tr '\n' ' ')"
 	# use locally-built irank, if present
 	irank="$(env PATH="$HOME/dev/python/irank/result/bin:$PATH" which irank)"
-	"$irank" export "$@" -d "$dest" --limit 6.0 --merge ~/Music/Library/Other/Phone/ -- $playlists
+	"$irank" export "$@" -d "$dest" --limit 5.0 --merge ~/Music/Library/Other/Phone/ -- $playlists
 	overwrite_android_db
 
 	# echo '-------- DISK USAGE: -----------'
