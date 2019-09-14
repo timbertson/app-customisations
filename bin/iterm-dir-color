@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+import os, random,sys, colorsys
+
+args = sys.argv[1:]
+seed = args[0] if args else os.getcwd()
+
+random.seed(seed)
+def rand(scale):
+	return random.randint(0,scale)
+
+hue = rand(255)
+sat = rand(100) + 100
+lum = rand(100) + 155
+rgb = colorsys.hsv_to_rgb(hue/255, sat/255, lum/255)
+for (name, value) in zip(('red', 'green', 'blue'), rgb):
+	# print("%s: %s" % (name, value))
+	print('\033]6;1;bg;%s;brightness;%s\a' % (name, int(value*255)), end='')

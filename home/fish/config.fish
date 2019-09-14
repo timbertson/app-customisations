@@ -138,3 +138,16 @@ set -x PASSE_SERVER https://passe.gfxmonk.net/
 
 # https://github.com/NixOS/nixpkgs/issues/24256
 set -x QT_QPA_PLATFORM_PLUGIN_PATH "$HOME/.local/nix/lib/qt5/plugins/platforms"
+
+if begin set -q TERM_PROGRAM ; and test $TERM_PROGRAM = 'iTerm.app'; end
+	set iterm_dir_color_exe (which iterm-dir-color)
+	if test -n $iterm_dir_color_exe
+		function __set_tab_color_iterm2 --on-variable PWD --description 'Set item2 color'
+			if status --is-command-substitution
+				return
+			end
+			$iterm_dir_color_exe
+		end
+		$iterm_dir_color_exe
+	end
+end
