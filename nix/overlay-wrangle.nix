@@ -19,27 +19,25 @@ let
 	args = {
 		path = ./.;
 		sources = wrangleSources;
-		extend = (sources: let
-			overrides = {
-				snip = sources.snip // { call = {pkgs, path}: self.haskell.packages.ghc864.callPackage path {}; };
-				passe = sources.passe // { call = { pkgs, path }: pkgs.callPackage path { target = "client"; }; };
-				vim-watch = sources.vim-watch // { call = { pkgs, path }: pkgs.callPackage path { enableNeovim = true; }; };
-			};
-		in (sources // overrides));
+		extend = sources: let
+			overrideCall = name: call:
+			if hasAttr name sources
+				then listToAttrs [
+					{ inherit name; value = (getAttr name sources) // { inherit call; }; }
+				] else {}
+			; in
+
+			(overrideCall "snip" ({pkgs, path}: self.haskell.packages.ghc864.callPackage path {})) //
+			(overrideCall "passe" ({pkgs, path}: pkgs.callPackage path { target = "client"; })) //
+			(overrideCall "vim-watch" ({pkgs, path}: pkgs.callPackage path { enableNeovim = true; })) //
+			{};
 	};
 
-	wrangleAttrs = wrangleApi.importFrom args;
-	overlay = foldr composeExtensions (_: _: {}) (wrangleApi.overlays args);
-	packageImpls = overlay self super;
-
-	# overlayObject is actually equal to packageImpls, but it delays the evaluation of the
-	# actual package imports since its attribute names can be compued up front.
-	# See https://discourse.nixos.org/t/cant-reference-any-attributes-of-super-in-toplevel-of-overlay/2704
-	overlayObject = mapAttrs (name: _: builtins.getAttr name packageImpls) (wrangleAttrs.sources);
+	derivations = wrangleApi.derivations args;
 	injectOnlyNames = [ "opam2nix" "opam2nixBin"];
-	installNames = (filter (x: !(elem x injectOnlyNames)) (attrNames wrangleAttrs.sources));
+	installNames = (filter (x: !(elem x injectOnlyNames)) (attrNames derivations));
 in
-overlayObject // {
+derivations // {
 	installedPackages = (super.installedPackages or []) ++ (
 		map (name: builtins.getAttr name self) installNames
 	);
