@@ -120,6 +120,14 @@
       "ref": "HEAD",
       "type": "git-local"
     },
+    "vdoml": {
+      "fetch": {
+        "path": "/home/tim/dev/ocaml/vdoml"
+      },
+      "nix": "nix/default.nix",
+      "path": "/home/tim/dev/ocaml/vdoml",
+      "type": "git-local"
+    },
     "vim-watch": {
       "fetch": {
         "path": "/home/tim/dev/vim/vim-watch",

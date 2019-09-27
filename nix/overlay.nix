@@ -85,7 +85,6 @@ in
 	] ++ map maximal (
 		[
 			# maximal:
-			abduco
 			ctags
 			glibcLocales
 			python3Packages.ipython

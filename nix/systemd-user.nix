@@ -8,18 +8,18 @@ let
 	sessionTask = x: {wantedBy = ["desktop-session.target"]; } // x;
 	systemPath = [ "/usr/local" "/usr" "/" ];
 	loadSessionVars = "eval \"$(/home/tim/.bin/session-vars --all --process gnome-shell --export)\"";
-	userPath = systemPath ++ [
-		"${home}"
-		"${builtins.toString ../.}"
-		"${builtins.toString ./local}"
-	];
+	userPath = systemPath ++ (map builtins.toString [
+		home
+		../.
+		./local
+	]);
 in
 {
 	config = {
 		systemd.user = lib.fold lib.recursiveUpdate {
 			# album releases cron job
 			services.album-releases = {
-				path = userPath;
+				path = userPath ++ [pkgs.google-cloud-sdk];
 				serviceConfig = {
 					ExecStart = "${pkgs.gup}/bin/gup ${home}/dev/web/album-releases/all";
 					Restart="no";

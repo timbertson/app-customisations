@@ -1,0 +1,19 @@
+#!/bin/bash
+set -eu
+
+case $# in
+	1)
+		set -x
+		# name
+		echo 1
+		exec dtach -A "$1" -r winch fish
+		;;
+	2)
+		set -x
+		# remote / name
+		exec ssh -t "$1" "dtach -A '$2' -r winch fish"
+		;;
+	*) echo "Exactly one or two arguments required"; exit 1;;
+esac
+# name="$1"
+# exec ssh -t zendesk "dtach -A $name -r winch fish"
