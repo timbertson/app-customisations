@@ -9,8 +9,8 @@ def rand(scale):
 	return random.randint(0,scale)
 
 hue = rand(255)
-sat = rand(100) + 100
-lum = rand(100) + 155
+sat = rand(100) + 155
+lum = rand(40) + 150
 rgb = colorsys.hsv_to_rgb(hue/255, sat/255, lum/255)
 for (name, value) in zip(('red', 'green', 'blue'), rgb):
 	# print("%s: %s" % (name, value))

@@ -4,5 +4,8 @@ self: super:
 		vim-ide = true;
 		jdk = true;
 	};
-	installedPackages = super.installedPackages ++ (with self; [ jq ]);
+	installedPackages = super.installedPackages ++ (with self; [
+		jq
+		pstree
+	]);
 }

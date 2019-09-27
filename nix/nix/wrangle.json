@@ -35,7 +35,7 @@
         "rev": "919c207f2ca8a22efe5373fdde4e6d6220229fc7",
         "sha256": "15idvb4ybrddbfldkxz7qw3nhxcrw0pav18jz4b38i62f9knxnr0"
       },
-      "nix": "default.nix",
+      "nix": "nix/",
       "owner": "timbertson",
       "ref": "v1",
       "repo": "nix-wrangle",

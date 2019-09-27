@@ -39,7 +39,7 @@ let
 						"vala.vim"
 						"vim-grepper"
 						"vim-indent-object"
-						"vim-lsp"
+						# "vim-lsp"
 						"vim-nix"
 						"vim-rust"
 						"vim-stratifiedjs"
