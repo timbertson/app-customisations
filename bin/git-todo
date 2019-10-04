@@ -1,27 +1,58 @@
-#!/usr/bin/env bash
-if [ "$#" -eq 0 ]; then
-	set -- "TODO"
-fi
+#!/usr/bin/env python3
+import sys, os, subprocess
+import time, json
+try:
+	import pygments, pygments.formatters
+	from pygments.token import *
+	Number = Literal.Number
+	def highlight(symbols):
+		formatter = pygments.formatters.get_formatter_by_name("console")
+		return pygments.format(symbols, formatter)
+except ImportError:
+	Keyword = Text = String = Number = Whitespace = object()
+	def highlight(symbols):
+		return "".join([sym[1] for sym in symbols])
 
-rg --json "$@" | piep \
-	-m time -m pygments -m pygments.formatters -m json \
-	-e 'text = lambda d: d.get("text", None)' \
-	-e 'devnull = open(os.devnull, "w")' \
-	-e 'from pygments.token import *' \
-	'json.loads | p["type"] == "match" | p["data"] | path = text(p["path"]) | line = p["line_number"]
-	| contents = text(p["lines"]) | path is not None | (line, path, contents)
-	| blame = (sh("git", "blame", "-L%d,%d" % (line,line), "--line-porcelain", path, stderr=devnull) or "").splitlines()
-	| blame = next(iter(filter(lambda x: x.startswith("committer-time "), blame)))
-	| ts = int(blame.split()[1]) | (ts, time.strftime("%Y-%m-%d", time.localtime(ts)), path, line, contents.strip())
-	| list(pp)
-	| pp.sortby(lambda x: x[0])
-	| maxfile = max([len(x[2]) for x in pp])+1
-	| maxlineno = max([len(str(x[3])) for x in pp])
-	| pygments.format([
+def text(d): return d.get("text", None)
+devnull = open(os.devnull, 'w')
+
+def get_matches(args):
+	proc = subprocess.Popen(['rg', '--json'] + args, stdout = subprocess.PIPE)
+	for line in proc.stdout:
+		# print(repr(line))
+		p = json.loads(line)
+		if p['type'] != 'match': continue
+		p = p['data']
+		path = text(p['path'])
+		if path is None: continue
+		line = p['line_number']
+		contents = text(p['lines'])
+		# line, path, contents
+		try:
+			blame = subprocess.check_output(
+				["git", "blame", "-L%d,%d" % (line,line), "--line-porcelain", path], stderr=devnull).decode('utf-8').splitlines()
+			blame = next(iter(filter(lambda x: x.startswith("committer-time "), blame)))
+		except (subprocess.CalledProcessError, StopIteration) as e:
+			continue
+		ts = int(blame.split()[1])
+		yield (ts, time.strftime("%Y-%m-%d", time.localtime(ts)), path, line, contents.strip())
+	assert proc.wait() == 0
+
+args = sys.argv[1:]
+if not args: args = ["TODO"]
+pp = list(get_matches(args))
+if not pp:
+	sys.exit(0)
+pp = sorted(pp, key=lambda x: x[0])
+maxfile = max([len(x[2]) for x in pp])+1
+maxlineno = max([len(str(x[3])) for x in pp])
+
+for p in pp:
+	print(highlight([
 		(Keyword, p[1]),
 		(Text, " "),
 		(String, ("%%%ds" % maxfile) % (p[2] + ":")),
-		(Literal.Number, ("%%-%dd" % maxlineno) % (p[3])),
+		(Number, ("%%-%dd" % maxlineno) % (p[3])),
 		(Whitespace, " "),
 		(Text, p[4])
-	], pygments.formatters.get_formatter_by_name("console"))'
+	]))
