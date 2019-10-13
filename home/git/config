@@ -27,6 +27,7 @@
 	pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 }; f"
 	wrangle = !git update-ref refs/heads/wrangle "$(git-current-tree)"
 	recap = log --all --oneline --no-merges
+	upstream = !git branch --set-upstream-to=origin/"$(git branch --show-current)" "$(git branch --show-current)"
 [color]
 	branch = auto
 	diff = auto
@@ -64,3 +65,5 @@
 	remote = origin
 	remote = mba
 	remote = pew
+[diff]
+	noprefix = true
