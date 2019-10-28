@@ -1,6 +1,6 @@
 self: super:
 # let appCustomisations = import ./overlay.nix super self; in
-{
+with super; {
 
 	# disable fancy language server rubbish
 	python3Packages = super.python3Packages // {

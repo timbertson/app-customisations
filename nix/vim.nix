@@ -47,7 +47,7 @@ let
 						"vim-visual-star-search"
 						"vim-watch"
 					]
-					++ (lib.optional (siteLib.isEnabled "vim-ide") "LanguageClient-neovim")
+					# ++ (lib.optional (siteLib.isEnabled "vim-ide") "LanguageClient-neovim")
 					;
 				}
 				# full documentation at

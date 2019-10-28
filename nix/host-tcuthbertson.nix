@@ -5,6 +5,7 @@ self: super:
 		jdk = true;
 	};
 	installedPackages = super.installedPackages ++ (with self; [
+		chefdk
 		jq
 		pstree
 	]);

@@ -42,7 +42,7 @@ meta:
        - fish
        - nix
     tcuthbertson-mac:
-      regex: ".*tcuthbertson.*\\.local"
+      regex: ".*tcuthbertson.*"
       tags:
        - osx
        - fish
