@@ -80,8 +80,8 @@ in
 		vim-watch
 	]
 	++ map (ifEnabled "vim-ide") [
-		ocaml-language-server
-		python3Packages.python-language-server
+		# ocaml-language-server
+		# python3Packages.python-language-server
 	] ++ map maximal (
 		[
 			# maximal:

@@ -28,14 +28,13 @@ let
 			; in
 
 			(overrideCall "snip" ({pkgs, path}: self.haskell.packages.ghc864.callPackage path {})) //
-			(overrideCall "passe" ({pkgs, path}: pkgs.callPackage path { target = "client"; })) //
 			(overrideCall "vim-watch" ({pkgs, path}: pkgs.callPackage path { enableNeovim = true; })) //
 			{};
 	};
 
 	derivations = wrangleApi.derivations args;
 	injectOnlyNames = [ "opam2nix" "opam2nixBin"];
-	installNames = (filter (x: !(elem x injectOnlyNames)) (attrNames derivations));
+	installNames = sort (a: b: a < b) (filter (x: !(elem x injectOnlyNames)) (attrNames derivations));
 in
 derivations // {
 	installedPackages = (super.installedPackages or []) ++ (

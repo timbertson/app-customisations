@@ -62,16 +62,6 @@
     },
     "opam2nix": {
       "fetch": {
-        "path": "/home/tim/dev/ocaml/opam2nix-packages",
-        "ref": "HEAD"
-      },
-      "nix": "nix",
-      "path": "/home/tim/dev/ocaml/opam2nix-packages",
-      "ref": "HEAD",
-      "type": "git-local"
-    },
-    "opam2nixBin": {
-      "fetch": {
         "path": "/home/tim/dev/ocaml/opam2nix",
         "ref": "HEAD"
       },
@@ -122,9 +112,11 @@
     },
     "vdoml": {
       "fetch": {
-        "path": "/home/tim/dev/ocaml/vdoml"
+        "path": "/home/tim/dev/ocaml/vdoml",
+        "ref": "HEAD"
       },
       "nix": "nix/default.nix",
+      "ref": "HEAD",
       "path": "/home/tim/dev/ocaml/vdoml",
       "type": "git-local"
     },

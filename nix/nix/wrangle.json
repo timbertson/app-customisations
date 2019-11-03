@@ -55,6 +55,19 @@
       "type": "github",
       "version": "0.8.1"
     },
+    "status-check": {
+      "fetch": {
+        "owner": "timbertson",
+        "repo": "status-check",
+        "rev": "6034bf9f7b4ec930d1bd080e43a3a36be79db9dc",
+        "sha256": "1p1imna3qazw7l4j6ri01a6jci9fpw487887gd9zf7bijd5d7rjg"
+      },
+      "nix": "default.nix",
+      "owner": "timbertson",
+      "ref": "master",
+      "repo": "status-check",
+      "type": "github"
+    },
     "version": {
       "fetch": {
         "owner": "timbertson",

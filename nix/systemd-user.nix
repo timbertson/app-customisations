@@ -21,7 +21,7 @@ in
 			services.album-releases = {
 				path = userPath ++ [pkgs.google-cloud-sdk];
 				serviceConfig = {
-					ExecStart = "${pkgs.gup}/bin/gup ${home}/dev/web/album-releases/all";
+					ExecStart = "${pkgs.status-check}/bin/status-check -f ${home}/.cache/album-releases.status --run ${pkgs.gup}/bin/gup ${home}/dev/web/album-releases/all";
 					Restart="no";
 					Environment = [
 						"PYTHONUNBUFFERED=1"

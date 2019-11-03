@@ -128,6 +128,7 @@ complete -e -c g
 complete -c g --wraps git
 
 if begin isatty stderr; and not test -f ~/.config/status-check/IGNORE_THIS_MACHINE; end
+	status-check --desc "album releases" --max-age "30 days" ~/.cache/album-releases.status
 	status-check --desc "borg backup" --max-age "2 days" ~/.cache/my-borg/backup
 	and status-check --desc "borg remote sync" --max-age "5 days" ~/.cache/my-borg/sync
 	and status-check --desc "borg integrity check" --max-age "4 days" ~/.cache/my-borg/check
