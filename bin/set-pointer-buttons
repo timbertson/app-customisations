@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from __future__ import print_function
 from optparse import OptionParser
 import os, sys, subprocess, logging, itertools
@@ -10,7 +10,7 @@ def print_cmd(cmd):
 
 def _run_output(cmd, **k):
 	print_cmd(cmd)
-	return subprocess.check_output(cmd, **k)
+	return subprocess.check_output(cmd, **k).decode('utf-8')
 
 def _run(cmd, **k):
 	print_cmd(cmd)
@@ -122,18 +122,18 @@ def main():
 	assert len(devices) > 0, "no input devices found%s" % ("" if opts.name is None else (" matching name " + repr(opts.name)))
 
 	if len(devices) > 1:
-		logging.warn("multiple matching input devices found")
+		logging.warning("multiple matching input devices found")
 
 	for device in devices:
 		id = device.id()
 		mapping = _run_output(['xinput', 'get-button-map', str(id)]).strip().split(' ')
-		mapping = range(1, len(mapping)+1)
+		mapping = list(range(1, len(mapping)+1))
 		for btn, val in changes.items():
 			idx=btn-1
 			assert idx < len(mapping), "can't set button %s - pointer<%s> only has %s buttons!" % (btn, id, len(mapping))
 			mapping[idx] = str(val)
 		mapping = list(map(str, mapping))
-		logging.warn("Setting input device %s button map to %s" % (id, " ".join(mapping)))
+		logging.warning("Setting input device %s button map to %s" % (id, " ".join(mapping)))
 		_run(['xinput', 'set-button-map', str(id)] + mapping)
 
 try:

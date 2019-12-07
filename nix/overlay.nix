@@ -54,6 +54,7 @@ in
 		bash = "#!${pkgs.bash}/bin/bash";
 		wrapper = script: writeScript "wrapper" script;
 	in ([]) ++ lib.remove null ([
+		barrier
 		daglink
 		(darwin coreutils)
 		(darwin cacert)
@@ -268,7 +269,6 @@ in
 		mkdir -p $out/bin
 		ln -s "${pkgs.nodePackages.ocaml-language-server}/bin/ocaml-language-server" "$out/bin"
 	'');
-	opam2nix = super.callPackage ./opam2nix-packages {};
 	pyperclip = callPackage ({ lib, fetchgit, pythonPackages, which, xsel }:
 		pythonPackages.buildPythonPackage rec {
 			name = "pyperclip-${version}";

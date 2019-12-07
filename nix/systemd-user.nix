@@ -37,18 +37,18 @@ in
 			};
 
 			services.borg =
-			# NOTE: must be copied to /etc/systemd/system
-			# by gup target root/systemd/all
-			let
-				# exe = "${pkgs.my-borg}/bin/my-borg";
-				exe = "${home}/.local/nix/bin/my-dev/python/my-borg/bin/my-borg";
-			in
-			{
-				serviceConfig = {
-					ExecStart = "${home}/.local/nix/bin/my-borg-task";
-					Restart="no";
+				# NOTE: must be copied to /etc/systemd/system
+				# by gup target root/systemd/all
+				let
+					# exe = "${pkgs.my-borg}/bin/my-borg";
+					exe = "${home}/.local/nix/bin/my-dev/python/my-borg/bin/my-borg";
+				in
+				{
+					serviceConfig = {
+						ExecStart = "${home}/.local/nix/bin/my-borg-task";
+						Restart="no";
+					};
 				};
-			};
 			timers.borg = {
 				wantedBy = [ "multi-user.target" ];
 				timerConfig = {

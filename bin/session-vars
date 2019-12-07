@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from __future__ import print_function
 import os
 import optparse
@@ -60,12 +60,12 @@ DISPLAY = 'DISPLAY'
 
 def pgrep_vars(opts):
 	import getpass
-	pid_output = subprocess.check_output(['pgrep', '--exact', '-u', getpass.getuser(), opts.process])
-	pids = list(map(int, pid_output.strip().split('\n')))
+	pid_output = subprocess.check_output(['pgrep', '-u', getpass.getuser(), opts.process])
+	pids = list(map(int, pid_output.strip().decode('ascii').split('\n')))
 	assert pids, "no %s process found" % (opts.process,)
 	if len(pids) > 1:
 		# TODO: get correct one based on its $DISPLAY var
-		logging.warn("multiple pids found")
+		logging.warning("multiple pids found")
 	pid = pids[0]
 	rv = {}
 	# logging.warn('loading %s', '/proc/%d/environ' % pid)

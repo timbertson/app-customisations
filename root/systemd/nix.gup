@@ -1,0 +1,27 @@
+#!bash -eu
+SYS="/etc/systemd/system"
+if [ -d /home/nix ]; then
+	# install bind mount to /nix
+	installed=true
+	if ! diff -q nix.mount "$SYS/nix.mount"; then
+		installed=false
+	fi
+	if ! diff -q nix.mount "$SYS/local-fs.target.wants/nix.mount"; then
+		installed=false
+	fi
+
+	if [ "$installed" != true ]; then
+		echo "Installing and activating nix.mount in $SYS"
+		sudo ln -nfs ../nix.mount $SYS/local-fs.target.wants/nix.mount
+		sudo cp nix.mount $SYS/
+		sudo systemctl daemon-reload
+		sudo systemctl start nix.mount
+		sudo systemctl status nix.mount
+	fi
+	gup -u \
+		"nix.mount" \
+		"$SYS/nix.mount" \
+		"$SYS/local-fs.target.wants/nix.mount"
+else
+	gup --ifcreate /home/nix
+fi

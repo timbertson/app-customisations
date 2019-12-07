@@ -1,12 +1,28 @@
 #!/usr/bin/env bash
+set -x
 set -eu
 if [ -z "${GUP_TARGET:-}" ]; then
 	echo 'Reexecuting with bundled `gup`...'
 	base="$(dirname "$0")"
 	exec "$base/bootstrap/gup" "$base/install"
 fi
-exit 1
+
+# sets up /nix mount
+gup -u root/systemd/all
 
 export PATH="$HOME/.nix-profile/bin:$PATH"
 export NIX_PATH="$HOME/.nix-defexpr/channels"
-gup -u root/users root/polkit/all root/sudoers/all root/systemd/all root/shell root/packages
+
+LINUX_CRT="/etc/pki/tls/certs/ca-bundle.crt"
+if [ -e "$LINUX_CRT" ]; then
+	export GIT_SSL_CAINFO="$LINUX_CRT"
+	export CURL_CA_BUNDLE="$LINUX_CRT"
+	export SSL_CERT_FILE="$LINUX_CRT"
+
+fi
+
+[ -d /nix ]
+which nix-build || (curl -sSL https://nixos.org/nix/install | sh)
+
+gup -u root/polkit/all root/sudoers/all root/shell root/packages
+./nix/local/bin/daglink -i

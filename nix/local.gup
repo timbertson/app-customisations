@@ -1,11 +1,6 @@
-#!/usr/bin/env bash
-set -eu
-if [ "$#" -eq 0 ]; then
-	cd "$(dirname "$0")"
-	dest="$(basename "$0" .gup)"
-else
-	dest="$2"
-	gup --always
-fi
+#!bash -eu
+dest="$2"
+gup --always
+gup -u ../root/systemd/nix
 nix-build --out-link "$dest" default.nix -A siteInstalled --show-trace --option build-use-chroot false
 nix-store --add --add-root --indirect "$dest"

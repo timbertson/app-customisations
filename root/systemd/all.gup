@@ -1,11 +1,5 @@
 #!bash -eux
 nix="../../nix/local"
-SYS="/etc/systemd/system"
-sudo cp nix.mount $SYS/
-sudo ln -nfs ../nix.mount $SYS/local-fs.target.wants/nix.mount
-sudo systemctl daemon-reload
-sudo systemctl start nix.mount
-
 dir="$nix/share/systemd/user"
 if [ ! -e "$nix" ]; then
 	gup -u "$nix"
