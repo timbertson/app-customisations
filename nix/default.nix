@@ -1,11 +1,8 @@
 with builtins;
 let
-	hostname = let
-		fromEnv = getEnv "HOSTNAME";
-		fromFile = if pathExists "/etc/hostname"
-			then replaceStrings ["\n"] [""] (readFile "/etc/hostname")
-			else "unknown";
-	in if fromEnv == "" then fromFile else fromEnv;
+	hostname = if pathExists "/etc/hostname"
+		then replaceStrings ["\n"] [""] (readFile "/etc/hostname")
+		else "unknown";
 
 	maybeImport = p: if pathExists p
 		then trace "Including optional overlay: ${toString p}" [(import p)]

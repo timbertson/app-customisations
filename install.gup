@@ -8,7 +8,7 @@ if [ -z "${GUP_TARGET:-}" ]; then
 fi
 
 # sets up /nix mount
-gup -u root/systemd/all
+gup -u root/systemd/nix
 
 export PATH="$HOME/.nix-profile/bin:$PATH"
 export NIX_PATH="$HOME/.nix-defexpr/channels"
@@ -21,7 +21,6 @@ if [ -e "$LINUX_CRT" ]; then
 
 fi
 
-[ -d /nix ]
 which nix-build || (curl -sSL https://nixos.org/nix/install | sh)
 
 gup -u root/polkit/all root/sudoers/all root/shell root/packages

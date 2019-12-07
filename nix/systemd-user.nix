@@ -1,13 +1,12 @@
 { config, lib, pkgs, utils, ... }:
+with import ./session-vars.nix;
 let
 	sd = import <nixpkgs/nixos/modules/system/boot/systemd-lib.nix> { inherit config lib pkgs; };
 	optional = x: attrs: if (x == null || x == false) then {} else attrs;
-	home = builtins.getEnv "HOME";
 	displayEnv = ["DISPLAY=:1"]; # ugh...
 	libglEnv = ["LD_LIBRARY_PATH=${pkgs.libGLU}/lib"];
 	sessionTask = x: {wantedBy = ["desktop-session.target"]; } // x;
 	systemPath = [ "/usr/local" "/usr" "/" ];
-	loadSessionVars = "eval \"$(/home/tim/.bin/session-vars --all --process gnome-shell --export)\"";
 	userPath = systemPath ++ (map builtins.toString [
 		home
 		../.
@@ -57,26 +56,10 @@ in
 				};
 			};
 
-
-			# usermode DNS alias
-			# sockets.dns-alias = {
-			# 	wantedBy = [ "default.target" "sockets.target"];
-			# 	socketConfig = {
-			# 		ListenDatagram = "127.0.0.1:5053";
-			# 	};
-			# };
-			# services.dns-alias = {
-			# 	serviceConfig = {
-			# 		ExecStart = "${pkgs.dns-alias}/bin/dns-alias --port 5053";
-			# 		Environment = "PYTHONUNBUFFERED=1";
-			# 		EnvironmentFile = "-%h/.config/dns-alias/env";
-			# 	};
-			# };
-
 			services.xbindkeys = sessionTask {
 				path = systemPath;
+				script = "${loadSessionVars}; ${pkgs.xbindkeys}/bin/xbindkeys --nodaemon";
 				serviceConfig = {
-					ExecStart = "${pkgs.xbindkeys}/bin/xbindkeys --nodaemon";
 					Environment = displayEnv;
 					Restart = "on-abnormal";
 					RestartSec = "2";

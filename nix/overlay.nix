@@ -35,7 +35,7 @@ let
 
 	anyEnabled = features: x: orNull (any isEnabled features) x;
 
-	home = builtins.getEnv "HOME";
+	home = (import ./session-vars.nix).home;
 in
 {
 	features = defaultFeatures;

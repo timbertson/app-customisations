@@ -3,7 +3,7 @@ with super.lib;
 let
 	# TODO: figure out a way to safely use super instead of this
 	safeNixpkgs = import <nixpkgs> {};
-	home = builtins.getEnv "HOME";
+	home = (import ./session-vars.nix).home;
 	wrangleSrc =
 		let local = "${home}/dev/nix/nix-wrangle"; in
 		if builtins.pathExists local

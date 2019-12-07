@@ -5,12 +5,5 @@ pkcon install --allow-reinstall \
 	ecryptfs-utils \
 	xautomation \
 	xbindkeys \
+	strace \
 	;
-
-set +x
-
-cat <<EOF
-# === Suggested: ===
-# pkcon remove setroubleshoot
-# pkcon install tracker-preferences (and then disable tracker)
-EOF

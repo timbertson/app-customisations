@@ -73,18 +73,6 @@ meta:
   path: ../root/gdm/env.d/xdg-nix.env
   tags: linux root nix
 
-/etc/NetworkManager/NetworkManager.conf:
-  path: ../root/NetworkManager/NetworkManager.conf
-  tags: root
-
-/etc/NetworkManager/dnsmasq.d:
-  path: ~/.config/dnsmasq.d
-  tags: root linux
-
-~/.config/dnsmasq.d/localhost.conf:
-  path: ../root/dnsmasq.d/localhost.conf
-  tags: root linux
-
 ~/.vim:
   path: ../vim
 
@@ -223,6 +211,10 @@ meta:
 
 ~/.config/dconf.user.d/disable-housekeeping-plugin:
   path: ../home/dconf/disable-housekeeping-plugin
+  tags: linux
+
+~/.config/dconf.user.d/disable-tracker:
+  path: ../home/dconf/disable-tracker
   tags: linux
 
 ~/.config/dconf.user.d/shellshape:
