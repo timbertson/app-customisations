@@ -32,8 +32,8 @@
       "fetch": {
         "owner": "timbertson",
         "repo": "nix-wrangle",
-        "rev": "97e9048b7b2fa5ed80f3bb2c369364519aa35c7c",
-        "sha256": "0s2a65dh1xdyj6ygdgg2zisl109bqxzyjgywibbm9zwrygifj8yr"
+        "rev": "636b4baff554c12be99dbc42b3eb1740d63a2fce",
+        "sha256": "0vpji60gbl513k4jvpnsm6lhnm5rzyld23vls5r963li03dxlxq2"
       },
       "nix": "nix/",
       "owner": "timbertson",
@@ -59,8 +59,8 @@
       "fetch": {
         "owner": "timbertson",
         "repo": "status-check",
-        "rev": "6034bf9f7b4ec930d1bd080e43a3a36be79db9dc",
-        "sha256": "1p1imna3qazw7l4j6ri01a6jci9fpw487887gd9zf7bijd5d7rjg"
+        "rev": "5418622f6b2b610468440df918f1d60c47343ee8",
+        "sha256": "0w3gmj4gxncxwf80abgw7jpbn4m0gxvywphx4yr2q69xjdhwf5z0"
       },
       "nix": "default.nix",
       "owner": "timbertson",

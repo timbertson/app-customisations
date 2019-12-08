@@ -27,7 +27,8 @@ let
 				] else {}
 			; in
 
-			(overrideCall "snip" ({pkgs, path}: self.haskell.packages.ghc864.callPackage path {})) //
+			(overrideCall "gup-ocaml" ({pkgs, path}: pkgs.callPackage path { inherit (self) opam2nix nix-wrangle;})) //
+			(overrideCall "snip" ({pkgs, path}: self.haskell.packages.ghc865.callPackage path {})) //
 			(overrideCall "vim-watch" ({pkgs, path}: pkgs.callPackage path { enableNeovim = true; })) //
 			{};
 	};
