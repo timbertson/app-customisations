@@ -63,11 +63,11 @@
     "opam2nix": {
       "fetch": {
         "path": "/home/tim/dev/ocaml/opam2nix",
-        "ref": "HEAD"
+        "ref": "v1"
       },
       "nix": "nix",
       "path": "/home/tim/dev/ocaml/opam2nix",
-      "ref": "HEAD",
+      "ref": "v1",
       "type": "git-local"
     },
     "passe": {
@@ -116,8 +116,8 @@
         "ref": "HEAD"
       },
       "nix": "nix/default.nix",
-      "ref": "HEAD",
       "path": "/home/tim/dev/ocaml/vdoml",
+      "ref": "HEAD",
       "type": "git-local"
     },
     "vim-watch": {

@@ -59,8 +59,8 @@
       "fetch": {
         "owner": "timbertson",
         "repo": "status-check",
-        "rev": "5418622f6b2b610468440df918f1d60c47343ee8",
-        "sha256": "0w3gmj4gxncxwf80abgw7jpbn4m0gxvywphx4yr2q69xjdhwf5z0"
+        "rev": "8e1c2157260931fde4f25913a18dd1629e32a22d",
+        "sha256": "04c65iybpn62g2ivldicdapmpil0krji6pgy47qns0gl5rbph4x7"
       },
       "nix": "default.nix",
       "owner": "timbertson",
