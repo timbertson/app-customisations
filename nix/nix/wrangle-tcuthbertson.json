@@ -1,0 +1,17 @@
+{
+  "sources": {
+    "git-wip": {
+      "fetch": {
+        "ref": "HEAD",
+        "relativePath": "../../python/git-wip/"
+      },
+      "ref": "HEAD",
+      "nix": "nix/",
+      "relativePath": "../../python/git-wip/",
+      "type": "git-local"
+    }
+  },
+  "wrangle": {
+    "apiversion": 1
+  }
+}
