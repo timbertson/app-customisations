@@ -11,10 +11,8 @@ let
 			else safeNixpkgs.fetchFromGitHub (importJSON ./nix/wrangle.json).sources.nix-wrangle.fetch;
 
 	wrangleApi = safeNixpkgs.callPackage "${wrangleSrc}/nix/api.nix" {};
-	wrangleSources = filter builtins.pathExists [
-		./nix/wrangle.json
-		(./nix + "/wrangle-${super.hostname}.json")
-	];
+	localWrangleSource = ./nix + "/wrangle-${super.hostname}.json";
+	wrangleSources = filter builtins.pathExists [ ./nix/wrangle.json localWrangleSource ];
 
 	args = {
 		path = ./.;

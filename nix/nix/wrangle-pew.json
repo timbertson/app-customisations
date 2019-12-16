@@ -10,16 +10,6 @@
       "ref": "HEAD",
       "type": "git-local"
     },
-    "git-wip": {
-      "fetch": {
-        "path": "/home/tim/dev/python/git-wip",
-        "ref": "HEAD"
-      },
-      "nix": "nix/",
-      "path": "/home/tim/dev/python/git-wip",
-      "ref": "HEAD",
-      "type": "git-local"
-    },
     "gup-ocaml": {
       "fetch": {
         "path": "/home/tim/dev/ocaml/gup",

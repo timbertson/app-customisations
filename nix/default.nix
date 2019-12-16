@@ -17,6 +17,7 @@ import <nixpkgs> {
 		(import ./overlay-user.nix)
 		(import ./overlay.nix)
 		(import ./overlay-wrangle.nix)
+		(import ./overlay-symlinks.nix)
 	]
 		++ (maybeImport ./overlay-local.nix)
 		++ (maybeImport (./. + "/host-${hostname}.nix"))
