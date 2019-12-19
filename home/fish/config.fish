@@ -72,6 +72,7 @@ end
 
 set -x NIX_PATH ~/.nix-defexpr/channels
 # needed for nix-packaged utils
+# TODO use cacert, generate a .fish file ot include
 if test -f              /etc/pki/tls/certs/ca-bundle.crt
 	set -x GIT_SSL_CAINFO /etc/pki/tls/certs/ca-bundle.crt
 	set -x CURL_CA_BUNDLE /etc/pki/tls/certs/ca-bundle.crt
