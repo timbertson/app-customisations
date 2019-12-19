@@ -72,16 +72,8 @@ end
 
 set -x NIX_PATH ~/.nix-defexpr/channels
 # needed for nix-packaged utils
-# TODO use cacert, generate a .fish file ot include
-if test -f              /etc/pki/tls/certs/ca-bundle.crt
-	set -x GIT_SSL_CAINFO /etc/pki/tls/certs/ca-bundle.crt
-	set -x CURL_CA_BUNDLE /etc/pki/tls/certs/ca-bundle.crt
-	set -x SSL_CERT_FILE  /etc/pki/tls/certs/ca-bundle.crt
-else if test -f            $HOME/.local/nix/etc/ssl/certs/ca-bundle.crt
-	set -x NIX_SSL_CERT_FILE $HOME/.local/nix/etc/ssl/certs/ca-bundle.crt
-	set -x GIT_SSL_CAINFO    $HOME/.local/nix/etc/ssl/certs/ca-bundle.crt
-	set -x CURL_CA_BUNDLE    $HOME/.local/nix/etc/ssl/certs/ca-bundle.crt
-	set -x SSL_CERT_FILE     $HOME/.local/nix/etc/ssl/certs/ca-bundle.crt
+if test -f ~/.local/nix/share/fish/nix-caenv.fish
+	.        ~/.local/nix/share/fish/nix-caenv.fish
 end
 
 # Nope.

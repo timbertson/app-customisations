@@ -36,6 +36,8 @@ let
 	anyEnabled = features: x: orNull (any isEnabled features) x;
 
 	home = (import ./session-vars.nix).home;
+
+	caenv = callPackage ./caenv.nix;
 in
 {
 	features = defaultFeatures;
@@ -211,10 +213,11 @@ in
 		}
 	'');
 
+	my-caenv = caenv;
+
 	my-nix-prefetch-scripts = (
 		# Override nix-prefetch-* scripts to include the system's .crt files,
 		# so that https works as expected
-		with callPackage ./caenv.nix {};
 		let
 			addVars = bin: ''
 				bin="${bin}"
@@ -222,7 +225,7 @@ in
 				dest="$out/bin/$base"
 				echo "Wrapping $bin -> $dest"
 				makeWrapper "$bin" "$dest" \
-					${lib.concatMapStringsSep " " (var: "--set ${var} ${cacert}")}
+					${lib.concatMapStringsSep " " (var: "--set ${var} ${caenv.cacert}") caenv.envvars}
 			'';
 		in
 		stdenv.mkDerivation {
