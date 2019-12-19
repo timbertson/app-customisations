@@ -54,7 +54,7 @@ in
 		bash = "#!${pkgs.bash}/bin/bash";
 		wrapper = script: writeScript "wrapper" script;
 	in ([]) ++ lib.remove null ([
-		barrier
+		# barrier
 		daglink
 		(darwin coreutils)
 		(darwin cacert)
@@ -214,21 +214,15 @@ in
 	my-nix-prefetch-scripts = (
 		# Override nix-prefetch-* scripts to include the system's .crt files,
 		# so that https works as expected
-		with pkgs;
+		with callPackage ./caenv.nix {};
 		let
-			linux_cacert = "/etc/pki/tls/cacerts/ca-bundle.crt";
-			nixpkgs_cacert = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-			cacert = if builtins.pathExists linux_cacert then linux_cacert else nixpkgs_cacert;
 			addVars = bin: ''
 				bin="${bin}"
 				base="$(basename "$bin")"
 				dest="$out/bin/$base"
 				echo "Wrapping $bin -> $dest"
 				makeWrapper "$bin" "$dest" \
-					--set GIT_SSL_CAINFO ${cacert} \
-					--set CURL_CA_BUNDLE ${cacert} \
-					--set SSL_CERT_FILE ${cacert} \
-				;
+					${lib.concatMapStringsSep " " (var: "--set ${var} ${cacert}")}
 			'';
 		in
 		stdenv.mkDerivation {

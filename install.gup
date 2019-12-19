@@ -13,15 +13,7 @@ gup -u root/systemd/nix
 export PATH="$HOME/.nix-profile/bin:$PATH"
 export NIX_PATH="$HOME/.nix-defexpr/channels"
 
-LINUX_CRT="/etc/pki/tls/certs/ca-bundle.crt"
-if [ -e "$LINUX_CRT" ]; then
-	export GIT_SSL_CAINFO="$LINUX_CRT"
-	export CURL_CA_BUNDLE="$LINUX_CRT"
-	export SSL_CERT_FILE="$LINUX_CRT"
-
-fi
-
 which nix-build || (curl -sSL https://nixos.org/nix/install | sh)
 
-gup -u root/polkit/all root/sudoers/all root/shell root/packages
+nix-shell nix/caenv.nix --run 'gup -u root/polkit/all root/sudoers/all root/shell root/packages'
 ./nix/local/bin/daglink -i
