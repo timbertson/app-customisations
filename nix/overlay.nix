@@ -37,7 +37,7 @@ let
 
 	home = (import ./session-vars.nix).home;
 
-	caenv = callPackage ./caenv.nix;
+	caenv = callPackage ./caenv.nix {};
 in
 {
 	features = defaultFeatures;

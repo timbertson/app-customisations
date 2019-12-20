@@ -7,7 +7,7 @@ let
 	envvars = [ "GIT_SSL_CAINFO" "CURL_CA_BUNDLE" "SSL_CERT_FILE " ];
 	fishrc = writeTextFile "nix-caenv.fish" (concatMapStringsSep "\n" (var:
 		"set -x ${var} ${cacert}"
-	)) envvars;
+	) envvars);
 in
 stdenv.mkDerivation ({
 	passthru = { inherit cacert envvars; };
