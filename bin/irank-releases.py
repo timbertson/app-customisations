@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-from __future__ import print_function
+#!/usr/bin/env python3
 import irank
 from irank.config import IrankOptionParser, IrankApp, config_file
 from irank import db as irank_db
@@ -24,7 +23,7 @@ def to_date(s):
 	raise ValueError("Unknown date format: %s" % (s,))
 
 TODAY = datetime.date.today()
-EPOCH = datetime.date(year=1970, month=01, day=01)
+EPOCH = datetime.date(year=1970, month=1, day=1)
 def format_date(date):
 	assert isinstance(date, datetime.date), "Not a date: %r" % (date,)
 	return date.strftime('%Y-%m-%d')
@@ -69,14 +68,14 @@ def make_feed(releases):
 </rss>
 """
 	from xml.dom import minidom as dom
-	from urllib import quote
+	from urllib.parse import quote
 	doc = dom.getDOMImplementation().createDocument(None, "rss", None)
 	doc.documentElement.setAttribute("version", "2.0")
 	def elem(parent, tag):
 		node = doc.createElement(tag)
 		parent.appendChild(node)
 		return node
-	t = lambda s: doc.createTextNode(s.encode('utf-8'))
+	t = doc.createTextNode
 
 	channel = elem(doc.documentElement, "channel")
 	elem(channel, "title").appendChild(t("Album Releases"))

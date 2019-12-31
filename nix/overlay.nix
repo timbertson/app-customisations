@@ -91,7 +91,7 @@ in
 			ctags
 			glibcLocales
 			python3Packages.ipython
-			pythonPackages.youtube-dl
+			python3Packages.youtube-dl
 			syncthing
 		] ++ map linux [
 			# linux + maximal
@@ -140,10 +140,10 @@ in
 			wrapProgram $out/bin/fish --set LOCALE_ARCHIVE ${self.glibcLocales}/lib/locale/locale-archive
 		'';
 	});
-	irank-releases = if self ? irank then (callPackage ({ lib, stdenv, makeWrapper, pythonPackages, irank }:
+	irank-releases = if self ? irank then (callPackage ({ lib, stdenv, makeWrapper, python3Packages, irank }:
 		let
-			pythonDeps = [ irank ] ++ (with pythonPackages; [ musicbrainzngs pyyaml ]);
-			pythonpath = lib.concatStringsSep ":" (map (dep: "${dep}/lib/${pythonPackages.python.libPrefix}/site-packages") pythonDeps);
+			pythonDeps = [ irank ] ++ (with python3Packages; [ musicbrainzngs pyyaml ]);
+			pythonpath = lib.concatStringsSep ":" (map (dep: "${dep}/lib/${python3Packages.python.libPrefix}/site-packages") pythonDeps);
 		in
 		stdenv.mkDerivation {
 			name = "irank-releases";
@@ -266,8 +266,8 @@ in
 		mkdir -p $out/bin
 		ln -s "${pkgs.nodePackages.ocaml-language-server}/bin/ocaml-language-server" "$out/bin"
 	'');
-	pyperclip = callPackage ({ lib, fetchgit, pythonPackages, which, xsel }:
-		pythonPackages.buildPythonPackage rec {
+	pyperclip = callPackage ({ lib, fetchgit, python3Packages, which, xsel }:
+		python3Packages.buildPythonPackage rec {
 			name = "pyperclip-${version}";
 			version = "dev";
 			src = fetchgit {
@@ -278,9 +278,6 @@ in
 			doCheck = false;
 			propagatedBuildInputs = [ which xsel ];
 		}) {};
-	# pythonPackages = super.pythonPackages // {
-	# 	# dnslib = tryCallLocal "${home}/dev/python/dns-alias" "nix/dnslib.nix" "HEAD" { inherit pythonPackages; };
-	# };
 	python3Packages = super.python3Packages // {
 		python-language-server = super.python3Packages.python-language-server.override { providers = []; };
 	};
