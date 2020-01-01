@@ -1,2 +1,2 @@
 #!/bin/bash
-pwd | pyperclip -i
+pwd | pyperclip --copy

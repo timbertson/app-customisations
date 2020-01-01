@@ -74,6 +74,7 @@ in
 		(ifEnabled "jdk" (callPackage ./jdks.nix {}))
 		(ifEnabled "gnome-shell" my-gnome-shell-extensions)
 		(anyEnabled [ "node" "maximal"] nodejs)
+		my-caenv
 		my-nix-prefetch-scripts
 		neovim
 		neovim-remote
@@ -266,18 +267,6 @@ in
 		mkdir -p $out/bin
 		ln -s "${pkgs.nodePackages.ocaml-language-server}/bin/ocaml-language-server" "$out/bin"
 	'');
-	pyperclip = callPackage ({ lib, fetchgit, python3Packages, which, xsel }:
-		python3Packages.buildPythonPackage rec {
-			name = "pyperclip-${version}";
-			version = "dev";
-			src = fetchgit {
-				"url" = "https://github.com/timbertson/pyperclip-upstream.git";
-				"rev" = "8fed9551596eef6dd8646c2a63d4239b9e5d2fdd";
-				"sha256" = "1czxcdlx390ywkaccm69sk1nnlyax4y3ky5bps9yzyj6k8i1xh1w";
-			};
-			doCheck = false;
-			propagatedBuildInputs = [ which xsel ];
-		}) {};
 	python3Packages = super.python3Packages // {
 		python-language-server = super.python3Packages.python-language-server.override { providers = []; };
 	};

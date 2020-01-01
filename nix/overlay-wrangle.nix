@@ -28,6 +28,27 @@ let
 			(overrideCall "gup-ocaml" ({pkgs, path}: pkgs.callPackage path { inherit (self) opam2nix nix-wrangle;})) //
 			(overrideCall "snip" ({pkgs, path}: self.haskell.packages.ghc865.callPackage path {})) //
 			(overrideCall "vim-watch" ({pkgs, path}: pkgs.callPackage path { enableNeovim = true; })) //
+			(overrideCall "pyperclip" ({pkgs, path}:
+				pkgs.callPackage ({ lib, fetchgit, python3Packages, which, xsel }:
+					python3Packages.buildPythonPackage rec {
+						name = "pyperclip-${version}";
+						version = "dev";
+						src = path;
+						doCheck = false;
+						# nativeBuildInputs = [ which xsel ];
+						postInstall = ''
+							mkdir -p $out/bin
+							cat > $out/bin/pyperclip << EOF
+#!/usr/bin/env bash
+export PATH="${lib.concatMapStringsSep ":" (p: "${p}/bin") [python3Packages.python which xsel]}"
+export PYTHONPATH="$out/${python3Packages.python.sitePackages}"
+exec python3 -m pyperclip "\$@"
+EOF
+							chmod +x $out/bin/pyperclip
+						'';
+					}
+				) {}
+			)) //
 			{};
 	};
 
