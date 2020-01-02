@@ -55,19 +55,6 @@
       "type": "github",
       "version": "0.8.1"
     },
-    "pyperclip": {
-      "fetch": {
-        "owner": "asweigart",
-        "repo": "pyperclip",
-        "rev": "09abcb63fa5a6ac9afa3b11def604b059b943b6b",
-        "sha256": "0z49rrs3nvdq2i18r9vf48drcwsirfifmjghwvq6ahxwiiv073a3"
-      },
-      "owner": "asweigart",
-      "ref": "master",
-      "repo": "pyperclip",
-      "nix": ".",
-      "type": "github"
-    },
     "status-check": {
       "fetch": {
         "owner": "timbertson",

@@ -78,7 +78,7 @@ in
 		my-nix-prefetch-scripts
 		neovim
 		neovim-remote
-		pyperclip
+		pyperclip-bin
 		python3Packages.python
 		ripgrep
 		vim-watch
@@ -215,6 +215,22 @@ in
 	'');
 
 	my-caenv = caenv;
+
+	pyperclip-bin = callPackage ({ stdenv, python3Packages, which, xsel }:
+		stdenv.mkDerivation {
+			name = "pyperclip-bin";
+			buildCommand = ''
+				mkdir -p $out/bin
+				cat > $out/bin/pyperclip << EOF
+#!/usr/bin/env bash
+export PATH="${lib.concatMapStringsSep ":" (p: "${p}/bin") [python3Packages.python which xsel]}"
+export PYTHONPATH="${python3Packages.pyperclip}/${python3Packages.python.sitePackages}"
+exec python3 -m pyperclip "\$@"
+EOF
+				chmod +x $out/bin/pyperclip
+			'';
+		}
+	) {};
 
 	my-nix-prefetch-scripts = (
 		# Override nix-prefetch-* scripts to include the system's .crt files,
