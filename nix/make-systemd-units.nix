@@ -1,13 +1,34 @@
-self: super:
-with super; {
-	system = lib.evalModules {
+{ lib, runCommand, callPackage, units }:
+let system = lib.evalModules {
 		modules = [
-			({lib, ...}:
+			({config, lib, pkgs, ...}:
+			let sd = import <nixpkgs/nixos/modules/system/boot/systemd-lib.nix> { inherit config lib pkgs; }; in
 			{
 				config = {
 					# _module.check = false;  # we're building a partial nixos here; just ignore unknown config options
-					_module.args = { pkgs = self; };
+					# _module.args = { pkgs = self; };
 					nixpkgs.system = builtins.currentSystem;
+					systemd.user = units;
+					system.build.standalone-user-units = (sd.generateUnits
+						"user" # type
+						(config.systemd.user.units // {
+							# Hack; systemd.user.targets should be supported...
+							"desktop-session.target" = rec {
+								wantedBy = [];
+								requiredBy = [];
+								aliases = [];
+								unit = sd.makeUnit "desktop-session.target" {
+									inherit wantedBy requiredBy;
+									enable = true;
+									text = ''
+										[Unit]
+									'';
+								};
+							};
+						})
+						[ "default.target" "sockets.target" "timers.target"] # upstreamUnits
+						[] # upstreamWants
+					);
 				};
 				# so that we can include _module check; we define & ignore
 				# whatever options nix complains about here:
@@ -19,7 +40,6 @@ with super; {
 					environment.systemPackages = ignore;
 				};
 			})
-			./systemd-user.nix
 			
 			<nixpkgs/nixos/modules/system/boot/systemd.nix>
 			<nixpkgs/nixos/modules/system/etc/etc.nix>
@@ -39,5 +59,8 @@ with super; {
 			<nixpkgs/nixos/modules/misc/passthru.nix>
 			<nixpkgs/nixos/modules/misc/version.nix>
 		];
-	};
-}
+}; in
+runCommand "systemd-units" {} ''
+	mkdir -p $out/share/systemd
+	cp -a "${system.config.system.build.standalone-user-units}" $out/share/systemd/user
+''

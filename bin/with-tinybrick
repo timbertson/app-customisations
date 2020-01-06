@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+from http import server
+import os,sys,subprocess,threading
+from functools import partial
+args = sys.argv[1:]
+port=int(args.pop(0))
+dir=args.pop(0)
+
+def run_server():
+	handler_class = partial(server.SimpleHTTPRequestHandler, directory=dir)
+	httpd = server.HTTPServer(('127.0.0.1', port), handler_class)
+	httpd.serve_forever()
+
+t = threading.Thread(target=run_server, daemon=True)
+t.start()
+
+p = subprocess.Popen(args)
+p.wait()
+sys.exit(p.returncode)

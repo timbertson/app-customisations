@@ -161,10 +161,12 @@ in
 				'';
 		}) {}) else null;
 
-	my-systemd-units = (pkgs.runCommand "systemd-units" {} ''
-		mkdir -p $out/share/systemd
-		cp -a "${self.system.config.system.build.standalone-user-units}" $out/share/systemd/user
-	'');
+	my-systemd-units = callPackage ./make-systemd-units.nix {
+		# TODO: callPackage instead of `import` fails with:
+		# > The option `systemd.user.override' defined in `<unknown-file>' does not exist.
+		units = import ./systemd-units.nix { inherit (self) pkgs lib;};
+	};
+
 	my-borg-task = callPackage ({ pkgs }:
 		with pkgs;
 		let

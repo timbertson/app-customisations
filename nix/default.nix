@@ -13,7 +13,6 @@ import <nixpkgs> {
 	config = (import ./config.nix);
 	overlays = [
 		(self: super: { inherit hostname; })
-		(import ./system.nix)
 		(import ./overlay-user.nix)
 		(import ./overlay.nix)
 		(import ./overlay-wrangle.nix)
