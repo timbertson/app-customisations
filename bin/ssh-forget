@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # parses the output of an ssh host key vertification
 # message, and deletes the offending key.
 #
@@ -30,6 +30,7 @@ else:
 		lines = sys.stdin.readlines()
 
 	for line in lines:
+		line = line.decode('utf-8')
 		line = line.strip()
 		m = re.match(patt, line)
 		if m:
