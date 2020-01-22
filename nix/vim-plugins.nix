@@ -117,4 +117,8 @@ in
 		"de1210420a53d491dfc468a8a0e000a9ff29c700"
 		"1lhdalnjlhl084ngvs42ifwq1hici6lxpxmr2a1l7vixdj7mcac1";
 
+	"vim-reason-plus" = mkgit
+		"https://github.com/reasonml-editor/vim-reason-plus"
+		"6f3c92a4dfc18ffd497eec2d1c2c0ea7c0056eb5"
+		"0al370a6sj2lz3m8x96byixd4f236f1vq95j3d7n6b7a3sa0n3j6";
 }

@@ -41,6 +41,7 @@ let
 						"vim-indent-object"
 						# "vim-lsp"
 						"vim-nix"
+						"vim-reason-plus"
 						"vim-rust"
 						"vim-stratifiedjs"
 						"vim-swift"
