@@ -19,6 +19,7 @@ let
 					names = [
 						"async.vim"
 						"asyncrun"
+						"dhall-vim"
 						"fish-syntax"
 						"fugitive"
 						"fzfWrapper"
