@@ -1,128 +1,131 @@
-#!/bin/bash
+#!/usr/bin/env python3
+import optparse
+import os
+import sys
+import subprocess
+import tempfile
+import shutil
 
-irank_base="$HOME/Music/irank"
+def run(fn, cmd, **k):
+	print(' + ' + repr(cmd))
+	return fn(cmd, **k)
 
-function overwrite_android_db {
-	scp "$irank_base/irank.sqlite" "$dest/"
-}
-
-function do_sync {
-	playlists="$(grep -v '^#' ~/.config/irank/android-playlists | tr '\n' ' ')"
+def irank_exe():
 	# use locally-built irank, if present
-	irank="$(env PATH="$HOME/dev/python/irank/result/bin:$PATH" which irank)"
-	"$irank" export "$@" -d "$dest" --limit 4.0 --merge ~/Music/Library/Other/Phone/ -- $playlists
-	overwrite_android_db
+	env_irank = os.environ.get('IRANK_EXE')
+	if env_irank is not None:
+		return env_irank
+	dev_irank = os.path.expanduser('~/dev/python/irank/result/bin/irank')
+	if os.path.exists(dev_irank):
+		return dev_irank
+	else:
+		return 'irank'
 
-	# echo '-------- DISK USAGE: -----------'
-	# du -h "$dest"
-	size=$(run_sh du -hs "$host_path" | cut -f1)
+def load_paths():
+	ret={}
+	with open(os.path.expanduser("~/.config/irank/paths")) as f:
+		lines = f.readlines()
+		for line in lines:
+			key, value = line.split(':', 1)
+			key = key.strip()
+			value = value.strip()
+			if key.startswith('#'): continue
+			ret[key] = os.path.expanduser(value)
+	return ret
+
+def num_remote_rating_changes(local_db):
+	if os.path.exists(local_db):
+		out = run(subprocess.check_output, [irank_exe(), 'rating-sync', '--count', local_db])
+		return int(out.decode('utf-8').strip())
+	else:
+		return 0
+
+def overwrite_android_db(opts):
+	# note we sync to the _music_ dest, not the DB source (that's never written to, to avoid conflicts)
+	host, path = split_host(opts.music_dest)
+	source = os.path.join(opts.irank_base, 'irank.sqlite')
+	dest = os.path.join(opts.music_dest, 'irank.sqlite')
+	print('copying %s -> %s' % (source, dest))
+	ssh(dest, lambda p: 'mkdir -p %s' % os.path.dirname(p))
+	if host is None:
+		shutil.copyfile(source, dest)
+	else:
+		run(subprocess.check_call, ['scp', source, dest])
+
+def apply_remote_rating_changes(opts, local_db):
+	print("updating ratings from device")
+	num_updates=num_remote_rating_changes(local_db)
+	if num_updates > 0:
+		print("applying %d remote updates..." % num_updates)
+		run(subprocess.check_call, [irank_exe(), 'rating-sync', '--no', local_db])
+			# TODO do this on failure
+			# zenity --question --no-markup --text='Rating update FAILED. Do you want to continue, ERASING all failed ratings?' --cancel-label='Cancel' --ok-label='ERASE' && \
+			# 	zenity --question --no-markup --text='SERIOUSLY?' --cancel-label='No!' --ok-label='Yes, ERASE ratings')
+		print("updating playlists after rating update")
+		if not opts.no_update_db:
+			run(subprocess.check_call, [irank_exe(), 'db'])
+
+def do_sync(opts):
+	with open(os.path.expanduser('~/.config/irank/android-playlists')) as conf:
+		playlists = []
+		for line in conf.readlines():
+			if line.startswith('#'): continue
+			playlists.append(line.strip())
+	
+	run(subprocess.check_call, [irank_exe(), 'export', '--dest', opts.music_dest,
+		'--no-checksum',
+		'--limit', '4.0',
+		'--merge', os.path.expanduser('~/Music/Library/Other/Phone/'),
+		'--leave-ext', 'sqlite',
+		'--leave-name', '.stfolder',
+		'--leave-name', '.gup',
+		'--'] + playlists)
+
+	print('-------- DISK USAGE: -----------')
+	size=ssh(opts.music_dest, lambda p: 'du -hs %s' % p).split()[0]
 	# remaining=$(df -h "$dest" | tail -n1 | awk '{print $4}')
-	notify-send "Android music sync finished" "$size used for $dest"
-}
+	run(subprocess.check_call, ['notify-send', "Android music sync finished", "%s used for %s" % (size, opts.music_dest)])
 
-function run_sh {
-	if [ -n "$host" ]; then
-		ssh "$host" -- "$@"
-	else
-		sh -c "$@"
-	fi
-}
+def split_host(dest):
+	if ':' in dest:
+		return dest.split(':', 1)
+	else:
+		return (None, dest)
 
-function num_remote_rating_changes {
-	if [ -r "$1" ]; then
-		irank rating-sync --count "$1"
-	else
-		echo 0
-	fi
-}
+def ssh(dest, cmd):
+	(host, path) = split_host(dest)
+	if host is not None:
+		# remote
+		host, _ = dest.split(':')
+		out = run(subprocess.check_output, ['ssh', host, '--', cmd(path)])
+	else:
+		out = run(subprocess.check_output, ['bash', '-c', cmd(path)])
+	return out.decode('utf-8').strip()
 
-function apply_remote_rating_changes {
-	echo "updating ratings from device"
+def main():
+	p = optparse.OptionParser()
+	p.add_option('--quick', action='store_true')
+	p.add_option('--no-update-db', action='store_true')
+	p.add_option('--no-read-android-ratings', action='store_true')
+	p.add_option('--headless', action='store_true')
+	opts, args = p.parse_args()
+	paths = load_paths()
+	if args:
+		(opts.music_dest,) = args
+	else:
+		opts.music_dest = paths['android']
+	opts.irank_base = paths['irank']
 
-	local_db="$1"
-	num_updates="$(num_remote_rating_changes "$local_db")"
-	if [ "$num_updates" -gt 0 ]; then
-		echo "applying $num_updates updates..."
-		irank rating-sync --no "$local_db" || ( \
-			zenity --question --no-markup --text='Rating update FAILED. Do you want to continue, ERASING all failed ratings?' --cancel-label='Cancel' --ok-label='ERASE' && \
-				zenity --question --no-markup --text='SERIOUSLY?' --cancel-label='No!' --ok-label='Yes, ERASE ratings')
+	opts.db_source = paths.get('android-db', opts.music_dest)
+	if not opts.no_read_android_ratings:
+		has_db = ssh(opts.db_source, lambda p: 'if [ -f "%s"/irank.sqlite ]; then echo YES; else echo NO; fi' % p)
+		print('has_db = %r' % has_db)
+		if has_db == 'YES':
+			with tempfile.NamedTemporaryFile() as db:
+				run(subprocess.check_call, ['scp', opts.db_source+'/irank.sqlite', db.name])
+				apply_remote_rating_changes(opts, db.name)
+		overwrite_android_db(opts)
+	if not opts.quick:
+		do_sync(opts)
 
-		echo "updating playlists after rating update"
-		irank db
-		echo "copying new irank DB to device"
-		overwrite_android_db
-	fi
-}
-
-
-if [ -z "$irank_test" ]; then
-	set -e
-	do_update_playlists=1
-	do_update_ratings=1
-	ask=0
-	headless=0
-	if [ "$1" = "--help" ]; then
-		echo "Usage: $0 [--quick|--ask]" >&2
-		exit 0
-	elif [ "$1" = "--headless" ]; then
-		headless=1
-		do_update_ratings=0
-		shift
-	elif [ "$1" = "--quick" ]; then
-		do_update_playlists=0
-		shift
-	elif [ "$1" = "--ask" ]; then
-		ask=1
-		shift
-	fi
-
-	dest="$1"
-	if [ -z "$dest" ]; then
-		echo "Note: no destination given"
-		dest=$(grep '^android:' ~/.config/irank/paths | cut -c10-)
-		echo "using: $dest"
-	fi
-
-	if echo "$dest" | fgrep -q ':'; then
-		host="$(echo "$dest" | cut -d ":" -f 1)"
-		host_path="$(echo "$dest" | cut -d ":" -f 2)"
-	else
-		host=""
-		host_path=""
-	fi
-	echo HOST: "$host"
-	echo DEST: "$host_path"
-
-	set -x
-	[ -n "$host" -o -d "$dest" ]
-
-	sqlite_db=/tmp/irank.sqlite
-	if [ "$do_update_ratings" -eq 1 ]; then
-		has_db="$(ssh $host -- if [ -f "$host_path"/irank.sqlite ]\; then echo OK\; else echo NO\; fi)"
-		if [ "$has_db" = "NO" ]; then
-			do_update_ratings=0
-			num_updates="0"
-		else
-			[ "$has_db" = "OK" ]
-			scp "$dest/irank.sqlite" "$sqlite_db"
-			num_updates="$(num_remote_rating_changes "$sqlite_db")"
-		fi
-	fi
-
-	if [ "$ask" = 1 ]; then
-		resp=$(echo -e "ALL\nSync all\nRATINGS\nUpdate ratings only ($num_updates)" | zenity --list --title="iRank android" --column="action" --column=foo --text="iRank android sync:\nSelect action to perform" --hide-header --hide-column=1) || exit 0
-		[ "$resp" = 'ALL' ] || do_update_playlists=0
-	fi
-
-	if [ "$do_update_ratings" -eq 1 ]; then apply_remote_rating_changes "$sqlite_db"; fi
-	if [ "$do_update_playlists" -eq 1 ]; then
-		if [ "$headless" -eq 1 ]; then
-			do_sync
-		else
-			do_sync --interactive
-		fi
-	fi
-else
-	echo "# (sourced)"
-	dest="$HOME/.tmp/android"
-fi
+main()
