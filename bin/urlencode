@@ -1,5 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-import urllib, sys
-print urllib.quote(sys.argv[1])
+import urllib.parse, sys
+print(urllib.parse.quote(sys.argv[1]))
 

@@ -1,5 +1,18 @@
 {
   "sources": {
+    "cached-nix-shell": {
+      "fetch": {
+        "owner": "xzfc",
+        "repo": "cached-nix-shell",
+        "rev": "ade493239d20458658db6b994a9bc40724e67ebb",
+        "sha256": "0vd9vybijq5lqc4gybpp60a37nzfkhhrbswl7vn06jr939jm53xq"
+      },
+      "nix": "default.nix",
+      "owner": "xzfc",
+      "ref": "master",
+      "repo": "cached-nix-shell",
+      "type": "github"
+    },
     "dconf-user-overrides": {
       "fetch": {
         "path": "/home/tim/dev/python/dconf-user-overrides",
