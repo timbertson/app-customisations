@@ -75,7 +75,6 @@ in
 		(ifEnabled "gnome-shell" my-gnome-shell-extensions)
 		(anyEnabled [ "node" "maximal"] nodejs)
 		my-caenv
-		my-nix-prefetch-scripts
 		neovim
 		neovim-remote
 		pyperclip-bin
@@ -233,42 +232,6 @@ EOF
 			'';
 		}
 	) {};
-
-	my-nix-prefetch-scripts = (
-		# Override nix-prefetch-* scripts to include the system's .crt files,
-		# so that https works as expected
-		let
-			addVars = bin: ''
-				bin="${bin}"
-				base="$(basename "$bin")"
-				dest="$out/bin/$base"
-				echo "Wrapping $bin -> $dest"
-				makeWrapper "$bin" "$dest" \
-					${lib.concatMapStringsSep " " (var: "--set ${var} ${caenv.cacert}") caenv.envvars}
-			'';
-		in
-		stdenv.mkDerivation {
-			priority=100;
-			name = "my-nix-prefetch-scripts";
-			buildInputs = with pkgs; [ makeWrapper ];
-			unpackPhase = "true";
-			buildPhase = "true";
-			dontGzipMan = "true"; # They already are, ya fool!
-			installPhase = ''
-				mkdir -p $out/bin $out/share
-				for f in ${pkgs.nix-prefetch-scripts}/bin/*; do
-					${addVars "$f"}
-				done
-				for f in ${pkgs.nix}/bin/*; do
-					${addVars "$f"}
-				done
-				cp -r ${pkgs.nix.man}/share/man $out/share/man
-				${addVars "${pkgs.git}/bin/git"}
-				${addVars "${pkgs.wget}/bin/wget"}
-				${addVars "${pkgs.bundler}/bin/bundle"}
-			'';
-			meta.priority = 1;
-		});
 
 	# Make a consistent path for setting $QT_QPA_PLATFORM_PLUGIN_PATH
 	# (see https://github.com/NixOS/nixpkgs/issues/24256)
