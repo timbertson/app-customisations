@@ -224,7 +224,7 @@ in
 				mkdir -p $out/bin
 				cat > $out/bin/pyperclip << EOF
 #!/usr/bin/env bash
-export PATH="${lib.concatMapStringsSep ":" (p: "${p}/bin") [python3Packages.python which xsel]}"
+export PATH="''${PATH:+\$PATH:}${lib.concatMapStringsSep ":" (p: "${p}/bin") [python3Packages.python which xsel]}"
 export PYTHONPATH="${python3Packages.pyperclip}/${python3Packages.python.sitePackages}"
 exec python3 -m pyperclip "\$@"
 EOF
