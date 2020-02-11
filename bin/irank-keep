@@ -1,5 +1,4 @@
 #!/bin/sh
-
-song="$1"
-[ -z "$song" ] && exit 1
-zenity --question --no-markup --text="really keep `basename "$song"`?" && mv -iv "$song" ~/Music/Library/ && echo "done"
+set -eu
+irank-confirm keep "$1"
+mv -iv "$1" ~/Music/Library/

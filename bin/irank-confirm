@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+desc="$1"
+song="$2"
+# zenity --question --no-markup --text="really delete `basename "$song"`?"
+echo -n "Really $desc $(basename "$song")? [Y/n]"
+read f
+[ "$f" = '' -o "$f" = 'y' ]

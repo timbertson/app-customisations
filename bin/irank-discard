@@ -1,5 +1,4 @@
 #!/bin/sh
-
-song="$1"
-[ -z "$song" ] && exit 1
-zenity --question --no-markup --text="really discard `basename "$song"`?" && mv -iv "$song" ~/Music/discarded/ && echo "done"
+set -eu
+irank-confirm discard "$1"
+mv -iv "$1" ~/Music/discarded/

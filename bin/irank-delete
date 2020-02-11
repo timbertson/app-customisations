@@ -1,11 +1,4 @@
 #!/bin/sh
-
-song="$1"
-[ -z "$song" ] && exit 1
-set -e
-echo -n "Really delete `basename "$song"`?"
-read f
-[ "$f" = '' -o "$f" = 'y' ]
-# zenity --question --no-markup --text="really delete `basename "$song"`?"
-trash "$song"
-echo "done"
+set -eu
+irank-confirm delete "$1"
+trash "$1"

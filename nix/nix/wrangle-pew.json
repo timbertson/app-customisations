@@ -4,8 +4,8 @@
       "fetch": {
         "owner": "xzfc",
         "repo": "cached-nix-shell",
-        "rev": "ade493239d20458658db6b994a9bc40724e67ebb",
-        "sha256": "0vd9vybijq5lqc4gybpp60a37nzfkhhrbswl7vn06jr939jm53xq"
+        "rev": "137390213d0b6cedce5f618f3141e69aeeae797c",
+        "sha256": "00p0sf24165n2wbdc0q8gqdbp85clq4b4ri39cklysr4ryadqica"
       },
       "nix": "default.nix",
       "owner": "xzfc",
