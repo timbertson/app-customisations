@@ -11,7 +11,7 @@ case $# in
 	2)
 		set -x
 		# remote / name
-		exec ssh -t "$1" "dtach -A '$2' -r winch fish"
+		exec ssh -t "$1" 'env "PATH=$HOME/.local/nix/bin:$PATH"'" dtach -A '$2' -r winch fish"
 		;;
 	*) echo "Exactly one or two arguments required"; exit 1;;
 esac

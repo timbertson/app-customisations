@@ -74,6 +74,7 @@ in
 		(ifEnabled "jdk" (callPackage ./jdks.nix {}))
 		(ifEnabled "gnome-shell" my-gnome-shell-extensions)
 		(anyEnabled [ "node" "maximal"] nodejs)
+		nix
 		my-caenv
 		neovim
 		neovim-remote
