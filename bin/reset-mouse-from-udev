@@ -1,0 +1,18 @@
+#!/bin/bash
+# run reset-mouse, but make it work from a udev rule which is:
+# - executed from an empty environment (no X session info)
+# - executed too early for xinput to know about the device
+set -eu
+LOGFILE="/tmp/reset-mouse-udev.log"
+echo "Logging to $LOGFILE"
+exec > "$LOGFILE"
+exec 2>&1
+
+# set -x
+here="$(dirname "$0")"
+eval "$($here/session-vars --user tim --all --process gnome-session --export)"
+(
+	# spawn a background process to do the reset after a brief delay
+	sleep 1
+	reset-mouse 2>&1
+) &

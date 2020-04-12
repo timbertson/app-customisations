@@ -1,4 +1,4 @@
 #!/bin/bash
 set -ex
-reset-mouse
+reset-mouse || true
 reset-xkb

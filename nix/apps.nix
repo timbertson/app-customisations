@@ -2,7 +2,6 @@
 with pkgs;
 with import ./session-vars.nix;
 let
-	loadSessionVars = "eval \"$(session-vars --all --process gnome-session --export)\"";
 	mkDesktopDrv = { name, exec, filename ? null }:
 		stdenv.mkDerivation {
 			name = "desktop-files";

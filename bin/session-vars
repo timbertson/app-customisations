@@ -59,8 +59,13 @@ DISPLAY = 'DISPLAY'
 # 			EXPORTS.append(token)
 
 def pgrep_vars(opts):
-	import getpass
-	pid_output = subprocess.check_output(['pgrep', '-u', getpass.getuser(), opts.process])
+	if opts.user:
+		user = opts.user
+	else:
+		import getpass
+		user = getpass.getuser()
+
+	pid_output = subprocess.check_output(['pgrep', '-u', user, opts.process])
 	pids = list(map(int, pid_output.strip().decode('ascii').split('\n')))
 	assert pids, "no %s process found" % (opts.process,)
 	if len(pids) > 1:
@@ -86,6 +91,7 @@ def main():
 	p = optparse.OptionParser()
 	p.add_option('--display')
 	p.add_option('--pure', action='store_true', default = False, help='don\'t inherit any vars')
+	p.add_option('--user', help='adopt from a different user (only works for root)')
 	p.add_option('--var', action='append', default=[], help='select specific variable (may be passed multiple times)')
 	p.add_option('--exclude', action='append', default=[], help='exclude specific variable (may be passed multiple times)')
 	p.add_option('--all', action='store_true', help='copy all env vars, not just session-related ones')

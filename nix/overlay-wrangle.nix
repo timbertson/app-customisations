@@ -25,6 +25,7 @@ let
 				] else {}
 			; in
 
+			(overrideCall "opam2nix" ({pkgs, path}: pkgs.callPackage path { inherit (self); ocamlPackages = super.ocaml-ng.ocamlPackages_4_08; })) //
 			(overrideCall "gup-ocaml" ({pkgs, path}: pkgs.callPackage path { inherit (self) opam2nix nix-wrangle;})) //
 			(overrideCall "snip" ({pkgs, path}: self.haskell.packages.ghc865.callPackage path {})) //
 			(overrideCall "vim-watch" ({pkgs, path}: pkgs.callPackage path { enableNeovim = true; })) //

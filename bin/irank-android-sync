@@ -57,12 +57,13 @@ def apply_remote_rating_changes(opts, local_db):
 	num_updates=num_remote_rating_changes(local_db)
 	if num_updates > 0:
 		print("applying %d remote updates..." % num_updates)
-		run(subprocess.check_call, [irank_exe(), 'rating-sync', '--no', local_db])
+		flags = ['--no'] if opts.headless else []
+		run(subprocess.check_call, [irank_exe(), 'rating-sync'] + flags + [local_db])
 			# TODO do this on failure
 			# zenity --question --no-markup --text='Rating update FAILED. Do you want to continue, ERASING all failed ratings?' --cancel-label='Cancel' --ok-label='ERASE' && \
 			# 	zenity --question --no-markup --text='SERIOUSLY?' --cancel-label='No!' --ok-label='Yes, ERASE ratings')
 		print("updating playlists after rating update")
-		if not opts.no_update_db:
+		if not opts.no_db:
 			run(subprocess.check_call, [irank_exe(), 'db'])
 
 def do_sync(opts):
@@ -74,7 +75,7 @@ def do_sync(opts):
 	
 	run(subprocess.check_call, [irank_exe(), 'export', '--dest', opts.music_dest,
 		'--no-checksum',
-		'--limit', '4.0',
+		'--limit', '2',
 		'--merge', os.path.expanduser('~/Music/Library/Other/Phone/'),
 		'--leave-ext', 'sqlite',
 		'--leave-name', '.stfolder',
@@ -104,9 +105,9 @@ def ssh(dest, cmd):
 
 def main():
 	p = optparse.OptionParser()
-	p.add_option('--quick', action='store_true')
-	p.add_option('--no-update-db', action='store_true')
-	p.add_option('--no-read-android-ratings', action='store_true')
+	p.add_option('--no-sync', action='store_true')
+	p.add_option('--no-db', action='store_true')
+	p.add_option('--no-read-ratings', action='store_true')
 	p.add_option('--headless', action='store_true')
 	opts, args = p.parse_args()
 	paths = load_paths()
@@ -117,7 +118,7 @@ def main():
 	opts.irank_base = paths['irank']
 
 	opts.db_source = paths.get('android-db', opts.music_dest)
-	if not opts.no_read_android_ratings:
+	if not opts.no_read_ratings:
 		has_db = ssh(opts.db_source, lambda p: 'if [ -f "%s"/irank.sqlite ]; then echo YES; else echo NO; fi' % p)
 		print('has_db = %r' % has_db)
 		if has_db == 'YES':
@@ -125,7 +126,7 @@ def main():
 				run(subprocess.check_call, ['scp', opts.db_source+'/irank.sqlite', db.name])
 				apply_remote_rating_changes(opts, db.name)
 		overwrite_android_db(opts)
-	if not opts.quick:
+	if not opts.no_sync:
 		do_sync(opts)
 
 main()
