@@ -84,7 +84,6 @@ def do_sync(opts):
 
 	print('-------- DISK USAGE: -----------')
 	size=ssh(opts.music_dest, lambda p: 'du -hs %s' % p).split()[0]
-	# remaining=$(df -h "$dest" | tail -n1 | awk '{print $4}')
 	run(subprocess.check_call, ['notify-send', "Android music sync finished", "%s used for %s" % (size, opts.music_dest)])
 
 def split_host(dest):

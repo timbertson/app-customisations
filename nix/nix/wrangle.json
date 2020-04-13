@@ -41,6 +41,19 @@
       "repo": "nix-wrangle",
       "type": "github"
     },
+    "pkgs": {
+      "fetch": {
+        "owner": "NixOS",
+        "repo": "nixpkgs-channels",
+        "rev": "f97746ba2726128dcf40134837ffd13b4042e95d",
+        "sha256": "1ramsxyv4ajkc2jmk4cv8jnzlrbqq1hswigw9dv29hz60scfzv4m"
+      },
+      "nix": "default.nix",
+      "owner": "NixOS",
+      "ref": "f97746ba2726128dcf40134837ffd13b4042e95d",
+      "repo": "nixpkgs-channels",
+      "type": "github"
+    },
     "piep": {
       "fetch": {
         "owner": "timbertson",

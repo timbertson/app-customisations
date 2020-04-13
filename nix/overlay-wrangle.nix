@@ -2,7 +2,7 @@ self: super:
 with super.lib;
 let
 	# TODO: figure out a way to safely use super instead of this
-	safeNixpkgs = import <nixpkgs> {};
+	safeNixpkgs = (import ./nixpkgs.nix).system {};
 	home = (import ./session-vars.nix).home;
 	wrangleSrc =
 		let local = "${home}/dev/nix/nix-wrangle"; in
@@ -32,8 +32,8 @@ let
 			{};
 	};
 
-	derivations = wrangleApi.derivations args;
-	injectOnlyNames = [ "opam2nix" "opam2nixBin"];
+	derivations = filterAttrs (name: value: name != "pkgs") (wrangleApi.derivations args);
+	injectOnlyNames = [ "opam2nix" "opam2nixBin" ];
 	installNames = sort (a: b: a < b) (filter (x: !(elem x injectOnlyNames)) (attrNames derivations));
 in
 derivations // {
