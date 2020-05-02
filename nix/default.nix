@@ -9,7 +9,7 @@ let
 		else trace "Ignoring optional overlay: ${toString p}" [];
 
 in
-(import ./nixpkgs.nix).pinned {
+(import ./nixpkgs.nix).system {
 	config = (import ./config.nix);
 	overlays = [
 		(self: super: { inherit hostname; })
