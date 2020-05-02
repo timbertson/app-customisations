@@ -13,10 +13,12 @@ in
 	config = (import ./config.nix);
 	overlays = [
 		(self: super: { inherit hostname; })
-		(import ./overlay-user.nix)
-		(import ./overlay.nix)
-		(import ./overlay-wrangle.nix)
-		(import ./overlay-symlinks.nix)
+		(import ./overlay-user.nix) # shared with ~/.config/nixpkgs/overlays/site.nix
+		(import ./overlay-features.nix) # setup feature API
+		(import ./overlay.nix) # base layer
+		(import ./overlay-wrangle.nix) # wrangle sources
+		(import ./overlay-home.nix) # home-manager
+		(import ./overlay-symlinks.nix) # moar links
 	]
 		++ (maybeImport ./overlay-local.nix)
 		++ (maybeImport (./. + "/host-${hostname}.nix"))

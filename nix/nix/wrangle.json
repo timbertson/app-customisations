@@ -28,6 +28,18 @@
       "type": "github",
       "version": "0.1.5"
     },
+    "home-manager": {
+      "fetch": {
+        "owner": "rycee",
+        "repo": "home-manager",
+        "rev": "70f7c9f35510ac9482db5276e34a628ead8372ca",
+        "sha256": "00ni2y49ljhd1pmkvv384glpb200i11msahkm1w51whmcd1z74n2"
+      },
+      "owner": "rycee",
+      "ref": "master",
+      "repo": "home-manager",
+      "type": "github"
+    },
     "nix-wrangle": {
       "fetch": {
         "owner": "timbertson",

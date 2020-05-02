@@ -213,10 +213,6 @@ meta:
   path: ../home/dconf/disable-housekeeping-plugin
   tags: linux
 
-~/.config/dconf.user.d/disable-tracker:
-  path: ../home/dconf/disable-tracker
-  tags: linux
-
 ~/.config/dconf.user.d/shellshape:
   path: ../home/dconf/shellshape
   tags: linux shellshape

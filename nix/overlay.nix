@@ -1,17 +1,8 @@
 self: super:
 with builtins;
 with super.lib;
+with self.siteLib;
 let
-	defaultFeatures = {
-		node = true;
-		maximal = false;
-		git-readonly = false;
-		gnome-shell = false;
-		jdk = false;
-		systemd = false;
-		vim-ide = false;
-	};
-
 	lib = super.lib;
 	stdenv = self.stdenv;
 	callPackage = self.callPackage;
@@ -24,29 +15,14 @@ let
 	firstNonNull = items:
 		findFirst (x: x != null) null items;
 
-	isEnabled = feature:
-		if (!hasAttr feature defaultFeatures) then
-			lib.warn "Unknown feature: ${feature}" (assert false; null)
-		else getAttr feature self.features;
-
 	orNull = cond: x: if cond then x else null;
-
-	ifEnabled = feature: x: orNull (isEnabled feature) x;
-
-	anyEnabled = features: x: orNull (any isEnabled features) x;
 
 	home = (import ./session-vars.nix).home;
 
 	caenv = callPackage ./caenv.nix {};
+
 in
 {
-	features = defaultFeatures;
-	siteLib = {
-		inherit
-			isEnabled
-		;
-	};
-
 	installedDerivations = map (o: o.drvPath) self.installedPackages;
 
 	installedPackages = with self; builtins.trace "Features: ${builtins.toJSON self.features}" (let

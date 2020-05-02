@@ -1,4 +1,4 @@
-{ pkgs, siteLib }:
+{ pkgs }:
 with pkgs;
 let
 	neovimUpstream = pkgs.wrapNeovim pkgs.neovim-unwrapped { };
@@ -48,9 +48,7 @@ let
 						"vim-swift"
 						"vim-visual-star-search"
 						"vim-watch"
-					]
-					# ++ (lib.optional (siteLib.isEnabled "vim-ide") "LanguageClient-neovim")
-					;
+					];
 				}
 				# full documentation at
 				# github.com/MarcWeber/vim-addon-manager
