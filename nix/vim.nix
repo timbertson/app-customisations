@@ -1,3 +1,4 @@
+# TODO integrate with home-manager
 { pkgs }:
 with pkgs;
 let

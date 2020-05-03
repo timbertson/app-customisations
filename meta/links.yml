@@ -3,16 +3,6 @@
 meta:
   basedir: ~/dev/app-customisations/meta
   hosts:
-    meep:
-      tags:
-        - root
-        - multi-user
-        - linux
-        - desktop
-        - fedora
-        - fish
-        - nix
-        - systemd
     pew:
       tags:
         - root
@@ -23,18 +13,6 @@ meta:
         - fish
         - nix
         - systemd
-    tjcee:
-      tags:
-        - root
-        - linux
-        - ubuntu
-        - ubuntu-natty
-        - tv
-    docker-dev:
-      tags:
-        - linux
-        - fish
-        - nix
     mba.local:
       tags:
        - osx
@@ -72,22 +50,6 @@ meta:
 /etc/gdm/env.d/nix-xdg.env:
   path: ../root/gdm/env.d/xdg-nix.env
   tags: linux root nix
-
-~/.vim:
-  path: ../vim
-
-~/.vimrc:
-  path: ../vim/vimrc
-  tags: linux nix
-
-~/.vim:
-  path: ../vim
-
-~/.bin:
-  path: ../bin
-
-~/dev/.projects.gup:
-  path: ../home/dev/projects.gup
 
 ~/.config/direnv-std:
   path: ../home/direnv-std

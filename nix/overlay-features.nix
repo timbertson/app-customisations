@@ -2,7 +2,6 @@ self: super:
 with builtins;
 with super.lib;
 
-
 let
 	# TODO: this should be a home-manager module when it's all ported
 	defaultFeatures = {
@@ -13,11 +12,12 @@ let
 		jdk = false;
 		systemd = false;
 		vim-ide = false;
+		linux = super.stdenv.isLinux;
+		osx = super.stdenv.isDarwin;
 	};
 in
 {
 	siteLib = rec {
-		# TODO weird to mix API and flags, but it works :shrug:
 		orNull = cond: x: if cond then x else null;
 
 		isEnabled = feature:

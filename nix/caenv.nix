@@ -1,3 +1,4 @@
+# kept as its own file because it can be useful to `nix-shell caenv.nix` in an emergency
 { pkgs ? import <nixpkgs> {}}:
 with pkgs; with lib;
 let

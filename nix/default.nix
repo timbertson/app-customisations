@@ -10,15 +10,14 @@ let
 
 in
 (import ./nixpkgs.nix).system {
-	config = (import ./config.nix);
+	config = (import ./shared/config.nix);
 	overlays = [
 		(self: super: { inherit hostname; })
-		(import ./overlay-user.nix) # shared with ~/.config/nixpkgs/overlays/site.nix
-		(import ./overlay-features.nix) # setup feature API
-		(import ./overlay.nix) # base layer
-		(import ./overlay-wrangle.nix) # wrangle sources
-		(import ./overlay-home.nix) # home-manager
-		(import ./overlay-symlinks.nix) # moar links
+		(import ./shared/overlay-user.nix)
+		(import ./overlay-features.nix)
+		(import ./overlay-base.nix)
+		(import ./overlay-wrangle.nix)
+		(import ./overlay-home.nix)
 	]
 		++ (maybeImport ./overlay-local.nix)
 		++ (maybeImport (./. + "/host-${hostname}.nix"))

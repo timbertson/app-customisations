@@ -7,109 +7,32 @@ let
 	stdenv = self.stdenv;
 	callPackage = self.callPackage;
 
-	withExtantPath = p: fn:
-		if (builtins.pathExists p)
-			then fn (builtins.toPath p)
-			else lib.warn "no such file: ${path}" null;
+	sessionVars = import ./session-vars.nix;
+	home = sessionVars.home;
+	loadSessionVars = sessionVars.loadSessionVars;
 
-	firstNonNull = items:
-		findFirst (x: x != null) null items;
+	pkgs = self;
 
-	orNull = cond: x: if cond then x else null;
+	mkDesktopDrv = { name, exec, filename ? null }:
+		stdenv.mkDerivation {
+			name = "desktop-files";
+			buildCommand = with super.lib; ''
+				mkdir -p "$out/share/applications"
+				cd "$out/share/applications"
+				cat > "${if filename == null then name else filename}.desktop" <<"EOF"
+					[Desktop Entry]
+					Version=1.0
+					Name=${name}
+					GenericName=${name}
+					Exec=${exec}
+					Terminal=false
+					Type=Application
+					Icon=${name}
+EOF
+			'';
+		};
 
-	home = (import ./session-vars.nix).home;
-
-	caenv = callPackage ./caenv.nix {};
-
-in
-{
-	installedDerivations = map (o: o.drvPath) self.installedPackages;
-
-	installedPackages = with self; builtins.trace "Features: ${builtins.toJSON self.features}" (let
-		maximal = ifEnabled "maximal";
-		darwin = pkg: orNull stdenv.isDarwin pkg;
-		linux = pkg: orNull stdenv.isLinux pkg;
-		bash = "#!${pkgs.bash}/bin/bash";
-		wrapper = script: writeScript "wrapper" script;
-	in ([]) ++ lib.remove null ([
-		# barrier
-		daglink
-		(darwin coreutils)
-		(darwin cacert)
-		(darwin fswatch)
-		direnv
-		dtach
-		(self.gup-ocaml or gup)
-		fish
-		fzf
-		git-wip
-		(if (isEnabled "git-readonly" || stdenv.isDarwin) then null else git)
-		(ifEnabled "git-readonly" (callPackage ./git-readonly.nix {}))
-		(self.irank or null)
-		irank-releases
-		(ifEnabled "jdk" (callPackage ./jdks.nix {}))
-		(ifEnabled "gnome-shell" my-gnome-shell-extensions)
-		(anyEnabled [ "node" "maximal"] nodejs)
-		nix
-		my-caenv
-		neovim
-		neovim-remote
-		pyperclip-bin
-		python3Packages.python
-		ripgrep
-		vim-watch
-	]
-	++ map (ifEnabled "vim-ide") [
-		# ocaml-language-server
-		# python3Packages.python-language-server
-	] ++ map maximal (
-		[
-			# maximal:
-			ctags
-			glibcLocales
-			python3Packages.ipython
-			python3Packages.youtube-dl
-			syncthing
-		] ++ map linux [
-			# linux + maximal
-			desktopFiles.my-desktop-session
-			desktopFiles.tilda-launch
-			desktopFiles.calibre
-
-			jsonnet
-			my-borg-task
-			my-gnome-shell-extensions
-			(ifEnabled "systemd" my-systemd-units)
-
-			ocaml
-			parcellite
-			my-qt5
-			xbindkeys
-		]) # /maximal
-	));
-
-	siteInstalled = super.symlinkJoin {
-		name = "local";
-		paths = self.installedPackages;
-		postBuild = ''
-			for bin in $out/bin/*; do
-				final_dest="$(readlink -f "$bin")"
-				intermediate="$(readlink "$bin")"
-				if [ "$final_dest" != "$intermediate" ]; then
-					ln -sfn "$final_dest" "$bin"
-				fi
-			done
-		'' + (
-			# on darwin, git complains about OSX config, so delete it :(
-			if stdenv.isDarwin then ''
-			rm -f $out/bin/git
-			'' else "");
-	};
-
-} // (let pkgs = self; in {
-
-	# plain ol' packages:
-	desktopFiles = callPackage ./apps.nix {};
+in {
 	fish = if super.glibcLocales == null then super.fish else lib.overrideDerivation super.fish (o: {
 		# workaround for https://github.com/NixOS/nixpkgs/issues/39328
 		buildInputs = o.buildInputs ++ [ self.makeWrapper ];
@@ -136,12 +59,6 @@ in
 						;
 				'';
 		}) {}) else null;
-
-	my-systemd-units = callPackage ./make-systemd-units.nix {
-		# TODO: callPackage instead of `import` fails with:
-		# > The option `systemd.user.override' defined in `<unknown-file>' does not exist.
-		units = import ./systemd-units.nix { inherit (self) pkgs lib;};
-	};
 
 	my-borg-task = callPackage ({ pkgs }:
 		with pkgs;
@@ -192,7 +109,7 @@ in
 		}
 	'');
 
-	my-caenv = caenv;
+	my-caenv = callPackage ./caenv.nix {};
 
 	pyperclip-bin = callPackage ({ stdenv, python3Packages, which, xsel }:
 		stdenv.mkDerivation {
@@ -229,4 +146,24 @@ EOF
 		python-language-server = super.python3Packages.python-language-server.override { providers = []; };
 	};
 	vimPlugins = (callPackage ./vim-plugins.nix {}) // super.vimPlugins;
-})
+
+	tilda-launch = mkDesktopDrv {
+		exec = pkgs.writeScript "tilda-launch" ''#!${pkgs.bash}/bin/bash
+			${loadSessionVars}
+			export GTK_THEME='Adwaita:dark'
+			export TERM_SOLARIZED=1
+			exec ${pkgs.tilda}/bin/tilda
+			'';
+		name = "Tilda";
+		filename = "tilda";
+	};
+
+	my-desktop-session = mkDesktopDrv {
+		exec = pkgs.writeScript "desktop-session" ''#!${pkgs.bash}/bin/bash
+			reset-input &
+			systemctl --user start desktop-session.target &
+		'';
+		name = "My desktop session";
+		filename = "desktop-session";
+	};
+}
