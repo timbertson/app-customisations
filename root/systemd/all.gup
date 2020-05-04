@@ -9,5 +9,4 @@ for unit in "${units[@]}"; do
 	gup -u "$dir/$unit"
 	sudo cp --dereference "$dir/$unit" /etc/systemd/system/
 done
-sudo systemd daemon-reload
-sudo systemd --user daemon-reload
+sudo systemd reenable "${units[@]}"

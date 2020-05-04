@@ -90,6 +90,7 @@ in {
 			'';
 		}) {};
 
+	# TODO move to files.nix instead?
 	my-gnome-shell-extensions =
 		let exts = {
 			"scroll-workspaces@gfxmonk.net" = "${home}/dev/gnome-shell/scroll-workspaces";
@@ -146,17 +147,6 @@ EOF
 		python-language-server = super.python3Packages.python-language-server.override { providers = []; };
 	};
 	vimPlugins = (callPackage ./vim-plugins.nix {}) // super.vimPlugins;
-
-	tilda-launch = mkDesktopDrv {
-		exec = pkgs.writeScript "tilda-launch" ''#!${pkgs.bash}/bin/bash
-			${loadSessionVars}
-			export GTK_THEME='Adwaita:dark'
-			export TERM_SOLARIZED=1
-			exec ${pkgs.tilda}/bin/tilda
-			'';
-		name = "Tilda";
-		filename = "tilda";
-	};
 
 	my-desktop-session = mkDesktopDrv {
 		exec = pkgs.writeScript "desktop-session" ''#!${pkgs.bash}/bin/bash

@@ -21,7 +21,6 @@ let
 in
 {
 	home.file = (listToAttrs (remove null [
-		(feature "maximal" ".config/autostart/tilda.desktop" "${pkgs.tilda-launch}/share/applications/tilda.desktop")
 	])) // {
 		".vim" = symlink ../vim;
 		".vimrc" = symlink ../vim/vimrc;

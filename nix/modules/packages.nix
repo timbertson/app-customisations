@@ -54,10 +54,7 @@ in {
 			] ++ map linux [
 				# linux + maximal
 				my-desktop-session
-				tilda-launch
-
 				jsonnet
-				my-borg-task
 				my-gnome-shell-extensions
 
 				ocaml

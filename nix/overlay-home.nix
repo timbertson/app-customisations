@@ -8,6 +8,7 @@ let
 			./files.nix
 			./modules/packages.nix
 			./modules/services.nix
+			./modules/dconf.nix
 		] ++ (if builtins.pathExists ./modules/local.nix then [ ./modules/local.nix ] else []);
 	};
 
