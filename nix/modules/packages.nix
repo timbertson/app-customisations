@@ -53,7 +53,7 @@ in {
 				syncthing
 			] ++ map linux [
 				# linux + maximal
-				my-desktop-session
+				# my-desktop-session
 				jsonnet
 				my-gnome-shell-extensions
 

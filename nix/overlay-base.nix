@@ -148,12 +148,12 @@ EOF
 	};
 	vimPlugins = (callPackage ./vim-plugins.nix {}) // super.vimPlugins;
 
-	my-desktop-session = mkDesktopDrv {
-		exec = pkgs.writeScript "desktop-session" ''#!${pkgs.bash}/bin/bash
-			reset-input &
-			systemctl --user start desktop-session.target &
-		'';
-		name = "My desktop session";
-		filename = "desktop-session";
-	};
+	# my-desktop-session = mkDesktopDrv {
+	# 	exec = pkgs.writeScript "desktop-session" ''#!${pkgs.bash}/bin/bash
+	# 		reset-input &
+	# 		systemctl --user start desktop-session.target &
+	# 	'';
+	# 	name = "My desktop session";
+	# 	filename = "desktop-session";
+	# };
 }
