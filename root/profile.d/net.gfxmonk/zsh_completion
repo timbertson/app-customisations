@@ -1,8 +1,0 @@
-function use_completion {
-	compctl -K "$1" "$2"
-}
-compdef '_dispatch git git' g
-
-# a fancy (read:primitive) way to specify "*.xml" AND NOT "*-local.xml"
-compctl -g '(*[^l].xml|*[^a]l.xml|*[^c]al.xml|*[^o]cal.xml|*[^l]ocal.xml|*[^-]local.xml)' \
-	0local zero2pypi 0publish 0publish-gui 0readme

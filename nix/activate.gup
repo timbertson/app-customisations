@@ -1,6 +1,7 @@
-#!/usr/bin/env bash
+#!bash -eu
 set -eu
 cd "$(dirname "$0")"
 set -x
-gup home
+gup -u home
 ./home/activate
+touch "$1"

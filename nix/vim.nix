@@ -66,6 +66,7 @@ stdenv.mkDerivation {
 	name = "nvim-custom";
 	buildInputs = [ makeWrapper ];
 	unpackPhase = "true";
+	passthru = { tim = "yeah!"; };
 	# note: nvim-remote relies on the binary being named "nvim", so we have to do an awkward copy-dance...
 	installPhase = ''
 		mkdir -p $out/bin

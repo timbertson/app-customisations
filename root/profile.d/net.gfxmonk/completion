@@ -1,3 +1,0 @@
-use_completion _git g
-use_completion _complete_dpkg_avail aptinstall
-use_completion _complete_dpkg_installed aptremove

@@ -13,5 +13,5 @@ vim/.netrwhist
 .tags
 *-local.xml
 /nix/local
-bin/size-tree.exe
+/nix/activate
 nix/cachix

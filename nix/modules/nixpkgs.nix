@@ -3,7 +3,7 @@ self:
 # into the `pkgs` argument of each module,
 # to reverse the default nixpkgs module which reimports with
 # configured overlays, etc.
-{
-	config._module.args.pkgs = self;
+{ lib, ... }: {
+	config._module.args.pkgs = lib.mkForce self;
 }
 

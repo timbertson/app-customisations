@@ -15,7 +15,6 @@ in {
 	home.packages = builtins.trace "Features: ${builtins.toJSON pkgs.features}" (
 		with pkgs; lib.remove null (pkgs.installedPackages ++ [
 			home-manager
-			daglink
 			(darwin coreutils)
 			(darwin cacert)
 			(darwin fswatch)
@@ -25,7 +24,7 @@ in {
 			fish
 			fzf
 			git-wip
-			(if (stdenv.isDarwin) then null else git)
+			(darwin git)
 			(self.irank or null)
 			irank-releases
 			(ifEnabled "jdk" (callPackage ../jdks.nix {}))
@@ -35,28 +34,22 @@ in {
 			my-caenv
 			neovim
 			neovim-remote
+			# (ifEnabled "vim-ide" ocaml-language-server)
+			# (ifEnabled "vim-ide" python3Packages.python-language-server)
 			pyperclip-bin
 			python3Packages.python
 			ripgrep
 			vim-watch
 		]
-		++ map (ifEnabled "vim-ide") [
-			# ocaml-language-server
-			# python3Packages.python-language-server
-		] ++ map maximal (
+		++ map maximal (
 			[
-				# maximal:
-				ctags
 				glibcLocales
 				python3Packages.ipython
 				python3Packages.youtube-dl
 				syncthing
 			] ++ map linux [
 				# linux + maximal
-				# my-desktop-session
 				jsonnet
-				my-gnome-shell-extensions
-
 				ocaml
 				parcellite
 				my-qt5

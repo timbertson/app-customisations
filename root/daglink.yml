@@ -1,0 +1,37 @@
+# vim: set et:
+
+meta:
+  # basedir: ~/dev/app-customisations/meta
+  hosts:
+    pew:
+      tags:
+        - linux
+        - fedora
+        - nix
+    mba.local:
+      tags:
+       - nix
+    tcuthbertson-mac:
+      regex: ".*tcuthbertson.*"
+      tags:
+       - nix
+
+/etc/security/pam.env.conf:
+  path: pam/environment.conf
+  tags: linux
+
+/etc/gdm/env.d/nix-xdg.env:
+  path: gdm/env.d/xdg-nix.env
+  tags: linux root nix
+
+/etc/nix/nix.conf:
+  path: nix/nix.conf
+  tags: nix root
+
+/etc/yum.repos.d/google-chrome.repo:
+  path: yum.repos.d/google-chrome.repo
+  tags: fedora root
+
+/etc/selinux/config:
+  path: selinux/config
+  tags: linux root

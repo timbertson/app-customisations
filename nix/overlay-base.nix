@@ -90,27 +90,18 @@ in {
 			'';
 		}) {};
 
-	# TODO move to files.nix instead?
-	my-gnome-shell-extensions =
-		let exts = {
-			"scroll-workspaces@gfxmonk.net" = "${home}/dev/gnome-shell/scroll-workspaces";
-			"impatience@gfxmonk.net" = "${home}/dev/gnome-shell/impatience@gfxmonk.net";
-		}; in (pkgs.runCommand "gnome-shell-extensions" {} ''
-		mkdir -p $out/share/gnome-shell/extensions
-		${concatStringsSep "\n" (remove null (mapAttrsToList (name: src:
-			if src == null then null else ''
-				for suff in xdg/data/gnome-shell/extensions share/gnome-shell/extensions; do
-					if [ -e "${src}/$suff/${name}" ]; then
-						ln -s "${src}/$suff/${name}" $out/share/gnome-shell/extensions/${name}
-					else
-						echo "Skipping non-existent gnome-shell extension: ${src}/$suff/${name}"
-					fi
-				done
-			'') exts))
-		}
-	'');
-
 	my-caenv = callPackage ./caenv.nix {};
+
+	my-jdks = with pkgs;
+		stdenv.mkDerivation {
+			name = "jdks";
+			buildCommand = ''
+				dest="$out/jdk"
+				mkdir -p "$dest"
+				ln -s "${openjdk}" "$dest/8"
+				ln -s "${openjdk11}" "$dest/11"
+			'';
+		};
 
 	pyperclip-bin = callPackage ({ stdenv, python3Packages, which, xsel }:
 		stdenv.mkDerivation {
@@ -139,6 +130,7 @@ EOF
 	};
 
 	neovim = callPackage ./vim.nix {};
+
 	ocaml-language-server = (pkgs.runCommand "ocaml-language-server" {} ''
 		mkdir -p $out/bin
 		ln -s "${pkgs.nodePackages.ocaml-language-server}/bin/ocaml-language-server" "$out/bin"
@@ -148,12 +140,14 @@ EOF
 	};
 	vimPlugins = (callPackage ./vim-plugins.nix {}) // super.vimPlugins;
 
-	# my-desktop-session = mkDesktopDrv {
-	# 	exec = pkgs.writeScript "desktop-session" ''#!${pkgs.bash}/bin/bash
-	# 		reset-input &
-	# 		systemctl --user start desktop-session.target &
-	# 	'';
-	# 	name = "My desktop session";
-	# 	filename = "desktop-session";
-	# };
+	my-desktop-session = mkDesktopDrv {
+		# https://naftuli.wtf/2017/12/28/systemd-user-environment/
+		exec = pkgs.writeScript "desktop-session" ''#!${pkgs.bash}/bin/bash
+			set -eux
+			systemctl --user import-environment
+			systemctl --user start desktop-session.target
+		'';
+		name = "My desktop session";
+		filename = "desktop-session";
+	};
 }

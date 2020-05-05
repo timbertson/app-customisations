@@ -3,4 +3,8 @@ dest="${2:-1}"
 gup --always
 gup -u ../root/systemd/nix
 nix-build --out-link "$dest" default.nix -A home-activation --show-trace
+
+# it's only changed if the nix store result changed
+readlink "$dest" | gup --contents
+
 nix-store --add --add-root --indirect "$dest"

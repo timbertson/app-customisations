@@ -23,6 +23,8 @@ let
 		in "${drv}";
 in {
 	systemd.user = {
+		targets."desktop-session".Unit = {}; # must exist for others to be wanted by it
+
 		services.xbindkeys = {
 			Install.WantedBy = desktopSession;
 			Service = {
@@ -71,6 +73,7 @@ in {
 		};
 
 		services.tilda = {
+			Install.WantedBy = desktopSession;
 			Service = {
 				ExecStart = writeScript "${loadSessionVars}; exec ${pkgs.tilda}/bin/tilda";
 				Environment = displayEnv ++ [
