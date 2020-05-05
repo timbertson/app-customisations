@@ -1,7 +1,6 @@
 #!bash -eu
-gup -u ../nix/local
-../nix/local/bin/daglink -c daglink.yml -f --sudo=sudo
 gup -u \
+	links \
 	polkit/all \
 	sudoers/all \
 	shell \

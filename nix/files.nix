@@ -41,7 +41,7 @@ in
 			".snip" = symlink ../home/snip;
 			".gitconfig" = symlink ../home/git/config;
 			".gitignore" = symlink ../home/git/ignore;
-			# ".local/nix" = symlinkOpt ./home/home-path; # TODO if we rename home/ back to local/ ...
+			".local/nix" = symlinkOpt ./local/home-path;
 		}
 		// (if pkgs.stdenv.isLinux then {
 			".config/fontconfig/fonts.conf" = symlink ../home/fonts.conf;

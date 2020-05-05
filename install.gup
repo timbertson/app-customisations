@@ -15,6 +15,4 @@ export NIX_PATH="$HOME/.nix-defexpr/channels"
 
 which nix-build || (curl -sSL https://nixos.org/nix/install | sh)
 
-nix-shell nix/caenv.nix --run gup -u nix/activate
-nix-shell nix/caenv.nix --run 'gup -u root/all'
-#./nix/local/bin/daglink -i # TODO daglink for root?
+nix-shell nix/caenv.nix --run 'gup -u nix/activate root/all'

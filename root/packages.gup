@@ -1,7 +1,6 @@
 #!bash -eu
 set -x
 pkcon install --allow-reinstall \
-	gnome-tweak-tool \
 	ecryptfs-utils \
 	xautomation \
 	xbindkeys \

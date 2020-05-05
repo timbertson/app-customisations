@@ -9,8 +9,7 @@ let
 	userPath = systemPath ++ (map builtins.toString [
 		home
 		../../.
-		../local
-		../home/home-path
+		../local/home-path
 	]);
 	pathEnv = dirs: ["PATH=\"${lib.concatMapStringsSep ":" (p: "${p}/bin") dirs}\""];
 	remocaml = "${home}/dev/web/remocaml";

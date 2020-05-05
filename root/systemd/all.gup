@@ -1,6 +1,6 @@
 #!bash -eux
 nix="../../nix/local"
-dir="$nix/share/systemd/user"
+dir="$nix/home-path/share/systemd/user"
 if [ ! -e "$nix" ]; then
 	gup -u "$nix"
 fi

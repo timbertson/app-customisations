@@ -12,7 +12,7 @@ let
 		] ++ (if builtins.pathExists ./modules/local.nix then [ ./modules/local.nix ] else []);
 	};
 
-	home-manager = (self.callPackage "${self.home-manager}/modules" {
+	home-manager = (self.callPackage "${super.home-manager-src}/modules" {
 		configuration = configuration;
 		check = true;
 	});
@@ -20,4 +20,5 @@ let
 in {
 	home-activation = home-manager.activationPackage;
 	home-config = home-manager.config;
+	home-manager = (self.callPackage "${super.home-manager-src}/default.nix" {}).home-manager;
 }

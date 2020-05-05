@@ -1,6 +1,6 @@
 #!bash -eu
 gup -u ../nix/local
-FISH="$HOME/dev/app-customisations/nix/local/bin/fish"
+FISH="$HOME/.local/nix/bin/fish"
 if ! fgrep "$FISH" /etc/shells; then
 	echo "$FISH" | sudo tee -a /etc/shells
 fi

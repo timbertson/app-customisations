@@ -22,16 +22,16 @@ meta:
 
 /etc/gdm/env.d/nix-xdg.env:
   path: gdm/env.d/xdg-nix.env
-  tags: linux root nix
+  tags: linux nix
 
 /etc/nix/nix.conf:
   path: nix/nix.conf
-  tags: nix root
+  tags: nix
 
 /etc/yum.repos.d/google-chrome.repo:
   path: yum.repos.d/google-chrome.repo
-  tags: fedora root
+  tags: fedora
 
 /etc/selinux/config:
   path: selinux/config
-  tags: linux root
+  tags: linux
