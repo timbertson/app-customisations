@@ -3,5 +3,6 @@ gup -u \
 	links \
 	polkit/all \
 	sudoers/all \
+	systemd/all \
 	shell \
 	packages \

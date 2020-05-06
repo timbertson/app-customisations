@@ -1,6 +1,6 @@
 #!bash -eux
 nix="../../nix/local"
-dir="$nix/home-path/share/systemd/user"
+dir="$nix/home-files/.config/systemd/system"
 if [ ! -e "$nix" ]; then
 	gup -u "$nix"
 fi
@@ -9,4 +9,5 @@ for unit in "${units[@]}"; do
 	gup -u "$dir/$unit"
 	sudo cp --dereference "$dir/$unit" /etc/systemd/system/
 done
-sudo systemd reenable "${units[@]}"
+sudo systemctl reenable "${units[@]}"
+touch "$1"

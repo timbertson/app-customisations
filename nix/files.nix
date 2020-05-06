@@ -55,7 +55,7 @@ in
 					[Desktop Entry]
 					Version=1.0
 					Name=My Desktop Session
-					Exec="systemctl --user start desktop-session.target"
+					Exec=systemctl --user start desktop-session.target
 					Terminal=false
 					Type=Application
 				''

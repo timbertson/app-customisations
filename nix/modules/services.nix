@@ -21,6 +21,8 @@ let
 		'';
 		in "${drv}";
 in {
+	services.syncthing.enable = true;
+
 	systemd.user = {
 		targets."desktop-session".Unit = {}; # must exist for others to be wanted by it
 
@@ -77,6 +79,7 @@ in {
 				ExecStart = writeScript "${loadSessionVars}; exec ${pkgs.tilda}/bin/tilda";
 				Environment = displayEnv ++ [
 					"TERM_SOLARIZED=1"
+					"GTK_THEME=Adwaita:dark"
 					# "XDG_DATA_DIRS=${home}/.local/nix/share:/usr/local/share/:/usr/share/"
 					# "SSH_AUTH_SOCK=%t/keyring/ssh"
 				] ++ pathEnv userPath;

@@ -46,7 +46,6 @@ in {
 				glibcLocales
 				python3Packages.ipython
 				python3Packages.youtube-dl
-				syncthing
 			] ++ map linux [
 				# linux + maximal
 				jsonnet
