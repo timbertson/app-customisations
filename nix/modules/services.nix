@@ -2,7 +2,6 @@
 with lib;
 with import ../session-vars.nix;
 let
-	displayEnv = ["DISPLAY=:1"]; # ugh...
 	# libglEnv = ["LD_LIBRARY_PATH=${pkgs.libGLU}/lib"];
 	desktopSession = ["desktop-session.target"];
 	systemPath = [ "/usr/local" "/usr" "/" ];
@@ -29,7 +28,7 @@ in {
 		services.xbindkeys = {
 			Install.WantedBy = desktopSession;
 			Service = {
-				Environment = pathEnv systemPath ++ displayEnv;
+				Environment = pathEnv systemPath;
 				ExecStart = writeScript "${loadSessionVars}; exec ${pkgs.xbindkeys}/bin/xbindkeys --nodaemon";
 				Restart = "on-abnormal";
 				RestartSec = "2";
@@ -39,7 +38,6 @@ in {
 		services.parcellite = {
 			Install.WantedBy = desktopSession;
 			Service = {
-				Environment = displayEnv;
 				ExecStart = writeScript "${loadSessionVars}; exec ${pkgs.parcellite}/bin/parcellite";
 			};
 		};
@@ -77,12 +75,21 @@ in {
 			Install.WantedBy = desktopSession;
 			Service = {
 				ExecStart = writeScript "${loadSessionVars}; exec ${pkgs.tilda}/bin/tilda";
-				Environment = displayEnv ++ [
+				Environment = [
 					"TERM_SOLARIZED=1"
 					"GTK_THEME=Adwaita:dark"
 					# "XDG_DATA_DIRS=${home}/.local/nix/share:/usr/local/share/:/usr/share/"
 					# "SSH_AUTH_SOCK=%t/keyring/ssh"
 				] ++ pathEnv userPath;
+			};
+		};
+
+		services.reset-mouse = {
+			Install.WantedBy = desktopSession;
+			Service = {
+				ExecStart = writeScript "${loadSessionVars}; exec reset-mouse";
+				Restart="no";
+				Environment = pathEnv userPath;
 			};
 		};
 	};
