@@ -32,8 +32,8 @@
       "fetch": {
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "70f7c9f35510ac9482db5276e34a628ead8372ca",
-        "sha256": "00ni2y49ljhd1pmkvv384glpb200i11msahkm1w51whmcd1z74n2"
+        "rev": "b886cbea0bcc62b63dd4c7654843df62714e55b6",
+        "sha256": "1x8y7zi7yzlsmpp0bjgx4rbg68dyx37na37cb0lvsysz3ndp6xbp"
       },
       "owner": "rycee",
       "ref": "master",
@@ -44,8 +44,8 @@
       "fetch": {
         "owner": "timbertson",
         "repo": "nix-wrangle",
-        "rev": "636b4baff554c12be99dbc42b3eb1740d63a2fce",
-        "sha256": "0vpji60gbl513k4jvpnsm6lhnm5rzyld23vls5r963li03dxlxq2"
+        "rev": "86119ca8a5611aeb095cc1d449a36739991c9ee6",
+        "sha256": "06395pwzl14846ia9hls4clfy14l7b0s70999fc96h3pcfgg27d0"
       },
       "nix": "nix/",
       "owner": "timbertson",
