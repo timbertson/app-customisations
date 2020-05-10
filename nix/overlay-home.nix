@@ -1,15 +1,22 @@
 self: super:
 
 let
+	commonModules = [
+		(import ./modules/nixpkgs.nix self)
+		./modules/installed-derivations.nix
+		./files.nix
+		./modules/packages.nix
+	];
+	platformModules = if super.stdenv.isLinux then [
+		./modules/services.nix
+		./modules/dconf.nix
+	] else [];
+	optionalModules = super.lib.filter builtins.pathExists [
+		./modules/local.nix
+	];
+
 	configuration = { pkgs, ... }@args: {
-		require = [
-			(import ./modules/nixpkgs.nix self)
-			./modules/installed-derivations.nix
-			./files.nix
-			./modules/packages.nix
-			./modules/services.nix
-			./modules/dconf.nix
-		] ++ (if builtins.pathExists ./modules/local.nix then [ ./modules/local.nix ] else []);
+		require = commonModules ++ optionalModules ++ platformModules;
 	};
 
 	home-manager = (self.callPackage "${super.home-manager-src}/modules" {

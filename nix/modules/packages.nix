@@ -3,9 +3,10 @@ with lib;
 with pkgs;
 with pkgs.siteLib;
 let
-			maximal = ifEnabled "maximal";
-			darwin = pkg: orNull stdenv.isDarwin pkg;
-			linux = pkg: orNull stdenv.isLinux pkg;
+	maximal = ifEnabled "maximal";
+	darwin = pkg: orNull stdenv.isDarwin pkg;
+	linux = pkg: orNull stdenv.isLinux pkg;
+	warnNull = desc: opt: if opt == null then warn "${desc} is null" null else warn "${desc} is DEFINED!" opt;
 in {
 	# Don't try to install with `nix-env` during activation, I'll
 	# setup $PATH and friends myself
@@ -20,14 +21,14 @@ in {
 			(darwin fswatch)
 			direnv
 			dtach
-			(self.gup-ocaml or gup)
+			(pkgs.gup-ocaml or gup)
 			fish
 			fzf
 			git-wip
 			(darwin git)
-			(self.irank or null)
+			(pkgs.irank or null)
 			irank-releases
-			(ifEnabled "jdk" (callPackage ../jdks.nix {}))
+			(ifEnabled "jdk" my-jdks)
 			(ifEnabled "gnome-shell" my-gnome-shell-extensions)
 			(anyEnabled [ "node" "maximal"] nodejs)
 			nix

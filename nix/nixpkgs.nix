@@ -1,5 +1,5 @@
 let
-	system = import /nix/var/nix/profiles/per-user/tim/channels-44-link/nixpkgs;
+	system = import <nixpkgs>;
 in {
 	inherit system;
 	pinned =
