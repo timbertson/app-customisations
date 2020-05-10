@@ -60,33 +60,21 @@ in {
 				'';
 		}) {}) else null;
 
-	my-borg-task = callPackage ({ pkgs }:
-		with pkgs;
-		let
-			exe = "${home}/dev/python/my-borg/bin/my-borg";
-			script = writeScript "my-borg-task" ''#!${pkgs.bash}/bin/bash
-				set -eux
-				${exe} --user=tim --status-file=backup backup
-				${exe} --user=tim --status-file=sync sync
-				${exe} --user=tim --status-file=check check
-			'';
-		in
+	my-borg-task = callPackage ({ pkgs, my-borg }:
 		stdenv.mkDerivation {
 			name = "my-borg-task";
-			buildInputs = [ makeWrapper];
-			buildCommand = ''
+			buildCommand =
+				let exe = "${my-borg}/bin/my-borg"; in ''
 				mkdir -p $out/bin
-				ln -s ${borgbackup}/bin/borg $out/bin/borg
-				ln -s ${rclone}/bin/rclone $out/bin/rclone
-				makeWrapper ${script} $out/bin/my-borg-task \
-					--set PYTHONUNBUFFERED 1 \
-					--prefix PATH : ${pkgs.python3}/bin \
-					--prefix PATH : $out/bin \
-					;
-				makeWrapper ${exe} $out/bin/my-borg \
-					--prefix PATH : ${pkgs.python3}/bin \
-					--prefix PATH : $out/bin \
-					;
+				echo > $out/bin/my-borg-task <<EOF
+					#!${pkgs.bash}/bin/bash
+					set -eux
+					export PYTHONUNBUFFERED=1
+					${exe} --user=tim --status-file=backup backup
+					${exe} --user=tim --status-file=sync sync
+					${exe} --user=tim --status-file=check check
+EOF
+				chmod +x $out/bin/my-borg-task
 			'';
 		}) {};
 

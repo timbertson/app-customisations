@@ -61,6 +61,14 @@
       "ref": "HEAD",
       "type": "git-local"
     },
+    "my-borg": {
+      "fetch": {
+        "relativePath": "../../python/my-borg"
+      },
+      "nix": "default.nix",
+      "relativePath": "../../python/my-borg",
+      "type": "git-local"
+    },
     "nix-wrangle": {
       "fetch": {
         "path": "/home/tim/dev/nix/nix-wrangle/",
