@@ -29,7 +29,6 @@ in {
 			(pkgs.irank or null)
 			irank-releases
 			(ifEnabled "jdk" my-jdks)
-			(ifEnabled "gnome-shell" my-gnome-shell-extensions)
 			(anyEnabled [ "node" "maximal"] nodejs)
 			nix
 			my-caenv

@@ -49,6 +49,7 @@ in
 			".config/autostart/rhythmbox.desktop" = symlinkOpt /usr/share/applications/rhythmbox.desktop;
 			".local/share/gnome-shell/extensions/scroll-workspaces@gfxmonk.net" = symlinkOpt "${home}/dev/gnome-shell/scroll-workspaces/scroll-workspaces";
 			".local/share/gnome-shell/extensions/impatience@gfxmonk.net" = symlinkOpt "${home}/dev/gnome-shell/impatience@gfxmonk.net/impatience";
+			".local/share/gnome-shell/extensions/BringOutSubmenuOfPowerOffLogoutButton@pratap.fastmail.fm".source = "${pkgs.gnome-shell-rearrange-system-menu}";
 			".config/autostart/start-desktop-session.desktop".text = (
 				# https://naftuli.wtf/2017/12/28/systemd-user-environment/
 				''

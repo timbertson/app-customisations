@@ -28,6 +28,18 @@
       "type": "github",
       "version": "0.1.5"
     },
+    "gnome-shell-rearrange-system-menu": {
+      "fetch": {
+        "owner": "PRATAP-KUMAR",
+        "repo": "Re_Arrange_System_Menu_Items",
+        "rev": "72d89e4adc52d4a26c74c53c8ec5ee969cbc4540",
+        "sha256": "1f2gz10hyjq61gvrf34zva226c7kg55ynv979l1nr1kkjda37l78"
+      },
+      "owner": "PRATAP-KUMAR",
+      "ref": "master",
+      "repo": "Re_Arrange_System_Menu_Items",
+      "type": "github"
+    },
     "home-manager-src": {
       "fetch": {
         "owner": "rycee",

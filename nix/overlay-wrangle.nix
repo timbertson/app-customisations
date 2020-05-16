@@ -34,7 +34,7 @@ let
 	};
 
 	derivations = filterAttrs (name: value: name != "pkgs") (wrangleApi.derivations args);
-	injectOnlyNames = [ "opam2nix" "opam2nixBin" "home-manager-src" "gup-ocaml"];
+	injectOnlyNames = [ "opam2nix" "opam2nixBin" "home-manager-src" "gup-ocaml" "gnome-shell-rearrange-system-menu"];
 	installNames = sort (a: b: a < b) (filter (x: !(elem x injectOnlyNames)) (attrNames derivations));
 in
 derivations // {
