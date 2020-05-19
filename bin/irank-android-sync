@@ -10,17 +10,6 @@ def run(fn, cmd, **k):
 	print(' + ' + repr(cmd))
 	return fn(cmd, **k)
 
-def irank_exe():
-	# use locally-built irank, if present
-	env_irank = os.environ.get('IRANK_EXE')
-	if env_irank is not None:
-		return env_irank
-	dev_irank = os.path.expanduser('~/dev/python/irank/result/bin/irank')
-	if os.path.exists(dev_irank):
-		return dev_irank
-	else:
-		return 'irank'
-
 def load_paths():
 	ret={}
 	with open(os.path.expanduser("~/.config/irank/paths")) as f:
@@ -35,7 +24,7 @@ def load_paths():
 
 def num_remote_rating_changes(local_db):
 	if os.path.exists(local_db):
-		out = run(subprocess.check_output, [irank_exe(), 'rating-sync', '--count', local_db])
+		out = run(subprocess.check_output, ['irank', 'rating-sync', '--count', local_db])
 		return int(out.decode('utf-8').strip())
 	else:
 		return 0
@@ -58,13 +47,14 @@ def apply_remote_rating_changes(opts, local_db):
 	if num_updates > 0:
 		print("applying %d remote updates..." % num_updates)
 		flags = ['--no'] if opts.headless else []
-		run(subprocess.check_call, [irank_exe(), 'rating-sync'] + flags + [local_db])
+		run(subprocess.check_call, ['irank', 'rating-sync'] + flags + [local_db])
 			# TODO do this on failure
 			# zenity --question --no-markup --text='Rating update FAILED. Do you want to continue, ERASING all failed ratings?' --cancel-label='Cancel' --ok-label='ERASE' && \
 			# 	zenity --question --no-markup --text='SERIOUSLY?' --cancel-label='No!' --ok-label='Yes, ERASE ratings')
 		print("updating playlists after rating update")
 		if not opts.no_db:
-			run(subprocess.check_call, [irank_exe(), 'db'])
+			run(subprocess.check_call, ['irank', 'db'])
+			run(subprocess.check_call, ['irank', 'playlists'])
 
 def do_sync(opts):
 	with open(os.path.expanduser('~/.config/irank/android-playlists')) as conf:
@@ -73,7 +63,7 @@ def do_sync(opts):
 			if line.startswith('#'): continue
 			playlists.append(line.strip())
 	
-	run(subprocess.check_call, [irank_exe(), 'export', '--dest', opts.music_dest,
+	run(subprocess.check_call, ['irank', 'export', '--dest', opts.music_dest,
 		'--no-checksum',
 		'--limit', '2',
 		'--merge', os.path.expanduser('~/Music/Library/Other/Phone/'),
