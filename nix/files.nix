@@ -31,7 +31,7 @@ in
 			".vim" = symlink ../vim;
 			".vimrc" = symlink ../vim/vimrc;
 			".bin" = symlink ../bin;
-			"dev/projects.gup" = symlink ../home/dev/projects.gup;
+			"dev/.projects.gup" = symlink ../home/dev/projects.gup;
 			".config/nixpkgs/config.nix" = symlink ./shared/config.nix;
 			".config/nixpkgs/overlays/site.nix" = symlink ./shared/overlay-user.nix;
 			".config/direnv-std" = symlink ../home/direnv-std;
