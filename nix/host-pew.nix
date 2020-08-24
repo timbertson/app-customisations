@@ -4,5 +4,6 @@ self: super:
 		maximal = true;
 		systemd = true;
 		vim-ide = true;
+		jdk = true;
 	};
 }

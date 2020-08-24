@@ -1,3 +1,4 @@
+{ pkgs, nix-wrangle }:
 with builtins;
 let
 	hostname = if pathExists "/etc/hostname"
@@ -9,14 +10,14 @@ let
 		else trace "Ignoring optional overlay: ${toString p}" [];
 
 in
-(import ./nixpkgs.nix).system {
+(import pkgs.path) {
 	config = (import ./shared/config.nix);
 	overlays = [
 		(self: super: { inherit hostname; })
 		(import ./shared/overlay-user.nix)
 		(import ./overlay-features.nix)
 		(import ./overlay-base.nix)
-		(import ./overlay-wrangle.nix)
+		(import ./overlay-wrangle.nix {inherit pkgs nix-wrangle;})
 		(import ./overlay-home.nix)
 	]
 		++ (maybeImport ./overlay-local.nix)

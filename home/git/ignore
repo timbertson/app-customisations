@@ -7,6 +7,10 @@ __pycache__
 .envrc
 .DS_Store
 .merlin
+.bloop
+.metals
+.vscode
+metals.sbt
 /nix/local.tgz
 /nix/local
 .idea/

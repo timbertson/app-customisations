@@ -81,8 +81,7 @@
     },
     "opam2nix": {
       "fetch": {
-        "path": "/home/tim/dev/ocaml/opam2nix",
-        "ref": "v1"
+        "path": "/home/tim/dev/ocaml/opam2nix"
       },
       "nix": "default.nix",
       "path": "/home/tim/dev/ocaml/opam2nix",

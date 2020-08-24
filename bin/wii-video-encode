@@ -35,8 +35,8 @@ cmd = [
 	'-b:a', '68k', # audio bitrate
 	tmpfile]
 
-print "Running command:\n%s" % (' '.join(cmd),)
+print("Running command:\n%s" % (' '.join(cmd),))
 subprocess.check_call(cmd)
 shutil.move(tmpfile, outfile)
-print "Created %r" % (outfile,)
+print("Created %r" % (outfile,))
 

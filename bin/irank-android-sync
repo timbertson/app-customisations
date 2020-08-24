@@ -66,7 +66,7 @@ def do_sync(opts):
 	run(subprocess.check_call, ['irank', 'export', '--dest', opts.music_dest,
 		'--no-checksum',
 		'--limit', '2',
-		'--merge', os.path.expanduser('~/Music/Library/Other/Phone/'),
+		# '--merge', os.path.expanduser('~/Music/Library/Other/Phone/'),
 		'--leave-ext', 'sqlite',
 		'--leave-name', '.stfolder',
 		'--leave-name', '.gup',
@@ -94,11 +94,15 @@ def ssh(dest, cmd):
 
 def main():
 	p = optparse.OptionParser()
-	p.add_option('--no-sync', action='store_true')
+	p.add_option('--quick', action='store_true')
 	p.add_option('--no-db', action='store_true')
 	p.add_option('--no-read-ratings', action='store_true')
 	p.add_option('--headless', action='store_true')
 	opts, args = p.parse_args()
+	if opts.quick:
+		opts.no_db = True
+		opts.no_read_ratings = True
+
 	paths = load_paths()
 	if args:
 		(opts.music_dest,) = args
@@ -115,7 +119,6 @@ def main():
 				run(subprocess.check_call, ['scp', opts.db_source+'/irank.sqlite', db.name])
 				apply_remote_rating_changes(opts, db.name)
 		overwrite_android_db(opts)
-	if not opts.no_sync:
-		do_sync(opts)
+	do_sync(opts)
 
 main()

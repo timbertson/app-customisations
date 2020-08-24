@@ -1,18 +1,10 @@
+{ pkgs, nix-wrangle }:
 self: super:
 with super.lib;
 let
-	# TODO: figure out a way to safely use super instead of this
-	safeNixpkgs = (import ./nixpkgs.nix).system {};
-	home = (import ./session-vars.nix).home;
-	wrangleSrc =
-		let local = "${home}/dev/nix/nix-wrangle"; in
-		if builtins.pathExists local
-			then local
-			else safeNixpkgs.fetchFromGitHub (importJSON ./nix/wrangle.json).sources.nix-wrangle.fetch;
-
-	wrangleApi = safeNixpkgs.callPackage "${wrangleSrc}/nix/api.nix" {};
-	localWrangleSource = ./nix + "/wrangle-${super.hostname}.json";
-	wrangleSources = filter builtins.pathExists [ ./nix/wrangle.json localWrangleSource ];
+	wrangleApi = nix-wrangle.api { pkgs = self; };
+	localWrangleSource = ./. + "/wrangle-${super.hostname}.json";
+	wrangleSources = filter builtins.pathExists [ ./wrangle.json localWrangleSource ];
 
 	args = {
 		path = ./.;
@@ -25,7 +17,6 @@ let
 				] else {}
 			; in
 
-			(overrideCall "opam2nix" ({pkgs, path}: pkgs.callPackage path { inherit (self); ocamlPackages = super.ocaml-ng.ocamlPackages_4_08; })) //
 			(overrideCall "gup-ocaml" ({pkgs, path}: pkgs.callPackage path { inherit (self) opam2nix nix-wrangle;})) //
 			(overrideCall "snip" ({pkgs, path}: self.haskell.packages.ghc865.callPackage path {})) //
 			(overrideCall "vim-watch" ({pkgs, path}: pkgs.callPackage path { enableNeovim = true; })) //

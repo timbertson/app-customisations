@@ -522,29 +522,21 @@ let g:LanguageClient_serverCommands.scala = ['node', './server-proxy.js']
 let g:LanguageClient_serverCommands.ocaml = ['ocaml-language-server', '--stdio']
 let g:LanguageClient_serverCommands.haskell = ['hie']
 
-" leader-e for showing nerd-tree
-nmap <leader>e :NERDTreeToggle<cr>
-nmap <leader>E :NERDTreeFind<cr>
+if !exists('g:vscode')
+	" leader-e for showing nerd-tree
+	nmap <leader>e :NERDTreeToggle<cr>
+	nmap <leader>E :NERDTreeFind<cr>
 
-" find usages
-nmap <A-F7> :Grepper -cword -open -noprompt<cr>
-nmap <leader><F7> :Grepper -cword -open -noprompt<cr>
+	" find usages
+	nmap <A-F7> :Grepper -cword -open -noprompt<cr>
+	nmap <leader><F7> :Grepper -cword -open -noprompt<cr>
 
-" refresh / redraw
-nmap <F5> :syntax sync fromstart<cr>:redraw!<cr>
+	" refresh / redraw
+	nmap <F5> :syntax sync fromstart<cr>:redraw!<cr>
 
-" copy full path to clipboard
-nmap <C-c> :silent let @+ = expand("%:p")<cr>
-
-command! -narg=0 Open :silent :!gnome-open "`dirname "%:p"`" &
-command! -narg=0 Term :silent :!gnome-terminal --working-directory="`dirname "%:p"`" &
-command! -narg=0 CD :lcd %:p:h
-command! -narg=0 Mdview :silent :!markdown "%" | htmlview &
-command! -narg=0 Rstview :silent :!rst2html "%" | htmlview
-augroup automake
-augroup END
-command! -narg=0 Automake autocmd automake BufWritePost <buffer> Make
-command! -narg=0 AutomakeOff autocmd! automake
+	" copy full path to clipboard
+	nmap <C-c> :silent let @+ = expand("%:p")<cr>
+end
 
 " silly shift-typos
 command! -narg=0 Q :q
