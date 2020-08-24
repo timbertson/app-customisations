@@ -49,6 +49,7 @@ in {
 			] ++ map linux [
 				# linux + maximal
 				jsonnet
+				nixGL.nixGLIntel
 				ocaml
 				parcellite
 				my-qt5
