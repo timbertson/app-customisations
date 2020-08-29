@@ -98,6 +98,14 @@
       "ref": "HEAD",
       "type": "git-local"
     },
+    "remocaml": {
+      "fetch": {
+        "path": "/home/tim/dev/web/remocaml"
+      },
+      "nix": "default.nix",
+      "path": "/home/tim/dev/web/remocaml",
+      "type": "git-local"
+    },
     "snip": {
       "fetch": {
         "path": "/home/tim/dev/haskell/snip",

@@ -11,8 +11,8 @@ let
 		../local/home-path
 	]);
 	pathEnv = dirs: ["PATH=\"${lib.concatMapStringsSep ":" (p: "${p}/bin") dirs}\""];
-	remocaml = "${home}/dev/web/remocaml";
-	remocamlExists = builtins.pathExists remocaml;
+	remocaml = pkgs.remocaml or null;
+	remocamlExists = remocaml != null;
 	writeScript = contents:
 		# write a script, then return its path for ExecStart
 		let drv = pkgs.writeScript "script" ''#!${pkgs.bash}/bin/bash
@@ -60,7 +60,7 @@ in {
 			Service = {
 				KillMode = "process";
 				Restart = "always";
-				ExecStart = "${remocaml}/_build/install/default/bin/remocaml";
+				ExecStart = "${remocaml}/bin/remocaml";
 				Environment = [
 					"REMOCAML_EPHEMERAL=60"
 				];

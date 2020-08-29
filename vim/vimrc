@@ -422,9 +422,6 @@ nmap <leader>T :tabnew<cr>
 nmap <leader>q :q<cr>
 nmap <leader>Q :tabclose<cr>
 
-" map alt+slash to line comment toggle
-map <A-/> :TComment<cr>
-
 " add Tcomment overrides
 autocmd FileType nix set commentstring=#\ %s
 autocmd FileType vala set commentstring=//\ %s
@@ -536,6 +533,9 @@ if !exists('g:vscode')
 
 	" copy full path to clipboard
 	nmap <C-c> :silent let @+ = expand("%:p")<cr>
+
+	" map alt+slash to line comment toggle
+	map <A-/> :TComment<cr>
 end
 
 " silly shift-typos
