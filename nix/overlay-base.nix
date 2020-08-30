@@ -119,10 +119,6 @@ EOF
 
 	neovim = callPackage ./vim.nix {};
 
-	ocaml-language-server = (pkgs.runCommand "ocaml-language-server" {} ''
-		mkdir -p $out/bin
-		ln -s "${pkgs.nodePackages.ocaml-language-server}/bin/ocaml-language-server" "$out/bin"
-	'');
 	python3Packages = super.python3Packages // {
 		python-language-server = super.python3Packages.python-language-server.override { providers = []; };
 	};

@@ -34,7 +34,7 @@ in {
 			my-caenv
 			neovim
 			neovim-remote
-			# (ifEnabled "vim-ide" ocaml-language-server)
+			(ifEnabled "vim-ide" opam2nixPackages.ocaml-lsp-server)
 			# (ifEnabled "vim-ide" python3Packages.python-language-server)
 			pyperclip-bin
 			python3Packages.python

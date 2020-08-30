@@ -1,0 +1,3 @@
+#!bash -eu
+nix-shell --show-trace -A opam2nixResolve ../default.nix
+
