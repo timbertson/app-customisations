@@ -30,7 +30,7 @@ done
 gup -u "$vars"
 
 log_status "loading cached vars from $vars"
-direnv_load cat "$vars"
+direnv_load bash -euc 'cat "$1" > "$DIRENV_DUMP_FILE_PATH"' -- "$vars"
 if [ "${#SHADOWED_VARS[@]}" -ne 0 ]; then
 	log_status "Restoring [${!SHADOWED_VARS[@]}]"
 fi

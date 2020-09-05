@@ -35,7 +35,7 @@ in
 			".config/nixpkgs/config.nix" = symlink ./shared/config.nix;
 			".config/nixpkgs/overlays/site.nix" = symlink ./shared/overlay-user.nix;
 			".config/direnv-std" = symlink ../home/direnv-std;
-			".config/direnvrc" = symlink ../home/direnv-std/direnvrc;
+			".config/direnv/direnvrc" = symlink ../home/direnv-std/direnvrc;
 			".config/fish/functions" = symlink ../home/fish/functions;
 			".config/fish/config.fish" = symlink ../home/fish/config.fish;
 			".snip" = symlink ../home/snip;

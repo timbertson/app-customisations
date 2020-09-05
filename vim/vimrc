@@ -492,6 +492,9 @@ let g:LanguageClient_serverCommands.scala = ['node', './server-proxy.js']
 let g:LanguageClient_serverCommands.ocaml = ['ocaml-language-server', '--stdio']
 let g:LanguageClient_serverCommands.haskell = ['hie']
 
+" copy / paste (gvim, with the gui clipboard)
+vmap <C-c> "+y
+
 if !exists('g:vscode')
 	" leader-e for showing nerd-tree
 	nmap <leader>e :NERDTreeToggle<cr>
@@ -510,8 +513,6 @@ if !exists('g:vscode')
 	" map alt+slash to line comment toggle
 	map <A-/> :TComment<cr>
 
-	" copy / paste (gvim, with the gui clipboard)
-	vmap <C-c> "+y
 	inoremap <C-v> <C-r>+
 	cnoremap <C-v> <C-r>+
 	" c-v is still sometimes useful for literal <cr> chars, so use <c-l> (mnemonic 'literal')

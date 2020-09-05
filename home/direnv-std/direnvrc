@@ -8,10 +8,3 @@ use_nix() {
     source "$HOME/.config/direnv-std/nix-shell"
   fi
 }
-
-use_nix_pin() {
-  # sets NIX_PATH
-  direnv_load \
-    env PATH="$HOME/dev/nix/nix-pin/bin:$PATH" \
-    nix-pin env direnv dump
-}
