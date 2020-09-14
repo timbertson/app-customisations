@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
-set -x
 set -eu
 if [ -z "${GUP_TARGET:-}" ]; then
 	echo 'Reexecuting with bundled `gup`...'
 	base="$(dirname "$0")"
 	exec "$base/bootstrap/gup" "$base/install"
 fi
+
+gup --always
+set -x
 
 # sets up /nix mount
 gup -u root/systemd/nix
@@ -14,5 +16,10 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
 export NIX_PATH="$HOME/.nix-defexpr/channels"
 
 which nix-build || (curl -sSL https://nixos.org/nix/install | sh)
+
+find ~/.config/nixpkgs -type l ! -exec test -e {} \; -print | while read f; do
+  echo "Removing broken link: $f"
+  rm "$f"
+done
 
 nix-shell nix/caenv.nix --run 'gup -u nix/activate root/all'
