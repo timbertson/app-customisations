@@ -9,8 +9,12 @@ fi
 gup --always
 set -x
 
+OS="$(uname -s)"
+
 # sets up /nix mount
-gup -u root/systemd/nix
+if [ "$OS" != "Darwin" ]; then
+	gup -u root/systemd/nix
+fi
 
 export PATH="$HOME/.nix-profile/bin:$PATH"
 export NIX_PATH="$HOME/.nix-defexpr/channels"
@@ -22,4 +26,8 @@ find ~/.config/nixpkgs -type l ! -exec test -e {} \; -print | while read f; do
   rm "$f"
 done
 
-nix-shell nix/caenv.nix --run 'gup -u nix/activate root/all'
+cmd="gup -u nix/activate"
+if [ "$OS" != "Darwin" ]; then
+	cmd="$cmd root/all"
+fi
+nix-shell nix/caenv.nix --run "$cmd"
