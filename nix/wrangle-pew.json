@@ -85,7 +85,7 @@
       },
       "nix": "default.nix",
       "path": "/home/tim/dev/ocaml/opam2nix",
-      "ref": "v1",
+      "ref": "0install",
       "type": "git-local"
     },
     "passe": {
