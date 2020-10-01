@@ -6,4 +6,7 @@ self: super:
 		vim-ide = true;
 		jdk = true;
 	};
+	installedPackages = (super.installedPackages or []) ++ [
+		super.vscode
+	];
 }
