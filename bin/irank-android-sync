@@ -68,6 +68,7 @@ def do_sync(opts):
 		'--limit', '2',
 		# '--merge', os.path.expanduser('~/Music/Library/Other/Phone/'),
 		'--leave-ext', 'sqlite',
+		'--leave-ext', 'json',
 		'--leave-name', '.stfolder',
 		'--leave-name', '.gup',
 		'--'] + playlists)

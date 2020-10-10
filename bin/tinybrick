@@ -1,2 +1,169 @@
-#!/bin/sh
-python3 -m http.server "$@"
+#!/usr/bin/env python3
+import os, sys, tempfile, subprocess
+from http import server
+from optparse import OptionParser
+
+class TlsCert(object):
+	def __init__(self, base):
+		self.base = base
+	def key_path(self): return self.base + '.key'
+	def cert_path(self): return self.base + '.crt'
+	def exists(self): return os.path.exists(self.key_path()) and os.path.exists(self.cert_path())
+	def generate(self, common_name):
+		# https://stackoverflow.com/questions/57565665/one-self-signed-cert-to-rule-them-all-chrome-android-and-ios
+		conf_contents="""
+			[ req ]
+			default_bits        = 2048
+			default_md          = sha256
+			# default_days        = 825
+			encrypt_key         = no
+			distinguished_name  = subject
+			req_extensions      = req_ext
+			x509_extensions     = x509_ext
+			string_mask         = utf8only
+			prompt              = no
+
+			# The Subject DN can be formed using X501 or RFC 4514 (see RFC 4519 for a description).
+			#   Its sort of a mashup. For example, RFC 4514 does not provide emailAddress.
+
+			[ subject ]
+			countryName                 = AU
+			stateOrProvinceName         = State
+			localityName                = Town
+			organizationName            = My Company
+			OU                          = Engineering
+
+			# Use a friendly name here because it's presented to the user. The server's DNS
+			#   names are placed in Subject Alternate Names. Plus, DNS names here is deprecated
+			#   by both IETF and CA/Browser Forums. If you place a DNS name here, then you
+			#   must include the DNS name in the SAN too (otherwise, Chrome and others that
+			#   strictly follow the CA/Browser Baseline Requirements will fail).
+
+			commonName              = {host}
+			emailAddress            = nobody@example.com
+
+			# Section x509_ext is used when generating a self-signed certificate. I.e., openssl req -x509 ...
+
+			[ x509_ext ]
+			subjectKeyIdentifier      = hash
+			authorityKeyIdentifier    = keyid:always,issuer
+
+			# You only need digitalSignature below. *If* you don't allow
+			#   RSA Key transport (i.e., you use ephemeral cipher suites), then
+			#   omit keyEncipherment because that's key transport.
+
+			basicConstraints        = critical, CA:TRUE
+			keyUsage            = critical, digitalSignature, keyEncipherment, cRLSign, keyCertSign
+			subjectAltName          = DNS:{host}
+			extendedKeyUsage = serverAuth
+
+			# RFC 5280, Section 4.2.1.12 makes EKU optional
+			#   CA/Browser Baseline Requirements, Appendix (B)(3)(G) makes me confused
+			#   In either case, you probably only need serverAuth.
+
+			extendedKeyUsage    = TLS Web Server Authentication
+
+			# Section req_ext is used when generating a certificate signing request. I.e., openssl req ...
+
+			[ req_ext ]
+			subjectKeyIdentifier        = hash
+			basicConstraints        = CA:FALSE
+			keyUsage            = digitalSignature, keyEncipherment
+			subjectAltName          = DNS:{host}
+			nsComment           = "OpenSSL Generated Certificate"
+
+			# RFC 5280, Section 4.2.1.12 makes EKU optional
+			#   CA/Browser Baseline Requirements, Appendix (B)(3)(G) makes me confused
+			#   In either case, you probably only need serverAuth.
+			# extendedKeyUsage    = serverAuth, clientAuth
+
+			# [ alternate_names ]
+			# DNS.1       = example.com
+			# DNS.2       = www.example.com
+			# DNS.3       = mail.example.com
+			# DNS.4       = ftp.example.com
+
+			# Add these if you need them. But usually you don't want them or
+			#   need them in production. You may need them for development.
+			# DNS.5       = localhost
+			# DNS.6       = localhost.localdomain
+			# DNS.7       = 127.0.0.1
+
+			# IPv6 localhost
+			# DNS.8     = ::1
+		""".format(host=common_name)
+		print(conf_contents)
+		with tempfile.NamedTemporaryFile(mode='w') as conf_file:
+			print(conf_contents, file=conf_file)
+			conf_file.flush()
+			cmd = ['openssl', 'req',
+				'-config', conf_file.name,
+				'-new', '-x509', '-days', '825',
+				'-out', self.cert_path(),
+				'-keyout', self.key_path(),
+				]
+			print(repr(cmd))
+			subprocess.check_call(cmd)
+		# from OpenSSL import crypto, SSL
+		# # create a key pair
+		# k = crypto.PKey()
+		# k.generate_key(crypto.TYPE_RSA, 4096)
+		# # create a self-signed cert
+		# cert = crypto.X509()
+		# cert.get_subject().C = 'AU'
+		# cert.get_subject().ST = 'STATE'
+		# cert.get_subject().L = 'suburb'
+		# cert.get_subject().O = 'tinyorg'
+		# cert.get_subject().OU = 'dev'
+		# cert.get_subject().CN = common_name
+		# cert.get_subject().emailAddress = 'example@example.com'
+		# cert.set_serial_number(0)
+		# cert.gmtime_adj_notBefore(0)
+		# cert.gmtime_adj_notAfter(10*365*24*60*60)
+		# cert.set_issuer(cert.get_subject())
+		# cert.set_pubkey(k)
+		# cert.sign(k, 'sha512')
+		# with open(self.cert_path(), "wt") as f:
+		# 	f.write(crypto.dump_certificate(crypto.FILETYPE_PEM, cert).decode("utf-8"))
+		# with open(self.key_path(), "wt") as f:
+		# 	f.write(crypto.dump_privatekey(crypto.FILETYPE_PEM, k).decode("utf-8"))
+
+ 
+
+
+def main():
+	p = OptionParser()
+	p.add_option('--tls', action='store_true')
+	p.add_option('--port', type='int')
+	p.add_option('--host', default='localhost')
+	p.add_option('--common-name', default='pew.gfxmonk.net', help='(within ~/.cache/tinybrick)')
+	p.add_option('--new-cert', action='store_true')
+	(opts, args) = p.parse_args()
+	assert(len(args) == 0)
+	if opts.port is None:
+		opts.port = 4443 if opts.tls else 8000
+	protocol = 'https' if opts.tls else 'http'
+
+	httpd = server.HTTPServer((opts.host, opts.port), server.SimpleHTTPRequestHandler)
+	if opts.tls:
+		import ssl
+		cert_root = os.path.expanduser("~/.cache/tinybrick")
+		try:
+			os.makedirs(cert_root)
+		except FileExistsError:
+			pass
+		base = os.path.join(cert_root, opts.common_name)
+		cert = TlsCert(base)
+
+		if opts.new_cert or not cert.exists():
+			print("Generating %s.{key,crt}" % (base))
+			cert.generate(opts.common_name)
+		httpd.socket = ssl.wrap_socket (httpd.socket, keyfile = cert.key_path(), certfile=cert.cert_path(), server_side=True)
+
+	print("Serving on %s://%s:%s" % (protocol, opts.host, opts.port))
+	httpd.serve_forever()
+
+try:
+	main()
+except KeyboardInterrupt:
+	sys.exit(1)
