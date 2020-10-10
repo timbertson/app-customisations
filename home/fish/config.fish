@@ -80,7 +80,6 @@ end
 for var in LESSPIPE LESSOPEN LESSCLOSE
 	set -e -g $var
 end
-set FISH_CLIPBOARD_CMD "true" # Stop that.
 set -x BROWSER firefox
 set -x EDITOR nvim
 if test -n "$NVIM_LISTEN_ADDRESS"
@@ -142,3 +141,8 @@ if begin set -q TERM_PROGRAM ; and test $TERM_PROGRAM = 'iTerm.app'; end
 		$iterm_dir_color_exe
 	end
 end
+
+# Emulates vim's cursor shape behavior
+set fish_cursor_default block
+set fish_cursor_insert line
+set fish_cursor_replace_one underscore
