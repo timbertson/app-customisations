@@ -1,8 +1,8 @@
 # TODO integrate with home-manager
-{ pkgs }:
+{ pkgs, neovim-unwrapped ? pkgs.neovim-unwrapped }:
 with pkgs;
 let
-	neovimUpstream = pkgs.wrapNeovim pkgs.neovim-unwrapped { };
+	neovimUpstream = pkgs.wrapNeovim neovim-unwrapped { };
 	vimrcConfig = {
 		customRC = ''
 			set nocompatible

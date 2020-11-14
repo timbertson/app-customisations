@@ -143,6 +143,6 @@ if begin set -q TERM_PROGRAM ; and test $TERM_PROGRAM = 'iTerm.app'; end
 end
 
 # Emulates vim's cursor shape behavior
-set fish_cursor_default block
-set fish_cursor_insert line
-set fish_cursor_replace_one underscore
+# set fish_cursor_default block
+# set fish_cursor_insert line
+# set fish_cursor_replace_one underscore

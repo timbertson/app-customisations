@@ -52,6 +52,18 @@
       "repo": "home-manager",
       "type": "github"
     },
+    "neovim-nightly-src": {
+      "fetch": {
+        "owner": "neovim",
+        "repo": "neovim",
+        "rev": "0a95549d66df63c06d775fcc329f7b63cbb46b2f",
+        "sha256": "0a54xjd31dvz32hkzc8qhjnnp6g7v3npk5a5bdnlzh2mhxjnqyl4"
+      },
+      "owner": "neovim",
+      "ref": "0a95549d66df63c06d775fcc329f7b63cbb46b2f",
+      "repo": "neovim",
+      "type": "github"
+    },
     "nix-wrangle": {
       "fetch": {
         "owner": "timbertson",

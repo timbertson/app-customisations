@@ -40,9 +40,16 @@ in {
 			wrapProgram $out/bin/fish --set LOCALE_ARCHIVE ${self.glibcLocales}/lib/locale/locale-archive
 		'';
 	});
-	irank-releases = if self ? irank then (callPackage ({ lib, stdenv, makeWrapper, python3Packages, irank }:
+	fzf = super.fzf.overrideAttrs (o: {
+		checkPhase = "true";
+		# fzf installs some default keybindings that override my own
+		installPhase = (o.installPhase or "") + ''
+			rm -r $out/share/fish/vendor_conf.d
+		'';
+	});
+	irank-releases = if self ? irank then (callPackage ({ lib, stdenv, makeWrapper, python3Packages}:
 		let
-			pythonDeps = [ irank ] ++ (with python3Packages; [ musicbrainzngs pyyaml ]);
+			pythonDeps = with python3Packages; [ musicbrainzngs pyyaml ];
 			pythonpath = lib.concatStringsSep ":" (map (dep: "${dep}/lib/${python3Packages.python.libPrefix}/site-packages") pythonDeps);
 		in
 		stdenv.mkDerivation {
@@ -118,6 +125,51 @@ EOF
 	};
 
 	neovim = callPackage ./vim.nix {};
+
+	tree-sitter-for-neovim = callPackage ({rustPlatform}:
+		let
+			version = "0.17.3";
+			src = super.fetchFromGitHub {
+				owner = "tree-sitter";
+				repo = "tree-sitter";
+				rev = version;
+				sha256 = "sha256:1r9zvbl1d9ah3nwj9798kjkfxyqmys5jbax8wc87ygawpz93q2xr";
+				fetchSubmodules = true;
+			};
+
+			cargoSha256 = "sha256:0gnya02lnx4s89dx272w77y0rdvby6dipyr8q22arx31ng2fb2by";
+		in
+		rustPlatform.buildRustPackage {
+			pname = "tree-sitter";
+			inherit src version cargoSha256;
+
+			postInstall = ''
+				PREFIX=$out make install
+			'';
+			doCheck = false;
+		}
+	) {};
+
+	neovim-nightly = callPackage ./vim.nix {
+		neovim-unwrapped = super.neovim-unwrapped.overrideAttrs (o: {
+			src = self.neovim-nightly-src;
+			version = "0.5-nightly";
+			buildInputs = o.buildInputs ++ (with self; [
+				# unzip cmake
+				# gettext
+				pkgconfig
+				tree-sitter-for-neovim
+			# tree-sitter
+		]);
+		});
+	};
+
+	vscode = super.vscode.overrideAttrs (o: {
+		buildInputs = o.buildInputs ++ [ self.makeWrapper ];
+		installPhase = o.installPhase + ''
+			ln -s ${self.neovim-nightly}/bin/nvim $out/bin/nvim-nightly
+		'';
+	});
 
 	python3Packages = super.python3Packages // {
 		python-language-server = super.python3Packages.python-language-server.override { providers = []; };
