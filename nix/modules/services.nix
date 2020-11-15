@@ -71,6 +71,22 @@ in {
 			Socket.ListenStream = [ "8076" ];
 		};
 
+		services.irank = {
+			Service = {
+				Restart = "always";
+				ExecStart = "${home}/dev/rust/irank-rs/target/release/irank-rs serve";
+				Environment = [
+					"IRANK_TLS_CREDENTIALS=${home}/.cache/tinybrick"
+					"IRANK_TLS_DOMAIN=pew.gfxmonk.net"
+					"IRANK_EPHEMERAL=60"
+				];
+			};
+		};
+		sockets.irank = {
+			Install.WantedBy = [ "default.target" "sockets.target"];
+			Socket.ListenStream = [ "8079" ];
+		};
+
 		# services.tilda = {
 		# 	Install.WantedBy = desktopSession;
 		# 	Service = {
