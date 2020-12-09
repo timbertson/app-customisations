@@ -68,8 +68,8 @@
       "fetch": {
         "owner": "timbertson",
         "repo": "nix-wrangle",
-        "rev": "9da4c0663d2578a3d7fe83e0795448da75d4e9c9",
-        "sha256": "08i4kdg9n2w5xmlnc52zz6mgshiax8725dlz3hf2v78d9aak0897"
+        "rev": "25625d48f91785715dc62d7d90e44777839fa03d",
+        "sha256": "0haglgcn7lk80qn5lablcf5amqn107nql8h30vrb2rfw3m4a6xy8"
       },
       "nix": "nix/",
       "owner": "timbertson",
@@ -95,13 +95,26 @@
         "fetchSubmodules": true,
         "owner": "ocaml",
         "repo": "ocaml-lsp",
-        "rev": "ff69e470f651dbcce71be218fd09eacc4d99e003",
-        "sha256": "0ylzyhbg6hir347l9z3nnaapfp89jp7kyifk9xl9m3c5px78jahv"
+        "rev": "fc55c519db4797d70ac89a7c6d716bd5b9119b48",
+        "sha256": "03d6492jsf65abmg5fqlqll2rlqp63mpmppvp1j6j9cgyxnc0d1d"
       },
       "fetchSubmodules": "true",
       "owner": "ocaml",
       "ref": "master",
       "repo": "ocaml-lsp",
+      "type": "github"
+    },
+    "opam2nix": {
+      "fetch": {
+        "owner": "timbertson",
+        "repo": "opam2nix",
+        "rev": "f65617488b0a5b6306db47dccec9c232630e3706",
+        "sha256": "0f8nw61bvfmvyqpyn4nfalgwiwdqgrlqjd86298vk674h3lwhp4q"
+      },
+      "nix": "default.nix",
+      "owner": "timbertson",
+      "ref": "v1",
+      "repo": "opam2nix",
       "type": "github"
     },
     "piep": {

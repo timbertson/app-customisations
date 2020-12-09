@@ -126,30 +126,6 @@ EOF
 
 	neovim = callPackage ./vim.nix {};
 
-	tree-sitter-for-neovim = callPackage ({rustPlatform}:
-		let
-			version = "0.17.3";
-			src = super.fetchFromGitHub {
-				owner = "tree-sitter";
-				repo = "tree-sitter";
-				rev = version;
-				sha256 = "sha256:1r9zvbl1d9ah3nwj9798kjkfxyqmys5jbax8wc87ygawpz93q2xr";
-				fetchSubmodules = true;
-			};
-
-			cargoSha256 = "sha256:0gnya02lnx4s89dx272w77y0rdvby6dipyr8q22arx31ng2fb2by";
-		in
-		rustPlatform.buildRustPackage {
-			pname = "tree-sitter";
-			inherit src version cargoSha256;
-
-			postInstall = ''
-				PREFIX=$out make install
-			'';
-			doCheck = false;
-		}
-	) {};
-
 	neovim-nightly = callPackage ./vim.nix {
 		neovim-unwrapped = super.neovim-unwrapped.overrideAttrs (o: {
 			src = self.neovim-nightly-src;
@@ -158,8 +134,7 @@ EOF
 				# unzip cmake
 				# gettext
 				pkgconfig
-				tree-sitter-for-neovim
-			# tree-sitter
+				tree-sitter
 		]);
 		});
 	};

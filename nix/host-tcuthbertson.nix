@@ -5,6 +5,7 @@ self: super:
 		jdk = true;
 	};
 	installedPackages = super.installedPackages ++ (with self; [
+		super.vscode
 		google-cloud-sdk
 		chefdk
 		jq
