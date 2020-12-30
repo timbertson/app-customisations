@@ -6,6 +6,10 @@
 
 		# keybindings
 		"org.gnome.desktop.wm.keybindings".close = ["<Shift><Super>c"];
+		"org.gnome.desktop.input-sources".xkb-options = [
+			"caps:ctrl_modifier" # capslock is extra ctrl key
+			"ctrl:swap_lalt_lctl_lwin" # alt => ctrl, ctrl => win, win => Alt
+		];
 	};
 }
 

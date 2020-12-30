@@ -1,3 +1,6 @@
 #!/bin/sh
-set +x
-exec xkbcomp -I~/ ~/.xkb "${DISPLAY}"
+set -eux pipefail
+options="$(dconf read /org/gnome/desktop/input-sources/xkb-options)"
+[ -n "$options" ]
+dconf write /org/gnome/desktop/input-sources/xkb-options "['']"
+dconf write /org/gnome/desktop/input-sources/xkb-options "$options"

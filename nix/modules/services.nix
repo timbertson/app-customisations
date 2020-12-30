@@ -10,6 +10,7 @@ let
 		../../.
 		../local/home-path
 	]);
+	nixPath = "NIX_PATH=${home}/.nix-defexpr/channels";
 	pathEnv = dirs: ["PATH=\"${lib.concatMapStringsSep ":" (p: "${p}/bin") dirs}\""];
 	remocaml = pkgs.remocaml or null;
 	remocamlExists = remocaml != null;
@@ -45,7 +46,10 @@ in {
 		services.album-releases.Service = {
 			ExecStart = "${pkgs.status-check}/bin/status-check -f ${home}/.cache/album-releases.status --run ${pkgs.gup}/bin/gup ${home}/dev/web/album-releases/all";
 			Restart="no";
-			Environment = [ "PYTHONUNBUFFERED=1" ] ++ pathEnv (userPath ++ [pkgs.google-cloud-sdk]);
+			Environment = [
+				"PYTHONUNBUFFERED=1"
+				nixPath
+			] ++ pathEnv (userPath ++ [pkgs.google-cloud-sdk]);
 		};
 
 		timers.album-releases = {
