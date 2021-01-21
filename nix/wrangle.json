@@ -1,5 +1,17 @@
 {
   "sources": {
+    "asdf-vm-src": {
+      "fetch": {
+        "owner": "asdf-vm",
+        "repo": "asdf",
+        "rev": "90b92b99be8fb8f482e0c41e5e867302ed97806e",
+        "sha256": "1za66f3pjn9l350nrwrmx4hhb1nqq9x0ba1677jdmpk52ah7z3ji"
+      },
+      "owner": "asdf-vm",
+      "ref": "master",
+      "repo": "asdf",
+      "type": "github"
+    },
     "daglink": {
       "fetch": {
         "owner": "timbertson",

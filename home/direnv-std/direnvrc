@@ -8,3 +8,10 @@ use_nix() {
     source "$HOME/.config/direnv-std/nix-shell"
   fi
 }
+
+use_asdf() {
+  asdf install "$1" | while read line; do
+    log_status "$line"
+  done
+  direnv_load asdf env "$1" direnv dump
+}

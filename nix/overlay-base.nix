@@ -139,6 +139,17 @@ EOF
 		});
 	};
 
+	asdf-vm = stdenv.mkDerivation {
+		name = "asdf-vm";
+		src = self.asdf-vm-src;
+		buildInputs = [ pkgs.makeWrapper ];
+		installPhase = ''
+			mkdir -p $out/share $out/bin
+			cp -a . $out/share/asdf
+			makeWrapper $out/share/asdf/bin/asdf $out/bin/asdf
+		'';
+	};
+
 	vscode = super.vscode.overrideAttrs (o: {
 		buildInputs = o.buildInputs ++ [ self.makeWrapper ];
 		installPhase = o.installPhase + ''

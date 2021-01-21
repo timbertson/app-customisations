@@ -27,7 +27,17 @@ let
 	};
 
 	derivations = filterAttrs (name: value: name != "pkgs") (wrangleApi.derivations args);
-	injectOnlyNames = [ "opam2nix" "opam2nixBin" "home-manager-src" "gup-ocaml" "gnome-shell-rearrange-system-menu" "nixGL" "ocaml-lsp-src" "neovim-nightly-src"];
+	injectOnlyNames = [
+		"asdf-vm-src"
+		"gnome-shell-rearrange-system-menu"
+		"gup-ocaml"
+		"home-manager-src"
+		"neovim-nightly-src"
+		"nixGL"
+		"ocaml-lsp-src"
+		"opam2nix"
+		"opam2nixBin"
+	];
 	installNames = sort (a: b: a < b) (filter (x: !(elem x injectOnlyNames)) (attrNames derivations));
 in
 derivations // {
