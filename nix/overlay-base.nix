@@ -77,9 +77,12 @@ in {
 					#!${pkgs.bash}/bin/bash
 					set -eux
 					export PYTHONUNBUFFERED=1
-					${exe} --user=tim --status-file=backup backup
-					${exe} --user=tim --status-file=sync sync
-					${exe} --user=tim --status-file=check check
+					${exe} --user=tim --exclude=data --status-file=backup backup
+					${exe} --user=tim --exclude=data --status-file=sync sync
+					${exe} --user=tim --exclude=data --status-file=check check
+
+					# separate task since it requires external disk
+					${exe} --user=tim --include=data --status-file=data-backup backup check
 EOF
 				chmod +x $out/bin/my-borg-task
 			'';

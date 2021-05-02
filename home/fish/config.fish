@@ -124,6 +124,7 @@ if begin isatty stderr; and not test -f ~/.config/status-check/IGNORE_THIS_MACHI
 	status-check --desc "borg backup" --max-age "2 days" ~/.cache/my-borg/backup
 	and status-check --desc "borg remote sync" --max-age "5 days" ~/.cache/my-borg/sync
 	and status-check --desc "borg integrity check" --max-age "4 days" ~/.cache/my-borg/check
+	and status-check --desc "borg backup (data to external disk)" --max-age "7 days" ~/.cache/my-borg/data-backup
 end
 
 set -x CONDUIT_TLS native # https://github.com/ocaml/opam-publish/issues/58
