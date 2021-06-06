@@ -32,14 +32,12 @@ in {
 			(anyEnabled [ "node" "maximal"] nodejs)
 			nix
 			my-caenv
-			neovim
-			neovim-remote
+			my-neovim
 			(ifEnabled "vim-ide" opam2nixPackages.ocaml-lsp-server)
 			# (ifEnabled "vim-ide" python3Packages.python-language-server)
 			pyperclip-bin
 			python3Packages.python
 			ripgrep
-			vim-watch
 		]
 		++ map maximal (
 			[

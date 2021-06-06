@@ -32,11 +32,11 @@ let
 		"gnome-shell-rearrange-system-menu"
 		"gup-ocaml"
 		"home-manager-src"
-		"neovim-nightly-src"
 		"nixGL"
 		"ocaml-lsp-src"
 		"opam2nix"
 		"opam2nixBin"
+		"vim-watch" # temporary, while neovim-remote is failing to build
 	];
 	installNames = sort (a: b: a < b) (filter (x: !(elem x injectOnlyNames)) (attrNames derivations));
 in

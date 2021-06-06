@@ -5,4 +5,5 @@ with super; {
 		python-language-server = super.python3Packages.python-language-server.override { providers = []; };
 	};
 	sbt = super.sbt.override { jre = super.openjdk11; };
+	scala = super.scala.override { jre = super.openjdk11; };
 }

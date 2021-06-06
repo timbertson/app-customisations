@@ -1,7 +1,7 @@
 self: super:
 let
 	args = {
-		ocaml = super.ocaml-ng.ocamlPackages_4_10.ocaml;
+		ocaml = super.ocaml-ng.ocamlPackages_4_12.ocaml;
 		src = {
 			ocaml-lsp-server = super.ocaml-lsp-src;
 		};

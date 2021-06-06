@@ -127,20 +127,7 @@ EOF
 		'';
 	};
 
-	neovim = callPackage ./vim.nix {};
-
-	neovim-nightly = callPackage ./vim.nix {
-		neovim-unwrapped = super.neovim-unwrapped.overrideAttrs (o: {
-			src = self.neovim-nightly-src;
-			version = "0.5-nightly";
-			buildInputs = o.buildInputs ++ (with self; [
-				# unzip cmake
-				# gettext
-				pkgconfig
-				tree-sitter
-		]);
-		});
-	};
+	my-neovim = callPackage ./vim.nix {};
 
 	asdf-vm = stdenv.mkDerivation {
 		name = "asdf-vm";
@@ -153,18 +140,9 @@ EOF
 		'';
 	};
 
-	vscode = super.vscode.overrideAttrs (o: {
-		buildInputs = o.buildInputs ++ [ self.makeWrapper ];
-		installPhase = o.installPhase + ''
-			ln -s ${self.neovim-nightly}/bin/nvim $out/bin/nvim-nightly
-		'';
-	});
-
 	python3Packages = super.python3Packages // {
 		python-language-server = super.python3Packages.python-language-server.override { providers = []; };
 	};
-	vimPlugins = (callPackage ./vim-plugins.nix {}) // super.vimPlugins;
-
 	my-desktop-session = mkDesktopDrv {
 		# https://naftuli.wtf/2017/12/28/systemd-user-environment/
 		exec = pkgs.writeScript "desktop-session" ''#!${pkgs.bash}/bin/bash
