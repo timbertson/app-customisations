@@ -171,13 +171,13 @@ command! Emailmode call FnEmailMode()
 
 command! -nargs=0 Spaces set et noet< | retab
 fun! Tabsize(sz)
-	let &l:shiftwidth=a:sz
+	let &l:shiftwidth=0
 	let &l:tabstop=a:sz
 	let &l:softtabstop=a:sz
 endfun
 fun! GlobalTabsize(sz)
 	let g:indent_preferred_width=a:sz
-	let &shiftwidth=a:sz
+	let &shiftwidth=0
 	let &tabstop=a:sz
 	let &softtabstop=a:sz
 endfun
@@ -196,7 +196,8 @@ set statusline+=%r " readonly flag
 set statusline+=%#statuslinenc#
 set statusline+=\ %l:%c
 set statusline+=%=
-set statusline+=▸%{&et?'space':'tab'}\ %{&sw} "indentation
+" set statusline+=▸%{&et?'space':'tab'}\ %{&sw} "indentation
+set statusline+=▸%{SleuthIndicator()} "indentation
 set statusline+=\ \  " separator
 set statusline+=%{&ff} "file format
 set statusline+=• " separator

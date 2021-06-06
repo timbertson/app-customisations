@@ -25,7 +25,7 @@ neovim.override {
 			sensible
 			Solarized
 			# indent-finder # trying sleuth instead..
-			sleuth
+			polyglot
 			NeoSolarized
 			surround
 			targets-vim
