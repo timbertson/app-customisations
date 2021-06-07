@@ -35,7 +35,7 @@ let
 		"opam2nixBin"
 		"vim-watch" # temporary, while neovim-remote is failing to build
 	];
-	installNames = sort (a: b: a < b) (filter (x: (hasSuffix "-src" x) || !(elem x injectOnlyNames)) (attrNames derivations));
+	installNames = sort (a: b: a < b) (filter (name: !((hasSuffix "-src" name) || (elem name injectOnlyNames))) (attrNames derivations));
 in
 derivations // {
 	installedPackages = (super.installedPackages or []) ++ (
