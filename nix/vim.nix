@@ -10,34 +10,38 @@ neovim.override {
 				source ${../vim/vimrc}
 			endif
 		'';
-		# For a full list of builtin plugins: `nix-expr attrNames pkgs.vimPlugins`
-		plug.plugins = with pkgs.vimPlugins; [
-			# async-vim
-			# asyncrun
-			dhall-vim
-			vim-fish
-			fugitive
-			fzfWrapper
-			fzf-vim
-			ir_black
-			# misc
-			repeat
-			sensible
-			Solarized
-			# indent-finder # trying sleuth instead..
-			polyglot
-			NeoSolarized
-			surround
-			targets-vim
-			tcomment_vim
-			The_NERD_tree
-			vim-indent-object
-			# vim-lsp
-			vim-nix
-			rust-vim
-			swift-vim
-			# vim-watch
-			];
+		# For a full list of builtin plugins: `nix-expr 'attrNames pkgs.vimPlugins'`
+		packages.init = with pkgs.vimPlugins; {
+			start = [
+				# async-vim
+				# asyncrun
+				dhall-vim
+				vim-fish
+				fugitive
+				fzfWrapper
+				fzf-vim
+				ir_black
+				# misc
+				vim-grepper
+				repeat
+				sensible
+				Solarized
+				(sleuth.overrideAttrs (o: {
+					src = pkgs.vim-sleuth-src;
+				}))
+				NeoSolarized
+				surround
+				targets-vim
+				tcomment_vim
+				The_NERD_tree
+				vim-indent-object
+				# vim-lsp
+				vim-nix
+				rust-vim
+				swift-vim
+				# vim-watch
+				];
+			};
 	};
 }
 

@@ -183,6 +183,12 @@ fun! GlobalTabsize(sz)
 endfun
 command! -nargs=1 Tabsize call Tabsize(<args>)
 call GlobalTabsize(2)
+let g:sleuth_neighbor_limit=1
+" let g:sleuth_debug=1
+" let g:sleuth_automatic=1
+
+" stop it python plugin
+let g:python_recommended_style=0
 
 " statusbar config:
 set statusline=%< " truncation point
@@ -196,8 +202,8 @@ set statusline+=%r " readonly flag
 set statusline+=%#statuslinenc#
 set statusline+=\ %l:%c
 set statusline+=%=
-" set statusline+=▸%{&et?'space':'tab'}\ %{&sw} "indentation
 set statusline+=▸%{SleuthIndicator()} "indentation
+" set statusline+=▸%{&et?'space':'tab'}\ %{&sw} "indentation
 set statusline+=\ \  " separator
 set statusline+=%{&ff} "file format
 set statusline+=• " separator

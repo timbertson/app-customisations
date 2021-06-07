@@ -158,6 +158,18 @@
       "type": "github",
       "version": "0.13.1"
     },
+    "vim-sleuth-src": {
+      "fetch": {
+        "owner": "timbertson",
+        "repo": "vim-sleuth",
+        "rev": "750f26c9206b4d3b8a78ce0127980890df440376",
+        "sha256": "0q8h2yxzbzr5j026rfn8s7p6f76inrf44d2kv6d4w7zn9nsbvsgb"
+      },
+      "owner": "timbertson",
+      "ref": "master",
+      "repo": "vim-sleuth",
+      "type": "github"
+    },
     "vim-watch": {
       "fetch": {
         "owner": "timbertson",
