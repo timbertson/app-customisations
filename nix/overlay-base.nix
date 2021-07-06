@@ -153,4 +153,5 @@ EOF
 		name = "My desktop session";
 		filename = "desktop-session";
 	};
+
 }
