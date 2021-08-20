@@ -27,16 +27,14 @@ let
 
 	derivations = filterAttrs (name: value: name != "pkgs") (wrangleApi.derivations args);
 	injectOnlyNames = [
-		"asdf-vm-src"
 		"gnome-shell-rearrange-system-menu"
 		"gup-ocaml"
-		"home-manager-src"
 		"nixGL"
-		"ocaml-lsp-src"
 		"opam2nix"
 		"opam2nixBin"
+		"vim-watch" # temporary, while neovim-remote is failing to build
 	];
-	installNames = sort (a: b: a < b) (filter (x: !(elem x injectOnlyNames)) (attrNames derivations));
+	installNames = sort (a: b: a < b) (filter (name: !((hasSuffix "-src" name) || (elem name injectOnlyNames))) (attrNames derivations));
 in
 derivations // {
 	installedPackages = (super.installedPackages or []) ++ (

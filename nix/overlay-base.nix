@@ -143,8 +143,6 @@ EOF
 	python3Packages = super.python3Packages // {
 		python-language-server = super.python3Packages.python-language-server.override { providers = []; };
 	};
-	vimPlugins = (callPackage ./vim-plugins.nix {}) // super.vimPlugins;
-
 	my-desktop-session = mkDesktopDrv {
 		# https://naftuli.wtf/2017/12/28/systemd-user-environment/
 		exec = pkgs.writeScript "desktop-session" ''#!${pkgs.bash}/bin/bash
@@ -155,4 +153,5 @@ EOF
 		name = "My desktop session";
 		filename = "desktop-session";
 	};
+
 }

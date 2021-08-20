@@ -9,6 +9,16 @@
       "nix": "nix/",
       "relativePath": "../../python/git-wip/",
       "type": "git-local"
+    },
+    "opam2nix": {
+      "fetch": {
+        "ref": "HEAD",
+        "relativePath": "../../ocaml/opam2nix"
+      },
+      "nix": "default.nix",
+      "ref": "HEAD",
+      "relativePath": "../../ocaml/opam2nix",
+      "type": "git-local"
     }
   },
   "wrangle": {

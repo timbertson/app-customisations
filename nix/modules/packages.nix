@@ -38,7 +38,6 @@ in {
 			pyperclip-bin
 			python3Packages.python
 			ripgrep
-			vim-watch
 		]
 		++ map maximal (
 			[

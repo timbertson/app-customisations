@@ -5,7 +5,12 @@ self: super:
 		jdk = true;
 	};
 	installedPackages = super.installedPackages ++ (with self; [
-		pdsh
+		gnupg
+		kubectl
+		kubie
+		awscli2
+		saml2aws
+		ssm-session-manager-plugin
 		asdf-vm
 		super.vscode
 		google-cloud-sdk
