@@ -20,8 +20,7 @@ let
 			(overrideCall "gup-ocaml" ({pkgs, path}: pkgs.callPackage path { inherit (self) opam2nix nix-wrangle;})) //
 			(overrideCall "remocaml" ({pkgs, path}: (pkgs.callPackage path { inherit (self) opam2nix; }).remocaml)) //
 			(overrideCall "passe" ({pkgs, path}: (pkgs.callPackage path { inherit (self) opam2nix; }))) //
-			(overrideCall "snip" ({pkgs, path}: self.haskell.packages.ghc865.callPackage path {})) //
-			(overrideCall "vim-watch" ({pkgs, path}: pkgs.callPackage path { enableNeovim = true; })) //
+			(overrideCall "vim-watch" ({pkgs, path}: pkgs.callPackage path { enableNeovim = false; })) //
 			(overrideCall "nix-wrangle" ({pkgs, path}: pkgs.callPackage path { enableSplice = false; })) //
 			{};
 	};
@@ -32,7 +31,6 @@ let
 		"gnome-shell-rearrange-system-menu"
 		"gup-ocaml"
 		"home-manager-src"
-		"neovim-nightly-src"
 		"nixGL"
 		"ocaml-lsp-src"
 		"opam2nix"

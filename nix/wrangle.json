@@ -56,24 +56,12 @@
       "fetch": {
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "472ca211cac604efdf621337067a237be9df389e",
-        "sha256": "1gbfsnd7zsxwqryxd4r6jz9sgdz6ghlkapws1cdxshrbxlwhqad1"
+        "rev": "1a6df903e320eb848c02a343141a11afefe4a73f",
+        "sha256": "01w6agb00s0djr3hzja6z4k2vwqbhp4gm70cixi01q410wwknnj8"
       },
       "owner": "rycee",
       "ref": "master",
       "repo": "home-manager",
-      "type": "github"
-    },
-    "neovim-nightly-src": {
-      "fetch": {
-        "owner": "neovim",
-        "repo": "neovim",
-        "rev": "0a95549d66df63c06d775fcc329f7b63cbb46b2f",
-        "sha256": "0a54xjd31dvz32hkzc8qhjnnp6g7v3npk5a5bdnlzh2mhxjnqyl4"
-      },
-      "owner": "neovim",
-      "ref": "0a95549d66df63c06d775fcc329f7b63cbb46b2f",
-      "repo": "neovim",
       "type": "github"
     },
     "nix-wrangle": {
@@ -156,7 +144,7 @@
       "repo": "status-check",
       "type": "github"
     },
-    "version": {
+    "version-py": {
       "fetch": {
         "owner": "timbertson",
         "repo": "version",

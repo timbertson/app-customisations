@@ -1,5 +1,4 @@
-# TODO integrate with home-manager
-{ pkgs, neovim-unwrapped ? pkgs.neovim-unwrapped }:
+{ pkgs }:
 with pkgs;
 let
 	neovimUpstream = pkgs.wrapNeovim neovim-unwrapped { };

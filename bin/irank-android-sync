@@ -2,6 +2,6 @@
 
 set -eux
 irank-rs db
-irank-rs export --export-limit=12
+irank-rs export --export-limit=30
 systemctl --user start syncthing
 du -hs ~/Music/android-export

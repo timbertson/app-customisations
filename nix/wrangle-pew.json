@@ -1,18 +1,5 @@
 {
   "sources": {
-    "cached-nix-shell": {
-      "fetch": {
-        "owner": "xzfc",
-        "repo": "cached-nix-shell",
-        "rev": "137390213d0b6cedce5f618f3141e69aeeae797c",
-        "sha256": "00p0sf24165n2wbdc0q8gqdbp85clq4b4ri39cklysr4ryadqica"
-      },
-      "nix": "default.nix",
-      "owner": "xzfc",
-      "ref": "master",
-      "repo": "cached-nix-shell",
-      "type": "github"
-    },
     "dconf-user-overrides": {
       "fetch": {
         "path": "/home/tim/dev/python/dconf-user-overrides",
@@ -104,16 +91,6 @@
       },
       "nix": "default.nix",
       "path": "/home/tim/dev/web/remocaml",
-      "type": "git-local"
-    },
-    "snip": {
-      "fetch": {
-        "path": "/home/tim/dev/haskell/snip",
-        "ref": "HEAD"
-      },
-      "nix": "nix",
-      "path": "/home/tim/dev/haskell/snip",
-      "ref": "HEAD",
       "type": "git-local"
     },
     "stereoscoper": {
