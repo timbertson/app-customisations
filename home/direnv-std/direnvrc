@@ -15,3 +15,7 @@ use_asdf() {
   done
   direnv_load asdf env "$1" direnv dump
 }
+
+use_opam() {
+  direnv_load opam exec --set-switch --set-root "$@" -- direnv dump
+}

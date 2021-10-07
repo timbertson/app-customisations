@@ -23,6 +23,7 @@ neovim.override {
 				ir_black
 				# misc
 				vim-grepper
+				vim-jsonnet
 				repeat
 				sensible
 				Solarized

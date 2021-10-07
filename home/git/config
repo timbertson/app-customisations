@@ -1,17 +1,13 @@
 [alias]
 	st = status
 	f = fetch
-	fo = !git fetch && git checkout
-	ci = commit
-	co = checkout
-	go = checkout
-	br = branch
+	fo = !git fetch && git switch -d
+	sw = switch
+	co = switch
+	re = restore
+	rehead = restore --source HEAD --worktree --staged
 	sh = !git-sh
-	sub = submodule
-	mb = merge-base HEAD
 	ff = pull --ff-only
-	up = !git pull && git submodule sync && git submodule init && git submodule update && git sub
-	patch = format-patch --stdout
 	show-branches = !git show-branch origin/master $(git branch | cut -c3-)
 	branches = !git show-branch --color=always | less -SR
 	br = branch --sort=-committerdate
