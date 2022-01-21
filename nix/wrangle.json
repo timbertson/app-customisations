@@ -16,15 +16,15 @@
       "fetch": {
         "owner": "timbertson",
         "repo": "daglink",
-        "rev": "40fd87d4bbc76cc3d5b2accb5fbd736a272f8d39",
-        "sha256": "0z41vlxhj3883aidiqdpm2cg9a6b2h9s210q21yblk5pfs43gipg"
+        "rev": "cd55637a3cca7224fe45ba9593780ad08fac4e02",
+        "sha256": "1q9hi2mdijc34q5qk3k7v2a14mynks31pgp1001jgya8n4dsa294"
       },
       "nix": "nix/",
       "owner": "timbertson",
       "ref": "version-<version>",
       "repo": "daglink",
       "type": "github",
-      "version": "0.6"
+      "version": "0.8"
     },
     "git-wip": {
       "fetch": {
@@ -56,8 +56,8 @@
       "fetch": {
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "1a6df903e320eb848c02a343141a11afefe4a73f",
-        "sha256": "01w6agb00s0djr3hzja6z4k2vwqbhp4gm70cixi01q410wwknnj8"
+        "rev": "7eb5106548eaab99ebeb21c87f93092de54fe931",
+        "sha256": "0whd65hlpz3809m9z2wkdf79yq14yinrx29c6lpa4qap9agkmd3c"
       },
       "owner": "rycee",
       "ref": "master",
@@ -95,12 +95,12 @@
         "fetchSubmodules": true,
         "owner": "ocaml",
         "repo": "ocaml-lsp",
-        "rev": "fc55c519db4797d70ac89a7c6d716bd5b9119b48",
-        "sha256": "03d6492jsf65abmg5fqlqll2rlqp63mpmppvp1j6j9cgyxnc0d1d"
+        "rev": "92684a4287918c86f671d56ff5bda8aa3e83b4c4",
+        "sha256": "0k0grnqm4gis9rj58njgy6cph1abim66d8vqs8yplxajgg36snhz"
       },
       "fetchSubmodules": "true",
       "owner": "ocaml",
-      "ref": "master",
+      "ref": "1.8.0",
       "repo": "ocaml-lsp",
       "type": "github"
     },

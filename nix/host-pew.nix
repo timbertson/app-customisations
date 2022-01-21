@@ -7,6 +7,6 @@ self: super:
 		jdk = true;
 	};
 	installedPackages = (super.installedPackages or []) ++ [
-		super.vscode
+		# super.vscode
 	];
 }

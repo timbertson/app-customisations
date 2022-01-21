@@ -2,6 +2,6 @@
 
 set -eux
 irank-rs db
-irank-rs export --export-limit=30
+irank-rs export --export-limit=30 --merge ~/Music/Library/Other/Phone
 systemctl --user start syncthing
 du -hs ~/Music/android-export

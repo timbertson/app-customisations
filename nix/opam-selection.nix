@@ -13,8 +13,8 @@ let
         {
           owner = "ocaml";
           repo = "opam-repository";
-          rev = "21f90b5f3001186bb725617f47701847eae03085";
-          sha256 = "1ybxm3mnhrjb7gdffzf23k5a0k3q3428jhlb2xvmydb5izvb3lc1";
+          rev = "103835d71bc45c9c12f1ac568bab7dc20c7fc4c4";
+          sha256 = "0j47vr4lymm8zxcrwrck66d8m6mx163z4dy040lrafwmbpwwbanj";
         };
         src = (pkgs.fetchFromGitHub) fetch;
       };
@@ -260,7 +260,10 @@ in
         dune = selection.dune;
         dune-build-info = selection.dune-build-info;
         ocaml = selection.ocaml;
+        ocamlformat-rpc-lib = selection.ocamlformat-rpc-lib;
+        pp = selection.pp;
         ppx_yojson_conv_lib = selection.ppx_yojson_conv_lib;
+        re = selection.re;
         result = selection.result;
         yojson = selection.yojson;
       };
@@ -289,6 +292,48 @@ in
       };
       version = "1.9.1";
     };
+    ocamlformat-rpc-lib = 
+    {
+      opamInputs = 
+      {
+        csexp = selection.csexp;
+        dune = selection.dune;
+        ocaml = selection.ocaml;
+        sexplib0 = selection.sexplib0;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:1wys4wnqy0102l2f8rvrb8q4j7s1rj12vcx4bgl02dp91svwbywc";
+        package = "packages/ocamlformat-rpc-lib/ocamlformat-rpc-lib.0.18.0";
+      };
+      pname = "ocamlformat-rpc-lib";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "0571kzmb1h03qj74090n3mg8wfbh29qqrkdjkai6rnl5chll86lq";
+        url = "https://github.com/ocaml-ppx/ocamlformat/releases/download/0.18.0/ocamlformat-0.18.0.tbz";
+      };
+      version = "0.18.0";
+    };
+    pp = 
+    {
+      opamInputs = 
+      {
+        dune = selection.dune;
+        ocaml = selection.ocaml;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:1mdh8npl8ma5ypafp6bzhjxim2if3ygny7nm0rb5689x40b1c83b";
+        package = "packages/pp/pp.1.1.2";
+      };
+      pname = "pp";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "0mhxmzsraid4yw18zr6pyjfrhvf873ls8vfd1yapdfxijs6yk974";
+        url = "https://github.com/ocaml-dune/pp/releases/download/1.1.2/pp-1.1.2.tbz";
+      };
+      version = "1.1.2";
+    };
     ppx_yojson_conv_lib = 
     {
       opamInputs = 
@@ -310,6 +355,27 @@ in
       };
       version = "v0.14.0";
     };
+    re = 
+    {
+      opamInputs = 
+      {
+        dune = selection.dune;
+        ocaml = selection.ocaml;
+        seq = selection.seq;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:0k3x6z24l4r0wbl39m85nv92lfgipvzwk066mmbm8ph4pqmc3dy9";
+        package = "packages/re/re.1.9.0";
+      };
+      pname = "re";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "1gas4ky49zgxph3870nffzkr6y41kkpqp4nj38pz1gh49zcf12aj";
+        url = "https://github.com/ocaml/ocaml-re/releases/download/1.9.0/re-1.9.0.tbz";
+      };
+      version = "1.9.0";
+    };
     result = 
     {
       opamInputs = 
@@ -329,6 +395,40 @@ in
         url = "https://github.com/janestreet/result/releases/download/1.5/result-1.5.tbz";
       };
       version = "1.5";
+    };
+    seq = 
+    {
+      opamInputs = {
+                     ocaml = selection.ocaml;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:1vm8mk6zm2q3fwnkprl6jib048zr4ysldw0bl74x6wwbxj0vx6k9";
+        package = "packages/seq/seq.base";
+      };
+      pname = "seq";
+      src = null;
+      version = "base";
+    };
+    sexplib0 = 
+    {
+      opamInputs = 
+      {
+        dune = selection.dune;
+        ocaml = selection.ocaml;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:0k9vkjbiibja48c0yayal7xwyik3h3c3v4dwd3j7jbmras63ig2c";
+        package = "packages/sexplib0/sexplib0.v0.14.0";
+      };
+      pname = "sexplib0";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "0adrc0r1vvvr41dcpj8jwkzh1dfgqf0mks9xlnnskqfm3a51iavg";
+        url = "https://ocaml.janestreet.com/ocaml-core/v0.14/files/sexplib0-v0.14.0.tar.gz";
+      };
+      version = "v0.14.0";
     };
     yojson = 
     {
