@@ -6,8 +6,11 @@ self: super:
 	};
 	installedPackages = super.installedPackages ++ (with self; [
 		gnupg
+		vendir
+		jsonnet
 		kubectl
 		kubie
+		stern
 		awscli2
 		saml2aws
 		ssm-session-manager-plugin
