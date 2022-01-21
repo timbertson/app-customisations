@@ -3,7 +3,6 @@
 	f = fetch
 	fo = !git fetch && git switch -d
 	sw = switch
-	co = switch
 	re = restore
 	rehead = restore --source HEAD --worktree --staged
 	sh = !git-sh
