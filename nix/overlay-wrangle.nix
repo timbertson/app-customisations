@@ -3,7 +3,7 @@ self: super:
 with super.lib;
 let
 	wrangleApi = nix-wrangle.api { pkgs = self; };
-	localWrangleSource = ./. + "/wrangle-${super.hostname}.json";
+	localWrangleSource = ./. + "/wrangle-${super.etc-hostname}.json";
 	wrangleSources = filter builtins.pathExists [ ./wrangle.json localWrangleSource ];
 
 	args = {

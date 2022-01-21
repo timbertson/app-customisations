@@ -1,7 +1,7 @@
 { pkgs, nix-wrangle }:
 with builtins;
 let
-	hostname = if pathExists "/etc/hostname"
+	etc-hostname = if pathExists "/etc/hostname"
 		then replaceStrings ["\n"] [""] (readFile "/etc/hostname")
 		else "unknown";
 
@@ -13,7 +13,7 @@ in
 (import pkgs.path) {
 	config = (import ./shared/config.nix);
 	overlays = [
-		(self: super: { inherit hostname; })
+		(self: super: { inherit etc-hostname; })
 		(import ./shared/overlay-user.nix)
 		(import ./overlay-features.nix)
 		(import ./overlay-base.nix)
@@ -22,6 +22,6 @@ in
 		(import ./overlay-home.nix)
 	]
 		++ (maybeImport ./overlay-local.nix)
-		++ (maybeImport (./. + "/host-${hostname}.nix"))
+		++ (maybeImport (./. + "/host-${etc-hostname}.nix"))
 	;
 }
