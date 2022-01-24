@@ -95,8 +95,8 @@
         "fetchSubmodules": true,
         "owner": "ocaml",
         "repo": "ocaml-lsp",
-        "rev": "92684a4287918c86f671d56ff5bda8aa3e83b4c4",
-        "sha256": "0k0grnqm4gis9rj58njgy6cph1abim66d8vqs8yplxajgg36snhz"
+        "rev": "6aad6b207add335da8d8dfcdd59a6218ee914f9d",
+        "sha256": "1iq976gas6w6llhi1lfbja28xx2q1rgwh8vl16dd1dhkr69ik7gw"
       },
       "fetchSubmodules": "true",
       "owner": "ocaml",
