@@ -1,5 +1,6 @@
 .tags
 *.pyc
+/.bsp
 0inst/
 __pycache__
 .redo

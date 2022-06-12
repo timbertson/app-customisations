@@ -82,15 +82,7 @@ for var in LESSPIPE LESSOPEN LESSCLOSE
 end
 set -x BROWSER firefox
 set -x EDITOR nvim
-if test -n "$NVIM_LISTEN_ADDRESS"
-	set -x EDITOR "nvr -cc split --remote-wait +'set bufhidden=wipe'"
-end
 set -x force_s3tc_enable true # games often need this
-
-set -x NOSE_PROGRESSIVE_EDITOR_SHORTCUT_TEMPLATE \
-	'  {term.black}{editor} {term.cyan}+{term.bold}{line_number:<{line_number_max_width}} {term.blue}{path}{normal}{function_format}{term.yellow}{hash_if_function}{function}{normal}'
-set -x NOSE_PROGRESSIVE_EDITOR 'gvimr'
-set -x NOSE_PROGRESSIVE_ADVISORIES 1
 
 # direnv
 if isatty stdin; and which direnv >/dev/null 2>&1
