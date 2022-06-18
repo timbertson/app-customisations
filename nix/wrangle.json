@@ -66,10 +66,10 @@
     },
     "nix-wrangle": {
       "fetch": {
+        "hash": "sha256-FsglNwnGaLINUF0D6qovSV3JqSXxVXQD8jFZ4y5rgOE=",
         "owner": "timbertson",
         "repo": "nix-wrangle",
-        "rev": "25625d48f91785715dc62d7d90e44777839fa03d",
-        "sha256": "0haglgcn7lk80qn5lablcf5amqn107nql8h30vrb2rfw3m4a6xy8"
+        "rev": "3c1c3b7785e95a39fbd9c986e113c82c02043c2d"
       },
       "nix": "nix/",
       "owner": "timbertson",
