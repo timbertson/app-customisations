@@ -26,6 +26,19 @@
       "type": "github",
       "version": "0.8"
     },
+    "fetlock": {
+      "fetch": {
+        "hash": "sha256-L2HfehkP1JWFFDTj4BmJeXIvnPV+SCgGLeTnhBghwmg=",
+        "owner": "timbertson",
+        "repo": "fetlock",
+        "rev": "864e96c3ab237a85c7c57e98768f3c6a9e897e40"
+      },
+      "nix": "default.nix",
+      "owner": "timbertson",
+      "ref": "master",
+      "repo": "fetlock",
+      "type": "github"
+    },
     "git-wip": {
       "fetch": {
         "owner": "timbertson",
@@ -66,10 +79,10 @@
     },
     "nix-wrangle": {
       "fetch": {
-        "hash": "sha256-FsglNwnGaLINUF0D6qovSV3JqSXxVXQD8jFZ4y5rgOE=",
+        "hash": "sha256-KXAaB+BbPZz2e9wnacSXARrTcMG38NYUfw8CTaJFZME=",
         "owner": "timbertson",
         "repo": "nix-wrangle",
-        "rev": "3c1c3b7785e95a39fbd9c986e113c82c02043c2d"
+        "rev": "6f68b43717717e11c9e68d00022fb69aad2d6f26"
       },
       "nix": "nix/",
       "owner": "timbertson",

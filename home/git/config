@@ -5,6 +5,7 @@
 	sw = switch
 	re = restore
 	rehead = restore --source HEAD --worktree --staged
+	pushf = push --force-with-lease
 	sh = !git-sh
 	ff = pull --ff-only
 	show-branches = !git show-branch origin/master $(git branch | cut -c3-)
@@ -53,6 +54,7 @@
 [core]
 	excludesfile = ~/.gitignore
 	sharedRepository = group
+	pager = less --tabs 2
 [guitool "gvim remote tab"]
 	cmd = gvim --remote-tab \"$FILENAME\"
 	noconsole = yes

@@ -32,6 +32,7 @@ let
 		"nixGL"
 		"opam2nix"
 		"opam2nixBin"
+		"fetlock" # TEMP
 		"vim-watch" # temporary, while neovim-remote is failing to build
 	];
 	installNames = sort (a: b: a < b) (filter (name: !((hasSuffix "-src" name) || (elem name injectOnlyNames))) (attrNames derivations));
