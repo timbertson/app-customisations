@@ -1,4 +1,4 @@
-{ pkgs, nix-wrangle }:
+{ pkgs ? import <nixpkgs> {} }:
 with builtins;
 let
 	etc-hostname = if pathExists "/etc/hostname"
@@ -17,7 +17,7 @@ in
 		(import ./shared/overlay-user.nix)
 		(import ./overlay-features.nix)
 		(import ./overlay-base.nix)
-		(import ./overlay-wrangle.nix {inherit pkgs nix-wrangle;})
+		(import ./overlay-niv.nix {inherit pkgs;})
 		(import ./overlay-home.nix)
 	]
 		++ (maybeImport ./overlay-local.nix)

@@ -129,17 +129,6 @@ EOF
 
 	my-neovim = callPackage ./vim.nix {};
 
-	asdf-vm = stdenv.mkDerivation {
-		name = "asdf-vm";
-		src = self.asdf-vm-src;
-		buildInputs = [ pkgs.makeWrapper ];
-		installPhase = ''
-			mkdir -p $out/share $out/bin
-			cp -a . $out/share/asdf
-			makeWrapper $out/share/asdf/bin/asdf $out/bin/asdf
-		'';
-	};
-
 	python3Packages = super.python3Packages // {
 		python-language-server = super.python3Packages.python-language-server.override { providers = []; };
 	};
