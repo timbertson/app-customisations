@@ -28,10 +28,10 @@
     },
     "fetlock": {
       "fetch": {
-        "hash": "sha256-L2HfehkP1JWFFDTj4BmJeXIvnPV+SCgGLeTnhBghwmg=",
+        "hash": "sha256-VSUwjpE0KKB7cw02A6waIIawPZEKPB1NnUhu/veKx7g=",
         "owner": "timbertson",
         "repo": "fetlock",
-        "rev": "864e96c3ab237a85c7c57e98768f3c6a9e897e40"
+        "rev": "7518ce4727bd8aaea956ed405a4c48750ddb40a7"
       },
       "nix": "default.nix",
       "owner": "timbertson",

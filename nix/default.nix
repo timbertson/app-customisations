@@ -18,7 +18,6 @@ in
 		(import ./overlay-features.nix)
 		(import ./overlay-base.nix)
 		(import ./overlay-wrangle.nix {inherit pkgs nix-wrangle;})
-		(import ./overlay-ocaml.nix)
 		(import ./overlay-home.nix)
 	]
 		++ (maybeImport ./overlay-local.nix)

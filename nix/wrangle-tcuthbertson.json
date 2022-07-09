@@ -10,6 +10,16 @@
       "relativePath": "../../python/git-wip/",
       "type": "git-local"
     },
+    "fetlock": {
+      "fetch": {
+        "ref": "HEAD",
+        "relativePath": "../../rust/fetlock"
+      },
+      "ref": "HEAD",
+      "nix": "default.nix",
+      "relativePath": "../../rust/fetlock",
+      "type": "git-local"
+    },
     "opam2nix": {
       "fetch": {
         "ref": "HEAD",
