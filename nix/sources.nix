@@ -1,8 +1,1 @@
-# TODO upstream?
-attrs:
-with builtins;
-let
-	bootstrap = fromJSON (readFile ./sources.json);
-	url = "https://raw.githubusercontent.com/nmattia/niv/${bootstrap.niv.rev}/nix/sources.nix";
-in
-import (fetchurl url) attrs
+import (builtins.fetchurl "https://raw.githubusercontent.com/timbertson/niv-util/8ebce20437f67525a6925d26cc0b0481395bedc7/default.nix")

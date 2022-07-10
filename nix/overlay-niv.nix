@@ -34,6 +34,7 @@ in
 		(callPackage sources.status-check {})
 		(callPackage "${sources.version-py}/nix" {})
 		(callPackage "${sources.vim-watch}/nix" {})
+		(callPackage sources.niv-util {}).cli
 		nix-wrangle
 	];
 	nixGL = callPackage sources.nixGL {};

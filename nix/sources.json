@@ -71,6 +71,18 @@
         "url": "https://github.com/nmattia/niv/archive/82e5cd1ad3c387863f0545d7591512e76ab0fc41.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "niv-util": {
+        "branch": "main",
+        "description": "Alternate `sources.nix` loader for niv",
+        "homepage": null,
+        "owner": "timbertson",
+        "repo": "niv-util",
+        "rev": "8ebce20437f67525a6925d26cc0b0481395bedc7",
+        "sha256": "19rlhmlqzcwifakzck5x6qciaaz23a4bdyqsbl2icjz6prf602bm",
+        "type": "tarball",
+        "url": "https://github.com/timbertson/niv-util/archive/8ebce20437f67525a6925d26cc0b0481395bedc7.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nix-wrangle": {
         "branch": "v1",
         "description": "Wrangle your nix dependencies",
