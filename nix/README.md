@@ -3,15 +3,14 @@
 OK, take a deep breath. There's a few layers here.
 
 1. We need some nix: done by ../install.gup
-2. Dependency management: for everything we need external to this repo comes in through `nix-wrangle` (see `nix/wrangle*.json`).
-   This is bootstrap-friendly, i.e. we only need nix to evaluate-and-fetch these dependencies, we don't need the nix-wrangle binary itself (which will only be available after first build)
+2. Dependency management: for everything we need external to this repo comes in through `niv` (see `nix/sources*.json`).
 3. Then it's all overlays:
   - default.nix sets up all the layers, including some optional overlays for `overlay-$HOSTNAME.nix` and `overlay-local.nix` (uncommitted)
   - overlay-features.nix defines broad configuration options, mainly for opting into minimal setups and host / OS specific differences.
   - overlay-home.nix plugs everything into home-manager, which ends up producing the actual user environment and activation script
     - `modules/` defines custom modules for home-manager
     - `home.packages` extends `pkgs.installedPackages`, which is where the various overlays pop things (not sure how to get an overlay to merge into home-manager)
-  - overlay-wrangle.nix imports all wrangle inputs (with a few overridden arguments) and makes them available in `pkgs`, as well as installing them by default
+  - overlay-niv.nix imports all niv sources and builds the actual packages.
 
 Some nix files are _also_ installed user-wide (with symlinks) to affect general nix usage, they live in shared/
 
