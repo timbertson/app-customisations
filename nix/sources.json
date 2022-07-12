@@ -77,10 +77,10 @@
         "homepage": null,
         "owner": "timbertson",
         "repo": "niv-util",
-        "rev": "8ebce20437f67525a6925d26cc0b0481395bedc7",
-        "sha256": "19rlhmlqzcwifakzck5x6qciaaz23a4bdyqsbl2icjz6prf602bm",
+        "rev": "3b71ea06145debe7c6bf27f18e350ae690467225",
+        "sha256": "1xsvbfyb211ik99nciyymxwz44wcax8yk306k4j129vfbdggyj9p",
         "type": "tarball",
-        "url": "https://github.com/timbertson/niv-util/archive/8ebce20437f67525a6925d26cc0b0481395bedc7.tar.gz",
+        "url": "https://github.com/timbertson/niv-util/archive/3b71ea06145debe7c6bf27f18e350ae690467225.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-wrangle": {
