@@ -12,7 +12,7 @@ let
 	]);
 	nixPath = "NIX_PATH=${home}/.nix-defexpr/channels";
 	pathEnv = dirs: ["PATH=\"${lib.concatMapStringsSep ":" (p: "${p}/bin") dirs}\""];
-	remocaml = pkgs.remocaml or null;
+	remocaml = lib.warn "${builtins.toJSON (lib.attrNames pkgs.remocaml)}" (pkgs.remocaml or null);
 	remocamlExists = remocaml != null;
 	writeScript = contents:
 		# write a script, then return its path for ExecStart

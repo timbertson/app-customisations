@@ -12,15 +12,17 @@ in
 	};
 
 	# these are exported for use in other modules
-	gup-ocaml = callPackage "${localHead ../../ocaml/gup}/nix" {
-		inherit (self) opam2nix;
-	};
+	gup-ocaml = let src = localHead ../../ocaml/gup; in
+		callPackage "${src}/nix" {
+			inherit (self) opam2nix;
+			self = src;
+		};
 	vdoml = callPackage "${localHead ../../ocaml/vdoml}/nix" {
 		inherit (self) opam2nix;
 	};
-	remocaml = callPackage "${localHead ../../ocaml/passe}/nix" {
+	remocaml = (callPackage "${localHead ../../web/remocaml}/nix" {
 		inherit (self) opam2nix;
-	};
+	}).remocaml;
 	my-borg = callPackage (localHead ../../python/my-borg) {};
 
 	# override default sources for globally installed packages
@@ -30,10 +32,11 @@ in
 		(let src = localHead ../../python/music-import; in
 			callPackage ("${src}/nix") {} { inherit src; })
 		(callPackage (localHead ../../python/trash) {})
-		(callPackage "${localHead ../../ocaml/passe}/nix" {
-			inherit (self) opam2nix;
-		})
-		self.remocaml
+
+		# TODO
+		# (callPackage "${localHead ../../ocaml/passe}/nix" {
+		# 	inherit (self) opam2nix;
+		# })
 		self.my-borg
 	];
 }

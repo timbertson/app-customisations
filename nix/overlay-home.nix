@@ -17,6 +17,12 @@ let
 
 	configuration = { pkgs, ... }@args: {
 		require = commonModules ++ optionalModules ++ platformModules;
+		home = {
+			# I don't think these are used, but need to be defined
+			stateVersion = "22.05";
+			username = builtins.getEnv "USER";
+			homeDirectory = builtins.getEnv "HOME";
+		};
 	};
 
 	home-manager = (self.callPackage "${super.home-manager-src}/modules" {
