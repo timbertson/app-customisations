@@ -20,6 +20,7 @@ let
 			${contents}
 		'';
 		in "${drv}";
+
 in {
 	services.syncthing.enable = true;
 

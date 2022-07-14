@@ -2,9 +2,9 @@
 self: super:
 with super.lib;
 let
-	loadSources = sourcesFile:
-		import ./sources.nix { inherit pkgs sourcesFile; };
-	sources = loadSources ./sources.json;
+	baseSources = import ./sources.nix { inherit pkgs; };
+
+	sources = self.sources;
 	callPackage = self.callPackage;
 
 	# exported and installed
@@ -21,10 +21,15 @@ let
 		'';
 	};
 
+	localHead = p: trace "fetching ${builtins.toString p}" (builtins.fetchGit {
+		url = p;
+		ref = "HEAD";
+	});
+
 in
 {
-	inherit sources loadSources;
-	inherit nix-wrangle asdf-vm;
+	inherit nix-wrangle asdf-vm localHead;
+	sources = baseSources;
 	installedPackages = (super.installedPackages or []) ++ [
 		(callPackage sources.daglink {})
 		(callPackage self.sources.fetlock {})
@@ -40,4 +45,6 @@ in
 	nixGL = callPackage sources.nixGL {};
 	vim-sleuth-src = sources.vim-sleuth;
 	home-manager-src = sources.home-manager;
+	opam2nix = callPackage sources.opam2nix {};
+	status-check = callPackage sources.status-check {};
 }

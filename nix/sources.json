@@ -77,10 +77,10 @@
         "homepage": null,
         "owner": "timbertson",
         "repo": "niv-util",
-        "rev": "3b71ea06145debe7c6bf27f18e350ae690467225",
-        "sha256": "1xsvbfyb211ik99nciyymxwz44wcax8yk306k4j129vfbdggyj9p",
+        "rev": "c1b60458c9eda33f821f07436fcf0d20f4faef37",
+        "sha256": "0k0df4jvvq7iyrq5lcwipmw1jd9lchf8z64idgrh9ckljv5jv355",
         "type": "tarball",
-        "url": "https://github.com/timbertson/niv-util/archive/3b71ea06145debe7c6bf27f18e350ae690467225.tar.gz",
+        "url": "https://github.com/timbertson/niv-util/archive/c1b60458c9eda33f821f07436fcf0d20f4faef37.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-wrangle": {
@@ -105,6 +105,18 @@
         "sha256": "1d9cq747pszs5r5x7b3qkmdsxb2mamj5xzml2m3cigkar9d2wgab",
         "type": "tarball",
         "url": "https://github.com/guibou/nixGL/archive/047a34b2f087e2e3f93d43df8e67ada40bf70e5c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "opam2nix": {
+        "branch": "v1",
+        "description": "Generate nix expressions from opam packages",
+        "homepage": null,
+        "owner": "timbertson",
+        "repo": "opam2nix",
+        "rev": "c9192288543be9ea17ba8a568e41258082016768",
+        "sha256": "1ii2v08r7xkqf35ra0niqkzyqwx45vi7bzm7c0kcq83sl46qirlp",
+        "type": "tarball",
+        "url": "https://github.com/timbertson/opam2nix/archive/c9192288543be9ea17ba8a568e41258082016768.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "piep": {
