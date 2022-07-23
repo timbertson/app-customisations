@@ -32,7 +32,7 @@ in
 	sources = baseSources;
 	installedPackages = (super.installedPackages or []) ++ [
 		(callPackage sources.daglink {})
-		# (callPackage self.sources.fetlock {}) # TODO
+		(callPackage self.sources.fetlock {})
 		(callPackage "${sources.git-wip}/nix" {})
 		(callPackage sources.git-wip {})
 		(callPackage "${sources.piep}/nix" {})

@@ -113,10 +113,10 @@
         "homepage": null,
         "owner": "timbertson",
         "repo": "opam2nix",
-        "rev": "c9192288543be9ea17ba8a568e41258082016768",
-        "sha256": "1ii2v08r7xkqf35ra0niqkzyqwx45vi7bzm7c0kcq83sl46qirlp",
+        "rev": "61db9c0e6917b07c4a3f64c63d09e99eb9159101",
+        "sha256": "09r1wds27y688lwrb5qsrqfsi9ffn67v5lcfyshzlibkd6qlsbq7",
         "type": "tarball",
-        "url": "https://github.com/timbertson/opam2nix/archive/c9192288543be9ea17ba8a568e41258082016768.tar.gz",
+        "url": "https://github.com/timbertson/opam2nix/archive/61db9c0e6917b07c4a3f64c63d09e99eb9159101.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "piep": {

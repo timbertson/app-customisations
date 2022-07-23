@@ -17,15 +17,17 @@ in
 			inherit (self) opam2nix;
 			self = src;
 		};
-	vdoml = callPackage "${localHead ../../ocaml/vdoml}/nix" {
-		inherit (self) opam2nix;
-	};
+	vdoml = localHead ../../ocaml/vdoml;
 	remocaml = (callPackage "${localHead ../../web/remocaml}/nix" {
-		inherit (self) opam2nix;
+		inherit (self) opam2nix vdoml;
 	}).remocaml;
 	my-borg = callPackage (localHead ../../python/my-borg) {};
 
 	# override default sources for globally installed packages
+	sources = super.sources // {
+		fetlock = localHead ../../rust/fetlock;
+	};
+
 	installedPackages = (super.installedPackages or []) ++ [
 		# only built for this machine
 		(callPackage (localHead ../../python/irank) {})
@@ -34,9 +36,10 @@ in
 		(callPackage (localHead ../../python/trash) {})
 
 		# TODO
-		# (callPackage "${localHead ../../ocaml/passe}/nix" {
-		# 	inherit (self) opam2nix;
-		# })
+		(let src = localHead ../../ocaml/passe; in callPackage "${src}/nix" {
+			inherit (self) opam2nix vdoml;
+			self = src;
+		})
 		self.my-borg
 	];
 }
