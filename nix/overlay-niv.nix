@@ -7,9 +7,6 @@ let
 	sources = self.sources;
 	callPackage = self.callPackage;
 
-	# exported and installed
-	nix-wrangle = callPackage "${sources.nix-wrangle}/nix" { self = sources.nix-wrangle; };
-
 	asdf-vm = self.stdenv.mkDerivation {
 		name = "asdf-vm";
 		src = sources.asdf;
@@ -28,7 +25,7 @@ let
 
 in
 {
-	inherit nix-wrangle asdf-vm localHead;
+	inherit asdf-vm localHead;
 	sources = baseSources;
 	installedPackages = (super.installedPackages or []) ++ [
 		(callPackage sources.daglink {})
@@ -40,7 +37,6 @@ in
 		(callPackage "${sources.version-py}/nix" {})
 		(callPackage "${sources.vim-watch}/nix" {})
 		(callPackage sources.niv-util {}).cli
-		nix-wrangle
 	];
 	nixGL = callPackage sources.nixGL {};
 	vim-sleuth-src = sources.vim-sleuth;

@@ -35,7 +35,6 @@ in
 			callPackage ("${src}/nix") {} { inherit src; })
 		(callPackage (localHead ../../python/trash) {})
 
-		# TODO
 		(let src = localHead ../../ocaml/passe; in callPackage "${src}/nix" {
 			inherit (self) opam2nix vdoml;
 			self = src;
