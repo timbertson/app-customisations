@@ -92,19 +92,6 @@ in {
 			Socket.ListenStream = [ "8079" ];
 		};
 
-		# services.tilda = {
-		# 	Install.WantedBy = desktopSession;
-		# 	Service = {
-		# 		ExecStart = writeScript "${loadSessionVars}; exec ${pkgs.tilda}/bin/tilda";
-		# 		Environment = [
-		# 			"TERM_SOLARIZED=1"
-		# 			"GTK_THEME=Adwaita:dark"
-		# 			# "XDG_DATA_DIRS=${home}/.local/nix/share:/usr/local/share/:/usr/share/"
-		# 			# "SSH_AUTH_SOCK=%t/keyring/ssh"
-		# 		] ++ pathEnv userPath;
-		# 	};
-		# };
-
 		services.reset-mouse = {
 			Install.WantedBy = desktopSession;
 			Service = {
