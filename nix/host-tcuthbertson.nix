@@ -3,7 +3,7 @@ let
 	zen = super.callPackage (builtins.fetchGit {
 		url = "git@github.com:zendesk/zendesk-nix.git";
 		ref = "HEAD";
-		rev = "21b2c5bd6a0a4eb6be6190c5e0f435840d9794e9";
+		rev = "4b4112f6793e4fd5885cf1edb9002824707e0b71";
 	}) {};
 
 in
