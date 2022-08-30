@@ -125,10 +125,10 @@
         "homepage": "http://gfxmonk.net/dist/doc/piep/",
         "owner": "timbertson",
         "repo": "piep",
-        "rev": "d425388d62a3e951e12d622bb007930817e54c5a",
-        "sha256": "1k57rs8awkddfmmvw0vpwlx9j3vhbsz7cg4c7pbp8ldg3g25vr2a",
+        "rev": "b0c3cf98ef32655b0959f7c148ab36812e9e3400",
+        "sha256": "0xwphfrjn1igm9i7dxq63db97psvs4c7i6vch207gs4fzmcs8svg",
         "type": "tarball",
-        "url": "https://github.com/timbertson/piep/archive/d425388d62a3e951e12d622bb007930817e54c5a.tar.gz",
+        "url": "https://github.com/timbertson/piep/archive/b0c3cf98ef32655b0959f7c148ab36812e9e3400.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "status-check": {
