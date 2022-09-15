@@ -1,10 +1,5 @@
 self: super:
 let
-	zen = super.callPackage (builtins.fetchGit {
-		url = "git@github.com:zendesk/zendesk-nix.git";
-		ref = "HEAD";
-		rev = "8f136bd7f22844a147815e4c8436c49b44f50fac";
-	}) {};
 
 in
 {
@@ -28,5 +23,5 @@ in
 		chefdk
 		jq
 		pstree
-	] ++ zen.all);
+	]) ++ (super.callPackage super.sources.zendesk-nix {}).all;
 }
