@@ -40,6 +40,7 @@ in
 			self = src;
 		})
 		self.my-borg
+		self.python3Packages.twine
 	];
 }
 
