@@ -4,5 +4,6 @@ gup -u \
 	polkit/all \
 	sudoers/all \
 	systemd/all \
+	udev/all \
 	shell \
 	packages \

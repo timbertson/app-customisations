@@ -1,0 +1,2 @@
+# NOTE: this should chgrp wheel /dev/uinput; if not then try https://github.com/chrippa/ds4drv/issues/93
+KERNEL=="uinput", GROUP="wheel", TAG+="uaccess"

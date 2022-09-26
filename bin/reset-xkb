@@ -4,3 +4,5 @@ options="$(dconf read /org/gnome/desktop/input-sources/xkb-options)"
 [ -n "$options" ]
 dconf write /org/gnome/desktop/input-sources/xkb-options "['']"
 dconf write /org/gnome/desktop/input-sources/xkb-options "$options"
+
+# Prior to xremap usage, we had: ['caps:ctrl_modifier', 'ctrl:swap_lalt_lctl_lwin', 'lv3:ralt_switch']

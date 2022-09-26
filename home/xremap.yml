@@ -1,0 +1,21 @@
+modmap:
+  - name: modifiers
+    remap:
+      # Physical keys are ctl, win, alt
+      # Logical keys are  win, alt, ctl
+      LEFTCTRL: LEFTMETA
+      LEFTALT: LEFTCTRL
+      LEFTMETA: LEFTALT
+
+keymap:
+  - name: Tab shifting
+    remap:
+      # Tab right
+      LEFTALT-SCROLLDOWN: LEFTCTRL-PAGEDOWN
+      LEFTCTRL-SHIFT-RIGHTBRACE: LEFTCTRL-PAGEDOWN
+      # LEFTCTRL-LEFTALT-SHIFT-RIGHTBRACE: LEFTCTRL-SHIFT-PAGEDOWN
+
+      # Tab left
+      LEFTALT-SCROLLUP: LEFTCTRL-PAGEUP
+      LEFTCTRL-SHIFT-LEFTBRACE: LEFTCTRL-PAGEUP
+      # LEFTCTRL-LEFTALT-SHIFT-LEFTBRACE: LEFTCTRL-SHIFT-PAGEUP

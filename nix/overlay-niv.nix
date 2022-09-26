@@ -18,18 +18,37 @@ let
 		'';
 	};
 
+	fetlock = callPackage self.sources.fetlock {};
+
 	localHead = p: trace "fetching ${builtins.toString p}" (builtins.fetchGit {
 		url = p;
 		ref = "HEAD";
 	});
 
+	# xremap = self.fetlock.cargo.load ./lock/xremap.nix {
+	# 	pkgOverrides = api: [
+	# 		(api.overrideSpec {
+	# 			xremap = base: base // { features = [ "gnome" ]; };
+	# 		})
+	# 		(api.overrideAttrs {
+	# 			bitvec = base: {
+	# 				# https://github.com/bitvecto-rs/bitvec/pull/162
+	# 				src = builtins.fetchGit {
+	# 					url = "https://github.com/bitvecto-rs/bitvec.git";
+	# 					rev = "8dcc6e96f012daade242318645d97487e59fbe6d";
+	# 				};
+	# 			};
+	# 		})
+	# 	];
+	# };
+
 in
 {
-	inherit asdf-vm localHead;
+	inherit asdf-vm localHead fetlock;
 	sources = baseSources;
 	installedPackages = (super.installedPackages or []) ++ [
+		fetlock
 		(callPackage sources.daglink {})
-		(callPackage self.sources.fetlock {})
 		(callPackage "${sources.git-wip}/nix" {})
 		(callPackage sources.git-wip {})
 		(callPackage "${sources.piep}/nix" {})
