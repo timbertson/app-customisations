@@ -4,7 +4,7 @@ dir="$nix/home-files/.config/systemd/system"
 if [ ! -e "$nix" ]; then
 	gup -u "$nix"
 fi
-units=(borg.timer borg.service)
+units=(borg.timer borg.service modprobe-uinput.timer modprobe-uinput.service)
 for unit in "${units[@]}"; do
 	gup -u "$dir/$unit"
 	sudo cp --dereference "$dir/$unit" /etc/systemd/system/

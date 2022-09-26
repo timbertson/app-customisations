@@ -92,12 +92,19 @@ in {
 			Socket.ListenStream = [ "8079" ];
 		};
 
-		services.reset-mouse = {
-			Install.WantedBy = desktopSession;
+		# services.reset-mouse = {
+		# 	Install.WantedBy = desktopSession;
+		# 	Service = {
+		# 		ExecStart = writeScript "${loadSessionVars}; exec reset-mouse";
+		# 		Restart="no";
+		# 		Environment = pathEnv userPath;
+		# 	};
+		# };
+
+		services.xremap = {
 			Service = {
-				ExecStart = writeScript "${loadSessionVars}; exec reset-mouse";
-				Restart="no";
-				Environment = pathEnv userPath;
+				Restart = "always";
+				ExecStart = "${home}/dev/oss/xremap/target/release/xremap --mouse ${home}/dev/app-customisations/home/xremap.yml";
 			};
 		};
 	};
