@@ -124,19 +124,4 @@ in {
 		OnStartupSec=5min
 		Persistent=true
 	'';
-
-	xdg.configFile."systemd/system/modprobe-uinput.service".text = ''
-		# workaround for https://github.com/chrippa/ds4drv/issues/93
-		[Service]
-		ExecStart=modprobe uinput
-		Restart=no
-	'';
-
-	xdg.configFile."systemd/system/modprobe-uinput.timer".text = ''
-		[Install]
-		WantedBy=multi-user.target
-
-		[Timer]
-		OnBootSec=20sec
-	'';
 }
