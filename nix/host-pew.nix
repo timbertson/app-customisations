@@ -41,6 +41,7 @@ in
 		})
 		self.my-borg
 		self.python3Packages.twine
+		self.remocaml
 	];
 }
 

@@ -102,6 +102,7 @@ in {
 		# };
 
 		services.xremap = {
+			Install.WantedBy = [ "default.target" ];
 			Service = {
 				Restart = "always";
 				ExecStart = "${home}/dev/oss/xremap/target/release/xremap --mouse ${home}/dev/app-customisations/home/xremap.yml";
