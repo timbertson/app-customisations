@@ -499,6 +499,9 @@ let g:LanguageClient_serverCommands.scala = ['node', './server-proxy.js']
 let g:LanguageClient_serverCommands.ocaml = ['ocaml-language-server', '--stdio']
 let g:LanguageClient_serverCommands.haskell = ['hie']
 
+" stop it!
+let g:jsonnet_fmt_on_save = 0
+
 " copy / paste (gvim, with the gui clipboard)
 vmap <C-c> "+y
 
