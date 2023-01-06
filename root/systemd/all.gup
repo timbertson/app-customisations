@@ -10,4 +10,5 @@ for unit in "${units[@]}"; do
 	sudo cp --dereference "$dir/$unit" /etc/systemd/system/
 done
 sudo systemctl reenable "${units[@]}"
+sudo systemctl daemon-reload
 touch "$1"

@@ -73,16 +73,16 @@ in {
 			buildCommand =
 				let exe = "${my-borg}/bin/my-borg"; in ''
 				mkdir -p $out/bin
-				echo > $out/bin/my-borg-task <<EOF
-					#!${pkgs.bash}/bin/bash
-					set -eux
-					export PYTHONUNBUFFERED=1
-					${exe} --user=tim --exclude=data --status-file=backup backup
-					${exe} --user=tim --exclude=data --status-file=sync sync
-					${exe} --user=tim --exclude=data --status-file=check check
+				cat > $out/bin/my-borg-task <<EOF
+#!${pkgs.bash}/bin/bash
+set -eux
+export PYTHONUNBUFFERED=1
+${exe} --user=tim --exclude=data --status-file=backup backup
+${exe} --user=tim --exclude=data --status-file=sync sync
+${exe} --user=tim --exclude=data --status-file=check check
 
-					# separate task since it requires external disk
-					${exe} --user=tim --include=data --status-file=data-backup backup check
+# separate task since it requires external disk
+${exe} --user=tim --include=data --status-file=data-backup backup check
 EOF
 				chmod +x $out/bin/my-borg-task
 			'';
