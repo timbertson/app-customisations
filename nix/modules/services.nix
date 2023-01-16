@@ -105,7 +105,13 @@ in {
 			Install.WantedBy = [ "default.target" ];
 			Service = {
 				Restart = "always";
-				ExecStart = "${home}/dev/oss/xremap/target/release/xremap --mouse ${home}/dev/app-customisations/home/xremap.yml";
+				ExecStart = "${pkgs.xremap}/bin/xremap --mouse ${home}/dev/app-customisations/home/xremap.yml";
+				# ExecStart = "${home}/dev/oss/xremap/target/release/xremap --mouse ${home}/dev/app-customisations/home/xremap.yml";
+				RestartSecs = "10s";
+			};
+			Unit = {
+				# disable rate limiting, it's only every 10s :shrug:
+				StartLimitIntervalSec = "0";
 			};
 		};
 	};

@@ -14,4 +14,5 @@ vim/.netrwhist
 *-local.xml
 /nix/local
 /nix/activate
+/nix/lock/*.nix
 nix/cachix

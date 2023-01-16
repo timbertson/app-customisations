@@ -25,26 +25,23 @@ let
 		ref = "HEAD";
 	});
 
-	# xremap = self.fetlock.cargo.load ./lock/xremap.nix {
-	# 	pkgOverrides = api: [
-	# 		(api.overrideSpec {
-	# 			xremap = base: base // { features = [ "gnome" ]; };
-	# 		})
-	# 		(api.overrideAttrs {
-	# 			bitvec = base: {
-	# 				# https://github.com/bitvecto-rs/bitvec/pull/162
-	# 				src = builtins.fetchGit {
-	# 					url = "https://github.com/bitvecto-rs/bitvec.git";
-	# 					rev = "8dcc6e96f012daade242318645d97487e59fbe6d";
-	# 				};
-	# 			};
-	# 		})
-	# 	];
-	# };
+	xremap = (self.fetlock.cargo.load ./lock/xremap.nix {
+		pkgOverrides = api: [
+			(api.overrideAttrs {
+				bitvec = base: {
+					# https://github.com/bitvecto-rs/bitvec/pull/162
+					src = builtins.fetchGit {
+						url = "https://github.com/bitvecto-rs/bitvec.git";
+						rev = "8dcc6e96f012daade242318645d97487e59fbe6d";
+					};
+				};
+			})
+		];
+	}).root;
 
 in
 {
-	inherit asdf-vm localHead fetlock;
+	inherit asdf-vm localHead fetlock xremap;
 	sources = baseSources;
 	installedPackages = (super.installedPackages or []) ++ [
 		fetlock

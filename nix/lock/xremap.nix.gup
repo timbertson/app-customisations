@@ -1,0 +1,3 @@
+#!bash -eu
+gup --always
+fetlock write -o "$1" --github "k0kubun/xremap#v0.8.0"
