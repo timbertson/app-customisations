@@ -53,10 +53,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "2c94b9801f1a11cde0fc97aa850687bb9137d42c",
-        "sha256": "1ifbyzpr1g4pawlmnqiyawd01bc7d0bld4jjk2jy4akh80q7f2wx",
+        "rev": "2dce7f1a55e785a22d61668516df62899278c9e4",
+        "sha256": "1nxhd86lfpfw24yfvkrrf4hnw0xcmwb495qbxl1dqhgv76ayxa2r",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/2c94b9801f1a11cde0fc97aa850687bb9137d42c.tar.gz",
+        "url": "https://github.com/rycee/home-manager/archive/2dce7f1a55e785a22d61668516df62899278c9e4.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {
