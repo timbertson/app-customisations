@@ -2,11 +2,13 @@ function fish_prompt --description 'Write out the prompt'
 	#printf '$ '
 	set -l __exit_status $status
 	if test $CMD_DURATION -gt 2000 -a -x /usr/bin/notify-send
-		set __last_cmd (builtin history search -n 1)
-		if [ $__exit_status = 0 ]
-			notify-send --hint=int:transient:1 --expire-time=2000 --app-name='fish' "Success: ($__last_cmd)" &
-		else
-			notify-send --hint=int:transient:1 --expire-time=2000 --app-name='fish' "Command failed ($__exit_status): $__last_cmd" &
+		if set -q WAYLAND_DISPLAY or set -q DISPLAY
+			set __last_cmd (builtin history search -n 1)
+			if [ $__exit_status = 0 ]
+				notify-send --hint=int:transient:1 --expire-time=2000 --app-name='fish' "Success: ($__last_cmd)" &
+			else
+				notify-send --hint=int:transient:1 --expire-time=2000 --app-name='fish' "Command failed ($__exit_status): $__last_cmd" &
+			end
 		end
 	end
 	printf "\n"
