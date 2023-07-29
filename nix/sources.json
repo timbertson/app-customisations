@@ -59,6 +59,18 @@
         "url": "https://github.com/rycee/home-manager/archive/2dce7f1a55e785a22d61668516df62899278c9e4.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "my-borg": {
+        "branch": "master",
+        "description": null,
+        "homepage": null,
+        "owner": "timbertson",
+        "repo": "my-borg",
+        "rev": "0d61a196dd28af60a0cf432ca18e417765133d61",
+        "sha256": "1dazcv3yyzxnhmafjq6h6gylx2qk4iq6n5mfp2l1hxl26qz8kagw",
+        "type": "tarball",
+        "url": "https://github.com/timbertson/my-borg/archive/0d61a196dd28af60a0cf432ca18e417765133d61.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "niv": {
         "branch": "master",
         "description": "Easy dependency management for Nix projects",

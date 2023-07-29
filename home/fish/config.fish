@@ -12,7 +12,6 @@ end
 set additional_paths \
 	/sbin \
 	~/.bin \
-	~/.local/nix/bin \
 	~/.nix-profile/bin \
 	~/.cargo/bin
 	;
@@ -28,6 +27,7 @@ end
 
 # NOTE: LAST path is most overridey
 set path_overrides \
+	~/.local/nix/bin \
 	~/bin \
 	;
 

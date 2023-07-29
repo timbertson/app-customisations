@@ -39,12 +39,15 @@ let
 		];
 	}).root;
 
+	my-borg = callPackage sources.my-borg {};
+
 in
 {
-	inherit asdf-vm localHead fetlock xremap;
+	inherit asdf-vm localHead fetlock xremap my-borg;
 	sources = baseSources;
 	installedPackages = (super.installedPackages or []) ++ [
 		fetlock
+		my-borg
 		(callPackage sources.daglink {})
 		(callPackage "${sources.git-wip}/nix" {})
 		(callPackage sources.git-wip {})
@@ -52,6 +55,7 @@ in
 		(callPackage sources.status-check {})
 		(callPackage "${sources.version-py}/nix" {})
 		(callPackage "${sources.vim-watch}/nix" {})
+		(callPackage sources.my-borg {})
 		(callPackage sources.niv-util {}).cli
 	];
 	nixGL = callPackage sources.nixGL {};

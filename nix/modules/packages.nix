@@ -19,6 +19,7 @@ in {
 			(darwin coreutils)
 			(darwin cacert)
 			(darwin fswatch)
+			difftastic
 			direnv
 			dtach
 			(pkgs.gup-ocaml or gup)

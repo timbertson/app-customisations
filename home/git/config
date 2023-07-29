@@ -51,6 +51,7 @@
 [user]
 	name = Tim Cuthbertson
 	email = tim@gfxmonk.net
+	signingkey = E3B36A95D162C705
 [core]
 	excludesfile = ~/.gitignore
 	sharedRepository = group

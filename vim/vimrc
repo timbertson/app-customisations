@@ -269,6 +269,9 @@ nmap <A-k> :silent call Save_if_possible()<cr>gT
 nmap <a-J> :silent call Save_if_possible()<cr><c-w>w
 nmap <a-K> :silent call Save_if_possible()<cr><c-w>W
 
+nmap <D-J> :silent call Save_if_possible()<cr><c-w>w
+nmap <D-K> :silent call Save_if_possible()<cr><c-w>W
+
 
 " Visually select the text that was last edited/pasted
 nmap gV `[V`]

@@ -18,6 +18,8 @@ in
 	# 	(super.callPackage "${src}/nix/gup-python.nix" {}); #.overrideAttrs (orig: { src; });
 
 	installedPackages = super.installedPackages ++ (with self; [
+		rbenv
+		# bundler
 		fblog
 		gnupg
 		vendir
