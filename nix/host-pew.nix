@@ -40,6 +40,7 @@ in
 			self = src;
 		})
 		self.my-borg
+		self.borgmatic
 		self.python3Packages.twine
 		self.remocaml
 	];

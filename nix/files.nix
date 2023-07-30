@@ -46,6 +46,7 @@ in
 		// (if pkgs.stdenv.isLinux then {
 			".config/fontconfig/fonts.conf" = symlink ../home/fonts.conf;
 			".xbindkeysrc.scm" = symlink ../home/xbindkeysrc.scm;
+			".config/borgmatic" = symlink ../home/borgmatic;
 			".config/autostart/rhythmbox.desktop" = symlinkOpt /usr/share/applications/rhythmbox.desktop;
 			".local/share/gnome-shell/extensions/scroll-workspaces@gfxmonk.net" = symlinkOpt "${home}/dev/gnome-shell/scroll-workspaces/scroll-workspaces";
 			".local/share/gnome-shell/extensions/impatience@gfxmonk.net" = symlinkOpt "${home}/dev/gnome-shell/impatience@gfxmonk.net/impatience";
