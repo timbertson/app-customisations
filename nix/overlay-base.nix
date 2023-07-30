@@ -81,7 +81,7 @@ ${exe} --user=tim --exclude=data --status-file=backup backup
 ${exe} --user=tim --exclude=data --status-file=sync sync
 ${exe} --user=tim --exclude=data --status-file=check check
 
-# separate task since it requires external disk
+# separate, requires external disk
 ${exe} --user=tim --only=data --status-file=data-backup backup check
 EOF
 				chmod +x $out/bin/my-borg-task

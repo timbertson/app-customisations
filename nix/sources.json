@@ -53,10 +53,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "2dce7f1a55e785a22d61668516df62899278c9e4",
-        "sha256": "1nxhd86lfpfw24yfvkrrf4hnw0xcmwb495qbxl1dqhgv76ayxa2r",
+        "rev": "32d3e39c491e2f91152c84f8ad8b003420eab0a1",
+        "sha256": "0k4lh2j11inwvpjl74vbw2afl732qpkabi8zlqrjv1l36mxgh4li",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/2dce7f1a55e785a22d61668516df62899278c9e4.tar.gz",
+        "url": "https://github.com/rycee/home-manager/archive/32d3e39c491e2f91152c84f8ad8b003420eab0a1.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "my-borg": {
@@ -125,10 +125,10 @@
         "homepage": null,
         "owner": "timbertson",
         "repo": "opam2nix",
-        "rev": "61db9c0e6917b07c4a3f64c63d09e99eb9159101",
-        "sha256": "09r1wds27y688lwrb5qsrqfsi9ffn67v5lcfyshzlibkd6qlsbq7",
+        "rev": "d928afb09578c9e6036029c6f75c7662fb6b4f98",
+        "sha256": "05dhf49khsn28cgh0bsxyn7925h43hmjaqr0hyvw8v03vw0mkllb",
         "type": "tarball",
-        "url": "https://github.com/timbertson/opam2nix/archive/61db9c0e6917b07c4a3f64c63d09e99eb9159101.tar.gz",
+        "url": "https://github.com/timbertson/opam2nix/archive/d928afb09578c9e6036029c6f75c7662fb6b4f98.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "piep": {

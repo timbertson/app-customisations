@@ -3,11 +3,21 @@ keypress_delay_ms: 20
 modmap:
   - name: modifiers
     remap:
-      # Physical keys are ctl, win, alt
-      # Logical keys are  win, alt, ctl
+      # # Rgo keyboard:
+      # # Physical keys are ctl, win, alt
+      # # Logical keys are  win, alt, ctl
+      # LEFTCTRL: LEFTMETA
+      # LEFTALT: LEFTCTRL
+      # LEFTMETA: LEFTALT
+      
+      # Glove80 keyboard
+      # Physical keys are win, ctl, alt
+      # Logical keys are  ctl, win, alt
       LEFTCTRL: LEFTMETA
-      LEFTALT: LEFTCTRL
-      LEFTMETA: LEFTALT
+      LEFTMETA: LEFTCTRL
+
+      RIGHTCTRL: RIGHTMETA
+      RIGHTMETA: RIGHTCTRL
 
 keymap:
   - name: Tab shifting
