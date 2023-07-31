@@ -114,23 +114,23 @@ in {
 				StartLimitIntervalSec = "0";
 			};
 		};
+
+		services.borg = {
+			Install.WantedBy = [ "default.target" ];
+			Service = {
+				Restart = "no";
+				ExecStart = "${pkgs.status-check} $HOME/.cache/borgmatic/backup --desc borgmatic --run ${pkgs.borgmatic}/bin/borgmatic --verbosity=1";
+			};
+		};
+
+		timers.borg = {
+			Install.WantedBy = [ "default.target" "timers.target" ];
+			Timer = {
+				OnStartupSec = "5min";
+				Persistent = true;
+			};
+		};
 	};
-
-	# NOTE: these have no effect on their own, they will be
-	# copied to /etc/systemd/system by gup target root/systemd/all
-	xdg.configFile."systemd/system/borg.service".text = ''
-		[Service]
-		ExecStart=${pkgs.my-borg-task}/bin/my-borg-task
-		Restart=no
-	'';
-	xdg.configFile."systemd/system/borg.timer".text = ''
-		[Install]
-		WantedBy=multi-user.target
-
-		[Timer]
-		OnStartupSec=5min
-		Persistent=true
-	'';
 
 	xdg.configFile."systemd/system/modprobe-uinput.service".text = ''
 		# workaround for https://github.com/chrippa/ds4drv/issues/93

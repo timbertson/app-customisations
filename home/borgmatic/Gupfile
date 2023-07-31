@@ -1,0 +1,3 @@
+./merge.sh:
+	main.yaml
+	media.yaml

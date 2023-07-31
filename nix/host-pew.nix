@@ -28,6 +28,18 @@ in
 		fetlock = localHead ../../rust/fetlock;
 	};
 
+	borgmatic = super.borgmatic.overrideAttrs (upstream:
+		if upstream.version == "1.7.15" then rec {
+			version = "1.8.0";
+			name = "${upstream.pname}-${version}";
+			src = super.fetchPypi {
+				inherit (upstream) pname;
+				inherit version;
+				sha256 = "tWHGnyQdnoevWFcgB56e97Q73ujUw5yHdUduBo7HGlo=";
+			};
+		} else (super.lib.warn "borgmatic override is no longer needed in host-pew.nix" {})
+	);
+
 	installedPackages = (super.installedPackages or []) ++ [
 		# only built for this machine
 		(callPackage (localHead ../../python/irank) {})

@@ -5,10 +5,10 @@
         "homepage": "https://asdf-vm.com/",
         "owner": "asdf-vm",
         "repo": "asdf",
-        "rev": "eaf2215cb8adc9c3b74dbcbee034aba8ffa92dda",
-        "sha256": "0d92ary4q6lp41acwcqld81b9629hfnn9j73wq3iw7rjg267d8j1",
+        "rev": "624604a8626dc6006d78121d4cf0f6c920449c56",
+        "sha256": "0w6yk41ynypw3w04hkvlh21d32hzkrnc5dac3yhnlliinrnl1gzl",
         "type": "tarball",
-        "url": "https://github.com/asdf-vm/asdf/archive/eaf2215cb8adc9c3b74dbcbee034aba8ffa92dda.tar.gz",
+        "url": "https://github.com/asdf-vm/asdf/archive/624604a8626dc6006d78121d4cf0f6c920449c56.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "daglink": {
@@ -29,10 +29,10 @@
         "homepage": null,
         "owner": "timbertson",
         "repo": "fetlock",
-        "rev": "17187feb3d1d4044edbb3a194d732496978fb3d8",
-        "sha256": "1acwrnnrlkxwz6q6ylffdjkyngnv6hxd9nighjjfvhq41sj92r7z",
+        "rev": "a51266933c0b52c9c4e0cd05d7556c645b8cc8ef",
+        "sha256": "1xpzijq1hm9a5j84p6zxg2k76m8fa99af521zp0iqfy9333ybxqz",
         "type": "tarball",
-        "url": "https://github.com/timbertson/fetlock/archive/17187feb3d1d4044edbb3a194d732496978fb3d8.tar.gz",
+        "url": "https://github.com/timbertson/fetlock/archive/a51266933c0b52c9c4e0cd05d7556c645b8cc8ef.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "git-wip": {
@@ -53,10 +53,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "32d3e39c491e2f91152c84f8ad8b003420eab0a1",
-        "sha256": "0k4lh2j11inwvpjl74vbw2afl732qpkabi8zlqrjv1l36mxgh4li",
+        "rev": "f58889c07efa8e1328fdf93dc1796ec2a5c47f38",
+        "sha256": "13j7nbxfg609zpvzwpld7a3pa33wp66wjkyiq8akmkcyp61ksb8g",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/32d3e39c491e2f91152c84f8ad8b003420eab0a1.tar.gz",
+        "url": "https://github.com/rycee/home-manager/archive/f58889c07efa8e1328fdf93dc1796ec2a5c47f38.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "my-borg": {
@@ -77,10 +77,10 @@
         "homepage": "https://github.com/nmattia/niv",
         "owner": "nmattia",
         "repo": "niv",
-        "rev": "82e5cd1ad3c387863f0545d7591512e76ab0fc41",
-        "sha256": "090l219mzc0gi33i3psgph6s2pwsc8qy4lyrqjdj4qzkvmaj65a7",
+        "rev": "914aba08a26cb10538b84d00d6cfb01c9776d80c",
+        "sha256": "0gx316gc7prjay5b0cr13x4zc2pdbiwxkfkpjvrlb2rml80lm4pm",
         "type": "tarball",
-        "url": "https://github.com/nmattia/niv/archive/82e5cd1ad3c387863f0545d7591512e76ab0fc41.tar.gz",
+        "url": "https://github.com/nmattia/niv/archive/914aba08a26cb10538b84d00d6cfb01c9776d80c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv-util": {
@@ -101,10 +101,10 @@
         "homepage": "",
         "owner": "timbertson",
         "repo": "nix-wrangle",
-        "rev": "6f68b43717717e11c9e68d00022fb69aad2d6f26",
-        "sha256": "1hb48ni4s0hggwaddw5pq5qd66h1jz26j9ywggv9qgavw03ilw19",
+        "rev": "cc0c215cc2f9dbfee31c1b96527310c0168c449f",
+        "sha256": "0x265lijdk6c37038lw3j60l2hacaw6720xx9iz4myiij9zmnhnv",
         "type": "tarball",
-        "url": "https://github.com/timbertson/nix-wrangle/archive/6f68b43717717e11c9e68d00022fb69aad2d6f26.tar.gz",
+        "url": "https://github.com/timbertson/nix-wrangle/archive/cc0c215cc2f9dbfee31c1b96527310c0168c449f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixGL": {
@@ -113,10 +113,10 @@
         "homepage": null,
         "owner": "guibou",
         "repo": "nixGL",
-        "rev": "047a34b2f087e2e3f93d43df8e67ada40bf70e5c",
-        "sha256": "1d9cq747pszs5r5x7b3qkmdsxb2mamj5xzml2m3cigkar9d2wgab",
+        "rev": "489d6b095ab9d289fe11af0219a9ff00fe87c7c5",
+        "sha256": "03kwsz8mf0p1v1clz42zx8cmy6hxka0cqfbfasimbj858lyd930k",
         "type": "tarball",
-        "url": "https://github.com/guibou/nixGL/archive/047a34b2f087e2e3f93d43df8e67ada40bf70e5c.tar.gz",
+        "url": "https://github.com/guibou/nixGL/archive/489d6b095ab9d289fe11af0219a9ff00fe87c7c5.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "opam2nix": {
@@ -137,10 +137,10 @@
         "homepage": "http://gfxmonk.net/dist/doc/piep/",
         "owner": "timbertson",
         "repo": "piep",
-        "rev": "b0c3cf98ef32655b0959f7c148ab36812e9e3400",
-        "sha256": "0xwphfrjn1igm9i7dxq63db97psvs4c7i6vch207gs4fzmcs8svg",
+        "rev": "9c032f593bbcb977b3b6048081bfa482dfe9a148",
+        "sha256": "01hc68h4w8a33yndqybypbqq1v7qif1sqr8a1nzljs7cg14jq786",
         "type": "tarball",
-        "url": "https://github.com/timbertson/piep/archive/b0c3cf98ef32655b0959f7c148ab36812e9e3400.tar.gz",
+        "url": "https://github.com/timbertson/piep/archive/9c032f593bbcb977b3b6048081bfa482dfe9a148.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "status-check": {
@@ -161,10 +161,10 @@
         "homepage": "",
         "owner": "timbertson",
         "repo": "version",
-        "rev": "a16ac8c53cf8d7f08a6889570d9897946394fe42",
-        "sha256": "056l8m0xxl1h7x4fd1hf754w8q4sibpqnwgnbk5af5i66399az61",
+        "rev": "cab83bdfbf4e194cf1806c8abb5522f14f298331",
+        "sha256": "0wa3lyn1bfccd9b8x6p71mb5kq94vif8nfrbfip2zki77q4m6s5z",
         "type": "tarball",
-        "url": "https://github.com/timbertson/version/archive/a16ac8c53cf8d7f08a6889570d9897946394fe42.tar.gz",
+        "url": "https://github.com/timbertson/version/archive/cab83bdfbf4e194cf1806c8abb5522f14f298331.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-sleuth": {
