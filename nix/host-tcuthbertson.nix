@@ -20,6 +20,7 @@ in
 	installedPackages = super.installedPackages ++ (with self; [
 		rbenv
 		# bundler
+		chef-cli
 		fblog
 		gnupg
 		vendir
@@ -28,7 +29,6 @@ in
 		asdf-vm
 		super.vscode
 		google-cloud-sdk
-		chefdk
 		jq
 		pstree
 	]) ++ (super.callPackage super.sources.zendesk-nix {}).all;

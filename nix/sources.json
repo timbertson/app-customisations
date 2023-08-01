@@ -194,7 +194,7 @@
     "zendesk-nix": {
         "branch": "main",
         "repo": "git@github.com:zendesk/zendesk-nix",
-        "rev": "18ca1ce36d3d417d8e9390c3f6dfe8460547ee6e",
+        "rev": "58bc01667b3792934b7d747e0233f33c15ee12f5",
         "type": "git"
     }
 }
