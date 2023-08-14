@@ -119,14 +119,14 @@ in {
 			Install.WantedBy = [ "default.target" ];
 			Service = {
 				Restart = "no";
-				ExecStart = "${pkgs.status-check} $HOME/.cache/borgmatic/backup --desc borgmatic --run ${pkgs.borgmatic}/bin/borgmatic --verbosity=1";
+				ExecStart = "${pkgs.status-check}/bin/status-check ${home}/.cache/borgmatic/backup --desc borgmatic --run ${pkgs.borgmatic}/bin/borgmatic --verbosity=1";
 			};
 		};
 
 		timers.borg = {
 			Install.WantedBy = [ "default.target" "timers.target" ];
 			Timer = {
-				OnStartupSec = "5min";
+				OnCalendar = "20:00:00";
 				Persistent = true;
 			};
 		};

@@ -161,10 +161,10 @@
         "homepage": "",
         "owner": "timbertson",
         "repo": "version",
-        "rev": "cab83bdfbf4e194cf1806c8abb5522f14f298331",
-        "sha256": "0wa3lyn1bfccd9b8x6p71mb5kq94vif8nfrbfip2zki77q4m6s5z",
+        "rev": "a0eae446e185976c0b323c9b7f821b3038aa5221",
+        "sha256": "0nzh6qx4sljw3yyah3j7a0b51kj7v0i457k81327v9yr4zjzl11c",
         "type": "tarball",
-        "url": "https://github.com/timbertson/version/archive/cab83bdfbf4e194cf1806c8abb5522f14f298331.tar.gz",
+        "url": "https://github.com/timbertson/version/archive/a0eae446e185976c0b323c9b7f821b3038aa5221.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-sleuth": {
