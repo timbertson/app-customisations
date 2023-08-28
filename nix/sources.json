@@ -29,10 +29,10 @@
         "homepage": null,
         "owner": "timbertson",
         "repo": "fetlock",
-        "rev": "a51266933c0b52c9c4e0cd05d7556c645b8cc8ef",
-        "sha256": "1xpzijq1hm9a5j84p6zxg2k76m8fa99af521zp0iqfy9333ybxqz",
+        "rev": "173646e4f3a570878e4742f26df53c483b4f364b",
+        "sha256": "07qqq9abh4s9hpwl67a1v69r2hib4rj1xy3bmxh2wvlw76jj6330",
         "type": "tarball",
-        "url": "https://github.com/timbertson/fetlock/archive/a51266933c0b52c9c4e0cd05d7556c645b8cc8ef.tar.gz",
+        "url": "https://github.com/timbertson/fetlock/archive/173646e4f3a570878e4742f26df53c483b4f364b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "git-wip": {
@@ -194,7 +194,7 @@
     "zendesk-nix": {
         "branch": "main",
         "repo": "git@github.com:zendesk/zendesk-nix",
-        "rev": "58bc01667b3792934b7d747e0233f33c15ee12f5",
+        "rev": "a91603e6d9af694469b8e4fb3d44f7b8efef4db8",
         "type": "git"
     }
 }

@@ -24,6 +24,7 @@
 	wrangle = !git update-ref refs/heads/wrangle "$(git-current-tree)"
 	recap = log --all --oneline --no-merges
 	upstream = !git branch --set-upstream-to=origin/"$(git branch --show-current)" "$(git branch --show-current)"
+	resign = !git rebase --exec 'git -c user.email="$GIT_RESIGN_EMAIL" commit --amend --no-edit -n -S' -i
 [color]
 	branch = auto
 	diff = auto

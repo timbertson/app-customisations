@@ -7,7 +7,7 @@ if has("win32")
 	endif
 endif
 
-if has("mac") && has("gui_running")
+if has("mac") && has("gui_running") && !exists('g:vscode')
 	set macmeta
 endif
 
