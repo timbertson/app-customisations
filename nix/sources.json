@@ -95,6 +95,18 @@
         "url": "https://github.com/timbertson/niv-util/archive/c1b60458c9eda33f821f07436fcf0d20f4faef37.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "nix-nightly": {
+        "branch": "master",
+        "description": "Nix, the purely functional package manager",
+        "homepage": "https://nixos.org/",
+        "owner": "nixos",
+        "repo": "nix",
+        "rev": "94e91566e",
+        "sha256": "1x995n8q82sdgn1afs1afm5dpip1sb47qi3bxhrapk6b8vkq7vix",
+        "type": "tarball",
+        "url": "https://github.com/nixos/nix/archive/94e91566e.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nix-wrangle": {
         "branch": "v1",
         "description": "Wrangle your nix dependencies",
@@ -194,7 +206,7 @@
     "zendesk-nix": {
         "branch": "main",
         "repo": "git@github.com:zendesk/zendesk-nix",
-        "rev": "a91603e6d9af694469b8e4fb3d44f7b8efef4db8",
+        "rev": "ea430c8f6e4e2b105c0d903b6c0c5737789b0963",
         "type": "git"
     }
 }

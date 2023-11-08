@@ -56,6 +56,10 @@ in
 		(callPackage "${sources.vim-watch}/nix" {})
 		(callPackage sources.niv-util {}).cli
 	];
+
+	# this is a flake, how do I get it to use the same nixpkgs?
+	nix-nightly = (import sources.nix-nightly).default; # TODO drop after nix v2.19
+
 	nixGL = callPackage sources.nixGL {};
 	vim-sleuth-src = sources.vim-sleuth;
 	home-manager-src = sources.home-manager;

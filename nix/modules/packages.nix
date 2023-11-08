@@ -31,7 +31,7 @@ in {
 			irank-releases
 			(ifEnabled "jdk" my-jdks)
 			(anyEnabled [ "node" "maximal"] nodejs)
-			nix
+			nix-nightly # TODO revert to nix
 			niv
 			my-caenv
 			my-neovim
