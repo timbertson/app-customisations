@@ -1,5 +1,4 @@
 #!/bin/bash
 set -eu
-user="$(id -un)"
 channel="${1:-nixpkgs}"
-grep -E -o '[^.]+$' "/nix/var/nix/profiles/per-user/$user/channels/$channel/svn-revision"
+grep -E -o '[^.]+$' ~/".local/state/nix/profiles/channels/$channel/svn-revision"

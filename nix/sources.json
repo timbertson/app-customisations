@@ -29,10 +29,10 @@
         "homepage": null,
         "owner": "timbertson",
         "repo": "fetlock",
-        "rev": "173646e4f3a570878e4742f26df53c483b4f364b",
-        "sha256": "07qqq9abh4s9hpwl67a1v69r2hib4rj1xy3bmxh2wvlw76jj6330",
+        "rev": "284b4416dab9469a289630d6d6cc26b292d4b57e",
+        "sha256": "0cg2skp1s2k976z3x71x8sr4a57pnnghvawr85gr8cn4n7v6n0mr",
         "type": "tarball",
-        "url": "https://github.com/timbertson/fetlock/archive/173646e4f3a570878e4742f26df53c483b4f364b.tar.gz",
+        "url": "https://github.com/timbertson/fetlock/archive/284b4416dab9469a289630d6d6cc26b292d4b57e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "git-wip": {
