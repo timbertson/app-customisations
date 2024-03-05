@@ -1,6 +1,7 @@
 self: super:
 let
-
+	localHead = self.localHead;
+	callPackage = super.callPackage;
 in
 {
 	features = super.features // {
@@ -17,12 +18,15 @@ in
 	# gup = let src = self.localHead ../../timbertson/gup; in
 	# 	(super.callPackage "${src}/nix/gup-python.nix" {}); #.overrideAttrs (orig: { src; });
 
+	netproxrc = (callPackage "${localHead ../../timbertson/netproxrc}/nix" {}).root;
+
 	installedPackages = super.installedPackages ++ (with self; [
 		rbenv
 		# bundler
 		chef-cli
 		fblog
 		gnupg
+		netproxrc
 		vendir
 		jsonnet
 		stern
