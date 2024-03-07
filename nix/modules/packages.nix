@@ -43,7 +43,7 @@ in {
 			[
 				glibcLocales
 				python3Packages.ipython
-				python3Packages.youtube-dl
+				youtube-dl
 			] ++ map linux [
 				# linux + maximal
 				jsonnet

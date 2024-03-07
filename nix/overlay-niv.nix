@@ -40,10 +40,17 @@ let
 	}).root;
 
 	my-borg = callPackage sources.my-borg {};
+	
+	youtube-dl = super.youtube-dl.overrideAttrs (o: {
+		version = "dev";
+		src = sources.youtube-dl;
+		patches = []; # upstream patches are based on an old version
+		postInstall = ""; # skip insallShellCompletion
+	});
 
 in
 {
-	inherit asdf-vm localHead fetlock xremap my-borg;
+	inherit asdf-vm localHead fetlock xremap my-borg youtube-dl;
 	sources = baseSources;
 	installedPackages = (super.installedPackages or []) ++ [
 		fetlock
@@ -63,6 +70,7 @@ in
 	nixGL = callPackage sources.nixGL {};
 	vim-sleuth-src = sources.vim-sleuth;
 	home-manager-src = sources.home-manager;
+	paperwm = sources.PaperWM;
 	opam2nix = callPackage sources.opam2nix {};
 	status-check = callPackage sources.status-check {};
 }

@@ -1,4 +1,16 @@
 {
+    "PaperWM": {
+        "branch": "release",
+        "description": "Tiled scrollable window management for Gnome Shell",
+        "homepage": "",
+        "owner": "paperwm",
+        "repo": "PaperWM",
+        "rev": "d280bc743d15d869bdbbeb8e410fd3a88e9d17a5",
+        "sha256": "0gpvdmpwjwyq3kx46m8m493cv986na73rsjw8qqn619bv7lkwkgk",
+        "type": "tarball",
+        "url": "https://github.com/paperwm/PaperWM/archive/d280bc743d15d869bdbbeb8e410fd3a88e9d17a5.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "asdf": {
         "branch": "master",
         "description": "Extendable version manager with support for Ruby, Node.js, Elixir, Erlang & more",
@@ -201,6 +213,18 @@
         "sha256": "1csdgvlxq4w9mb1i6jv94zn4vqi6y3jggz9vhyz2rn98g4l2j49l",
         "type": "tarball",
         "url": "https://github.com/timbertson/vim-watch/archive/b4d33fc40ae7367cf3472895e022fc7305c542cb.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "youtube-dl": {
+        "branch": "master",
+        "description": "Command-line program to download videos from YouTube.com and other video sites",
+        "homepage": "http://ytdl-org.github.io/youtube-dl/",
+        "owner": "ytdl-org",
+        "repo": "youtube-dl",
+        "rev": "f0812d784836d18fd25ea32f9b5a0c9c6e92425b",
+        "sha256": "0yg9i4fiv5k54qz1knyvkvkdzrsf56mchs6i8p9766k9s4mm0qv3",
+        "type": "tarball",
+        "url": "https://github.com/ytdl-org/youtube-dl/archive/f0812d784836d18fd25ea32f9b5a0c9c6e92425b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "zendesk-nix": {
