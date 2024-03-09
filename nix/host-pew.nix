@@ -24,7 +24,7 @@ in
 	my-borg = callPackage (localHead ../../python/my-borg) {};
 
 	# override default sources for globally installed packages
-	sources = super.sources // {
+	nivSources = super.nivSources // {
 		fetlock = localHead ../../rust/fetlock;
 	};
 

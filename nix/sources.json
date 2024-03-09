@@ -41,10 +41,10 @@
         "homepage": null,
         "owner": "timbertson",
         "repo": "fetlock",
-        "rev": "284b4416dab9469a289630d6d6cc26b292d4b57e",
-        "sha256": "0cg2skp1s2k976z3x71x8sr4a57pnnghvawr85gr8cn4n7v6n0mr",
+        "rev": "0be1ae3c8fcdc74a50f982f4e3cc323bc6576330",
+        "sha256": "1vylp46vl5ppcpqxxk2snxh6fn6h30gyhb3yjz3ca01apazh42l7",
         "type": "tarball",
-        "url": "https://github.com/timbertson/fetlock/archive/284b4416dab9469a289630d6d6cc26b292d4b57e.tar.gz",
+        "url": "https://github.com/timbertson/fetlock/archive/0be1ae3c8fcdc74a50f982f4e3cc323bc6576330.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "git-wip": {
@@ -65,10 +65,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "f58889c07efa8e1328fdf93dc1796ec2a5c47f38",
-        "sha256": "13j7nbxfg609zpvzwpld7a3pa33wp66wjkyiq8akmkcyp61ksb8g",
+        "rev": "17431970b4ebc75a92657101ccffcfc9e1f9d8f0",
+        "sha256": "1nzp0j3i0km01wpaf5brx0d3qknimg9i9qnc3y87a4b6w5c3cp6r",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/f58889c07efa8e1328fdf93dc1796ec2a5c47f38.tar.gz",
+        "url": "https://github.com/rycee/home-manager/archive/17431970b4ebc75a92657101ccffcfc9e1f9d8f0.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "my-borg": {

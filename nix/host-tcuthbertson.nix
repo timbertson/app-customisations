@@ -10,7 +10,7 @@ in
 	};
 
 	# override default sources for globally installed packages
-	sources = super.sources // {
+	nivSources = super.nivSources // {
 		fetlock = self.localHead ../../rust/fetlock;
 	};
 
@@ -35,5 +35,5 @@ in
 		google-cloud-sdk
 		jq
 		pstree
-	]) ++ (super.callPackage super.sources.zendesk-nix {}).all;
+	]) ++ (super.callPackage super.nivSources.zendesk-nix {}).all;
 }

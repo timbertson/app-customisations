@@ -4,12 +4,12 @@ with super.lib;
 let
 	baseSources = import ./sources.nix { inherit pkgs; };
 
-	sources = self.sources;
+	nivSources = self.nivSources;
 	callPackage = self.callPackage;
 
 	asdf-vm = self.stdenv.mkDerivation {
 		name = "asdf-vm";
-		src = sources.asdf;
+		src = nivSources.asdf;
 		buildInputs = [ pkgs.makeWrapper ];
 		installPhase = ''
 			mkdir -p $out/share $out/bin
@@ -18,7 +18,7 @@ let
 		'';
 	};
 
-	fetlock = callPackage self.sources.fetlock {};
+	fetlock = callPackage self.nivSources.fetlock {};
 
 	localHead = p: trace "fetching ${builtins.toString p}" (builtins.fetchGit {
 		url = p;
@@ -39,11 +39,11 @@ let
 		];
 	}).root;
 
-	my-borg = callPackage sources.my-borg {};
+	my-borg = callPackage nivSources.my-borg {};
 	
 	youtube-dl = super.youtube-dl.overrideAttrs (o: {
 		version = "dev";
-		src = sources.youtube-dl;
+		src = nivSources.youtube-dl;
 		patches = []; # upstream patches are based on an old version
 		postInstall = ""; # skip insallShellCompletion
 	});
@@ -51,26 +51,26 @@ let
 in
 {
 	inherit asdf-vm localHead fetlock xremap my-borg youtube-dl;
-	sources = baseSources;
+	nivSources = baseSources;
 	installedPackages = (super.installedPackages or []) ++ [
 		fetlock
-		(callPackage sources.daglink {})
-		(callPackage "${sources.git-wip}/nix" {})
-		(callPackage sources.git-wip {})
-		(callPackage "${sources.piep}/nix" {})
-		(callPackage sources.status-check {})
-		(callPackage "${sources.version-py}/nix" {})
-		(callPackage "${sources.vim-watch}/nix" {})
-		(callPackage sources.niv-util {}).cli
+		(callPackage nivSources.daglink {})
+		(callPackage "${nivSources.git-wip}/nix" {})
+		(callPackage nivSources.git-wip {})
+		(callPackage "${nivSources.piep}/nix" {})
+		(callPackage nivSources.status-check {})
+		(callPackage "${nivSources.version-py}/nix" {})
+		(callPackage "${nivSources.vim-watch}/nix" {})
+		(callPackage nivSources.niv-util {}).cli
 	];
 
 	# this is a flake, how do I get it to use the same nixpkgs?
-	nix-nightly = (import sources.nix-nightly).default; # TODO drop after nix v2.19
+	nix-nightly = (import nivSources.nix-nightly).default; # TODO drop after nix v2.19
 
-	nixGL = callPackage sources.nixGL {};
-	vim-sleuth-src = sources.vim-sleuth;
-	home-manager-src = sources.home-manager;
-	paperwm = sources.PaperWM;
-	opam2nix = callPackage sources.opam2nix {};
-	status-check = callPackage sources.status-check {};
+	nixGL = callPackage nivSources.nixGL {};
+	vim-sleuth-src = nivSources.vim-sleuth;
+	home-manager-src = nivSources.home-manager;
+	paperwm = nivSources.PaperWM;
+	opam2nix = callPackage nivSources.opam2nix {};
+	status-check = callPackage nivSources.status-check {};
 }
