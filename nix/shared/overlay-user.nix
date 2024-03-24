@@ -13,5 +13,4 @@ with super; {
 	# };
 	sbt = super.sbt.override { jre = super.openjdk11; };
 	scala = super.scala.override { jre = super.openjdk11; };
-	pkgconfig = super.pkg-config; # temporary fix opam2nix
 }
