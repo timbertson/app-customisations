@@ -40,6 +40,11 @@ in
 		} else (super.lib.warn "borgmatic override is no longer needed in host-pew.nix" {})
 	);
 
+	passe = (let src = localHead ../../ocaml/passe; in callPackage "${src}/nix" {
+		inherit (self) opam2nix vdoml;
+		self = src;
+	});
+
 	installedPackages = (super.installedPackages or []) ++ [
 		# only built for this machine
 		(callPackage (localHead ../../python/irank) {})
@@ -47,10 +52,7 @@ in
 			callPackage ("${src}/nix") {} { inherit src; })
 		(callPackage (localHead ../../python/trash) {})
 
-		(let src = localHead ../../ocaml/passe; in callPackage "${src}/nix" {
-			inherit (self) opam2nix vdoml;
-			self = src;
-		})
+		self.passe
 		self.my-borg
 		self.borgmatic
 		self.python3Packages.twine
