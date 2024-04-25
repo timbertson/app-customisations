@@ -41,10 +41,10 @@
         "homepage": null,
         "owner": "timbertson",
         "repo": "fetlock",
-        "rev": "b6898d607675e730000ab83fbbf2d7817945beb4",
-        "sha256": "0s42xglq9mvd6li3434w3lsj8m51m2lr71ngy9ynmcfdqxjka11r",
+        "rev": "aa39c2ea4cc44fbbdca98dca5b393844956a3a09",
+        "sha256": "0ghfdxjlyjsv3a855yscy0rwg6g9q9f256g3yr87g387cmkvffr2",
         "type": "tarball",
-        "url": "https://github.com/timbertson/fetlock/archive/b6898d607675e730000ab83fbbf2d7817945beb4.tar.gz",
+        "url": "https://github.com/timbertson/fetlock/archive/aa39c2ea4cc44fbbdca98dca5b393844956a3a09.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "git-wip": {
@@ -105,18 +105,6 @@
         "sha256": "0k0df4jvvq7iyrq5lcwipmw1jd9lchf8z64idgrh9ckljv5jv355",
         "type": "tarball",
         "url": "https://github.com/timbertson/niv-util/archive/c1b60458c9eda33f821f07436fcf0d20f4faef37.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "nix-nightly": {
-        "branch": "master",
-        "description": "Nix, the purely functional package manager",
-        "homepage": "https://nixos.org/",
-        "owner": "nixos",
-        "repo": "nix",
-        "rev": "94e91566e",
-        "sha256": "1x995n8q82sdgn1afs1afm5dpip1sb47qi3bxhrapk6b8vkq7vix",
-        "type": "tarball",
-        "url": "https://github.com/nixos/nix/archive/94e91566e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-wrangle": {
@@ -230,7 +218,7 @@
     "zendesk-nix": {
         "branch": "main",
         "repo": "git@github.com:zendesk/zendesk-nix",
-        "rev": "2ef9432cc29a33568a9314ed1b965e57bfb71aea",
+        "rev": "00c45c7b709afddeb7b08acf81a2620cb3daeca2",
         "type": "git"
     }
 }

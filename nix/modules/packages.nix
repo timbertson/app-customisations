@@ -31,7 +31,7 @@ in {
 			irank-releases
 			(ifEnabled "jdk" my-jdks)
 			(anyEnabled [ "node" "maximal"] nodejs)
-			nix-nightly # TODO revert to nix
+			nixVersions.nix_2_19 # TODO revert to `nix` once stable reaches 2.19+
 			niv
 			my-caenv
 			my-neovim

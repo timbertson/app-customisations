@@ -64,9 +64,6 @@ in
 		(callPackage nivSources.niv-util {}).cli
 	];
 
-	# this is a flake, how do I get it to use the same nixpkgs?
-	nix-nightly = (import nivSources.nix-nightly).default; # TODO drop after nix v2.19
-
 	nixGL = callPackage nivSources.nixGL {};
 	vim-sleuth-src = nivSources.vim-sleuth;
 	home-manager-src = nivSources.home-manager;
