@@ -22,7 +22,7 @@ in {
 			difftastic
 			direnv
 			dtach
-			(pkgs.gup-ocaml or gup)
+			gup
 			fish
 			fzf
 			(linux gnomeExtensions.quake-mode)

@@ -65,10 +65,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "17431970b4ebc75a92657101ccffcfc9e1f9d8f0",
-        "sha256": "1nzp0j3i0km01wpaf5brx0d3qknimg9i9qnc3y87a4b6w5c3cp6r",
+        "rev": "0eb314b4f0ba337e88123e0b1e57ef58346aafd9",
+        "sha256": "1fwcxx8ilkih855g2dk9n9wvhizkxy1r16x414n3rchqg8knybhw",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/17431970b4ebc75a92657101ccffcfc9e1f9d8f0.tar.gz",
+        "url": "https://github.com/rycee/home-manager/archive/0eb314b4f0ba337e88123e0b1e57ef58346aafd9.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "my-borg": {
@@ -209,10 +209,10 @@
         "homepage": "http://ytdl-org.github.io/youtube-dl/",
         "owner": "ytdl-org",
         "repo": "youtube-dl",
-        "rev": "f0812d784836d18fd25ea32f9b5a0c9c6e92425b",
-        "sha256": "0yg9i4fiv5k54qz1knyvkvkdzrsf56mchs6i8p9766k9s4mm0qv3",
+        "rev": "a08f2b7e4567cdc50c0614ee0a4ffdff49b8b6e6",
+        "sha256": "1nz3vfdypfyv7p1fj5al6vb3wyaij76dfy6sz0x604hcbgfc3d41",
         "type": "tarball",
-        "url": "https://github.com/ytdl-org/youtube-dl/archive/f0812d784836d18fd25ea32f9b5a0c9c6e92425b.tar.gz",
+        "url": "https://github.com/ytdl-org/youtube-dl/archive/a08f2b7e4567cdc50c0614ee0a4ffdff49b8b6e6.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "zendesk-nix": {

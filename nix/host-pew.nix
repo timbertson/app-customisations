@@ -13,10 +13,9 @@ in
 
 	# these are exported for use in other modules
 	gup-ocaml = let src = localHead ../../ocaml/gup; in
-		callPackage "${src}/nix" {
-			inherit (self) opam2nix;
-			self = src;
-		};
+	(callPackage "${src}/nix/gup-python.nix" {}).overrideAttrs (_: {
+		inherit src;
+	});
 	vdoml = localHead ../../ocaml/vdoml;
 	remocaml = (callPackage "${localHead ../../web/remocaml}/nix" {
 		inherit (self) opam2nix vdoml;
