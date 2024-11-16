@@ -149,10 +149,10 @@
         "homepage": "http://gfxmonk.net/dist/doc/piep/",
         "owner": "timbertson",
         "repo": "piep",
-        "rev": "9c032f593bbcb977b3b6048081bfa482dfe9a148",
-        "sha256": "01hc68h4w8a33yndqybypbqq1v7qif1sqr8a1nzljs7cg14jq786",
+        "rev": "b31f5c623ed0f3341783188a0165e28019bd03b3",
+        "sha256": "0a4sb6yq5vhnxs3r3yq9cn3y0w5lha9i8xacnq7n93y5j35m1y2n",
         "type": "tarball",
-        "url": "https://github.com/timbertson/piep/archive/9c032f593bbcb977b3b6048081bfa482dfe9a148.tar.gz",
+        "url": "https://github.com/timbertson/piep/archive/b31f5c623ed0f3341783188a0165e28019bd03b3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "status-check": {
@@ -218,7 +218,7 @@
     "zendesk-nix": {
         "branch": "main",
         "repo": "git@github.com:zendesk/zendesk-nix",
-        "rev": "32c4c34e07fbccf562a4e2fa078ab8be72dcde6f",
+        "rev": "999d978f635ad042f08c499100573f08d4b95a78",
         "type": "git"
     }
 }
