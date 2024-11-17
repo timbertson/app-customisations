@@ -25,7 +25,6 @@ in {
 			gup
 			fish
 			fzf
-			(linux gnomeExtensions.quake-mode)
 			(darwin git)
 			(pkgs.irank or null)
 			irank-releases

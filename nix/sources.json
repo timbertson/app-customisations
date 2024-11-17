@@ -63,12 +63,12 @@
         "branch": "master",
         "description": "Manage a user environment using Nix  [maintainer=@rycee] ",
         "homepage": "https://nix-community.github.io/home-manager/",
-        "owner": "rycee",
+        "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "0eb314b4f0ba337e88123e0b1e57ef58346aafd9",
-        "sha256": "1fwcxx8ilkih855g2dk9n9wvhizkxy1r16x414n3rchqg8knybhw",
+        "rev": "1bd5616e33c0c54d7a5b37db94160635a9b27aeb",
+        "sha256": "1m42r978m22scrg030c54f0qbxaa7s8jw7hiiiqrk49wk51j0zfp",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/0eb314b4f0ba337e88123e0b1e57ef58346aafd9.tar.gz",
+        "url": "https://github.com/nix-community/home-manager/archive/1bd5616e33c0c54d7a5b37db94160635a9b27aeb.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "my-borg": {
@@ -209,10 +209,10 @@
         "homepage": "http://ytdl-org.github.io/youtube-dl/",
         "owner": "ytdl-org",
         "repo": "youtube-dl",
-        "rev": "a08f2b7e4567cdc50c0614ee0a4ffdff49b8b6e6",
-        "sha256": "1nz3vfdypfyv7p1fj5al6vb3wyaij76dfy6sz0x604hcbgfc3d41",
+        "rev": "c5098961b04ce83f4615f2a846c84f803b072639",
+        "sha256": "0b5njciaahfvrpz1x24jwmfr8nghhn5h1cwng5bz8sm7p6ryf7bd",
         "type": "tarball",
-        "url": "https://github.com/ytdl-org/youtube-dl/archive/a08f2b7e4567cdc50c0614ee0a4ffdff49b8b6e6.tar.gz",
+        "url": "https://github.com/ytdl-org/youtube-dl/archive/c5098961b04ce83f4615f2a846c84f803b072639.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "zendesk-nix": {
