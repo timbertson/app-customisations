@@ -45,7 +45,6 @@ in
 		}
 		// (if pkgs.stdenv.isLinux then {
 			".config/fontconfig/fonts.conf" = symlink ../home/fonts.conf;
-			".xbindkeysrc.scm" = symlink ../home/xbindkeysrc.scm;
 			".config/borgmatic.d/01-main.yaml" = symlink ../home/borgmatic/main.yaml;
 			".config/borgmatic.d/02-media.yaml" = symlink ../home/borgmatic/media.yaml;
 			".config/autostart/rhythmbox.desktop" = symlinkOpt /usr/share/applications/rhythmbox.desktop;

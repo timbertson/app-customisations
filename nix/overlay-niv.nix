@@ -41,16 +41,16 @@ let
 
 	my-borg = callPackage nivSources.my-borg {};
 	
-	youtube-dl = super.youtube-dl.overrideAttrs (o: {
+	yt-dlp = super.yt-dlp.overrideAttrs (o: {
 		version = "dev";
-		src = nivSources.youtube-dl;
-		patches = []; # upstream patches are based on an old version
-		postInstall = ""; # skip insallShellCompletion
+		src = nivSources.yt-dlp;
+		# patches = []; # upstream patches are based on an old version
+		# postInstall = ""; # skip insallShellCompletion
 	});
 
 in
 {
-	inherit asdf-vm localHead fetlock xremap my-borg youtube-dl;
+	inherit asdf-vm localHead fetlock xremap my-borg yt-dlp;
 	nivSources = baseSources;
 	installedPackages = (super.installedPackages or []) ++ [
 		fetlock

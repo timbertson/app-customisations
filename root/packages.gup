@@ -2,7 +2,5 @@
 set -x
 pkcon install --allow-reinstall \
 	ecryptfs-utils \
-	xautomation \
-	xbindkeys \
 	strace \
 	;

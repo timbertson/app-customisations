@@ -203,16 +203,16 @@
         "url": "https://github.com/timbertson/vim-watch/archive/b4d33fc40ae7367cf3472895e022fc7305c542cb.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "youtube-dl": {
+    "yt-dlp": {
         "branch": "master",
-        "description": "Command-line program to download videos from YouTube.com and other video sites",
-        "homepage": "http://ytdl-org.github.io/youtube-dl/",
-        "owner": "ytdl-org",
-        "repo": "youtube-dl",
-        "rev": "c5098961b04ce83f4615f2a846c84f803b072639",
-        "sha256": "0b5njciaahfvrpz1x24jwmfr8nghhn5h1cwng5bz8sm7p6ryf7bd",
+        "description": "A feature-rich command-line audio/video downloader",
+        "homepage": "https://discord.gg/H5MNcFW63r",
+        "owner": "yt-dlp",
+        "repo": "yt-dlp",
+        "rev": "52c0ffe40ad6e8404d93296f575007b05b04c686",
+        "sha256": "01m4lcspshrw74dq1hl0fin6j6nx02p2wqknyjdy0lv4y83h773z",
         "type": "tarball",
-        "url": "https://github.com/ytdl-org/youtube-dl/archive/c5098961b04ce83f4615f2a846c84f803b072639.tar.gz",
+        "url": "https://github.com/yt-dlp/yt-dlp/archive/52c0ffe40ad6e8404d93296f575007b05b04c686.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "zendesk-nix": {

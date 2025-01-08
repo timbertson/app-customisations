@@ -27,23 +27,6 @@ in {
 	systemd.user = {
 		targets."desktop-session".Unit = {}; # must exist for others to be wanted by it
 
-		services.xbindkeys = {
-			Install.WantedBy = desktopSession;
-			Service = {
-				Environment = pathEnv systemPath;
-				ExecStart = writeScript "${loadSessionVars}; exec ${pkgs.xbindkeys}/bin/xbindkeys --nodaemon";
-				Restart = "on-abnormal";
-				RestartSec = "2";
-			};
-		};
-
-		services.parcellite = {
-			Install.WantedBy = desktopSession;
-			Service = {
-				ExecStart = writeScript "${loadSessionVars}; exec ${pkgs.parcellite}/bin/parcellite";
-			};
-		};
-
 		services.album-releases.Service = {
 			ExecStart = "${pkgs.status-check}/bin/status-check -f ${home}/.cache/album-releases.status --run ${pkgs.gup}/bin/gup ${home}/dev/web/album-releases/all";
 			Restart="no";

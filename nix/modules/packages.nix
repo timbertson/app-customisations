@@ -42,7 +42,7 @@ in {
 			[
 				glibcLocales
 				python3Packages.ipython
-				youtube-dl
+				yt-dlp
 			] ++ map linux [
 				# linux + maximal
 				jsonnet
@@ -50,7 +50,6 @@ in {
 				ocaml
 				parcellite
 				my-qt5
-				xbindkeys
 			]) # /maximal
 		)
 	);
