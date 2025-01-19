@@ -158,7 +158,10 @@ def main():
 		if opts.new_cert or not cert.exists():
 			print("Generating %s.{key,crt}" % (base))
 			cert.generate(opts.common_name)
-		httpd.socket = ssl.wrap_socket (httpd.socket, keyfile = cert.key_path(), certfile=cert.cert_path(), server_side=True)
+		ctx = ssl.create_default_context()
+		ctx.load_cert_chain(certfile = cert.cert_path(), keyfile = cert.key_path())
+		ctx.check_hostname = False
+		httpd.socket = ctx.wrap_socket(httpd.socket, server_side=True)
 
 	print("Serving on %s://%s:%s" % (protocol, opts.host, opts.port))
 	httpd.serve_forever()
