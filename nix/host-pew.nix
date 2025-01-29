@@ -40,8 +40,7 @@ in
 	);
 
 	passe = (let src = localHead ../../ocaml/passe; in callPackage "${src}/nix" {
-		inherit (self) opam2nix vdoml;
-		self = src;
+		inherit (self) opam2nix;
 	});
 
 	installedPackages = (super.installedPackages or []) ++ [
