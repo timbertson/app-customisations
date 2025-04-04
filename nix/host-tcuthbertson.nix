@@ -23,7 +23,7 @@ in
 	installedPackages = super.installedPackages ++ (with self; [
 		rbenv
 		# bundler
-		chef-cli
+		argo
 		fblog
 		gnupg
 		netproxrc

@@ -65,10 +65,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "1bd5616e33c0c54d7a5b37db94160635a9b27aeb",
-        "sha256": "1m42r978m22scrg030c54f0qbxaa7s8jw7hiiiqrk49wk51j0zfp",
+        "rev": "e1ae908bcc30af792b0bb0a52e53b03d2577255e",
+        "sha256": "1bwnmhb7brayfamljr4rl3ks07gs4awgx57zns6cd8dhc92c08y6",
         "type": "tarball",
-        "url": "https://github.com/nix-community/home-manager/archive/1bd5616e33c0c54d7a5b37db94160635a9b27aeb.tar.gz",
+        "url": "https://github.com/nix-community/home-manager/archive/e1ae908bcc30af792b0bb0a52e53b03d2577255e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "my-borg": {
@@ -218,7 +218,7 @@
     "zendesk-nix": {
         "branch": "main",
         "repo": "git@github.com:zendesk/zendesk-nix",
-        "rev": "999d978f635ad042f08c499100573f08d4b95a78",
+        "rev": "e4fc3836b1912212e22d16441ed8158eac38032b",
         "type": "git"
     }
 }

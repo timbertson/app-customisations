@@ -212,6 +212,9 @@ set statusline+=\  "end with a space
 
 " set iskeyword-=_ \" allow underscore to delimit words"
 
+" treat kebab-case as words
+set iskeyword+=-
+
 
 set tags+=.tags
 let g:autotagTagsFile=".tags"
