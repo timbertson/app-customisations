@@ -92,7 +92,7 @@ let g:solarized_contrast="high"
 let g:neosolarized_contrast="normal"
 let g:solarized_italic=0
 let g:neosolarized_vertSplitBgTrans=0
-set background="dark"
+" set background="dark"
 if has("gui_running")
 	color solarized
 	if has("win32")
@@ -124,9 +124,9 @@ set autowrite " save file when navigating away from it or using :make (but not o
 set wrapmargin=0
 set nowrap
 set formatoptions=crqln
-set guitablabel=%N\ %t\ %m%r
-set guioptions-=T "remove toolbar
-set guioptions-=m "remove menu bar
+" set guitablabel=%N\ %t\ %m%r
+" set guioptions-=T "remove toolbar
+" set guioptions-=m "remove menu bar
 set splitright
 set splitbelow
 set showcmd
@@ -140,7 +140,7 @@ let g:ctrlp_custom_ignore = {
 let g:rust_recommended_style=0 " quit it with your expandtab business
 let g:multi_cursor_exit_from_insert_mode=0
 
-set pastetoggle=<F2>
+"set pastetoggle=<F2>
 " set sessionoptions="curdir,folds,localoptions,tabpages,winsize"
 " autocmd SessionLoadPost * tab ball
 " set sessionoptions=blank,buffers,curdir,folds,resize,tabpages,winsize
