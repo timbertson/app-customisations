@@ -35,6 +35,18 @@
         "url": "https://github.com/timbertson/daglink/archive/cd55637a3cca7224fe45ba9593780ad08fac4e02.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "direnv": {
+        "branch": "master",
+        "description": "unclutter your .profile",
+        "homepage": "http://direnv.net",
+        "owner": "direnv",
+        "repo": "direnv",
+        "rev": "a86b7e9bf8275a2ef5f1a9ecb3428ba79f28e719",
+        "sha256": "0par4q0fqnsd1hagh046lh39c6nkjbvk7zlibx76c1b36vdi3zbm",
+        "type": "tarball",
+        "url": "https://github.com/direnv/direnv/archive/a86b7e9bf8275a2ef5f1a9ecb3428ba79f28e719.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "fetlock": {
         "branch": "master",
         "description": "VERY WIP doesn't do anything useful yet",
@@ -218,7 +230,7 @@
     "zendesk-nix": {
         "branch": "main",
         "repo": "git@github.com:zendesk/zendesk-nix",
-        "rev": "4075855c8cf8a4697a8e72dc2afc61cf5f68ff3f",
+        "rev": "d891507ba9f020627c613bcbfafe86783a78c112",
         "type": "git"
     }
 }

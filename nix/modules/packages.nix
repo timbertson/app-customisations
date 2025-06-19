@@ -20,7 +20,7 @@ in {
 			(darwin cacert)
 			(darwin fswatch)
 			difftastic
-			direnv
+			(pkgs.my-direnv or direnv)
 			dtach
 			gup
 			fish

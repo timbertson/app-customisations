@@ -70,4 +70,11 @@ in
 	paperwm = nivSources.PaperWM;
 	opam2nix = callPackage nivSources.opam2nix {};
 	status-check = callPackage nivSources.status-check {};
+
+	# TODO remove after 2.36.1+
+	my-direnv = super.pkgs.direnv.overrideAttrs (o: {
+		src = nivSources.direnv;
+		version = "development";
+		vendorHash = "sha256-SAIGFQGACTB3Q0KnIdiKKNYY6fVjf/09wGqNr0Hkg+M=";
+	});
 }
