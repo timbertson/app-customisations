@@ -41,11 +41,12 @@
         "homepage": "http://direnv.net",
         "owner": "direnv",
         "repo": "direnv",
-        "rev": "a86b7e9bf8275a2ef5f1a9ecb3428ba79f28e719",
-        "sha256": "0par4q0fqnsd1hagh046lh39c6nkjbvk7zlibx76c1b36vdi3zbm",
+        "rev": "d6b6caacffba02169ed7f36dd5f972794ac40180",
+        "sha256": "0d3ld8xdrn6958m9m0zlcgrpvs6sga84wj3b0n0zmian5p3lg7pi",
         "type": "tarball",
-        "url": "https://github.com/direnv/direnv/archive/a86b7e9bf8275a2ef5f1a9ecb3428ba79f28e719.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+        "url": "https://github.com/direnv/direnv/archive/d6b6caacffba02169ed7f36dd5f972794ac40180.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz",
+        "version": "v2.37.0"
     },
     "fetlock": {
         "branch": "master",
@@ -113,10 +114,10 @@
         "homepage": null,
         "owner": "timbertson",
         "repo": "niv-util",
-        "rev": "c1b60458c9eda33f821f07436fcf0d20f4faef37",
-        "sha256": "0k0df4jvvq7iyrq5lcwipmw1jd9lchf8z64idgrh9ckljv5jv355",
+        "rev": "73aad0c181a69917d618ff68e5bba5e1a915d57f",
+        "sha256": "1dbpgdirjahanaffa7yys16hzzb0w2f2krir10vi6r8fxlam3037",
         "type": "tarball",
-        "url": "https://github.com/timbertson/niv-util/archive/c1b60458c9eda33f821f07436fcf0d20f4faef37.tar.gz",
+        "url": "https://github.com/timbertson/niv-util/archive/73aad0c181a69917d618ff68e5bba5e1a915d57f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-wrangle": {
@@ -230,7 +231,7 @@
     "zendesk-nix": {
         "branch": "main",
         "repo": "git@github.com:zendesk/zendesk-nix",
-        "rev": "d891507ba9f020627c613bcbfafe86783a78c112",
+        "rev": "25f5ab7f12bd11e4f284c5954e6c2e4e12f1c478",
         "type": "git"
     }
 }
