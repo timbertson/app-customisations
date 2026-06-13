@@ -13,7 +13,8 @@ set additional_paths \
 	/sbin \
 	~/.bin \
 	~/.nix-profile/bin \
-	~/.cargo/bin
+	~/.cargo/bin \
+	~/dev/ocaml/passe/_build/install/default/bin \
 	;
 
 for p in $additional_paths

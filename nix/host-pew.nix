@@ -17,31 +17,15 @@ in
 		inherit src;
 	});
 	vdoml = localHead ../../ocaml/vdoml;
-	remocaml = (callPackage "${localHead ../../web/remocaml}/nix" {
-		inherit (self) opam2nix vdoml;
-	}).remocaml;
+	# remocaml = (callPackage "${localHead ../../web/remocaml}/nix" {
+	# 	inherit (self) opam2nix vdoml;
+	# }).remocaml;
 	my-borg = callPackage (localHead ../../python/my-borg) {};
 
 	# override default sources for globally installed packages
 	nivSources = super.nivSources // {
 		fetlock = localHead ../../rust/fetlock;
 	};
-
-	borgmatic = super.borgmatic.overrideAttrs (upstream:
-		if upstream.version == "1.7.15" then rec {
-			version = "1.8.0";
-			name = "${upstream.pname}-${version}";
-			src = super.fetchPypi {
-				inherit (upstream) pname;
-				inherit version;
-				sha256 = "tWHGnyQdnoevWFcgB56e97Q73ujUw5yHdUduBo7HGlo=";
-			};
-		} else (super.lib.warn "borgmatic override is no longer needed in host-pew.nix" {})
-	);
-
-	passe = (let src = localHead ../../ocaml/passe; in callPackage "${src}/nix" {
-		inherit (self) opam2nix;
-	});
 
 	installedPackages = (super.installedPackages or []) ++ [
 		# only built for this machine
@@ -50,11 +34,10 @@ in
 			callPackage ("${src}/nix") {} { inherit src; })
 		(callPackage (localHead ../../python/trash) {})
 
-		self.passe
 		self.my-borg
 		self.borgmatic
 		self.python3Packages.twine
-		self.remocaml
+		# self.remocaml
 	];
 }
 

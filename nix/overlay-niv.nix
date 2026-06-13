@@ -64,7 +64,9 @@ in
 		(callPackage nivSources.niv-util {}).cli
 	];
 
-	nixGL = callPackage nivSources.nixGL {};
+	# nixGL = callPackage nivSources.nixGL {};
+	nixGL = callPackage /home/tim/dev/nix/nixGL {};
+
 	vim-sleuth-src = nivSources.vim-sleuth;
 	home-manager-src = nivSources.home-manager;
 	paperwm = nivSources.PaperWM;

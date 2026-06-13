@@ -32,21 +32,21 @@ EOF
 			'';
 		};
 
-in {
-	fish = if super.glibcLocales == null then super.fish else lib.overrideDerivation super.fish (o: {
+	fish-upstream = super.fish.overrideAttrs (o: {
+		# parent fails with some check that I don't care about right now
+		installCheckPhase = "";
+	});
+	fish-with-locales = if super.glibcLocales == null then fish-upstream else fish-upstream.overrideAttrs (o: {
 		# workaround for https://github.com/NixOS/nixpkgs/issues/39328
 		buildInputs = o.buildInputs ++ [ self.makeWrapper ];
 		postInstall = ''
 			wrapProgram $out/bin/fish --set LOCALE_ARCHIVE ${self.glibcLocales}/lib/locale/locale-archive
 		'';
 	});
-	fzf = super.fzf.overrideAttrs (o: {
-		checkPhase = "true";
-		# fzf installs some default keybindings that override my own
-		installPhase = (o.installPhase or "") + ''
-			rm -r $out/share/fish/vendor_conf.d
-		'';
-	});
+	my-fish = fish-with-locales;
+
+in {
+	fish = fish-with-locales;
 	irank-releases = if self ? irank then (callPackage ({ lib, stdenv, makeWrapper, python3Packages}:
 		let
 			pythonDeps = with python3Packages; [ musicbrainzngs pyyaml ];

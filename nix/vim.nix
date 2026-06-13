@@ -17,21 +17,21 @@ neovim.override {
 				# asyncrun
 				dhall-vim
 				vim-fish
-				fugitive
-				fzfWrapper
+				vim-fugitive
+				fzf
 				fzf-vim
 				ir_black
 				# misc
 				vim-grepper
 				vim-jsonnet
-				repeat
-				sensible
-				Solarized
-				(sleuth.overrideAttrs (o: {
+				vim-repeat
+				vim-sensible
+				vim-colors-solarized
+				(vim-sleuth.overrideAttrs (o: {
 					src = pkgs.vim-sleuth-src;
 				}))
 				NeoSolarized
-				surround
+				vim-surround
 				targets-vim
 				tcomment_vim
 				The_NERD_tree

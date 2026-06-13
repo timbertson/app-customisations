@@ -47,8 +47,10 @@ in {
 				# linux + maximal
 				jsonnet
 				nixGL.nixGLIntel
-				ocaml
-				parcellite
+				# nixGL.auto.nixGLDefault
+				nixGL.auto.nixGLNvidia
+				# ocaml
+				mp3gain
 				my-qt5
 			]) # /maximal
 		)
