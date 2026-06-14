@@ -34,7 +34,7 @@ neovim.override {
 				vim-surround
 				targets-vim
 				tcomment_vim
-				The_NERD_tree
+				nerdtree
 				vim-indent-object
 				# vim-lsp
 				vim-nix

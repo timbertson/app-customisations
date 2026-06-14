@@ -72,6 +72,7 @@ end
 
 
 set -x NIX_PATH ~/.nix-defexpr/channels
+
 # needed for nix-packaged utils
 if test -f ~/.local/nix/share/fish/nix-caenv.fish
 	.        ~/.local/nix/share/fish/nix-caenv.fish
