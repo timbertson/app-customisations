@@ -65,7 +65,5 @@
 	remote = origin
 	remote = mba
 	remote = pew
-[diff]
-	noprefix = true
 [pull]
 	rebase = false

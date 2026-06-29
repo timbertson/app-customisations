@@ -2,6 +2,7 @@ self: super:
 let
 	localHead = self.localHead;
 	callPackage = super.callPackage;
+	zendesk = super.callPackage super.nivSources.zendesk-nix {};
 in
 {
 	features = super.features // {
@@ -21,19 +22,22 @@ in
 	netproxrc = (callPackage "${localHead ../../timbertson/netproxrc}/nix" {}).root;
 
 	installedPackages = super.installedPackages ++ (with self; [
-		rbenv
+		# rbenv
 		# bundler
-		argo
+		argo-workflows
 		fblog
 		gnupg
+		gh
 		netproxrc
 		vendir
 		jsonnet
 		stern
 		asdf-vm
-		super.vscode
 		google-cloud-sdk
 		jq
+		yaml2json
 		pstree
-	]) ++ (super.callPackage super.nivSources.zendesk-nix {}).all;
+	]) ++ zendesk.all;
+
+	inherit zendesk;
 }

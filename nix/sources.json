@@ -54,10 +54,10 @@
         "homepage": null,
         "owner": "timbertson",
         "repo": "fetlock",
-        "rev": "eae4f4d9e6811fd71616ea0dd2e288cacf58db70",
-        "sha256": "0brxqhajaqjqmhxxw81rmj6ckhdjis4ki41mdqdz25zyb7bn9nar",
+        "rev": "c2e176821da698d48416fd7fead0a24626514125",
+        "sha256": "1j0cmnr63sjx3f9yz2x3pg3bp86zm8qzygbcfg74vjn93ip2xi60",
         "type": "tarball",
-        "url": "https://github.com/timbertson/fetlock/archive/eae4f4d9e6811fd71616ea0dd2e288cacf58db70.tar.gz",
+        "url": "https://github.com/timbertson/fetlock/archive/c2e176821da698d48416fd7fead0a24626514125.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "git-wip": {
@@ -78,10 +78,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "4c5c1e8ba14f1c7475fa31ff11bc1c19cd220974",
-        "sha256": "11fv0rjzr87r0imzsfff6sprarbl7j928h8hvs7s4pwf8y2gd9gh",
+        "rev": "789a35fbdeb3c46b260096daa0b321c11be527ea",
+        "sha256": "016mfawc382gz0p43ff6msn1zq11npp59b5rkvr1jgmv5ghhdwzk",
         "type": "tarball",
-        "url": "https://github.com/nix-community/home-manager/archive/4c5c1e8ba14f1c7475fa31ff11bc1c19cd220974.tar.gz",
+        "url": "https://github.com/nix-community/home-manager/archive/789a35fbdeb3c46b260096daa0b321c11be527ea.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "my-borg": {
@@ -231,7 +231,7 @@
     "zendesk-nix": {
         "branch": "main",
         "repo": "git@github.com:zendesk/zendesk-nix",
-        "rev": "25f5ab7f12bd11e4f284c5954e6c2e4e12f1c478",
+        "rev": "4b78dd926424dd579643a045643c321ab692237f",
         "type": "git"
     }
 }

@@ -19,3 +19,16 @@ use_asdf() {
 use_opam() {
   direnv_load opam exec --set-switch --set-root "$@" -- direnv dump
 }
+
+unset_if_empty() {
+  key="$1"
+  if [ -z "${!key}" ]; then
+    log_status "Unsetting empty var $1"
+    unset "$1"
+  fi
+}
+
+# workaround for vscode plugin setting empty vars instead of unset
+# due to limited vscode API
+unset_if_empty "SOURCE_DATE_EPOCH"
+unset_if_empty "NIX_APPLE_SDK_VERSION"
