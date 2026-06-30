@@ -30,7 +30,7 @@ in {
 			irank-releases
 			(ifEnabled "jdk" my-jdks)
 			(anyEnabled [ "node" "maximal"] nodejs)
-			nix
+			nixVersions.nix_2_31 # temporary for https://github.com/NixOS/nix/issues/16017
 			niv
 			my-caenv
 			my-neovim
